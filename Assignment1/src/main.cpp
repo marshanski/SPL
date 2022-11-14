@@ -1,9 +1,18 @@
+/****************************************
+ * Author : Ido Israeli , Raz Marshanski
+ * Date   :
+ * Name   :
+****************************************/
+//----------INCLUDE----------
 #include <iostream>
 #include <iomanip>
-#include "Parser.h"
-
+#include "../include/Parser.h"
+//---------------------------
+//----------USING----------
 using std::cout;
 using std::endl;
+//---------------------------
+
 
 int main(int argc, char **argv)
 {
@@ -15,10 +24,12 @@ int main(int argc, char **argv)
 
     // read simulation from config file
     const string config_path = argv[1];
-    Simulation simulation = Parser::readSimulation(argv[1]);
+    Simulation simulation    = Parser::readSimulation(argv[1]);
 
     // run simulation and store json state after each iteration
     vector<json> outPerIter = {Parser::makeJson(simulation)};
+    //cout << simulation;
+    simulation.raz();
     while (!simulation.shouldTerminate())
     {
         simulation.step();
@@ -31,4 +42,4 @@ int main(int argc, char **argv)
     outputFile << std::setw(4) << json(outPerIter) << endl;
 
     return 0;
-}
+};

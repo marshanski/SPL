@@ -1,12 +1,49 @@
+/****************************************
+ * Author : Ido Israeli , Raz Marshanski
+ * Date   :
+ * Name   :
+****************************************/
+//----------INCLUDE----------
+#include "Party.h"
+#include "Coalition.h"
 #include "Simulation.h"
+#include <vector>
+#include <iostream>
+//---------------------------
+//----------USING----------
+using std::vector;
+using std::cout;
 
-Simulation::Simulation(Graph graph, vector<Agent> agents) : mGraph(graph), mAgents(agents) 
+//---------------------------
+
+
+
+Simulation::Simulation(Graph graph, vector<Agent> agents): mGraph(graph), mAgents(agents) , iter (0), joined(0)
 {
+    //mGraph           = Graph(graph);
+    //mAgents          = agents;
+    //iter             = 0;
+    
+    //joined           = 0;
+    
+
     // You can change the implementation of the constructor, but not the signature!
 }
 
+void Simulation::raz()
+{
+    //cout << mGraph.getParties()[0].getMandates();
+    Coalition c = Coalition(mGraph.getParties(), &mAgents[1]);
+    cout << c.getMandates();
+    return;
+}
+
+
 void Simulation::step()
 {
+    return ;
+    //step of all the parties in the collecting offers
+    //step of all the agents
     // TODO: implement this method
 }
 
