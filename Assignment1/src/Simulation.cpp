@@ -9,48 +9,64 @@
 #include "Simulation.h"
 #include <vector>
 #include <iostream>
+#include<bits/stdc++.h>
+#include<algorithm>
 //---------------------------
 //----------USING----------
 using std::vector;
 using std::cout;
-
+using std::endl;
 //---------------------------
 
 
 
-Simulation::Simulation(Graph graph, vector<Agent> agents): mGraph(graph), mAgents(agents) , iter (0), joined(0)
+Simulation::Simulation(Graph graph, vector<Agent> agents): mGraph(graph), mAgents(agents) , iter (0), joined(0),numberOfPartyies(0),hasCoalition(false)
 {
-    //mGraph           = Graph(graph);
-    //mAgents          = agents;
-    //iter             = 0;
-    
-    //joined           = 0;
-    
 
-    // You can change the implementation of the constructor, but not the signature!
 }
 
-void Simulation::raz()
+void Simulation::initCoalition()
 {
-    //cout << mGraph.getParties()[0].getMandates();
-    Coalition c = Coalition(mGraph.getParties(), &mAgents[1]);
-    cout << c.getMandates();
+    vector <Party> parties   = mGraph.getParties();
+    numberOfPartyies         = parties.size();
+    vector <Party * > aviable;
+    for (int i = 0; i <numberOfPartyies; i++)
+    {
+        aviable.push_back(& parties[i]);
+        cout << &parties[i] << endl;
+    }
+    for (unsigned int i=0; i<mAgents.size();i++)
+    {
+        Coalition c = Coalition(parties, &mAgents[i]);
+        coalitions.push_back(c);
+        joined++;
+        if (c.getMandates() >= 61){hasCoalition = true;}
+
+        auto iter = std::remove(aviable.begin(),aviable.end(),&parties[mAgents[i].getPartyId()]);
+        aviable.erase(iter,aviable.end());    
+    }
+    cout << aviable.size() << endl;
+    
+    for (unsigned i = 0; i <aviable.size(); i++)
+    {
+        cout << aviable[i]->getMandates() << endl;
+        
+    }
     return;
 }
 
 
 void Simulation::step()
 {
-    return ;
-    //step of all the parties in the collecting offers
-    //step of all the agents
-    // TODO: implement this method
+    //
+    return;
+  
 }
 
 bool Simulation::shouldTerminate() const
 {
-    // TODO implement this method
-    return true;
+    if ( hasCoalition || numberOfPartyies == joined){return true;}
+    return true;    
 }
 
 const Graph &Simulation::getGraph() const
