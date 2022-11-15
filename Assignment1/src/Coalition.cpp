@@ -22,7 +22,7 @@ Coalition::Coalition(vector<Party> parties, Agent * agent)
     partiesInCoalition.push_back(& parties[agent->getPartyId()]);
     mandates = parties[agent->getPartyId()].getMandates();
     agentInCoalition.push_back(agent);
-    cout << partiesInCoalition[0]->getMandates();
+    //cout << partiesInCoalition[0]->getMandates();
 
 }
 int Coalition::getMandates() const

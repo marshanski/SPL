@@ -25,11 +25,10 @@ int main(int argc, char **argv)
     // read simulation from config file
     const string config_path = argv[1];
     Simulation simulation    = Parser::readSimulation(argv[1]);
-
     // run simulation and store json state after each iteration
     vector<json> outPerIter = {Parser::makeJson(simulation)};
-    //cout << simulation;
-    simulation.raz();
+    //initalize the coalitions
+    simulation.initCoalition();
     while (!simulation.shouldTerminate())
     {
         simulation.step();
