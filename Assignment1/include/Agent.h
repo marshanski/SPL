@@ -16,12 +16,10 @@ class Coalition;
 //---------------------------
 
 
-
 class Agent
 {
 public:
     Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy);
-
     int getPartyId() const;
     int getId() const;
     void step(Simulation &);
@@ -29,10 +27,9 @@ public:
     Coalition * getCoalition(); 
     void setConnections(vector<int> * vec) ;
     vector<int> * getConnections(); 
-    void choose(vector<int> * connections,vector<Party *> aviableToOffer) ;
+    void choose() ;
 
 
-    //SelectionPolicy getSelectionPolicy();
 
 private:
     int mAgentId;

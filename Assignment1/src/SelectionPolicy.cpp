@@ -7,12 +7,12 @@
 #pragma once
 #include "SelectionPolicy.h"
 using std::cout;
+using std::endl;
 
 
-//EdgeWeightSelectionPolicy::EdgeWeightSelectionPolicy();
+//MandatesSelectionPolicy::MandatesSelectionPolicy();
 
-void EdgeWeightSelectionPolicy::choose2()
+void SelectionPolicy::choose2()
 {
-    cout << "edges" << endl;
+    cout << "Mandatori" << endl;
 }
-

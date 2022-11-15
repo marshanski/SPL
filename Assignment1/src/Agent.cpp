@@ -40,9 +40,9 @@ void Agent::setConnections(vector<int> * vec)
     connections = vec;
 }
 
-void Agent::choose(vector<int> * connections,vector<Party *> aviableToOffer) 
+void Agent::choose() 
 {
-    mSelectionPolicy->choose2(connections,aviableToOffer);
+    mSelectionPolicy->choose2();
 }
 
 

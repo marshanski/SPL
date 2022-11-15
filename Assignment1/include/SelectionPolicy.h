@@ -5,27 +5,25 @@
 ****************************************/
 //----------INCLUDE----------
 #pragma once
+#include <iostream>
 
 class SelectionPolicy 
 {
-    public:
-        
-        virtual int choose2(vector<int> * connections,vector<Party *> aviableToOffer);
-
+public:
+    virtual void choose2()=0;
 };
 
-class MandatesSelectionPolicy : public SelectionPolicy 
+class MandatesSelectionPolicy: public SelectionPolicy
 { 
-    public:
-        MandatesSelectionPolicy();
-        virtual int choose2(vector<int> * connections,vector<Party *> aviableToOffer);
-
+public:
+    virtual void choose2();
 };
 
 class EdgeWeightSelectionPolicy: public SelectionPolicy
 {
-    public:
-        EdgeWeightSelectionPolicy();
-        virtual int choose2(vector<int> * connections,vector<Party *> aviableToOffer);
-
+public:
+    virtual void choose2();
 };
+
+
+

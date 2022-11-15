@@ -6,10 +6,13 @@
 //----------INCLUDE----------
 #pragma once
 #include "SelectionPolicy.h"
+using std::cout;
+using std::endl;
 
-MandatesSelectionPolicy::MandatesSelectionPolicy(){};
 
-int MandatesSelectionPolicy::choose2(vector<int> * connections,vector<Party *> aviableToOffer)
+//MandatesSelectionPolicy::MandatesSelectionPolicy();
+
+void MandatesSelectionPolicy::choose2()
 {
     cout << "Mandatori" << endl;
 }

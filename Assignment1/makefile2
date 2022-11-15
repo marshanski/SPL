@@ -14,3 +14,7 @@ compile:
 	
 clean:
 	rm -f bin/*
+
+
+
+vector<int> * connections,vector<Party *> aviableToOffer
