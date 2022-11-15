@@ -36,6 +36,7 @@ private:
     vector <Coalition> coalitions;
     int iter,joined,numberOfPartyies;
     bool hasCoalition;
+    vector<vector<int>> copyMatrix;
 
     
 };

@@ -19,7 +19,10 @@ class Coalition
 {
 public:
     Coalition(vector<Party> parties, Agent * agent);
-    int getMandates() const;
+    int  getMandates() const;
+    void setAviable(vector<Party *> aviable );
+    void printAviable();
+    vector<Party *> getAviable();
     
 
 private:

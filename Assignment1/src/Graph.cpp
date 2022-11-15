@@ -29,3 +29,11 @@ vector <Party> Graph::getParties() const
 {
     return mVertices;
 }
+vector<vector<int>> Graph::getMatrix()
+{
+    return mEdges;
+}
+vector<vector<int>> * Graph::getMatrixAdress()
+{
+    return & mEdges;
+}
