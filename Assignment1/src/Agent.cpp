@@ -1,5 +1,6 @@
 #include "Agent.h"
 
+
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy)
 {
     // You can change the implementation of the constructor, but not the signature!
@@ -38,9 +39,9 @@ void Agent::setConnections(vector<int> * vec)
     connections = vec;
 }
 
-void Agent::choose() 
+int Agent::choose(vector<Party *> aviable, vector<int> * connections)
 {
-    //mSelectionPolicy->choose2();
+    return mSelectionPolicy->choose(aviable,connections);
 }
 
 

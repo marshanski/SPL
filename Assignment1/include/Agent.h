@@ -27,7 +27,7 @@ public:
     Coalition * getCoalition(); 
     void setConnections(vector<int> * vec) ;
     vector<int> * getConnections(); 
-    void choose() ;
+    int choose(vector<Party *> aviable ,vector<int> * connections) ;
 
 
 

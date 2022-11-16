@@ -45,9 +45,13 @@ void Simulation::initCoalition()
     }
     
     for (unsigned i = 0; i <coalitions.size(); i++){coalitions[i].setAviable(aviable);}
+
+    
     vector<int> * v = mAgents[0].getConnections();
-    cout << v->at(0) << endl;
-    mAgents[0].choose();
+    //cout << v->at(0) << endl;
+    
+    int a = mAgents[0].choose(mAgents[0].getCoalition()->getAviable(),mAgents[0].getConnections());
+    cout << a << endl;
     //v,mAgents[0].getCoalition()->getAviable()
     for (unsigned i = 0; i < v->size(); i++){cout << v->at(i) << endl;}
     //cout << & copyMatrix << endl;W
