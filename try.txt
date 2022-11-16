@@ -1,0 +1,30 @@
+/****************************************
+ * Author : Ido Israeli , Raz Marshanski
+ * Date   :
+ * Name   :
+****************************************/
+//----------INCLUDE----------
+#pragma once
+
+
+class SelectionPolicy 
+{
+public:
+    virtual void choose2()=0;
+};
+
+class MandatesSelectionPolicy: public SelectionPolicy
+{ 
+public:
+    void choose2() override;
+};
+
+class EdgeWeightSelectionPolicy: public SelectionPolicy
+{
+public:
+    void choose2() override;
+};
+
+
+
+

@@ -10,9 +10,12 @@ using std::cout;
 using std::endl;
 
 
-//MandatesSelectionPolicy::MandatesSelectionPolicy();
-
-void SelectionPolicy::choose2()
+void EdgeWeightSelectionPolicy::choose2()
 {
-    cout << "Mandatori" << endl;
+    cout << "edges" << endl;
+}
+
+void MandatesSelectionPolicy::choose2()
+{
+    cout << "Mandates" << endl;
 }

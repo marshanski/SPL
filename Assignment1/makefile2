@@ -2,7 +2,7 @@
 all: clean compile link
 
 link:
-	g++ -o bin/main bin/main.o bin/Agent.o  bin/Graph.o bin/Parser.o bin/Party.o   bin/Simulation.o
+	g++ -o bin/cRace bin/main bin/main.o bin/Agent.o  bin/Graph.o bin/Parser.o bin/Party.o   bin/Simulation.o bin/Coalition.o  bin/SelectionPolicy.o bin/MandatesSelectionPolicy.o bin/EdgeWeightSelectionPolicy.o
 
 compile:
 	g++ -g -Wall -Weffc++ -c -o bin/main.o       src/main.cpp
@@ -11,10 +11,12 @@ compile:
 	g++ -g -Wall -Weffc++ -c -o bin/Parser.o     src/Parser.cpp
 	g++ -g -Wall -Weffc++ -c -o bin/Party.o      src/Party.cpp
 	g++ -g -Wall -Weffc++ -c -o bin/Simulation.o src/Simulation.cpp
+	g++ -g -Wall -Weffc++ -c -o bin/EdgeWeightSelectionPolicy.o src/EdgeWeightSelectionPolicy.cpp
+	g++ -g -Wall -Weffc++ -c -o bin/MandatesSelectionPolicy.o src/MandatesSelectionPolicy.cpp
+	g++ -g -Wall -Weffc++ -c -o bin/SelectionPolicy.o src/SelectionPolicy.cpp
+	g++ -g -Wall -Weffc++ -c -o bin/Coalition.o       src/Coalition.cpp
+	
 	
 clean:
 	rm -f bin/*
 
-
-
-vector<int> * connections,vector<Party *> aviableToOffer

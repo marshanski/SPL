@@ -1,6 +1,4 @@
 #include "Agent.h"
-class SelectionPolicy;
-
 
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy)
 {
@@ -42,7 +40,7 @@ void Agent::setConnections(vector<int> * vec)
 
 void Agent::choose() 
 {
-    mSelectionPolicy->choose2();
+    //mSelectionPolicy->choose2();
 }
 
 

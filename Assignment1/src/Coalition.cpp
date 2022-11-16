@@ -6,8 +6,6 @@
 //----------INCLUDE----------
 #pragma once
 #include <vector>
-#include "Party.h"
-#include "Agent.h"
 #include "Coalition.h"
 #include <iostream>
 //---------------------------

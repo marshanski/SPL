@@ -13,7 +13,6 @@
 //----------USING----------
 using std::string;
 using std::vector;
-
 //---------------------------
 
 class Simulation
