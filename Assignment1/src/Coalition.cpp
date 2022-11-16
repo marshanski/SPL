@@ -16,36 +16,34 @@ using std::cout;
 using std::endl;
 //---------------------------
 
-Coalition::Coalition(vector<Party> parties, Agent * agent)
+Coalition::Coalition(vector<Party> parties, Agent * agent,vector<Party *> aviable)
 {
     partiesInCoalition.push_back(& parties[agent->getPartyId()]);
     mandates = parties[agent->getPartyId()].getMandates();
     agentInCoalition.push_back(agent);
+    for (unsigned i = 0; i < aviable.size(); i++){aviableToOffer.push_back(aviable[i]);}
+    
 }
+
 int Coalition::getMandates() const
 {
     return mandates;
 }
-void Coalition::setAviable(vector<Party *> aviable) 
-{
-    for (unsigned i = 0; i < aviable.size(); i++)
-    {
-        aviableToOffer.push_back(aviable[i]);
-    }
-    
-}
+
 
 void Coalition::printAviable() 
 {
     for (unsigned i = 0; i < aviableToOffer.size(); i++)
     {
-        cout << aviableToOffer[i] << endl;
+        cout << aviableToOffer.at(i) << endl;
     }
+
     
 }
 
 vector<Party *> Coalition:: getAviable()
 {
+    cout << partiesInCoalition.size() << endl;
     return aviableToOffer;
 }
 

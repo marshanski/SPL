@@ -18,9 +18,8 @@ using std::vector;
 class Coalition
 {
 public:
-    Coalition(vector<Party> parties, Agent * agent);
+    Coalition(vector<Party> parties, Agent * agent,vector<Party *> aviable);
     int  getMandates() const;
-    void setAviable(vector<Party *> aviable );
     void printAviable();
     vector<Party *> getAviable();
     
@@ -28,7 +27,6 @@ public:
 private:
     vector<Party *> partiesInCoalition;
     vector<Agent *> agentInCoalition;
-    vector<Party *> watingForResponse;
     vector<Party *> aviableToOffer;
     int mandates;
 };

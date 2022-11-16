@@ -29,31 +29,35 @@ void Simulation::initCoalition()
     copyMatrix               = mGraph.getMatrix();
     vector <Party> parties   = mGraph.getParties();
     numberOfPartyies         = parties.size();
-    vector <Party * > aviable;
+
     for (int i = 0; i <numberOfPartyies; i++){aviable.push_back(& parties[i]);}
+    for (unsigned int i=0; i<mAgents.size();i++)
+    {
+        auto iter = std::remove(aviable.begin(),aviable.end(),&parties[mAgents[i].getPartyId()]);
+        aviable.erase(iter,aviable.end());    
+    }
 
     for (unsigned int i=0; i<mAgents.size();i++)
     {
         
-        coalitions.push_back(Coalition(parties, &mAgents[i]));
+        coalitions.push_back(Coalition(parties, &mAgents[i],aviable));
         joined++;
         mAgents[i].setCoalition(& coalitions[i]);
         mAgents[i].setConnections(& copyMatrix[mAgents[i].getPartyId()]);
         if (coalitions[i].getMandates() >= 61){hasCoalition = true;}
-        auto iter = std::remove(aviable.begin(),aviable.end(),&parties[mAgents[i].getPartyId()]);
-        aviable.erase(iter,aviable.end());    
-    }
-    
-    for (unsigned i = 0; i <coalitions.size(); i++){coalitions[i].setAviable(aviable);}
 
+    }
     
     vector<int> * v = mAgents[0].getConnections();
     //cout << v->at(0) << endl;
+    //cout << mAgents[0].getCoalition()->getAviable().size() << endl;
+    mAgents[0].getCoalition()->printAviable();
+
     
     int a = mAgents[0].choose(mAgents[0].getCoalition()->getAviable(),mAgents[0].getConnections());
-    cout << a << endl;
+    //cout << a << endl;
     //v,mAgents[0].getCoalition()->getAviable()
-    for (unsigned i = 0; i < v->size(); i++){cout << v->at(i) << endl;}
+    //for (unsigned i = 0; i < v->size(); i++){cout << v->at(i) << endl;}
     //cout << & copyMatrix << endl;W
     //cout << mGraph.getMatrixAdress() << endl;
     return;

@@ -19,6 +19,10 @@ int Party::getMandates() const
 {
     return mMandates;
 }
+int Party::getId() const
+{
+    return mId;
+}
 
 const string & Party::getName() const
 {
