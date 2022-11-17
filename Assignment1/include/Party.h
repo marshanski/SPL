@@ -23,7 +23,7 @@ public:
     int getMandates() const;
     void step(Simulation &s);
     const string &getName() const;
-    int getId() const;
+    int getId() ;
 
 private:
     int mId;

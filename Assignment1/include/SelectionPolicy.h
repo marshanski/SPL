@@ -11,6 +11,7 @@ using std::vector;
 #include <Party.h>
 //---------------------------
 
+
 class SelectionPolicy 
 {
 public:

@@ -14,12 +14,18 @@ using std::endl;
 int EdgeWeightSelectionPolicy::choose(vector <Party *> aviable,vector<int> * connections)
 {
     //cout << aviable.size() << endl;
-    int min = -1, minIndex = -1;
+    cout << "IDO" << endl;
+    int max = 0, maxIndex = -1;
     for (unsigned i = 0; i < aviable.size(); i++)
     {
-        cout << "IDO" << endl;
-        cout << aviable.at(i)->getId() << endl;
+        if (connections->at(aviable.at(i)->getId()) >max)
+        {
+            max      = connections->at(aviable.at(i)->getId());
+            maxIndex = aviable.at(i)->getId();
+        }
     }
+    
+    cout << max << endl;
     return 2;
 }
 

@@ -10,6 +10,7 @@
 #include <iostream>
 #include <bits/stdc++.h>
 #include <algorithm>
+#include <Party.h>
 //---------------------------
 //----------USING----------
 using std::vector;
@@ -29,8 +30,9 @@ void Simulation::initCoalition()
     copyMatrix               = mGraph.getMatrix();
     vector <Party> parties   = mGraph.getParties();
     numberOfPartyies         = parties.size();
+    vector<Party *> aviable;
 
-    for (int i = 0; i <numberOfPartyies; i++){aviable.push_back(& parties[i]);}
+    for (unsigned int i=0; i <numberOfPartyies; i++){aviable.push_back(& parties[i]);}
     for (unsigned int i=0; i<mAgents.size();i++)
     {
         auto iter = std::remove(aviable.begin(),aviable.end(),&parties[mAgents[i].getPartyId()]);
@@ -39,27 +41,22 @@ void Simulation::initCoalition()
 
     for (unsigned int i=0; i<mAgents.size();i++)
     {
-        
-        coalitions.push_back(Coalition(parties, &mAgents[i],aviable));
+        Coalition *c = new Coalition();
+        c->setCoalition(parties, &mAgents.at(i),aviable);
+        coalitions.push_back(*c);
         joined++;
-        mAgents[i].setCoalition(& coalitions[i]);
+        mAgents[i].setCoalition(c);
         mAgents[i].setConnections(& copyMatrix[mAgents[i].getPartyId()]);
         if (coalitions[i].getMandates() >= 61){hasCoalition = true;}
 
     }
+    //for (unsigned int i=0; i<mAgents.size();i++){mAgents.at(i).getCoalition()->getParties();}
+    //mAgents.at(0).getCoalition()->getParties();
     
-    vector<int> * v = mAgents[0].getConnections();
-    //cout << v->at(0) << endl;
-    //cout << mAgents[0].getCoalition()->getAviable().size() << endl;
-    mAgents[0].getCoalition()->printAviable();
-
-    
+    //vector<Party *> v = mAgents[0].getCoalition()->getParties();
+    //vector<Party *> raz = mAgents[0].getCoalition()->getAviable();
+    //vector<int> * ido  = mAgents[0].getConnections();
     int a = mAgents[0].choose(mAgents[0].getCoalition()->getAviable(),mAgents[0].getConnections());
-    //cout << a << endl;
-    //v,mAgents[0].getCoalition()->getAviable()
-    //for (unsigned i = 0; i < v->size(); i++){cout << v->at(i) << endl;}
-    //cout << & copyMatrix << endl;W
-    //cout << mGraph.getMatrixAdress() << endl;
     return;
 }
 

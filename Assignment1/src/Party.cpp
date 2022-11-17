@@ -19,7 +19,7 @@ int Party::getMandates() const
 {
     return mMandates;
 }
-int Party::getId() const
+int Party::getId() 
 {
     return mId;
 }

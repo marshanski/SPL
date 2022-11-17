@@ -30,6 +30,7 @@ Coalition * Agent::getCoalition()
 {
     return coal;
 }
+
 vector<int> * Agent::getConnections() 
 {
     return connections;
