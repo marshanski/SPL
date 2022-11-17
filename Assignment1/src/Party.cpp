@@ -1,10 +1,29 @@
+/****************************************
+ * Author : Ido Israeli , Raz Marshanski
+ * Date   :
+ * Name   : Party.cpp
+****************************************/
+//----------INCLUDE----------
+#pragma once
+#include <vector>
 #include "Party.h"
+#include <iostream>
+//---------------------------
 
+//----------USING----------
+using std::vector;
+using std::cout;
+using std::endl;
+//---------------------------
 Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) 
 {
-    // You can change the implementation of the constructor, but not the signature!
+    timer = 0;
+    mCoalition = nullptr;
+    vector<Coalition *> offers;
+    cout << & offers << endl;
+    cout << & timer << endl;
+    
 }
-
 State Party::getState() const
 {
     return mState;
@@ -32,4 +51,12 @@ const string & Party::getName() const
 void Party::step(Simulation &s)
 {
     // TODO: implement this method
+    if(this->getState() == 1) // the party is collecting offers.
+    {
+        if(timer > 2)
+        {
+            //this.mCoalition = JoinPolicy:: join();
+        }
+    
+    }
 }
