@@ -27,6 +27,8 @@ public:
     const vector<Agent> &getAgents() const;
     const Party &getParty(int partyId) const;
     const vector<vector<int>> getPartiesByCoalitions() const;
+    void stepByParties();
+    int  getIter() ;
 
 private:
     Graph mGraph;

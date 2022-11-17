@@ -27,6 +27,7 @@ public:
     void step(Simulation &s);
     const string &getName() const;
     int getId() ;
+    void step(Simulation & s,int iter);
 
 private:
     int mId;
@@ -35,7 +36,7 @@ private:
     JoinPolicy *mJoinPolicy;
     State mState;
     int timer;
-    Coalition * mCoalition;
-    vector <Coalition*> offers;
+    int bestOffer;
+    int bestAgent;
 };
 

@@ -9,25 +9,18 @@
 #include <vector>
 using std::vector;
 #include <Party.h>
-#include <Agent.h>
+#include<JoinPolicy.h>
 //---------------------------
 
 #pragma once
 
 
-class JoinPolicy 
-{
-public:
-    virtual void choose(Agent * agent,Party * party)=0;
-};
-
-class MandatesJoinPolicy: public JoinPolicy
+void MandatesJoinPolicy::choose(Agent * agent,Party * party)
 { 
-public:
-    void choose(Agent * agent,Party * party) override;
-};
 
-class LastOfferJoinPolicy : public JoinPolicy 
+}
+
+void LastOfferJoinPolicy::choose(Agent * agent,Party * party) 
 {
-    void choose(Agent * agent,Party * party)override;
-};
+   
+}

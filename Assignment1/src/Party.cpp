@@ -15,14 +15,10 @@ using std::vector;
 using std::cout;
 using std::endl;
 //---------------------------
-Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) 
+Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) ,timer(0), bestOffer(-1), bestAgent(-1)
 {
-    timer = 0;
-    mCoalition = nullptr;
-    vector<Coalition *> offers;
-    cout << & offers << endl;
-    cout << & timer << endl;
-    
+
+
 }
 State Party::getState() const
 {
@@ -48,15 +44,20 @@ const string & Party::getName() const
     return mName;
 }
 
-void Party::step(Simulation &s)
+void Party::step(Simulation & s)
 {
     // TODO: implement this method
-    if(this->getState() == 1) // the party is collecting offers.
+
+
+}
+void Party::step(Simulation & s,int iter)
+{
+    // TODO: implement this method
+
+    if(timer+3 == iter) // the party is collecting offers.
     {
-        if(timer > 2)
-        {
-            //this.mCoalition = JoinPolicy:: join();
-        }
-    
+        //return maxAgent;
     }
 }
+
+

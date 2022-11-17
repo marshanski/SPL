@@ -63,10 +63,28 @@ void Simulation::initCoalition()
 
 void Simulation::step()
 {
-    //
+    
     return;
   
 }
+
+void Simulation::stepByParties()
+{
+    vector <Party> parties   = mGraph.getParties();
+    for (unsigned int i=0; i <numberOfPartyies; i++)
+    {
+        parties.at(i).step(*(this),iter);
+    }
+    
+    
+  
+}
+
+int Simulation::getIter() 
+{
+    return iter;
+}
+
 
 bool Simulation::shouldTerminate() const
 {
@@ -88,6 +106,7 @@ const Party &Simulation::getParty(int partyId) const
 {
     return mGraph.getParty(partyId);
 }
+
 
 /// This method returns a "coalition" vector, where each element is a vector of party IDs in the coalition.
 /// At the simulation initialization - the result will be [[agent0.partyId], [agent1.partyId], ...]
