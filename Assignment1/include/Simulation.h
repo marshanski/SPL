@@ -29,6 +29,8 @@ public:
     const vector<vector<int>> getPartiesByCoalitions() const;
     int  getIter() ;
     void stepByAgents();
+    void addAgent(Agent agent);
+    int getNumberOfAgents();
 
 
 private:

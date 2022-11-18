@@ -29,11 +29,27 @@ int EdgeWeightSelectionPolicy::choose(vector <Party *> aviable,vector<int> * con
     connections->at(maxIndex) = 0;
     auto iter = std::remove(aviable.begin(),aviable.end(),aviable[paryId]);
     aviable.erase(iter,aviable.end());   
-    for (unsigned i = 0; i < connections->size(); i++){cout << connections->at(i)<< endl;};
+    //for (unsigned i = 0; i < connections->size(); i++){cout << connections->at(i)<< endl;};
     return maxIndex;
 }
 
 int MandatesSelectionPolicy::choose(vector <Party *> aviable,vector<int> * connections)
 {
-    return 1;
+    int max = 0, maxIndex = -1, paryId =-1 ;
+    for (unsigned i = 0; i < aviable.size(); i++)
+    {
+        if (connections->at(aviable.at(i)->getId()) >0 && aviable.at(i)->getMandates() > max )
+        {
+            max      = aviable.at(i)->getMandates();
+            maxIndex = aviable.at(i)->getId();
+            paryId   = i;
+        }
+    }
+    if (max == 0 ){return maxIndex;}
+    
+    connections->at(maxIndex) = 0;
+    auto iter = std::remove(aviable.begin(),aviable.end(),aviable[paryId]);
+    aviable.erase(iter,aviable.end());   
+    //for (unsigned i = 0; i < connections->size(); i++){cout << connections->at(i)<< endl;};
+    return maxIndex;
 }

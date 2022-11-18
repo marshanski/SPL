@@ -24,7 +24,13 @@ void Coalition::setCoalition(vector<Party> parties, Agent * agent,vector<Party *
     mandates = parties[agent->getPartyId()].getMandates();
     agentInCoalition.push_back(agent);
     for (unsigned i = 0; i < aviable.size(); i++){aviableToOffer.push_back(aviable[i]);}  
+}
 
+void Coalition::addPartyToCoalition(Party * party, Agent * agent)
+{
+    partiesInCoalition.push_back(party);
+    mandates += party->getMandates();
+    agentInCoalition.push_back(agent);
 }
 
 int Coalition::getMandates() const

@@ -31,6 +31,32 @@ void Party::setState(State state)
     mState = state;
 }
 
+void Party::setBestCoal(Coalition * c)
+{
+    coal = c;
+}
+
+int Party::getbestOffer() 
+{
+    return bestOffer;
+}
+
+void Party::setbestOffer(int mandates)
+{
+    bestOffer = mandates;
+}
+
+int Party::getbestAgent() 
+{
+    return bestAgent ;
+}
+
+void Party::setbestAgent(int agentIndex)
+{
+    bestAgent = agentIndex;
+}
+
+
 int Party::getMandates() const
 {
     return mMandates;
@@ -56,13 +82,20 @@ void Party::step(Simulation & s,int iter)
 
     if(timer+3 == iter) // the party is collecting offers.
     {
-        //return maxAgent;
+        //s->getNumberOfAgents()
+        //bestAgent
+        //mSelectionPolicy
+
+        //Agent agent = new Agent()
+        
     }
 }
-void Party::choose(Agent * agent)
+
+void Party::choose(Party * party,int iter,Coalition * coal)
 {
-    int a=0;
-    mJoinPolicy->choose(agent,this);
+    this->setState(State(1));
+    timer = iter;
+    mJoinPolicy->choose(party,this,coal);
 }
 
 

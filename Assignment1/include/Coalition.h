@@ -24,6 +24,7 @@ public:
     void printAviable();
     vector<Party *> getAviable();
     void getParties();
+    void addPartyToCoalition(Party * party, Agent * agent);
     
 
 private:

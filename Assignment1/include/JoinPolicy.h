@@ -16,16 +16,16 @@ using std::vector;
 class JoinPolicy 
 {
 public:
-    virtual void choose(Agent * agent,Party * party)=0;
+    virtual void choose(Party * agentParty,Party * party, Coalition * coal)=0;
 };
 
 class MandatesJoinPolicy: public JoinPolicy
 { 
 public:
-    void choose(Agent * agent,Party * party);
+    void choose(Party * agentParty,Party * party,Coalition * coal);
 };
 
 class LastOfferJoinPolicy : public JoinPolicy 
 {
-    void choose(Agent * agent,Party * party);
+    void choose(Party * agentParty,Party * party,Coalition * coal);
 };

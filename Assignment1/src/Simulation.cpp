@@ -52,7 +52,6 @@ void Simulation::initCoalition()
     return;
 }
 
-
 void Simulation::step()
 {
     //this->stepByParties
@@ -73,17 +72,18 @@ void Simulation::stepByAgents()
         cout << "Agent "  << i << endl;
         cout << "Choose " << partyToOffer << endl;
         if(partyToOffer != -1)
-            parties.at(partyToOffer).choose(&mAgents[i]);
+            parties.at(partyToOffer).choose(&parties.at(mAgents[i].getPartyId()),iter,mAgents[i].getCoalition());
     }
     
 }
 
 void Simulation::stepByParties()
 {
+    int bestAgent;
     vector <Party> parties   = mGraph.getParties();
     for (unsigned int i=0; i <numberOfPartyies; i++)
     {
-        parties.at(i).step(*(this),iter);
+        //bestAgent = parties.at(i).step(*(this),iter);
     }
     
 }
@@ -115,6 +115,16 @@ const Party &Simulation::getParty(int partyId) const
     return mGraph.getParty(partyId);
 }
 
+void Simulation::addAgent(Agent agent)
+{
+    mAgents.push_back(agent);
+    
+}
+int Simulation::getNumberOfAgents()
+{
+    return mAgents.size();
+    
+}
 
 /// This method returns a "coalition" vector, where each element is a vector of party IDs in the coalition.
 /// At the simulation initialization - the result will be [[agent0.partyId], [agent1.partyId], ...]

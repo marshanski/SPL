@@ -20,6 +20,7 @@ class Agent
 {
 public:
     Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy);
+    Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy,Coalition *  coal,vector<int> * connections);
     int getPartyId() const;
     int getId() const;
     void step(Simulation &);
@@ -28,6 +29,7 @@ public:
     void setConnections(vector<int> * vec) ;
     vector<int> * getConnections(); 
     int choose(vector<Party *> aviable ,vector<int> * connections) ;
+
 
 
 
