@@ -8,6 +8,7 @@
 #include <vector>
 #include "SelectionPolicy.h"
 #include <vector>
+#include <utility>
 //---------------------------
 
 //----------CLASS----------
@@ -28,8 +29,9 @@ public:
     Coalition * getCoalition(); 
     void setConnections(vector<int> * vec) ;
     vector<int> * getConnections(); 
-    int choose(vector<Party *> aviable ,vector<int> * connections) ;
+    std::pair<int,int> choose(vector<Party *> aviable ,vector<int> * connections) ;
     SelectionPolicy * getSelectionPolicy();
+    void deleteFromAgent(int partyToOffer);
 
 
 

@@ -8,6 +8,7 @@
 #include <vector>
 #include "Coalition.h"
 #include <iostream>
+#include <bits/stdc++.h>
 //---------------------------
 
 //----------USING----------
@@ -32,6 +33,16 @@ void Coalition::addPartyToCoalition(Party * party, Agent * agent)
     partiesInCoalition.push_back(party);
     mandates += party->getMandates();
     agentInCoalition.push_back(agent);
+}
+
+vector<Party *> Coalition::getaviableToOffer()
+{
+    return aviableToOffer;
+}
+void Coalition::deleteFromCoalition(int partyId)
+{
+    auto iter = std::remove(aviableToOffer.begin(),aviableToOffer.end(),aviableToOffer.at(partyId));
+    aviableToOffer.erase(iter,aviableToOffer.end());
 }
 
 int Coalition::getMandates() const

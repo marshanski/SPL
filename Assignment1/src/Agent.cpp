@@ -3,6 +3,7 @@
 #include "Simulation.h"
 #include <vector>
 #include "SelectionPolicy.h"
+#include <utility>
 using std::vector;
 
 
@@ -52,9 +53,14 @@ void Agent::setConnections(vector<int> * vec)
     connections = vec;
 }
 
-int Agent::choose(vector<Party *> aviable, vector<int> * connections)
+std::pair<int,int> Agent::choose(vector<Party *> aviable, vector<int> * connections)
 {
     return mSelectionPolicy->choose(aviable,connections);
+}
+
+void Agent::deleteFromAgent(int partyToOffer)
+{
+    connections->at(partyToOffer) = 0;
 }
 
 

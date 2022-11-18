@@ -9,25 +9,27 @@
 #include <vector>
 using std::vector;
 #include <Party.h>
+#include <iostream>
+#include <utility>
 //---------------------------
 
 
 class SelectionPolicy 
 {
 public:
-    virtual int choose(vector<Party *> aviable,vector<int> * connections)=0;
+    virtual std::pair<int,int> choose(vector<Party *> aviable,vector<int> * connections)=0;
 };
 
 class MandatesSelectionPolicy: public SelectionPolicy
 { 
 public:
-    int choose(vector<Party *> aviable,vector<int> * connections);
+     std::pair<int,int> choose(vector<Party *> aviable,vector<int> * connections);
 };
 
 class EdgeWeightSelectionPolicy: public SelectionPolicy
 {
 public:
-    int choose(vector<Party *> aviable, vector<int> * connections);
+     std::pair<int,int> choose(vector<Party *> aviable, vector<int> * connections);
 };
 
 

@@ -7,48 +7,46 @@
 #pragma once
 #include <iostream>
 #include "SelectionPolicy.h"
+#include <utility>
 
 #include <bits/stdc++.h>
 using std::cout;
 using std::endl;
 
-int EdgeWeightSelectionPolicy::choose(vector <Party *> aviable,vector<int> * connections)
+std::pair<int,int> EdgeWeightSelectionPolicy::choose(vector <Party *> aviable,vector<int> * connections)
 {
 
-    int max = 0, maxIndex = -1, paryId =-1 ;
+    int max = 0, maxIndex = -1, partyId =-1 ;
     for (unsigned i = 0; i < aviable.size(); i++)
     {
         if (connections->at(aviable.at(i)->getId()) >max)
         {
             max      = connections->at(aviable.at(i)->getId());
             maxIndex = aviable.at(i)->getId();
-            paryId   = i;
+            partyId   = i;
         }
     }
-    if (max == 0 ){return maxIndex;}
+    if (max == 0 ){return(std::make_pair(maxIndex,partyId));}
     
-    connections->at(maxIndex) = 0;
-    auto iter = std::remove(aviable.begin(),aviable.end(),aviable[paryId]);
-    aviable.erase(iter,aviable.end());   
-    return maxIndex;
+    return(std::make_pair(maxIndex,partyId));
 }
 
-int MandatesSelectionPolicy::choose(vector <Party *> aviable,vector<int> * connections)
+std::pair<int,int>  MandatesSelectionPolicy::choose(vector <Party *> aviable,vector<int> * connections)
 {
-    int max = 0, maxIndex = -1, paryId =-1 ;
+    int max = 0, maxIndex = -1, partyId =-1 ;
     for (unsigned i = 0; i < aviable.size(); i++)
     {
         if (connections->at(aviable.at(i)->getId()) >0 && aviable.at(i)->getMandates() > max )
         {
             max      = aviable.at(i)->getMandates();
             maxIndex = aviable.at(i)->getId();
-            paryId   = i;
+            partyId   = i;
         }
     }
-    if (max == 0 ){return maxIndex;}
+    if (max == 0 ){return(std::make_pair(maxIndex,partyId));}
     
     connections->at(maxIndex) = 0;
-    auto iter = std::remove(aviable.begin(),aviable.end(),aviable[paryId]);
+    auto iter = std::remove(aviable.begin(),aviable.end(),aviable[partyId]);
     aviable.erase(iter,aviable.end());   
-    return maxIndex;
+    return(std::make_pair(maxIndex,partyId));
 }

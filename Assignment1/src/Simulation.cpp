@@ -64,19 +64,26 @@ void Simulation::step()
 
 void Simulation::stepByAgents()
 {
-    int partyToOffer;
+    int partyToOffer,partyId;
+    std::pair<int,int> p;
     for (unsigned int i=0; i < mAgents.size(); i++)
     {
-        partyToOffer = mAgents[i].choose(mAgents[i].getCoalition()->getAviable(),mAgents[i].getConnections());
+        
+        
+        p = mAgents[i].choose(coalitions.at(mAgents[i].getCoalition()->getId()).getAviable(),mAgents[i].getConnections());
+        partyToOffer = p.first;
+        partyId      = p.second;
         cout << "Agent "  << i << endl;
         cout << "Choose " << partyToOffer << endl;
         if(partyToOffer != -1)
         {
             parties.at(partyToOffer).choose(&parties.at(mAgents[i].getPartyId()),iter,mAgents[i].getCoalition(),mAgents[i].getSelectionPolicy());
             mGraph.getParty(partyToOffer).setState(State(1));
+            mAgents[i].getCoalition()->getId();
+            coalitions.at(mAgents[i].getCoalition()->getId()).deleteFromCoalition(partyId);
+            mAgents[i].deleteFromAgent(partyToOffer);
         }
     }
-    int a=0;
     
 }
 
