@@ -32,10 +32,9 @@ int main(int argc, char **argv)
     //initalize the coalitions
     simulation.initCoalition();
 
-    while (i<2) //!simulation.shouldTerminate()
+    while (!simulation.shouldTerminate()) //
     {
         simulation.step();
-        i++;
         outPerIter.push_back(Parser::makeJson(simulation));
     }
 

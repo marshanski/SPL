@@ -42,7 +42,7 @@ void Simulation::initCoalition()
     for (unsigned int i=0; i<mAgents.size();i++)
     {
         Coalition *c = new Coalition();
-        c->setCoalition(parties, &mAgents.at(i),aviable);
+        c->setCoalition(parties, &mAgents.at(i),aviable,i);
         coalitions.push_back(*c);
         joined++;
         mAgents[i].setCoalition(c);
@@ -54,7 +54,7 @@ void Simulation::initCoalition()
 
 void Simulation::step()
 {
-    //this->stepByParties
+    this->stepByParties();
     cout <<"---------------------------------------------" << endl;
     cout <<"iter: " << iter << endl; 
     this->stepByAgents();
@@ -86,7 +86,12 @@ void Simulation::stepByParties()
     //vector <Party> parties   = mGraph.getParties();
     for (unsigned int i=0; i <numberOfPartyies; i++)
     {
-        //bestAgent = parties.at(i).step(*(this),iter);
+        if (parties.at(i).getState()== 1 && parties.at(i).getTimer()+3 == iter)
+        {
+            parties.at(i).step(*this);
+            joined++;
+            mGraph.getParty(i).setState(State(2));
+        }
     }
     
 }
@@ -100,7 +105,7 @@ int Simulation::getIter()
 bool Simulation::shouldTerminate() const
 {
     if ( hasCoalition || numberOfPartyies == joined){return true;}
-    return true;    
+    return false;    
 }
 
 const Graph &Simulation::getGraph() const
@@ -118,11 +123,7 @@ const Party &Simulation::getParty(int partyId) const
     return mGraph.getParty(partyId);
 }
 
-void Simulation::addAgent(Agent agent)
-{
-    mAgents.push_back(agent);
-    
-}
+
 int Simulation::getNumberOfAgents()
 {
     return mAgents.size();
@@ -141,4 +142,25 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
     // TODO: you MUST implement this method for getting proper output, read the documentation above.
     return vector<vector<int>>();
+}
+
+Agent * Simulation::addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,Coalition *  coal,vector<int> * connections)
+{
+    Agent * agent = new Agent(mAgentId,mPartyId,mSelectionPolicy,coal,connections);
+    mAgents.push_back(* agent);
+    int coalitionId = coal->getId();
+    coalitions.at(coalitionId).addPartyToCoalition(&parties.at(mPartyId),agent);
+    if (coalitions.at(coalitionId).getMandates()>61)
+    {
+        hasCoalition = true;
+    }
+    
+    return agent;
+}
+
+void Simulation::addPartyToCoalition(Party * party, Agent * agent)
+{
+    //partiesInCoalition.push_back(party);
+    //mandates += party->getMandates();
+    //agentInCoalition.push_back(agent);
 }

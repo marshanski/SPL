@@ -17,12 +17,13 @@ using std::endl;
 //---------------------------
 
 
-void Coalition::setCoalition(vector<Party> parties, Agent * agent,vector<Party *> aviable)
+void Coalition::setCoalition(vector<Party> parties, Agent * agent,vector<Party *> aviable,int id)
 {
 
     partiesInCoalition.push_back(& parties[agent->getPartyId()]);
     mandates = parties[agent->getPartyId()].getMandates();
     agentInCoalition.push_back(agent);
+    cId = id;
     for (unsigned i = 0; i < aviable.size(); i++){aviableToOffer.push_back(aviable[i]);}  
 }
 
@@ -36,6 +37,10 @@ void Coalition::addPartyToCoalition(Party * party, Agent * agent)
 int Coalition::getMandates() const
 {
     return mandates;
+}
+int Coalition::getId() 
+{
+    return cId;
 }
 
 

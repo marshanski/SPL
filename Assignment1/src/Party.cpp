@@ -9,6 +9,9 @@
 #include "Party.h"
 #include "JoinPolicy.h"
 #include <iostream>
+#include <Simulation.h>
+
+
 //---------------------------
 
 //----------USING----------
@@ -39,6 +42,11 @@ void Party::setBestCoal(Coalition * c)
 int Party::getbestOffer() 
 {
     return bestOffer;
+}
+
+int Party::getTimer() 
+{
+    return timer;
 }
 
 void Party::setbestOffer(int mandates)
@@ -73,24 +81,10 @@ const string & Party::getName() const
 
 void Party::step(Simulation & s)
 {
-    // TODO: implement this method
+    Agent * agent = s.addAgent(s.getNumberOfAgents(),mId,sp,coal,s.getConnectionsOfParty(mId));
+    //coal->addPartyToCoalition(this,agent);
+    int r=0;
 
-}
-void Party::step(Simulation & s,int iter)
-{
-    // TODO: implement this method
-
-    if(timer+3 == iter) // the party is collecting offers.
-    {
-        //s->getNumberOfAgents(),
-        //mId,
-        //mSelectionPolicy,
-        //coal,
-        //s->getConnectionsOfParty(mId)
-
-        //Agent agent = new Agent()
-        
-    }
 }
 void Party::setSP(SelectionPolicy * SelectP)
 {
@@ -101,7 +95,10 @@ void Party::setSP(SelectionPolicy * SelectP)
 void Party::choose(Party * party,int iter,Coalition * coal,SelectionPolicy * sp)
 {
     this->setState(State(1));
-    timer = iter;
+    if (timer!=0)
+    {
+        timer = iter;
+    }
     mJoinPolicy->choose(party,this,coal,sp);
 }
 

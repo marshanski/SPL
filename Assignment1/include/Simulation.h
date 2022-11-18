@@ -29,9 +29,10 @@ public:
     const vector<vector<int>> getPartiesByCoalitions() const;
     int  getIter() ;
     void stepByAgents();
-    void addAgent(Agent agent);
+    Agent * addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,Coalition *  coal,vector<int> * connections);
     int getNumberOfAgents();
     vector<int> * getConnectionsOfParty(int party);
+    void addPartyToCoalition(Party * party, Agent * agent);
 
 
 private:

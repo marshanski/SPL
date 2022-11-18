@@ -19,12 +19,13 @@ class Coalition
 {
 public:
     Coalition(){};
-    void setCoalition(vector<Party> parties, Agent * agent,vector<Party *> aviable);
+    void setCoalition(vector<Party> parties, Agent * agent,vector<Party *> aviable,int id);
     int  getMandates() const;
     void printAviable();
     vector<Party *> getAviable();
     void getParties();
     void addPartyToCoalition(Party * party, Agent * agent);
+    int getId(); 
     
 
 private:
@@ -32,4 +33,5 @@ private:
     vector<Agent *> agentInCoalition;
     vector<Party *> aviableToOffer;
     int mandates;
+    int cId;
 };

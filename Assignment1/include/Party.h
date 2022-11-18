@@ -33,10 +33,9 @@ public:
     State getState() const;
     void setState(State state);
     int getMandates() const;
-    void step(Simulation &s);
     const string &getName() const;
     int getId() ;
-    void step(Simulation & s,int iter);
+    void step(Simulation & s);
     void choose(Party * party,int iter,Coalition * coal,SelectionPolicy * sp);
     void setbestOffer(int mandates);
     int getbestOffer() ;
@@ -44,6 +43,7 @@ public:
     void setBestCoal(Coalition * c);
     void setSP(SelectionPolicy * SelectP);
     int getbestAgent();
+    int getTimer() ;
 
 
 private:
