@@ -26,6 +26,8 @@ public:
     void getParties();
     void addPartyToCoalition(Party * party, Agent * agent);
     int getId(); 
+    void deleteFromCoalition(int partyId);
+    vector<Party *> getaviableToOffer();
     
 
 private:
@@ -35,3 +37,4 @@ private:
     int mandates;
     int cId;
 };
+s
