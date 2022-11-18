@@ -82,20 +82,27 @@ void Party::step(Simulation & s,int iter)
 
     if(timer+3 == iter) // the party is collecting offers.
     {
-        //s->getNumberOfAgents()
-        //bestAgent
-        //mSelectionPolicy
+        //s->getNumberOfAgents(),
+        //mId,
+        //mSelectionPolicy,
+        //coal,
+        //s->getConnectionsOfParty(mId)
 
         //Agent agent = new Agent()
         
     }
 }
+void Party::setSP(SelectionPolicy * SelectP)
+{
+    sp = SelectP;
+    
+}
 
-void Party::choose(Party * party,int iter,Coalition * coal)
+void Party::choose(Party * party,int iter,Coalition * coal,SelectionPolicy * sp)
 {
     this->setState(State(1));
     timer = iter;
-    mJoinPolicy->choose(party,this,coal);
+    mJoinPolicy->choose(party,this,coal,sp);
 }
 
 

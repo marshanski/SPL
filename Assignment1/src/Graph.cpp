@@ -24,6 +24,10 @@ const Party &Graph::getParty(int partyId) const
 {
     return mVertices[partyId];
 }
+Party &Graph::getParty(int partyId) 
+{
+    return mVertices[partyId];
+}
 
 vector <Party> Graph::getParties() const
 {

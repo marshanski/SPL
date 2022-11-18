@@ -28,7 +28,7 @@ Simulation::Simulation(Graph graph, vector<Agent> agents): mGraph(graph), mAgent
 void Simulation::initCoalition()
 {
     copyMatrix               = mGraph.getMatrix();
-    vector <Party> parties   = mGraph.getParties();
+    parties                  = mGraph.getParties();
     numberOfPartyies         = parties.size();
     vector<Party *> aviable;
 
@@ -65,22 +65,25 @@ void Simulation::step()
 void Simulation::stepByAgents()
 {
     int partyToOffer;
-    vector <Party> parties   = mGraph.getParties();
     for (unsigned int i=0; i < mAgents.size(); i++)
     {
         partyToOffer = mAgents[i].choose(mAgents[i].getCoalition()->getAviable(),mAgents[i].getConnections());
         cout << "Agent "  << i << endl;
         cout << "Choose " << partyToOffer << endl;
         if(partyToOffer != -1)
-            parties.at(partyToOffer).choose(&parties.at(mAgents[i].getPartyId()),iter,mAgents[i].getCoalition());
+        {
+            parties.at(partyToOffer).choose(&parties.at(mAgents[i].getPartyId()),iter,mAgents[i].getCoalition(),mAgents[i].getSelectionPolicy());
+            mGraph.getParty(partyToOffer).setState(State(1));
+        }
     }
+    int a=0;
     
 }
 
 void Simulation::stepByParties()
 {
     int bestAgent;
-    vector <Party> parties   = mGraph.getParties();
+    //vector <Party> parties   = mGraph.getParties();
     for (unsigned int i=0; i <numberOfPartyies; i++)
     {
         //bestAgent = parties.at(i).step(*(this),iter);
@@ -125,6 +128,12 @@ int Simulation::getNumberOfAgents()
     return mAgents.size();
     
 }
+
+vector<int> * Simulation::getConnectionsOfParty(int party)
+{
+    return &copyMatrix[party];
+
+} 
 
 /// This method returns a "coalition" vector, where each element is a vector of party IDs in the coalition.
 /// At the simulation initialization - the result will be [[agent0.partyId], [agent1.partyId], ...]

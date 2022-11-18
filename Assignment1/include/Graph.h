@@ -15,6 +15,7 @@ public:
     vector <Party>getParties() const;
     vector<vector<int>> getMatrix();
     vector<vector<int>>  * getMatrixAdress();
+    Party &getParty(int partyId) ;
 
 private:
     vector<Party> mVertices;

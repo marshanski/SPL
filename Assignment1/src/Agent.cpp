@@ -2,6 +2,7 @@
 #include "Party.h"
 #include "Simulation.h"
 #include <vector>
+#include "SelectionPolicy.h"
 using std::vector;
 
 
@@ -15,6 +16,11 @@ mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy),coal(coa
 int Agent::getId() const
 {
     return mAgentId;
+}
+
+SelectionPolicy * Agent::getSelectionPolicy()
+{
+    return mSelectionPolicy;
 }
 
 int Agent::getPartyId() const

@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     {
         simulation.step();
         i++;
-        //outPerIter.push_back(Parser::makeJson(simulation));
+        outPerIter.push_back(Parser::makeJson(simulation));
     }
 
     // writing the outputs list to a file

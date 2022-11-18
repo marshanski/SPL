@@ -12,7 +12,7 @@ using std::cout;
 using std::endl;
 //---------------------------
 
-void MandatesJoinPolicy::choose(Party * agentParty,Party * party,Coalition * coal)
+void MandatesJoinPolicy::choose(Party * agentParty,Party * party,Coalition * coal,SelectionPolicy * sp)
 {
     
     if (agentParty->getMandates() > party->getbestOffer())
@@ -20,16 +20,18 @@ void MandatesJoinPolicy::choose(Party * agentParty,Party * party,Coalition * coa
         party->setbestOffer(agentParty->getMandates());
         party->setbestAgent(agentParty->getId());
         party->setBestCoal(coal);
+        party->setSP(sp);
     }
     
     cout << "MandatesJoinPolicy" << endl;
 
 }
 
-void LastOfferJoinPolicy::choose(Party * agentParty,Party * party,Coalition * coal) 
+void LastOfferJoinPolicy::choose(Party * agentParty,Party * party,Coalition * coal,SelectionPolicy * sp) 
 {
     party->setbestOffer(agentParty->getMandates());
     party->setbestAgent(agentParty->getId());
     party->setBestCoal(coal);
+    party->setSP(sp);
     cout << "LastOfferJoinPolicy" << endl;
 }

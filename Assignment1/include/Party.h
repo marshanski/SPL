@@ -7,14 +7,14 @@
 #pragma once
 #include <string>
 #include <vector>
-
-
+#include <vector>
 //----------USING------------------------------------------
 using std::string;
 using std::vector;
 //---------------------------------------------------------
 class Agent;
 class JoinPolicy;
+class SelectionPolicy;
 class Simulation;
 class Coalition;
 
@@ -37,11 +37,12 @@ public:
     const string &getName() const;
     int getId() ;
     void step(Simulation & s,int iter);
-    void choose(Party * party,int iter,Coalition * coal);
+    void choose(Party * party,int iter,Coalition * coal,SelectionPolicy * sp);
     void setbestOffer(int mandates);
     int getbestOffer() ;
     void setbestAgent(int agentIndex);
     void setBestCoal(Coalition * c);
+    void setSP(SelectionPolicy * SelectP);
     int getbestAgent();
 
 
@@ -55,5 +56,6 @@ private:
     int bestOffer;
     int bestAgent;
     Coalition * coal;
+    SelectionPolicy * sp;
 };
 

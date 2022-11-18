@@ -31,11 +31,13 @@ public:
     void stepByAgents();
     void addAgent(Agent agent);
     int getNumberOfAgents();
+    vector<int> * getConnectionsOfParty(int party);
 
 
 private:
     Graph mGraph;
     vector <Agent> mAgents;
+    vector <Party> parties;
     vector <Party *> collectingOffers;
     vector <Coalition> coalitions;
     vector<vector<int>> copyMatrix;

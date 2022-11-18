@@ -29,6 +29,7 @@ public:
     void setConnections(vector<int> * vec) ;
     vector<int> * getConnections(); 
     int choose(vector<Party *> aviable ,vector<int> * connections) ;
+    SelectionPolicy * getSelectionPolicy();
 
 
 
