@@ -1,4 +1,8 @@
 #include "Agent.h"
+#include "Party.h"
+#include "Simulation.h"
+#include <vector>
+using std::vector;
 
 
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy)

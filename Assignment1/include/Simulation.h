@@ -1,7 +1,7 @@
 /****************************************
  * Author : Ido Israeli , Raz Marshanski
  * Date   :
- * Name   :
+ * Name   :Simulation.h
 ****************************************/
 //----------INCLUDE----------
 #pragma once
@@ -19,25 +19,24 @@ class Simulation
 {
 public:
     Simulation(Graph g, vector<Agent> agents);
-
     void step();
     void initCoalition();
+    void stepByParties();
     bool shouldTerminate() const;
     const Graph &getGraph() const;
     const vector<Agent> &getAgents() const;
     const Party &getParty(int partyId) const;
     const vector<vector<int>> getPartiesByCoalitions() const;
-    void stepByParties();
     int  getIter() ;
+    void stepByAgents();
+
 
 private:
     Graph mGraph;
     vector <Agent> mAgents;
     vector <Party *> collectingOffers;
     vector <Coalition> coalitions;
+    vector<vector<int>> copyMatrix;
     int iter,joined,numberOfPartyies;
     bool hasCoalition;
-    vector<vector<int>> copyMatrix;
-
-    
 };

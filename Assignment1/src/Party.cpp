@@ -7,6 +7,7 @@
 #pragma once
 #include <vector>
 #include "Party.h"
+#include "JoinPolicy.h"
 #include <iostream>
 //---------------------------
 
@@ -48,7 +49,6 @@ void Party::step(Simulation & s)
 {
     // TODO: implement this method
 
-
 }
 void Party::step(Simulation & s,int iter)
 {
@@ -58,6 +58,11 @@ void Party::step(Simulation & s,int iter)
     {
         //return maxAgent;
     }
+}
+void Party::choose(Agent * agent)
+{
+    int a=0;
+    mJoinPolicy->choose(agent,this);
 }
 
 

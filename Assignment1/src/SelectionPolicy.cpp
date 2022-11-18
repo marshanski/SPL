@@ -7,28 +7,30 @@
 #pragma once
 #include <iostream>
 #include "SelectionPolicy.h"
+#include <bits/stdc++.h>
 using std::cout;
 using std::endl;
 
-
 int EdgeWeightSelectionPolicy::choose(vector <Party *> aviable,vector<int> * connections)
 {
-    //cout << aviable.size() << endl;
-    int max = 0, maxIndex = -1;
+
+    int max = 0, maxIndex = -1, paryId =-1 ;
     for (unsigned i = 0; i < aviable.size(); i++)
     {
         if (connections->at(aviable.at(i)->getId()) >max)
         {
             max      = connections->at(aviable.at(i)->getId());
             maxIndex = aviable.at(i)->getId();
+            paryId   = i;
         }
     }
-
-    connections->at(maxIndex) = 0;
-    for (unsigned i = 0; i < connections->size(); i++){cout << connections->at(i)<< endl;};
+    if (max == 0 ){return maxIndex;}
     
-    //cout << max << endl;
-    return 2;
+    connections->at(maxIndex) = 0;
+    auto iter = std::remove(aviable.begin(),aviable.end(),aviable[paryId]);
+    aviable.erase(iter,aviable.end());   
+    for (unsigned i = 0; i < connections->size(); i++){cout << connections->at(i)<< endl;};
+    return maxIndex;
 }
 
 int MandatesSelectionPolicy::choose(vector <Party *> aviable,vector<int> * connections)

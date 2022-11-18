@@ -6,8 +6,8 @@
 //----------INCLUDE----------
 #pragma once
 #include <vector>
-#include "Graph.h"
 #include "SelectionPolicy.h"
+#include <vector>
 //---------------------------
 
 //----------CLASS----------

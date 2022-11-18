@@ -1,10 +1,19 @@
-
+/****************************************
+ * Author : Ido Israeli , Raz Marshanski
+ * Date   :
+ * Name   : SelectionPolicy.h
+****************************************/
+//----------INCLUDE----------------------------------------
 #pragma once
 #include <string>
 #include <vector>
+
+
+//----------USING------------------------------------------
 using std::string;
 using std::vector;
-
+//---------------------------------------------------------
+class Agent;
 class JoinPolicy;
 class Simulation;
 class Coalition;
@@ -28,6 +37,7 @@ public:
     const string &getName() const;
     int getId() ;
     void step(Simulation & s,int iter);
+    void choose(Agent * agent);
 
 private:
     int mId;

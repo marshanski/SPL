@@ -48,24 +48,34 @@ void Simulation::initCoalition()
         mAgents[i].setCoalition(c);
         mAgents[i].setConnections(& copyMatrix[mAgents[i].getPartyId()]);
         if (coalitions[i].getMandates() >= 61){hasCoalition = true;}
-
     }
-    //for (unsigned int i=0; i<mAgents.size();i++){mAgents.at(i).getCoalition()->getParties();}
-    //mAgents.at(0).getCoalition()->getParties();
-    
-    //vector<Party *> v = mAgents[0].getCoalition()->getParties();
-    //vector<Party *> raz = mAgents[0].getCoalition()->getAviable();
-    //vector<int> * ido  = mAgents[0].getConnections();
-    int a = mAgents[0].choose(mAgents[0].getCoalition()->getAviable(),mAgents[0].getConnections());
     return;
 }
 
 
 void Simulation::step()
 {
-    
+    //this->stepByParties
+    cout <<"---------------------------------------------" << endl;
+    cout <<"iter: " << iter << endl; 
+    this->stepByAgents();
+    iter++;
     return;
-  
+}
+
+void Simulation::stepByAgents()
+{
+    int partyToOffer;
+    vector <Party> parties   = mGraph.getParties();
+    for (unsigned int i=0; i < mAgents.size(); i++)
+    {
+        partyToOffer = mAgents[i].choose(mAgents[i].getCoalition()->getAviable(),mAgents[i].getConnections());
+        cout << "Agent "  << i << endl;
+        cout << "Choose " << partyToOffer << endl;
+        if(partyToOffer != -1)
+            parties.at(partyToOffer).choose(&mAgents[i]);
+    }
+    
 }
 
 void Simulation::stepByParties()
@@ -76,8 +86,6 @@ void Simulation::stepByParties()
         parties.at(i).step(*(this),iter);
     }
     
-    
-  
 }
 
 int Simulation::getIter() 

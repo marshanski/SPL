@@ -12,8 +12,6 @@ using std::vector;
 #include <Agent.h>
 //---------------------------
 
-#pragma once
-
 
 class JoinPolicy 
 {
@@ -24,10 +22,10 @@ public:
 class MandatesJoinPolicy: public JoinPolicy
 { 
 public:
-    void choose(Agent * agent,Party * party) override;
+    void choose(Agent * agent,Party * party);
 };
 
 class LastOfferJoinPolicy : public JoinPolicy 
 {
-    void choose(Agent * agent,Party * party)override;
+    void choose(Agent * agent,Party * party);
 };

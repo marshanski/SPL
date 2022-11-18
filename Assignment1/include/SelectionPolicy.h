@@ -1,11 +1,11 @@
 /****************************************
  * Author : Ido Israeli , Raz Marshanski
  * Date   :
- * Name   :
+ * Name   : SelectionPolicy.h
 ****************************************/
 //----------INCLUDE----------
-#pragma once
 //----------USING----------
+#pragma once
 #include <vector>
 using std::vector;
 #include <Party.h>
@@ -21,13 +21,13 @@ public:
 class MandatesSelectionPolicy: public SelectionPolicy
 { 
 public:
-    int choose(vector<Party *> aviable,vector<int> * connections) override;
+    int choose(vector<Party *> aviable,vector<int> * connections);
 };
 
 class EdgeWeightSelectionPolicy: public SelectionPolicy
 {
 public:
-    int choose(vector<Party *> aviable, vector<int> * connections) override;
+    int choose(vector<Party *> aviable, vector<int> * connections);
 };
 
 

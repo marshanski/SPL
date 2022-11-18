@@ -6,21 +6,19 @@
 //----------INCLUDE----------
 #pragma once
 //----------USING----------
-#include <vector>
-using std::vector;
-#include <Party.h>
 #include<JoinPolicy.h>
+#include <iostream>
+using std::cout;
+using std::endl;
 //---------------------------
 
-#pragma once
-
-
 void MandatesJoinPolicy::choose(Agent * agent,Party * party)
-{ 
+{
+    cout << "MandatesJoinPolicy" << endl;
 
 }
 
 void LastOfferJoinPolicy::choose(Agent * agent,Party * party) 
 {
-   
+    cout << "MandatesJoinPolicy" << endl;
 }
