@@ -22,7 +22,15 @@ using std::endl;
 
 Simulation::Simulation(Graph graph, vector<Agent> agents): mGraph(graph), mAgents(agents) , iter (0), joined(0),numberOfPartyies(0),hasCoalition(false)
 {
-
+    for (unsigned i = 0; i < agents.size(); i++)
+    {
+        Coalition c;
+        vector <int> a;
+        coalitions.push_back(c);
+        colByNum.push_back(a);
+    }
+    int a=0;
+    
 }
 
 void Simulation::initCoalition()
@@ -41,14 +49,12 @@ void Simulation::initCoalition()
 
     for (unsigned int i=0; i<mAgents.size();i++)
     {
-        Coalition *c = new Coalition();
-        vector <int> a;
-        c->setCoalition(parties, &mAgents.at(i),aviable,i);
-        coalitions.push_back(*c);
-        colByNum.push_back(a);
+        //Coalition *c = new Coalition();
+        coalitions.at(i).setCoalition(parties, &mAgents.at(i),aviable,i);
+        //coalitions.push_back(c.at(i));
         colByNum.at(i).push_back(mAgents[i].getPartyId());
         joined++;
-        mAgents[i].setCoalition(c);
+        mAgents[i].setCoalition(& coalitions.at(i));
         mAgents[i].setConnections(& copyMatrix[mAgents[i].getPartyId()]);
         if (coalitions[i].getMandates() >= 61){hasCoalition = true;}
     }
