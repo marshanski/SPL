@@ -55,6 +55,17 @@ int Coalition::getId()
 }
 
 
+vector<int> Coalition::getParties()
+{
+    vector<int> v;
+    for (unsigned i = 0; i < partiesInCoalition.size(); i++)
+    {
+        v.push_back(partiesInCoalition.at(i)->getId());
+    }
+    
+    return v;
+}
+
 void Coalition::printAviable() 
 {
     for (unsigned i = 0; i < aviableToOffer.size(); i++)
@@ -70,14 +81,7 @@ vector<Party *> Coalition:: getAviable()
     return aviableToOffer;
 }
 
-void Coalition::getParties()
-{
-    cout << "-------------------------------------------" << endl;
-    cout << partiesInCoalition.size() << endl;
-    
-    cout << aviableToOffer.size() << endl;
-    cout << mandates  << endl;
-}
+
 
 
 

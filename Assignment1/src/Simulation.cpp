@@ -148,6 +148,13 @@ vector<int> * Simulation::getConnectionsOfParty(int party)
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
     // TODO: you MUST implement this method for getting proper output, read the documentation above.
+    /*vector<vector<int>> c ();
+    for (unsigned i = 0; i <coalitions.size() ; i++)
+    {
+        c.push_back(coalitions.at(i).getParties());
+    }
+    
+    return c;*/
     return vector<vector<int>>();
 }
 

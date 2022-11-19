@@ -26,7 +26,7 @@ public:
     const Graph &getGraph() const;
     const vector<Agent> &getAgents() const;
     const Party &getParty(int partyId) const;
-    const vector<vector<int>> getPartiesByCoalitions() const;
+    const vector<vector<int>> getPartiesByCoalitions()const;
     int  getIter() ;
     void stepByAgents();
     Agent * addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,Coalition *  coal,vector<int> * connections);

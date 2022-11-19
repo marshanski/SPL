@@ -95,7 +95,7 @@ void Party::setSP(SelectionPolicy * SelectP)
 void Party::choose(Party * party,int iter,Coalition * coal,SelectionPolicy * sp)
 {
     this->setState(State(1));
-    if (timer!=0)
+    if (timer==0)
     {
         timer = iter;
     }

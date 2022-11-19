@@ -26,8 +26,6 @@ std::pair<int,int> EdgeWeightSelectionPolicy::choose(vector <Party *> aviable,ve
             partyId   = i;
         }
     }
-    if (max == 0 ){return(std::make_pair(maxIndex,partyId));}
-    
     return(std::make_pair(maxIndex,partyId));
 }
 
@@ -43,10 +41,5 @@ std::pair<int,int>  MandatesSelectionPolicy::choose(vector <Party *> aviable,vec
             partyId   = i;
         }
     }
-    if (max == 0 ){return(std::make_pair(maxIndex,partyId));}
-    
-    connections->at(maxIndex) = 0;
-    auto iter = std::remove(aviable.begin(),aviable.end(),aviable[partyId]);
-    aviable.erase(iter,aviable.end());   
     return(std::make_pair(maxIndex,partyId));
 }

@@ -23,11 +23,11 @@ public:
     int  getMandates() const;
     void printAviable();
     vector<Party *> getAviable();
-    void getParties();
     void addPartyToCoalition(Party * party, Agent * agent);
     int getId(); 
     void deleteFromCoalition(int partyId);
     vector<Party *> getaviableToOffer();
+    vector<int> getParties();
     
 
 private:
@@ -37,4 +37,3 @@ private:
     int mandates;
     int cId;
 };
-s
