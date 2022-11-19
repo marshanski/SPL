@@ -57,8 +57,8 @@ Agent::Agent(Agent && other)
     coal             = other.coal;
     connections      = other.connections;
     other.mSelectionPolicy = nullptr;
-    coal                   =nullptr;
-    connections            =nullptr;
+    //coal                   =nullptr;
+    //connections            =nullptr;
 
 }
 Agent& Agent::operator=(Agent && other) 
@@ -76,8 +76,8 @@ Agent& Agent::operator=(Agent && other)
         coal             = other.coal;
         connections      = other.connections;
         other.mSelectionPolicy = nullptr;
-        coal                   =nullptr;
-        connections            =nullptr;
+        //coal                   =nullptr;
+        //onnections            =nullptr;
     }
     return *this;
 
