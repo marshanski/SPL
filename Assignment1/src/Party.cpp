@@ -22,8 +22,8 @@ using std::endl;
 Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) ,timer(0), bestOffer(-1), bestAgent(-1)
 {
 
-
 }
+
 State Party::getState() const
 {
     return mState;
@@ -81,10 +81,7 @@ const string & Party::getName() const
 
 void Party::step(Simulation & s)
 {
-    Agent * agent = s.addAgent(s.getNumberOfAgents(),mId,sp,coal,s.getConnectionsOfParty(mId));
-    //coal->addPartyToCoalition(this,agent);
-    int r=0;
-
+    s.addAgent(s.getNumberOfAgents(),mId,sp,coal,s.getConnectionsOfParty(mId));
 }
 void Party::setSP(SelectionPolicy * SelectP)
 {

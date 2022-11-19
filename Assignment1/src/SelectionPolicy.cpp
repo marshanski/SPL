@@ -29,6 +29,11 @@ std::pair<int,int> EdgeWeightSelectionPolicy::choose(vector <Party *> aviable,ve
     return(std::make_pair(maxIndex,partyId));
 }
 
+EdgeWeightSelectionPolicy* EdgeWeightSelectionPolicy::clone()
+{
+    return new EdgeWeightSelectionPolicy();
+}
+
 std::pair<int,int>  MandatesSelectionPolicy::choose(vector <Party *> aviable,vector<int> * connections)
 {
     int max = 0, maxIndex = -1, partyId =-1 ;
@@ -43,3 +48,9 @@ std::pair<int,int>  MandatesSelectionPolicy::choose(vector <Party *> aviable,vec
     }
     return(std::make_pair(maxIndex,partyId));
 }
+
+MandatesSelectionPolicy* MandatesSelectionPolicy::clone()
+{
+    return new MandatesSelectionPolicy();
+}
+

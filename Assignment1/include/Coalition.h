@@ -28,6 +28,7 @@ public:
     void deleteFromCoalition(int partyId);
     vector<Party *> getaviableToOffer();
     vector<int> getParties();
+    //Coalition clone();
     
 
 private:

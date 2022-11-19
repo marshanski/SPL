@@ -23,7 +23,6 @@ void MandatesJoinPolicy::choose(Party * agentParty,Party * party,Coalition * coa
         party->setSP(sp);
     }
     
-    cout << "MandatesJoinPolicy" << endl;
 
 }
 
@@ -33,5 +32,4 @@ void LastOfferJoinPolicy::choose(Party * agentParty,Party * party,Coalition * co
     party->setbestAgent(agentParty->getId());
     party->setBestCoal(coal);
     party->setSP(sp);
-    cout << "LastOfferJoinPolicy" << endl;
 }

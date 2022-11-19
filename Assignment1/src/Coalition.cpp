@@ -81,6 +81,11 @@ vector<Party *> Coalition:: getAviable()
     return aviableToOffer;
 }
 
+/*Coalition Coalition::clone()
+{
+    //return Coalition c;
+}*/
+
 
 
 

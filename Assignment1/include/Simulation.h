@@ -29,7 +29,7 @@ public:
     const vector<vector<int>> getPartiesByCoalitions()const;
     int  getIter() ;
     void stepByAgents();
-    Agent * addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,Coalition *  coal,vector<int> * connections);
+    void addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,Coalition *  coal,vector<int> * connections);
     int getNumberOfAgents();
     vector<int> * getConnectionsOfParty(int party);
     void addPartyToCoalition(Party * party, Agent * agent);
@@ -39,7 +39,6 @@ private:
     Graph mGraph;
     vector <Agent> mAgents;
     vector <Party> parties;
-    vector <Party *> collectingOffers;
     vector <Coalition> coalitions;
     vector<vector<int>> copyMatrix;
     int iter,joined,numberOfPartyies;
