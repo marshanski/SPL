@@ -44,4 +44,5 @@ private:
     vector<vector<int>> copyMatrix;
     int iter,joined,numberOfPartyies;
     bool hasCoalition;
+    vector<vector<int>> colByNum;
 };

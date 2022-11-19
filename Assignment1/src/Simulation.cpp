@@ -42,8 +42,11 @@ void Simulation::initCoalition()
     for (unsigned int i=0; i<mAgents.size();i++)
     {
         Coalition *c = new Coalition();
+        vector <int> a;
         c->setCoalition(parties, &mAgents.at(i),aviable,i);
         coalitions.push_back(*c);
+        colByNum.push_back(a);
+        colByNum.at(i).push_back(mAgents[i].getPartyId());
         joined++;
         mAgents[i].setCoalition(c);
         mAgents[i].setConnections(& copyMatrix[mAgents[i].getPartyId()]);
@@ -148,14 +151,16 @@ vector<int> * Simulation::getConnectionsOfParty(int party)
 const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 {
     // TODO: you MUST implement this method for getting proper output, read the documentation above.
-    /*vector<vector<int>> c ();
-    for (unsigned i = 0; i <coalitions.size() ; i++)
+    /*for (unsigned i = 0; i <coalitions.size() ; i++)
     {
+        
         c.push_back(coalitions.at(i).getParties());
     }
     
-    return c;*/
-    return vector<vector<int>>();
+    return c();
+    ;*/
+
+    return colByNum;
 }
 
 Agent * Simulation::addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,Coalition *  coal,vector<int> * connections)
@@ -164,6 +169,7 @@ Agent * Simulation::addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelecti
     mAgents.push_back(* agent);
     int coalitionId = coal->getId();
     coalitions.at(coalitionId).addPartyToCoalition(&parties.at(mPartyId),agent);
+    colByNum.at(coalitionId).push_back(mPartyId);
     if (coalitions.at(coalitionId).getMandates()>61)
     {
         hasCoalition = true;

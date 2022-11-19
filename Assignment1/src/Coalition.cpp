@@ -21,7 +21,7 @@ using std::endl;
 void Coalition::setCoalition(vector<Party> parties, Agent * agent,vector<Party *> aviable,int id)
 {
 
-    partiesInCoalition.push_back(& parties[agent->getPartyId()]);
+    partiesInCoalition.push_back(& parties.at(agent->getPartyId()));
     mandates = parties[agent->getPartyId()].getMandates();
     agentInCoalition.push_back(agent);
     cId = id;

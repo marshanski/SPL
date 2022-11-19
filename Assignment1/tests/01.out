@@ -101,7 +101,20 @@
                 "partyId": 3
             }
         ],
-        "coalitions": [],
+        "coalitions": [
+            {
+                "mandates": 50,
+                "parties": [
+                    0
+                ]
+            },
+            {
+                "mandates": 20,
+                "parties": [
+                    3
+                ]
+            }
+        ],
         "edges": [
             {
                 "from": 0,
@@ -192,7 +205,20 @@
                 "partyId": 3
             }
         ],
-        "coalitions": [],
+        "coalitions": [
+            {
+                "mandates": 50,
+                "parties": [
+                    0
+                ]
+            },
+            {
+                "mandates": 20,
+                "parties": [
+                    3
+                ]
+            }
+        ],
         "edges": [
             {
                 "from": 0,
@@ -283,7 +309,20 @@
                 "partyId": 3
             }
         ],
-        "coalitions": [],
+        "coalitions": [
+            {
+                "mandates": 50,
+                "parties": [
+                    0
+                ]
+            },
+            {
+                "mandates": 20,
+                "parties": [
+                    3
+                ]
+            }
+        ],
         "edges": [
             {
                 "from": 0,
@@ -378,7 +417,21 @@
                 "partyId": 2
             }
         ],
-        "coalitions": [],
+        "coalitions": [
+            {
+                "mandates": 50,
+                "parties": [
+                    0
+                ]
+            },
+            {
+                "mandates": 40,
+                "parties": [
+                    3,
+                    2
+                ]
+            }
+        ],
         "edges": [
             {
                 "from": 0,
@@ -477,7 +530,22 @@
                 "partyId": 1
             }
         ],
-        "coalitions": [],
+        "coalitions": [
+            {
+                "mandates": 50,
+                "parties": [
+                    0
+                ]
+            },
+            {
+                "mandates": 70,
+                "parties": [
+                    3,
+                    2,
+                    1
+                ]
+            }
+        ],
         "edges": [
             {
                 "from": 0,
