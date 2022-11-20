@@ -11,25 +11,22 @@
 using std::cout;
 using std::endl;
 //---------------------------
-
-void MandatesJoinPolicy::choose(Party * agentParty,Party * party,Coalition * coal,SelectionPolicy * sp)
+void MandatesJoinPolicy::choose(Agent * agent,Party * party,int mandates)
 {
     
-    if (agentParty->getMandates() > party->getbestOffer())
+    if (mandates > party->getbestOffer())
     {
-        party->setbestOffer(agentParty->getMandates());
-        party->setbestAgent(agentParty->getId());
-        party->setBestCoal(coal);
-        party->setSP(sp);
+        party->setbestOffer(mandates);
+        party->setbestAgent(agent->getPartyId());
+        party->setBestCoal(agent->getColId());
     }
     
 
 }
 
-void LastOfferJoinPolicy::choose(Party * agentParty,Party * party,Coalition * coal,SelectionPolicy * sp) 
+void LastOfferJoinPolicy::choose(Agent * agent,Party * party,int mandates)
 {
-    party->setbestOffer(agentParty->getMandates());
-    party->setbestAgent(agentParty->getId());
-    party->setBestCoal(coal);
-    party->setSP(sp);
+    party->setbestOffer(mandates);
+    party->setbestAgent(agent->getPartyId());
+    party->setBestCoal(agent->getColId());
 }

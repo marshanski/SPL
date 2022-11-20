@@ -37,12 +37,12 @@ void Simulation::initCoalition()
     copyMatrix               = mGraph.getMatrix();
     parties                  = mGraph.getParties();
     numberOfPartyies         = parties.size();
-    vector<Party *> aviable;
+    vector<int> aviable;
 
-    for (unsigned int i=0; i <numberOfPartyies; i++){aviable.push_back(& parties[i]);}
+    for (unsigned int i=0; i <numberOfPartyies; i++){aviable.push_back(i);}
     for (unsigned int i=0; i<mAgents.size();i++)
     {
-        auto iter = std::remove(aviable.begin(),aviable.end(),&parties[mAgents[i].getPartyId()]);
+        auto iter = std::remove(aviable.begin(),aviable.end(),mAgents[i].getPartyId());
         aviable.erase(iter,aviable.end());    
     }
 
@@ -51,8 +51,8 @@ void Simulation::initCoalition()
         coalitions.at(i).setCoalition(parties, &mAgents.at(i),aviable,i);
         colByNum.at(i).push_back(mAgents[i].getPartyId());
         joined++;
-        mAgents[i].setCoalition(& coalitions.at(i));
-        mAgents[i].setConnections(& copyMatrix[mAgents[i].getPartyId()]);
+        mAgents[i].setCoalition(i);
+        //mAgents[i].setConnections(& copyMatrix[mAgents[i].getPartyId()]);
         if (coalitions[i].getMandates() >= 61){hasCoalition = true;}
     }
     return;
@@ -73,18 +73,18 @@ void Simulation::stepByAgents()
     std::pair<int,int> p;
     for (unsigned int i=0; i < mAgents.size(); i++)
     {
-        p = mAgents[i].choose(coalitions.at(mAgents[i].getCoalition()->getId()).getAviable(),mAgents[i].getConnections());
+        p = mAgents[i].choose(parties,coalitions.at(mAgents.at(i).getColId()).getAviable(),copyMatrix.at(mAgents.at(i).getPartyId()));
         partyToOffer = p.first;
         partyId      = p.second;
         cout << "Agent : " << i << endl;
         cout << "choose:" << partyToOffer << endl;
         if(partyToOffer != -1)
         {
-            parties.at(partyToOffer).choose(&parties.at(mAgents[i].getPartyId()),iter,mAgents[i].getCoalition(),mAgents[i].getSelectionPolicy());
+            parties.at(partyToOffer).choose(&mAgents[i],coalitions.at(mAgents[i].getColId()).getMandates(),iter);
             mGraph.getParty(partyToOffer).setState(State(1));
-            mAgents[i].getCoalition()->getId();
-            coalitions.at(mAgents[i].getCoalition()->getId()).deleteFromCoalition(partyId);
-            mAgents[i].deleteFromAgent(partyToOffer);
+            //mAgents[i].getCoalition()->getId();
+            coalitions.at(mAgents[i].getColId()).deleteFromCoalition(partyId);
+            copyMatrix[i][partyToOffer]=0;
         }
     }
     
@@ -127,6 +127,10 @@ const vector<Agent> &Simulation::getAgents() const
 {
     return mAgents;
 }
+Agent& Simulation::getAgent(int id) 
+{
+    return mAgents[id];
+}
 
 const Party &Simulation::getParty(int partyId) const
 {
@@ -152,14 +156,14 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const
     return colByNum;
 }
 
-void Simulation::addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,Coalition *  coal,vector<int> * connections)
+void Simulation::addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,int  coal)
 {
-    int a=0;
-    mAgents.push_back(Agent(mAgentId,mPartyId,mSelectionPolicy->clone(),coal,connections));
-    int coalitionId = coal->getId();
-    coalitions.at(coalitionId).addPartyToCoalition(&parties.at(mPartyId),&mAgents[mAgents.size()-1]);
-    colByNum.at(coalitionId).push_back(mPartyId);
-    if (coalitions.at(coalitionId).getMandates()>61)
+    int b=0;
+    mAgents.push_back(Agent(mAgentId,mPartyId,mSelectionPolicy->clone(),coal));
+    //int coalitionId = coal->getId();
+    coalitions.at(coal).addPartyToCoalition(&parties.at(mPartyId),&mAgents[mAgents.size()-1]);
+    colByNum.at(coal).push_back(mPartyId);
+    if (coalitions.at(coal).getMandates()>61)
     {
         hasCoalition = true;
     }

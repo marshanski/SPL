@@ -17,7 +17,7 @@ using std::vector;
 class SelectionPolicy 
 {
 public:
-    virtual std::pair<int,int> choose(vector<Party *> aviable,vector<int> * connections)=0;
+    virtual std::pair<int,int> choose(vector<Party>parties,vector <int> aviable,vector<int>connections)=0;
     virtual SelectionPolicy* clone()=0;
     virtual ~SelectionPolicy ()=default;
 
@@ -26,7 +26,7 @@ public:
 class MandatesSelectionPolicy: public SelectionPolicy
 { 
 public:
-     std::pair<int,int> choose(vector<Party *> aviable,vector<int> * connections);
+     std::pair<int,int> choose(vector<Party>parties,vector <int> aviable,vector<int>connections);
      MandatesSelectionPolicy* clone() override;
      virtual ~MandatesSelectionPolicy() =default ;
 
@@ -35,7 +35,7 @@ public:
 class EdgeWeightSelectionPolicy: public SelectionPolicy
 {
 public:
-     std::pair<int,int> choose(vector<Party *> aviable, vector<int> * connections);
+     std::pair<int,int> choose(vector<Party>parties,vector <int> aviable,vector<int>connections);
      EdgeWeightSelectionPolicy* clone()override;
      virtual ~EdgeWeightSelectionPolicy() = default;
 

@@ -19,8 +19,9 @@ using std::vector;
 using std::cout;
 using std::endl;
 //---------------------------
-Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) ,timer(0), bestOffer(-1), bestAgent(-1)
+Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName(name), mMandates(mandates), mJoinPolicy(jp), mState(Waiting) ,timer(0), bestOffer(-1), bestAgent(-1),coal(-1)
 {
+
 
 }
 
@@ -33,11 +34,11 @@ void Party::setState(State state)
 {
     mState = state;
 }
-
-void Party::setBestCoal(Coalition * c)
+void Party::setBestCoal(int colId)
 {
-    coal = c;
+    coal = colId;
 }
+
 
 int Party::getbestOffer() 
 {
@@ -81,23 +82,18 @@ const string & Party::getName() const
 
 void Party::step(Simulation & s)
 {
-    int a=0;
-    s.addAgent(s.getNumberOfAgents(),mId,sp,coal,s.getConnectionsOfParty(mId));
-}
-void Party::setSP(SelectionPolicy * SelectP)
-{
-    sp = SelectP;
     
+    s.addAgent(s.getNumberOfAgents(),mId,s.getAgent(coal).getSelectionPolicy(),coal);
 }
 
-void Party::choose(Party * party,int iter,Coalition * coal,SelectionPolicy * sp)
+
+void Party::choose(Agent * agent,int mandates,int iter)
 {
-    this->setState(State(1));
-    if (timer==0)
+    if(mState == State(0))
     {
         timer = iter;
     }
-    mJoinPolicy->choose(party,this,coal,sp);
+    mJoinPolicy->choose(agent,this,mandates);
 }
 
 

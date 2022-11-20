@@ -193,7 +193,7 @@
                 "id": 2,
                 "mandates": 20,
                 "name": "The Targaryens",
-                "state": "CollectingOffers"
+                "state": "Waiting"
             },
             {
                 "id": 3,
@@ -291,13 +291,13 @@
                 "id": 1,
                 "mandates": 30,
                 "name": "The Baratheons",
-                "state": "CollectingOffers"
+                "state": "Waiting"
             },
             {
                 "id": 2,
                 "mandates": 20,
                 "name": "The Targaryens",
-                "state": "CollectingOffers"
+                "state": "Waiting"
             },
             {
                 "id": 3,
@@ -395,13 +395,13 @@
                 "id": 1,
                 "mandates": 30,
                 "name": "The Baratheons",
-                "state": "CollectingOffers"
+                "state": "Waiting"
             },
             {
                 "id": 2,
                 "mandates": 20,
                 "name": "The Targaryens",
-                "state": "CollectingOffers"
+                "state": "Waiting"
             },
             {
                 "id": 3,
@@ -504,7 +504,7 @@
                 "id": 1,
                 "mandates": 30,
                 "name": "The Baratheons",
-                "state": "CollectingOffers"
+                "state": "Waiting"
             },
             {
                 "id": 2,

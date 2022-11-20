@@ -18,24 +18,24 @@ using std::endl;
 //---------------------------
 
 
-void Coalition::setCoalition(vector<Party> parties, Agent * agent,vector<Party *> aviable,int id)
+void Coalition::setCoalition(vector<Party> parties, Agent * agent,vector<int> aviable,int id)
 {
 
-    partiesInCoalition.push_back(& parties.at(agent->getPartyId()));
-    mandates = parties[agent->getPartyId()].getMandates();
-    agentInCoalition.push_back(agent);
-    cId = id;
+    partiesInCoalition.push_back(agent->getPartyId());
+    agentInCoalition.push_back(agent->getId());
+    mandates = parties[agent->getPartyId()].getMandates(); 
+    cId      = id;
     for (unsigned i = 0; i < aviable.size(); i++){aviableToOffer.push_back(aviable[i]);}  
 }
 
 void Coalition::addPartyToCoalition(Party * party, Agent * agent)
 {
-    partiesInCoalition.push_back(party);
+    partiesInCoalition.push_back(party->getId());
     mandates += party->getMandates();
-    agentInCoalition.push_back(agent);
+    agentInCoalition.push_back(agent->getId());
 }
 
-vector<Party *> Coalition::getaviableToOffer()
+vector<int> Coalition::getaviableToOffer()
 {
     return aviableToOffer;
 }
@@ -60,7 +60,7 @@ vector<int> Coalition::getParties()
     vector<int> v;
     for (unsigned i = 0; i < partiesInCoalition.size(); i++)
     {
-        v.push_back(partiesInCoalition.at(i)->getId());
+        v.push_back(partiesInCoalition.at(i));
     }
     
     return v;
@@ -76,7 +76,7 @@ void Coalition::printAviable()
     
 }
 
-vector<Party *> Coalition:: getAviable()
+vector<int> Coalition:: getAviable()
 {
     return aviableToOffer;
 }

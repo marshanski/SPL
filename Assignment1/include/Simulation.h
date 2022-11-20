@@ -25,11 +25,12 @@ public:
     bool shouldTerminate() const;
     const Graph &getGraph() const;
     const vector<Agent> &getAgents() const;
+    Agent& getAgent(int id) ;
     const Party &getParty(int partyId) const;
     const vector<vector<int>> getPartiesByCoalitions()const;
     int  getIter() ;
     void stepByAgents();
-    void addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,Coalition *  coal,vector<int> * connections);
+    void addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,int  coal);
     int getNumberOfAgents();
     vector<int> * getConnectionsOfParty(int party);
     void addPartyToCoalition(Party * party, Agent * agent);

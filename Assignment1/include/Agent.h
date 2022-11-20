@@ -23,7 +23,7 @@ public:
     //--------------------Rule of 5-----------------------------------------
     //Constructor
     Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy);
-    Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy,Coalition *coal,vector<int> * connections);
+    Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy,int coal);
     //Copy constructor
     Agent(const Agent & other);
     //
@@ -35,23 +35,18 @@ public:
     //GET
     int getPartyId() const;
     int getId() const;
-    Coalition * getCoalition(); 
+    int getColId(); 
     SelectionPolicy * getSelectionPolicy();
-    vector<int> * getConnections(); 
     //set
     void step(Simulation &);
-    void setCoalition(Coalition * col);
-    void setConnections(vector<int> * vec) ;
-    std::pair<int,int> choose(vector<Party *> aviable ,vector<int> * connections) ;
+    void setCoalition(int col);
+    std::pair<int,int> choose(vector<Party>parties,vector <int> aviable,vector<int>connections);
     void deleteFromAgent(int partyToOffer);
-
-
 
 
 private:
     int mAgentId;
     int mPartyId;
     SelectionPolicy *mSelectionPolicy;
-    Coalition *  coal;
-    vector<int> * connections;
+    int  coal;
 };

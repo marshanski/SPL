@@ -36,12 +36,11 @@ public:
     const string &getName() const;
     int getId() ;
     void step(Simulation & s);
-    void choose(Party * party,int iter,Coalition * coal,SelectionPolicy * sp);
+    void choose(Agent * agent,int iter,int mandates);
     void setbestOffer(int mandates);
     int getbestOffer() ;
+    void setBestCoal(int colId);
     void setbestAgent(int agentIndex);
-    void setBestCoal(Coalition * c);
-    void setSP(SelectionPolicy * SelectP);
     int getbestAgent();
     int getTimer() ;
 
@@ -55,7 +54,6 @@ private:
     int timer;
     int bestOffer;
     int bestAgent;
-    Coalition * coal;
-    SelectionPolicy * sp;
+    int coal;
 };
 

@@ -10,8 +10,8 @@ using std::vector;
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy)
 {}
 
-Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy,Coalition *  coal,vector<int> * connections):
-mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy),coal(coal),connections(connections)
+Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy,int  coal):
+mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy),coal(coal)
 {}
 
 Agent::Agent(const Agent & other)
@@ -20,7 +20,6 @@ Agent::Agent(const Agent & other)
     mPartyId         = other.mPartyId;
     mSelectionPolicy = other.mSelectionPolicy->clone();
     coal             = other.coal;
-    connections      = other.connections ;
 }
 Agent& Agent:: operator=(const Agent &other)
 {
@@ -35,7 +34,6 @@ Agent& Agent:: operator=(const Agent &other)
         mPartyId         = other.mPartyId;
         mSelectionPolicy = other.mSelectionPolicy->clone();
         coal             = other.coal;
-        connections      = other.connections;
     }
     return *this;
 }
@@ -56,11 +54,7 @@ Agent::Agent(Agent && other)
     mPartyId         = other.mPartyId;
     mSelectionPolicy = other.mSelectionPolicy;
     coal             = other.coal;
-    connections      = other.connections;
     other.mSelectionPolicy       =nullptr;
-    other.coal                   =nullptr;
-    other.connections            =nullptr;
-
 }
 Agent& Agent::operator=(Agent && other) 
 {
@@ -75,10 +69,7 @@ Agent& Agent::operator=(Agent && other)
         mPartyId         = other.mPartyId;
         mSelectionPolicy = other.mSelectionPolicy;
         coal             = other.coal;
-        connections      = other.connections;
         other.mSelectionPolicy       = nullptr;
-        other.coal                   =nullptr;
-        other.connections            =nullptr;
     }
     return *this;
 
@@ -104,34 +95,25 @@ void Agent::step(Simulation &sim)
     // TODO: implement this method
 }
 
-void Agent::setCoalition(Coalition * col)
+void Agent::setCoalition(int col)
 {
     coal = col;
 }
 
-Coalition * Agent::getCoalition() 
+int Agent::getColId() 
 {
     return coal;
 }
 
-vector<int> * Agent::getConnections() 
-{
-    return connections;
-}
-void Agent::setConnections(vector<int> * vec) 
-{
-    connections = vec;
-}
 
-std::pair<int,int> Agent::choose(vector<Party *> aviable, vector<int> * connections)
+std::pair<int,int> Agent::choose(vector<Party>parties,vector <int> aviable,vector<int>connections)
 {
-    int a=0;
-    return mSelectionPolicy->choose(aviable,connections);
+    return mSelectionPolicy->choose(parties,aviable,connections);
 }
 
 void Agent::deleteFromAgent(int partyToOffer)
 {
-    connections->at(partyToOffer) = 0;
+    //connections->at(partyToOffer) = 0;
 }
 
 
