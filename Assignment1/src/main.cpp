@@ -16,7 +16,6 @@ using std::endl;
 
 int main(int argc, char **argv)
 {
-    int i =0; //just for the debugging
     if (argc != 2)
     {
         cout << "usage: " << argv[0] << " <config_path>" << endl;

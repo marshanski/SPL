@@ -37,6 +37,7 @@ void Simulation::initCoalition()
     copyMatrix               = mGraph.getMatrix();
     parties                  = mGraph.getParties();
     numberOfPartyies         = parties.size();
+    this->checkForLonelyParty();
     vector<int> aviable;
 
     for (unsigned int i=0; i <numberOfPartyies; i++){aviable.push_back(i);}
@@ -82,6 +83,7 @@ void Simulation::stepByAgents()
         {
             parties.at(partyToOffer).choose(&mAgents[i],coalitions.at(mAgents[i].getColId()).getMandates(),iter);
             mGraph.getParty(partyToOffer).setState(State(1));
+            parties.at(partyToOffer).setState(State(1));
             //mAgents[i].getCoalition()->getId();
             coalitions.at(mAgents[i].getColId()).deleteFromCoalition(partyId);
             copyMatrix[i][partyToOffer]=0;
@@ -170,4 +172,16 @@ void Simulation::addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionP
     
 }
 
-
+void Simulation::checkForLonelyParty()
+{
+    int sum = 0;
+    for (unsigned int i = 0; i < copyMatrix.size(); i++)
+    {
+        for (unsigned int k = 0; k < copyMatrix.size(); k++)
+        {
+            sum += copyMatrix[i][k];
+        }
+        if (sum == 0 ){joined++;}
+        sum=0;   
+    }
+}

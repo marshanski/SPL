@@ -13,15 +13,16 @@ using std::endl;
 //---------------------------
 void MandatesJoinPolicy::choose(Agent * agent,Party * party,int mandates)
 {
-    
     if (mandates > party->getbestOffer())
     {
         party->setbestOffer(mandates);
         party->setbestAgent(agent->getPartyId());
         party->setBestCoal(agent->getColId());
     }
-    
-
+}
+MandatesJoinPolicy* MandatesJoinPolicy::clone()
+{
+    return new MandatesJoinPolicy();
 }
 
 void LastOfferJoinPolicy::choose(Agent * agent,Party * party,int mandates)
@@ -29,4 +30,8 @@ void LastOfferJoinPolicy::choose(Agent * agent,Party * party,int mandates)
     party->setbestOffer(mandates);
     party->setbestAgent(agent->getPartyId());
     party->setBestCoal(agent->getColId());
+}
+LastOfferJoinPolicy* LastOfferJoinPolicy::clone()
+{
+    return new LastOfferJoinPolicy();
 }

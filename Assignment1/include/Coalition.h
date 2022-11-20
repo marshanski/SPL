@@ -18,7 +18,6 @@ using std::vector;
 class Coalition
 {
 public:
-    Coalition(){};
     //GET
     vector<int> getAviable();
     int  getMandates() const;

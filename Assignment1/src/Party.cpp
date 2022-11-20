@@ -10,8 +10,6 @@
 #include "JoinPolicy.h"
 #include <iostream>
 #include <Simulation.h>
-
-
 //---------------------------
 
 //----------USING----------
@@ -28,6 +26,87 @@ Party::Party(int id, string name, int mandates, JoinPolicy *jp) : mId(id), mName
 State Party::getState() const
 {
     return mState;
+}
+
+ 
+Party::Party(const Party & other)
+{
+    mId               = other.mId;
+    mName             = other.mName;
+    mJoinPolicy       = other.mJoinPolicy->clone();
+    mMandates         = other.mMandates;
+    mState            = other.mState;
+    timer             = other.timer;
+    bestOffer         = other.bestOffer;
+    bestAgent         = other.bestAgent;
+    coal              = other.coal;
+}
+
+Party& Party:: operator=(const Party &other)
+{
+    if (this != &other)
+    {
+        if (mJoinPolicy)
+        {
+            delete mJoinPolicy;
+        }
+
+        mId           = other.mId;
+        mName         = other.mName;
+        mJoinPolicy   = other.mJoinPolicy->clone();
+        mMandates     = other.mMandates;
+        mState        = other.mState;
+        timer         = other.timer;
+        bestOffer     = other.bestOffer;
+        bestAgent     = other.bestAgent;
+        coal          = other.coal;
+
+    }
+    return *this;
+}
+
+
+Party::~Party()
+{
+    if (mJoinPolicy)
+    {
+        delete mJoinPolicy;
+    }
+}
+Party::Party(Party && other) 
+{
+    mId               = other.mId;
+    mName             = other.mName;
+    mJoinPolicy       = other.mJoinPolicy;
+    mMandates         = other.mMandates;
+    mState            = other.mState;
+    timer             = other.timer;
+    bestOffer         = other.bestOffer;
+    bestAgent         = other.bestAgent;
+    coal              = other.coal;
+    other.mJoinPolicy = nullptr;
+}
+Party& Party::operator=(Party && other) 
+{
+    if(this != &other)
+    {
+        if (mJoinPolicy)
+        {
+            delete mJoinPolicy;
+        }
+
+        mId               = other.mId;
+        mName             = other.mName;
+        mJoinPolicy       = other.mJoinPolicy;
+        mMandates         = other.mMandates;
+        mState            = other.mState;
+        timer             = other.timer;
+        bestOffer         = other.bestOffer;
+        bestAgent         = other.bestAgent;
+        coal              = other.coal;
+        other.mJoinPolicy =nullptr;
+    }
+    return *this;
 }
 
 void Party::setState(State state)
