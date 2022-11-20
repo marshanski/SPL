@@ -20,7 +20,7 @@ Agent::Agent(const Agent & other)
     mPartyId         = other.mPartyId;
     mSelectionPolicy = other.mSelectionPolicy->clone();
     coal             = other.coal;
-    connections      = other.connections;
+    connections      = other.connections ;
 }
 Agent& Agent:: operator=(const Agent &other)
 {
@@ -48,6 +48,7 @@ Agent::~Agent()
         delete mSelectionPolicy;
     }
 
+
 }
 Agent::Agent(Agent && other) 
 {
@@ -56,9 +57,9 @@ Agent::Agent(Agent && other)
     mSelectionPolicy = other.mSelectionPolicy;
     coal             = other.coal;
     connections      = other.connections;
-    other.mSelectionPolicy = nullptr;
-    //coal                   =nullptr;
-    //connections            =nullptr;
+    other.mSelectionPolicy       =nullptr;
+    other.coal                   =nullptr;
+    other.connections            =nullptr;
 
 }
 Agent& Agent::operator=(Agent && other) 
@@ -75,9 +76,9 @@ Agent& Agent::operator=(Agent && other)
         mSelectionPolicy = other.mSelectionPolicy;
         coal             = other.coal;
         connections      = other.connections;
-        other.mSelectionPolicy = nullptr;
-        //coal                   =nullptr;
-        //onnections            =nullptr;
+        other.mSelectionPolicy       = nullptr;
+        other.coal                   =nullptr;
+        other.connections            =nullptr;
     }
     return *this;
 

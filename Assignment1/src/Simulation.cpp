@@ -60,6 +60,7 @@ void Simulation::initCoalition()
 
 void Simulation::step()
 {
+    cout << "iter : " << iter << endl;
     this->stepByParties();
     this->stepByAgents();
     iter++;
@@ -76,7 +77,7 @@ void Simulation::stepByAgents()
         partyToOffer = p.first;
         partyId      = p.second;
         cout << "Agent : " << i << endl;
-        cout << " choose:" << partyToOffer << endl;
+        cout << "choose:" << partyToOffer << endl;
         if(partyToOffer != -1)
         {
             parties.at(partyToOffer).choose(&parties.at(mAgents[i].getPartyId()),iter,mAgents[i].getCoalition(),mAgents[i].getSelectionPolicy());
@@ -153,7 +154,8 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const
 
 void Simulation::addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,Coalition *  coal,vector<int> * connections)
 {
-    mAgents.push_back(Agent(mAgentId,mPartyId,mSelectionPolicy,coal,connections));
+    int a=0;
+    mAgents.push_back(Agent(mAgentId,mPartyId,mSelectionPolicy->clone(),coal,connections));
     int coalitionId = coal->getId();
     coalitions.at(coalitionId).addPartyToCoalition(&parties.at(mPartyId),&mAgents[mAgents.size()-1]);
     colByNum.at(coalitionId).push_back(mPartyId);

@@ -81,6 +81,7 @@ const string & Party::getName() const
 
 void Party::step(Simulation & s)
 {
+    int a=0;
     s.addAgent(s.getNumberOfAgents(),mId,sp,coal,s.getConnectionsOfParty(mId));
 }
 void Party::setSP(SelectionPolicy * SelectP)
