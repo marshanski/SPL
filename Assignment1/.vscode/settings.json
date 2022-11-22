@@ -3,7 +3,7 @@
         {
             "cwd": "/home/spl211//Desktop/SPL/Assignment1/bin",
             "binaryPath": "/home/spl211//Desktop/SPL/Assignment1/bin/cRace",
-            "binaryArgs": ["../tests/01.json"]
+            "binaryArgs": ["../tests/output3.json"]
         }
     ],
     "files.associations": {

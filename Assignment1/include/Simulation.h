@@ -34,7 +34,6 @@ public:
     int getNumberOfAgents();
     vector<int> * getConnectionsOfParty(int party);
     void addPartyToCoalition(Party * party, Agent * agent);
-    void checkForLonelyParty();
 
 
 private:
