@@ -12,14 +12,12 @@
 #include <algorithm>
 #include <Party.h>
 //---------------------------
-//---------SING----------
+//---------USING----------
 class Coalition;
 using std::vector;
 using std::cout;
 using std::endl;
 //---------------------------
-
-
 
 Simulation::Simulation(Graph graph, vector<Agent> agents):mGraph(graph),mAgents(agents),parties(vector <Party>()),coalitions(vector <Coalition>()),copyMatrix(vector<vector<int>>()), iter (0), joined(0),numberOfPartyies(0),hasCoalition(false),colByNum(vector<vector<int>>())
 {
