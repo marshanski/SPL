@@ -10,10 +10,6 @@ using std::vector;
 Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy),coal(-1)
 {}
 
-Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy,int  coal):
-mAgentId(agentId), mPartyId(partyId), mSelectionPolicy(selectionPolicy),coal(coal)
-{}
-
 Agent::Agent(const Agent & other):mAgentId(other.mAgentId), mPartyId(other.mPartyId), mSelectionPolicy(other.mSelectionPolicy->clone()),coal(other.coal)
 {
     //mAgentId         = other.mAgentId;
@@ -48,12 +44,12 @@ Agent::~Agent()
 
 
 }
-Agent::Agent(Agent && other) :mAgentId(other.mAgentId), mPartyId(other.mPartyId), mSelectionPolicy(other.mSelectionPolicy->clone()),coal(other.coal)
+Agent::Agent(Agent && other) //:mAgentId(other.mAgentId), mPartyId(other.mPartyId), mSelectionPolicy(other.mSelectionPolicy->clone()),coal(other.coal)
 {
-    //mAgentId         = other.mAgentId;
-    //mPartyId         = other.mPartyId;
-    //mSelectionPolicy = other.mSelectionPolicy;
-    //coal             = other.coal;
+    mAgentId         = other.mAgentId;
+    mPartyId         = other.mPartyId;
+    mSelectionPolicy = other.mSelectionPolicy;
+    coal             = other.coal;
     other.mSelectionPolicy       =nullptr;
 }
 Agent& Agent::operator=(Agent && other) 
@@ -79,6 +75,10 @@ int Agent::getId() const
 {
     return mAgentId;
 }
+void Agent::setId(int index) 
+{
+    mAgentId = index;
+}
 
 SelectionPolicy * Agent::getSelectionPolicy()
 {
@@ -88,6 +88,10 @@ SelectionPolicy * Agent::getSelectionPolicy()
 int Agent::getPartyId() const
 {
     return mPartyId;
+}
+void Agent::setPartyId(int index) 
+{
+    mPartyId = index;
 }
 
 void Agent::step(Simulation &sim)

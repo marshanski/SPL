@@ -159,9 +159,14 @@ const vector<vector<int>> Simulation::getPartiesByCoalitions() const
     return colByNum;
 }
 
-void Simulation::addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,int  coal)
+void Simulation::addAgent(int mAgentId,int mPartyId,Agent agent,int  coal)
 {
-    mAgents.push_back(Agent(mAgentId,mPartyId, mSelectionPolicy->clone(),coal));
+    Agent nAgent = Agent(agent);
+    nAgent.setCoalition(coal);
+    nAgent.setId(mAgentId);
+    nAgent.setPartyId(mPartyId);
+    //mAgents.push_back(Agent(mAgentId,mPartyId, mSelectionPolicy->clone(),coal));
+    mAgents.push_back(nAgent);
     coalitions.at(coal).addPartyToCoalition(&parties.at(mPartyId),&mAgents[mAgents.size()-1]);
     colByNum.at(coal).push_back(mPartyId);
     if (coalitions.at(coal).getMandates()>61)

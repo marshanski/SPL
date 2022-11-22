@@ -73,17 +73,17 @@ Party::~Party()
         delete mJoinPolicy;
     }
 }
-Party::Party(Party && other) :mId(other.mId), mName(other.mName), mMandates(other.mMandates), mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState) ,timer(other.timer), bestOffer(other.bestOffer), bestAgent(other.bestAgent),coal(other.coal)
+Party::Party(Party && other) //:mId(other.mId), mName(other.mName), mMandates(other.mMandates), mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState) ,timer(other.timer), bestOffer(other.bestOffer), bestAgent(other.bestAgent),coal(other.coal)
 {
-    //mId               = other.mId;
-    //mName             = other.mName;
-    //mJoinPolicy       = other.mJoinPolicy;
-    //mMandates         = other.mMandates;
-    //mState            = other.mState;
-    //timer             = other.timer;
-    //bestOffer         = other.bestOffer;
-    //bestAgent         = other.bestAgent;
-    //coal              = other.coal;
+    mId               = other.mId;
+    mName             = other.mName;
+    mJoinPolicy       = other.mJoinPolicy;
+    mMandates         = other.mMandates;
+    mState            = other.mState;
+    timer             = other.timer;
+    bestOffer         = other.bestOffer;
+    bestAgent         = other.bestAgent;
+    coal              = other.coal;
     other.mJoinPolicy = nullptr;
 }
 Party& Party::operator=(Party && other) 
@@ -161,8 +161,8 @@ const string & Party::getName() const
 
 void Party::step(Simulation & s)
 {
-    
-    s.addAgent(s.getNumberOfAgents(),mId,s.getAgent(coal).getSelectionPolicy(),coal);
+
+    s.addAgent(s.getNumberOfAgents(),mId,s.getAgent(coal),coal);
 }
 
 

@@ -30,7 +30,7 @@ public:
     const vector<vector<int>> getPartiesByCoalitions()const;
     int  getIter() ;
     void stepByAgents();
-    void addAgent(int mAgentId,int mPartyId,SelectionPolicy *mSelectionPolicy,int  coal);
+    void addAgent(int mAgentId,int mPartyId,Agent agent,int  coal);
     int getNumberOfAgents();
     vector<int> * getConnectionsOfParty(int party);
     void addPartyToCoalition(Party * party, Agent * agent);
