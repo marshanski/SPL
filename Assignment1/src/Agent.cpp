@@ -44,12 +44,12 @@ Agent::~Agent()
 
 
 }
-Agent::Agent(Agent && other) //:mAgentId(other.mAgentId), mPartyId(other.mPartyId), mSelectionPolicy(other.mSelectionPolicy->clone()),coal(other.coal)
+Agent::Agent(Agent && other) :mAgentId(other.mAgentId), mPartyId(other.mPartyId), mSelectionPolicy(other.mSelectionPolicy),coal(other.coal)
 {
-    mAgentId         = other.mAgentId;
-    mPartyId         = other.mPartyId;
-    mSelectionPolicy = other.mSelectionPolicy;
-    coal             = other.coal;
+    //mAgentId         = other.mAgentId;
+    //mPartyId         = other.mPartyId;
+    //mSelectionPolicy = other.mSelectionPolicy;
+    //coal             = other.coal;
     other.mSelectionPolicy       =nullptr;
 }
 Agent& Agent::operator=(Agent && other) 

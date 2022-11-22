@@ -73,17 +73,17 @@ Party::~Party()
         delete mJoinPolicy;
     }
 }
-Party::Party(Party && other) //:mId(other.mId), mName(other.mName), mMandates(other.mMandates), mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState) ,timer(other.timer), bestOffer(other.bestOffer), bestAgent(other.bestAgent),coal(other.coal)
+Party::Party(Party && other) :mId(other.mId), mName(other.mName), mMandates(other.mMandates), mJoinPolicy(other.mJoinPolicy), mState(other.mState) ,timer(other.timer), bestOffer(other.bestOffer), bestAgent(other.bestAgent),coal(other.coal)
 {
-    mId               = other.mId;
-    mName             = other.mName;
-    mJoinPolicy       = other.mJoinPolicy;
-    mMandates         = other.mMandates;
-    mState            = other.mState;
-    timer             = other.timer;
-    bestOffer         = other.bestOffer;
-    bestAgent         = other.bestAgent;
-    coal              = other.coal;
+    //mId               = other.mId;
+    //mName             = other.mName;
+    //mJoinPolicy       = other.mJoinPolicy;
+    //mMandates         = other.mMandates;
+    //mState            = other.mState;
+    //timer             = other.timer;
+    //bestOffer         = other.bestOffer;
+    //bestAgent         = other.bestAgent;
+    //coal              = other.coal;
     other.mJoinPolicy = nullptr;
 }
 Party& Party::operator=(Party && other) 

@@ -12,7 +12,7 @@
 #include <algorithm>
 #include <Party.h>
 //---------------------------
-//----------USING----------
+//---------SING----------
 class Coalition;
 using std::vector;
 using std::cout;
@@ -21,7 +21,9 @@ using std::endl;
 
 
 
-Simulation::Simulation(Graph graph, vector<Agent> agents): mGraph(graph), mAgents(agents) , iter (0), joined(0),numberOfPartyies(0),hasCoalition(false)
+Simulation::Simulation(Graph graph, vector<Agent> agents): mGraph(graph), mAgents(agents) , iter (0), joined(0),numberOfPartyies(0),hasCoalition(false),
+coalitions(vector <Coalition>()),parties(vector <Party>()),copyMatrix(vector<vector<int>>()),colByNum(vector<vector<int>>())
+
 {
     for (unsigned int i = 0; i < agents.size(); i++)
     {
@@ -30,6 +32,27 @@ Simulation::Simulation(Graph graph, vector<Agent> agents): mGraph(graph), mAgent
         coalitions.push_back(c);
         colByNum.push_back(a);
     }
+    copyMatrix               = mGraph.getMatrix();
+    parties                  = mGraph.getParties();
+    numberOfPartyies         = parties.size();
+    vector<int> aviable;
+
+    for (int i=0; i <numberOfPartyies; i++){aviable.push_back(i);}
+    for (unsigned int i=0; i<mAgents.size();i++)
+    {
+        auto iter = std::remove(aviable.begin(),aviable.end(),mAgents[i].getPartyId());
+        aviable.erase(iter,aviable.end());    
+    }
+
+    for (unsigned int i=0; i<mAgents.size();i++)
+    {
+        coalitions.at(i).setCoalition(parties, &mAgents.at(i),aviable,i);
+        colByNum.at(i).push_back(mAgents[i].getPartyId());
+        joined++;
+        mAgents[i].setCoalition(i);
+        if (coalitions[i].getMandates() >= 61){hasCoalition = true;}
+    }
+    return;
     
 }
 

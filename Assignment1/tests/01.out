@@ -12,12 +12,16 @@
         ],
         "coalitions": [
             {
-                "mandates": 0,
-                "parties": []
+                "mandates": 50,
+                "parties": [
+                    0
+                ]
             },
             {
-                "mandates": 0,
-                "parties": []
+                "mandates": 20,
+                "parties": [
+                    3
+                ]
             }
         ],
         "edges": [

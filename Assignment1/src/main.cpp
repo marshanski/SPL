@@ -29,7 +29,7 @@ int main(int argc, char **argv)
     vector<json> outPerIter = {Parser::makeJson(simulation)};
 
     //initalize the coalitions
-    simulation.initCoalition();
+    //simulation.initCoalition();
 
     while (!simulation.shouldTerminate()) //
     {
