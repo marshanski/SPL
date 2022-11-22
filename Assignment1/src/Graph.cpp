@@ -1,5 +1,15 @@
+/****************************************
+ * Author : Ido Israeli , Raz Marshanski
+ * Date   :
+ * Name   : Coalitaion.cpp
+****************************************/
+//----------INCLUDE----------
 #include "Graph.h"
+//---------------------------
 
+//----------USING----------
+
+//---------------------------
 Graph::Graph(vector<Party> vertices, vector<vector<int>> edges) : mVertices(vertices), mEdges(edges) 
 {
     // You can change the implementation of the constructor, but not the signature!

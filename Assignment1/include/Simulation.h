@@ -19,20 +19,22 @@ class Simulation
 {
 public:
     Simulation(Graph g, vector<Agent> agents);
+    //GET
+    const Graph &getGraph() const;
+    const vector<Agent> &getAgents() const;
+    const Party &getParty(int partyId) const;
+    const vector<vector<int>> getPartiesByCoalitions()const;
+    Agent& getAgent(int id) ;
+    int  getIter() ;
+    int getNumberOfAgents();
+    vector<int> * getConnectionsOfParty(int party);
+    //
     void step();
     void initCoalition();
     void stepByParties();
     bool shouldTerminate() const;
-    const Graph &getGraph() const;
-    const vector<Agent> &getAgents() const;
-    Agent& getAgent(int id) ;
-    const Party &getParty(int partyId) const;
-    const vector<vector<int>> getPartiesByCoalitions()const;
-    int  getIter() ;
     void stepByAgents();
     void addAgent(int mAgentId,int mPartyId,Agent agent,int  coal);
-    int getNumberOfAgents();
-    vector<int> * getConnectionsOfParty(int party);
     void addPartyToCoalition(Party * party, Agent * agent);
 
 

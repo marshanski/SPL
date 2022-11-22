@@ -4,7 +4,6 @@
  * Name   : Coalitaion.cpp
 ****************************************/
 //----------INCLUDE----------
-#pragma once
 #include <vector>
 #include "Coalition.h"
 #include <iostream>
@@ -17,10 +16,11 @@ using std::cout;
 using std::endl;
 //---------------------------
 
+Coalition ::Coalition():partiesInCoalition(vector<int>()),agentInCoalition(vector<int>()),aviableToOffer(vector<int>()),mandates(-1),cId(-1)
+{}
 
 void Coalition::setCoalition(vector<Party> parties, Agent * agent,vector<int> aviable,int id)
 {
-
     partiesInCoalition.push_back(agent->getPartyId());
     agentInCoalition.push_back(agent->getId());
     mandates = parties[agent->getPartyId()].getMandates(); 
@@ -31,14 +31,16 @@ void Coalition::setCoalition(vector<Party> parties, Agent * agent,vector<int> av
 void Coalition::addPartyToCoalition(Party * party, Agent * agent)
 {
     partiesInCoalition.push_back(party->getId());
-    mandates += party->getMandates();
     agentInCoalition.push_back(agent->getId());
+    mandates += party->getMandates();
+    
 }
 
 vector<int> Coalition::getaviableToOffer()
 {
     return aviableToOffer;
 }
+
 void Coalition::deleteFromCoalition(int partyId)
 {
     auto iter = std::remove(aviableToOffer.begin(),aviableToOffer.end(),aviableToOffer.at(partyId));
@@ -49,11 +51,11 @@ int Coalition::getMandates() const
 {
     return mandates;
 }
+
 int Coalition::getId() 
 {
     return cId;
 }
-
 
 vector<int> Coalition::getParties()
 {
@@ -66,25 +68,12 @@ vector<int> Coalition::getParties()
     return v;
 }
 
-void Coalition::printAviable() 
-{
-    for (unsigned i = 0; i < aviableToOffer.size(); i++)
-    {
-        cout << aviableToOffer.at(i) << endl;
-    }
-
-    
-}
-
 vector<int> Coalition:: getAviable()
 {
     return aviableToOffer;
 }
 
-/*Coalition Coalition::clone()
-{
-    //return Coalition c;
-}*/
+
 
 
 

@@ -11,20 +11,13 @@ Agent::Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy) : mAgen
 {}
 
 Agent::Agent(const Agent & other):mAgentId(other.mAgentId), mPartyId(other.mPartyId), mSelectionPolicy(other.mSelectionPolicy->clone()),coal(other.coal)
-{
-    //mAgentId         = other.mAgentId;
-    //mPartyId         = other.mPartyId;
-    //mSelectionPolicy = other.mSelectionPolicy->clone();
-    //coal             = other.coal;
-}
+{}
+
 Agent& Agent:: operator=(const Agent &other)
 {
     if (this != &other)
     {
-        if (mSelectionPolicy)
-        {
-            delete mSelectionPolicy;
-        }
+        if (mSelectionPolicy){delete mSelectionPolicy;}
 
         mAgentId         = other.mAgentId;
         mPartyId         = other.mPartyId;
@@ -37,29 +30,19 @@ Agent& Agent:: operator=(const Agent &other)
 
 Agent::~Agent()
 {
-    if (mSelectionPolicy)
-    {
-        delete mSelectionPolicy;
-    }
-
-
+    if (mSelectionPolicy){delete mSelectionPolicy;}
 }
+
 Agent::Agent(Agent && other) :mAgentId(other.mAgentId), mPartyId(other.mPartyId), mSelectionPolicy(other.mSelectionPolicy),coal(other.coal)
 {
-    //mAgentId         = other.mAgentId;
-    //mPartyId         = other.mPartyId;
-    //mSelectionPolicy = other.mSelectionPolicy;
-    //coal             = other.coal;
-    other.mSelectionPolicy       =nullptr;
+    other.mSelectionPolicy =nullptr;
 }
+
 Agent& Agent::operator=(Agent && other) 
 {
     if(this != &other)
     {
-        if (mSelectionPolicy)
-        {
-            delete mSelectionPolicy;
-        }
+        if (mSelectionPolicy){delete mSelectionPolicy;}
 
         mAgentId         = other.mAgentId;
         mPartyId         = other.mPartyId;
@@ -68,13 +51,13 @@ Agent& Agent::operator=(Agent && other)
         other.mSelectionPolicy       = nullptr;
     }
     return *this;
-
 }
 
 int Agent::getId() const
 {
     return mAgentId;
 }
+
 void Agent::setId(int index) 
 {
     mAgentId = index;
@@ -94,11 +77,6 @@ void Agent::setPartyId(int index)
     mPartyId = index;
 }
 
-void Agent::step(Simulation &sim)
-{
-    // TODO: implement this method
-}
-
 void Agent::setCoalition(int col)
 {
     coal = col;
@@ -115,10 +93,7 @@ std::pair<int,int> Agent::choose(vector<Party>parties,vector <int> aviable,vecto
     return mSelectionPolicy->choose(parties,aviable,connections);
 }
 
-void Agent::deleteFromAgent(int partyToOffer)
-{
-    //connections->at(partyToOffer) = 0;
-}
+
 
 
 

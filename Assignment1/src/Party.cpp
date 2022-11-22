@@ -4,7 +4,6 @@
  * Name   : Party.cpp
 ****************************************/
 //----------INCLUDE----------
-#pragma once
 #include <vector>
 #include "Party.h"
 #include "JoinPolicy.h"
@@ -30,26 +29,13 @@ State Party::getState() const
 
  
 Party::Party(const Party & other): mId(other.mId), mName(other.mName), mMandates(other.mMandates), mJoinPolicy(other.mJoinPolicy->clone()), mState(other.mState) ,timer(other.timer), bestOffer(other.bestOffer), bestAgent(other.bestAgent),coal(other.coal)
-{
-    //mId               = other.mId;
-    //mName             = other.mName;
-    //mJoinPolicy       = other.mJoinPolicy->clone();
-    //mMandates         = other.mMandates;
-    //mState            = other.mState;
-    //timer             = other.timer;
-    //bestOffer         = other.bestOffer;
-    //bestAgent         = other.bestAgent;
-    //coal              = other.coal;
-}
+{}
 
 Party& Party:: operator=(const Party &other)
 {
     if (this != &other)
     {
-        if (mJoinPolicy)
-        {
-            delete mJoinPolicy;
-        }
+        if (mJoinPolicy){delete mJoinPolicy;}
 
         mId           = other.mId;
         mName         = other.mName;
@@ -68,32 +54,19 @@ Party& Party:: operator=(const Party &other)
 
 Party::~Party()
 {
-    if (mJoinPolicy)
-    {
-        delete mJoinPolicy;
-    }
+    if (mJoinPolicy){delete mJoinPolicy;}
 }
+
 Party::Party(Party && other) :mId(other.mId), mName(other.mName), mMandates(other.mMandates), mJoinPolicy(other.mJoinPolicy), mState(other.mState) ,timer(other.timer), bestOffer(other.bestOffer), bestAgent(other.bestAgent),coal(other.coal)
 {
-    //mId               = other.mId;
-    //mName             = other.mName;
-    //mJoinPolicy       = other.mJoinPolicy;
-    //mMandates         = other.mMandates;
-    //mState            = other.mState;
-    //timer             = other.timer;
-    //bestOffer         = other.bestOffer;
-    //bestAgent         = other.bestAgent;
-    //coal              = other.coal;
+
     other.mJoinPolicy = nullptr;
 }
 Party& Party::operator=(Party && other) 
 {
     if(this != &other)
     {
-        if (mJoinPolicy)
-        {
-            delete mJoinPolicy;
-        }
+        if (mJoinPolicy){delete mJoinPolicy;}
 
         mId               = other.mId;
         mName             = other.mName;
@@ -113,11 +86,11 @@ void Party::setState(State state)
 {
     mState = state;
 }
+
 void Party::setBestCoal(int colId)
 {
     coal = colId;
 }
-
 
 int Party::getbestOffer() 
 {
@@ -144,11 +117,11 @@ void Party::setbestAgent(int agentIndex)
     bestAgent = agentIndex;
 }
 
-
 int Party::getMandates() const
 {
     return mMandates;
 }
+
 int Party::getId() 
 {
     return mId;

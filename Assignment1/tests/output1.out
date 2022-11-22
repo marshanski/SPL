@@ -24,24 +24,34 @@
         ],
         "coalitions": [
             {
-                "mandates": 0,
-                "parties": []
+                "mandates": 10,
+                "parties": [
+                    3
+                ]
             },
             {
-                "mandates": 0,
-                "parties": []
+                "mandates": 8,
+                "parties": [
+                    7
+                ]
             },
             {
-                "mandates": 0,
-                "parties": []
+                "mandates": 10,
+                "parties": [
+                    2
+                ]
             },
             {
-                "mandates": 0,
-                "parties": []
+                "mandates": 20,
+                "parties": [
+                    1
+                ]
             },
             {
-                "mandates": 0,
-                "parties": []
+                "mandates": 8,
+                "parties": [
+                    5
+                ]
             }
         ],
         "edges": [
@@ -1574,10 +1584,9 @@
         ],
         "coalitions": [
             {
-                "mandates": 45,
+                "mandates": 10,
                 "parties": [
-                    3,
-                    0
+                    3
                 ]
             },
             {
@@ -1594,9 +1603,10 @@
                 ]
             },
             {
-                "mandates": 20,
+                "mandates": 55,
                 "parties": [
-                    1
+                    1,
+                    0
                 ]
             },
             {
@@ -1976,10 +1986,9 @@
         ],
         "coalitions": [
             {
-                "mandates": 45,
+                "mandates": 10,
                 "parties": [
-                    3,
-                    0
+                    3
                 ]
             },
             {
@@ -1996,9 +2005,10 @@
                 ]
             },
             {
-                "mandates": 20,
+                "mandates": 55,
                 "parties": [
-                    1
+                    1,
+                    0
                 ]
             },
             {

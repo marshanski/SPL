@@ -8,8 +8,10 @@
         ],
         "coalitions": [
             {
-                "mandates": 0,
-                "parties": []
+                "mandates": 25,
+                "parties": [
+                    0
+                ]
             }
         ],
         "edges": [

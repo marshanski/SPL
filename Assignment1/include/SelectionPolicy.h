@@ -4,13 +4,13 @@
  * Name   : SelectionPolicy.h
 ****************************************/
 //----------INCLUDE----------
-//----------USING----------
 #pragma once
 #include <vector>
-using std::vector;
 #include <Party.h>
 #include <iostream>
 #include <utility>
+//----------USING----------
+using std::vector;
 //---------------------------
 
 

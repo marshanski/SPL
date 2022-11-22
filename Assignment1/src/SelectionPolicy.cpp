@@ -4,7 +4,6 @@
  * Name   : Coalitaion.h
 ****************************************/
 //----------INCLUDE----------
-#pragma once
 #include <iostream>
 #include "SelectionPolicy.h"
 #include <utility>

@@ -10,13 +10,10 @@
 #include <vector>
 #include <utility>
 //---------------------------
-
 //----------CLASS----------
 class SelectionPolicy;
 class Coalition;
 //---------------------------
-
-
 class Agent
 {
 public:
@@ -25,11 +22,14 @@ public:
     Agent(int agentId, int partyId, SelectionPolicy *selectionPolicy);
     //Copy constructor
     Agent(const Agent & other);
-    //
+    //Copy assignment opearator
     Agent &operator=(const Agent &other);
+    //Destructor
     virtual ~Agent();
+    //Move Constructor
     Agent(Agent && other) ;
-    Agent & operator=(Agent && other) ;
+    //Assignment Operator
+    Agent & operator=(Agent && other);
     //-------------------------------------------------------------
     //GET
     int getPartyId() const;
@@ -39,11 +39,10 @@ public:
     //set
     void step(Simulation &);
     void setCoalition(int col);
-    std::pair<int,int> choose(vector<Party>parties,vector <int> aviable,vector<int>connections);
-    void deleteFromAgent(int partyToOffer);
     void setPartyId(int index) ;
     void setId(int index) ;
 
+    std::pair<int,int> choose(vector<Party>parties,vector <int> aviable,vector<int>connections);
 
 private:
     int mAgentId;

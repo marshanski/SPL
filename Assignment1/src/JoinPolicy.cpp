@@ -4,13 +4,13 @@
  * Name   :
 ****************************************/
 //----------INCLUDE----------
-#pragma once
-//----------USING----------
 #include<JoinPolicy.h>
 #include <iostream>
+//----------USING----------
 using std::cout;
 using std::endl;
 //---------------------------
+
 void MandatesJoinPolicy::choose(Agent * agent,Party * party,int mandates)
 {
     if (mandates > party->getbestOffer())
@@ -20,6 +20,7 @@ void MandatesJoinPolicy::choose(Agent * agent,Party * party,int mandates)
         party->setBestCoal(agent->getColId());
     }
 }
+
 MandatesJoinPolicy* MandatesJoinPolicy::clone()
 {
     return new MandatesJoinPolicy();

@@ -4,14 +4,12 @@
  * Name   :
 ****************************************/
 //----------INCLUDE----------
-#pragma once
 //----------USING----------
 #include <vector>
 using std::vector;
 #include <Party.h>
 #include <Agent.h>
 //---------------------------
-
 
 class JoinPolicy 
 {
@@ -21,6 +19,7 @@ public:
     virtual ~JoinPolicy()=default;
 };
 
+
 class MandatesJoinPolicy: public JoinPolicy
 { 
 public:
@@ -28,6 +27,7 @@ public:
     virtual MandatesJoinPolicy* clone() override;
     virtual ~MandatesJoinPolicy() = default;
 };
+
 
 class LastOfferJoinPolicy : public JoinPolicy 
 {

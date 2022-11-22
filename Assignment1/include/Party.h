@@ -28,27 +28,36 @@ enum State
 class Party
 {
 public:
+    //--------------------Rule of 5-----------------------------------------
+    //Constructor
     Party(int id, string name, int mandates, JoinPolicy *); 
+    //Copy constructor
     Party(const Party & other);
-    //
+    //Copy assignment opearator
     Party &operator=(const Party &other);
+    //Destructor
     virtual ~Party();
+    //Move Constructor
     Party(Party && other) ;
+    //Assignment Operator
     Party & operator=(Party && other) ;
-
-    State getState() const;
-    void setState(State state);
-    int getMandates() const;
-    const string &getName() const;
-    int getId() ;
-    void step(Simulation & s);
-    void choose(Agent * agent,int iter,int mandates);
-    void setbestOffer(int mandates);
-    int getbestOffer() ;
-    void setBestCoal(int colId);
-    void setbestAgent(int agentIndex);
+    //GET
     int getbestAgent();
     int getTimer() ;
+    int getbestOffer() ;
+    int getId() ;
+    int getMandates() const;
+    State getState() const;
+    const string &getName() const;
+    //SET
+    void step(Simulation & s);
+    void setState(State state);
+    void setbestOffer(int mandates);
+    void setBestCoal(int colId);
+    void setbestAgent(int agentIndex);
+    //
+    void choose(Agent * agent,int iter,int mandates);
+
 
 
 private:
