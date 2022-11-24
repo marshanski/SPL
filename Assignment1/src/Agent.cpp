@@ -93,6 +93,10 @@ std::pair<int,int> Agent::choose(vector<Party>parties,vector <int> aviable,vecto
     return mSelectionPolicy->choose(parties,aviable,connections);
 }
 
+void Agent::step(Simulation &sim)
+{
+    //this method was contucted in simulation class as stepByAgents
+}
 
 
 

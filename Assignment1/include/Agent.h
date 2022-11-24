@@ -41,7 +41,6 @@ public:
     void setCoalition(int col);
     void setPartyId(int index) ;
     void setId(int index) ;
-
     std::pair<int,int> choose(vector<Party>parties,vector <int> aviable,vector<int>connections);
 
 private:
