@@ -5,7 +5,7 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/cRace",
-            "args": ["tests/output3.json"],
+            "args": ["customTests/MandatesSelectionPolicy2.json"],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],

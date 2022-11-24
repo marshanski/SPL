@@ -158,7 +158,7 @@ void Simulation::addAgent(int mAgentId,int mPartyId,Agent agent,int  coal)
     mAgents.push_back(nAgent);
     coalitions.at(coal).addPartyToCoalition(&parties.at(mPartyId),&mAgents[mAgents.size()-1]);
     colByNum.at(coal).push_back(mPartyId);
-    if (coalitions.at(coal).getMandates()>61)
+    if (coalitions.at(coal).getMandates()>=61)
     {
         hasCoalition = true;
     }
