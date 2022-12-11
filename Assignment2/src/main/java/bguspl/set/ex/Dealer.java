@@ -62,6 +62,7 @@ public class Dealer implements Runnable {
             placeCardsOnTable();
             timerLoop();
             updateTimerDisplay(false);
+            //removeCardToDeck(4);
             removeAllCardsFromTable();
             i++;
         }
@@ -150,9 +151,26 @@ public class Dealer implements Runnable {
      */
     private void removeAllCardsFromTable() 
     {
-        // TODO implement
+        for(int i=0;i<12;i++)
+            removeCardToDeck(i);
     }
+    
 
+     /**
+     * removes a card from the table, and return it to the deck.
+     * @param slot
+     */
+    public void removeCardToDeck(int slot)
+    {
+        try {
+            Thread.sleep(env.config.tableDelayMillis);
+        } catch (InterruptedException ignored) {}
+        // do a try catch if is trying to remove a card that isnt on the table!!
+        deck.add(table.slotToCard[slot]);
+        this.table.removeCard(slot);
+    }
+        
+   
     /**
      * Check who is/are the winner/s and displays them.
      */

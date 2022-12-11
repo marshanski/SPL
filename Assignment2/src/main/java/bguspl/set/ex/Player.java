@@ -65,6 +65,7 @@ public class Player implements Runnable {
         this.table = table;
         this.id    = id;
         this.human = human;
+       // int keyPresses[] = new int[3];
     }
 
     /**
@@ -79,7 +80,7 @@ public class Player implements Runnable {
 
         while (!terminate) 
         {
-            // TODO implement main player loop
+            
         }
         if (!human) try { aiThread.join(); } catch (InterruptedException ignored) {}
         System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
@@ -119,6 +120,7 @@ public class Player implements Runnable {
      */
     public void keyPressed(int slot) 
     {
+       
         // TODO implement
     }
 

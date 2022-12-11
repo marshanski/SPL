@@ -108,7 +108,8 @@ public class Table {
             Thread.sleep(env.config.tableDelayMillis);
         } catch (InterruptedException ignored) {}
 
-        // TODO implement
+        this.env.ui.removeCard(slot);
+         // TODO implement
     }
 
     /**
