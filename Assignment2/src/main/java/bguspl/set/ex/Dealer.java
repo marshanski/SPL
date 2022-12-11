@@ -145,8 +145,17 @@ public class Dealer implements Runnable {
      */
     private void sleepUntilWokenOrTimeout() 
     {
-        try{Thread.sleep(1000);}
-        catch(InterruptedException e){System.out.println(e);};        
+        long start    = System.currentTimeMillis();
+        long time     = start;
+        long toSleep   = 1000;
+        while (time < start+1000)
+        {
+            try{Thread.sleep(toSleep);}
+            catch(InterruptedException e){System.out.println(e);};
+            time    = System.currentTimeMillis();
+            toSleep = 1000-(time-start); 
+        }
+      
     }
 
     /**
@@ -154,9 +163,7 @@ public class Dealer implements Runnable {
      */
     private void updateTimerDisplay(boolean reset,long end) 
     {
-        
-        this.env.ui.setCountdown(end-System.currentTimeMillis(), reset); 
-
+        this.env.ui.setCountdown(end-System.currentTimeMillis(), reset);
     }
 
     /**
