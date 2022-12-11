@@ -4,7 +4,6 @@ import bguspl.set.Env;
 import java.util.Random;
 import java.math.*;
 import java.sql.Time;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -56,14 +55,21 @@ public class Dealer implements Runnable {
     public void run() 
     {
         System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
-        int i =0 ;
-        while (!shouldFinish() && i==0)
+        int k =0 ;
+        boolean found = false;
+
+        for(int i=0 ;i<this.players.length;i++)
         {
-            placeCardsOnTable();
-            timerLoop();
-            updateTimerDisplay(false);
+            Thread playerThread = new Thread(this.players[i], "player"+ i);
+            playerThread.start();
+        }
+        while (!shouldFinish() && k==0)
+        {
+            placeCardsOnTable(found);
+            timerLoop(found);
+            //updateTimerDisplay(false);
             removeAllCardsFromTable();
-            i++;
+            k++;
         }
         announceWinners();
         System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
@@ -72,17 +78,18 @@ public class Dealer implements Runnable {
     /**
      * The inner loop of the dealer thread that runs as long as the countdown did not time out.
      */
-    private void timerLoop() 
+    private void timerLoop(boolean found) 
     {
         int i=0;
-        while (!terminate && System.currentTimeMillis() < reshuffleTime && i==0) 
+        this.env.ui.setCountdown(60000, terminate);
+        long start    = System.currentTimeMillis();
+        long end      = start + 60000;
+        while (!terminate && !found && System.currentTimeMillis() < end) 
         {
             sleepUntilWokenOrTimeout();
-            
-            updateTimerDisplay(false);
-            removeCardsFromTable();
-            placeCardsOnTable();
-            i++;
+            updateTimerDisplay(found,end);
+            //removeCardsFromTable();
+            //placeCardsOnTable();
         }
     }
 
@@ -115,15 +122,18 @@ public class Dealer implements Runnable {
     /**
      * Check if any cards can be removed from the deck and placed on the table.
      */
-    private void placeCardsOnTable() 
+    private void placeCardsOnTable(boolean found) 
     {
-        int k;
-        Random rand  = new Random();
-        for(int i=0 ; i<12; i++)
+        if (!found)
         {
-            k = rand.nextInt(deck.size());
-            this.table.placeCard(deck.get(k),i);
-            deck.remove(k);
+            int k;
+            Random rand  = new Random();
+            for(int i=0 ; i<12; i++)
+            {
+                k = rand.nextInt(deck.size());
+                this.table.placeCard(deck.get(k),i);
+                deck.remove(k);
+            }
         }
     }
 
@@ -131,18 +141,22 @@ public class Dealer implements Runnable {
 
     /**
      * Sleep for a fixed amount of time or until the thread is awakened for some purpose.
+     * @throws InterruptedException
      */
     private void sleepUntilWokenOrTimeout() 
     {
-        // TODO implement
+        try{Thread.sleep(1000);}
+        catch(InterruptedException e){System.out.println(e);};        
     }
 
     /**
      * Reset and/or update the countdown and the countdown display.
      */
-    private void updateTimerDisplay(boolean reset) 
+    private void updateTimerDisplay(boolean reset,long end) 
     {
-        // TODO implement
+        
+        this.env.ui.setCountdown(end-System.currentTimeMillis(), reset); 
+
     }
 
     /**
