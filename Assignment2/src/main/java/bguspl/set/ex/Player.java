@@ -77,7 +77,6 @@ public class Player implements Runnable {
         playerThread = Thread.currentThread();
         System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
         if (!human) createArtificialIntelligence();
-
         while (!terminate) 
         {
             
@@ -120,8 +119,12 @@ public class Player implements Runnable {
      */
     public void keyPressed(int slot) 
     {
+<<<<<<< HEAD
        
         // TODO implement
+=======
+        System.out.println(slot);
+>>>>>>> 794c7bcf041da203d065efd5d0411bf03ae2c59c
     }
 
     /**
