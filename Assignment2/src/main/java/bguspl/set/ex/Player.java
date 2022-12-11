@@ -119,12 +119,7 @@ public class Player implements Runnable {
      */
     public void keyPressed(int slot) 
     {
-<<<<<<< HEAD
-       
-        // TODO implement
-=======
         System.out.println(slot);
->>>>>>> 794c7bcf041da203d065efd5d0411bf03ae2c59c
     }
 
     /**
