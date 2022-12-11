@@ -61,9 +61,9 @@ public class Player implements Runnable {
      */
     public Player(Env env, Dealer dealer, Table table, int id, boolean human) 
     {
-        this.env = env;
+        this.env   = env;
         this.table = table;
-        this.id = id;
+        this.id    = id;
         this.human = human;
     }
 
@@ -107,7 +107,8 @@ public class Player implements Runnable {
     /**
      * Called when the game should be terminated due to an external event.
      */
-    public void terminate() {
+    public void terminate() 
+    {
         // TODO implement
     }
 
@@ -116,7 +117,8 @@ public class Player implements Runnable {
      *
      * @param slot - the slot corresponding to the key pressed.
      */
-    public void keyPressed(int slot) {
+    public void keyPressed(int slot) 
+    {
         // TODO implement
     }
 

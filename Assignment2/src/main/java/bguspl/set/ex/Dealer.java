@@ -1,7 +1,10 @@
 package bguspl.set.ex;
 
 import bguspl.set.Env;
-
+import java.util.Random;
+import java.math.*;
+import java.sql.Time;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -42,6 +45,8 @@ public class Dealer implements Runnable {
         this.table   = table;
         this.players = players;
         deck         = IntStream.range(0, env.config.deckSize).boxed().collect(Collectors.toList());
+        
+        
     }
 
     /**
@@ -51,12 +56,14 @@ public class Dealer implements Runnable {
     public void run() 
     {
         System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
-        while (!shouldFinish())
+        int i =0 ;
+        while (!shouldFinish() && i==0)
         {
             placeCardsOnTable();
             timerLoop();
             updateTimerDisplay(false);
             removeAllCardsFromTable();
+            i++;
         }
         announceWinners();
         System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
@@ -107,8 +114,17 @@ public class Dealer implements Runnable {
      */
     private void placeCardsOnTable() 
     {
-        // TODO implement
+        int k;
+        Random rand  = new Random();
+        for(int i=0 ; i<12; i++)
+        {
+            k = rand.nextInt(deck.size());
+            this.table.placeCard(deck.get(k),i);
+            deck.remove(k);
+        }
     }
+
+
 
     /**
      * Sleep for a fixed amount of time or until the thread is awakened for some purpose.
@@ -129,14 +145,16 @@ public class Dealer implements Runnable {
     /**
      * Returns all the cards from the table to the deck.
      */
-    private void removeAllCardsFromTable() {
+    private void removeAllCardsFromTable() 
+    {
         // TODO implement
     }
 
     /**
      * Check who is/are the winner/s and displays them.
      */
-    private void announceWinners() {
+    private void announceWinners() 
+    {
         // TODO implement
     }
 }

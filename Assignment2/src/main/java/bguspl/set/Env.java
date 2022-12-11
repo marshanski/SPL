@@ -8,7 +8,7 @@ public class Env {
 
     public Env(Config config, UserInterface ui, Util util) {
         this.config = config;
-        this.ui = ui;
-        this.util = util;
+        this.ui     = ui;
+        this.util   = util;
     }
 }

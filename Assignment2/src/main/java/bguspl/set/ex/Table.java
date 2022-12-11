@@ -39,7 +39,7 @@ public class Table {
     public Table(Env env, Integer[] slotToCard, Integer[] cardToSlot) 
     {
 
-        this.env = env;
+        this.env        = env;
         this.slotToCard = slotToCard;
         this.cardToSlot = cardToSlot;
     }
@@ -94,6 +94,7 @@ public class Table {
 
         cardToSlot[card] = slot;
         slotToCard[slot] = card;
+        this.env.ui.placeCard(card,slot);
 
         // TODO implement
     }
@@ -115,7 +116,8 @@ public class Table {
      * @param player - the player the token belongs to.
      * @param slot   - the slot on which to place the token.
      */
-    public void placeToken(int player, int slot) {
+    public void placeToken(int player, int slot) 
+    {
         // TODO implement
     }
 
@@ -125,7 +127,8 @@ public class Table {
      * @param slot   - the slot from which to remove the token.
      * @return       - true iff a token was successfully removed.
      */
-    public boolean removeToken(int player, int slot) {
+    public boolean removeToken(int player, int slot) 
+    {
         // TODO implement
         return false;
     }
