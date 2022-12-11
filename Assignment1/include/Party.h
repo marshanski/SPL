@@ -57,6 +57,7 @@ public:
     void setbestAgent(int agentIndex);
     //
     void choose(Agent * agent,int iter,int mandates);
+    void updateMandates(Agent * agent,int mandates);
 
 
 

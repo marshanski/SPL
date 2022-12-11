@@ -19,8 +19,12 @@ using std::cout;
 using std::endl;
 //---------------------------
 
-Simulation::Simulation(Graph graph, vector<Agent> agents):mGraph(graph),mAgents(agents),parties(vector <Party>()),coalitions(vector <Coalition>()),copyMatrix(vector<vector<int>>()), iter (0), joined(0),numberOfPartyies(0),hasCoalition(false),colByNum(vector<vector<int>>())
+Simulation::Simulation(Graph graph, vector<Agent> agents):mGraph(graph),mAgents(agents),parties(vector <Party>()),coalitions(vector <Coalition>()),copyMatrix(vector<vector<int>>()), iter (0), joined(0),numberOfPartyies(0),hasCoalition(false),colByNum(vector<vector<int>>()),offers(vector<vector<int>>())
 {
+    copyMatrix               = mGraph.getMatrix();
+    parties                  = mGraph.getParties();
+    numberOfPartyies         = parties.size();
+    vector<int> aviable;
     for (unsigned int i = 0; i < agents.size(); i++)
     {
         Coalition c;
@@ -28,12 +32,13 @@ Simulation::Simulation(Graph graph, vector<Agent> agents):mGraph(graph),mAgents(
         coalitions.push_back(c);
         colByNum.push_back(a);
     }
-    copyMatrix               = mGraph.getMatrix();
-    parties                  = mGraph.getParties();
-    numberOfPartyies         = parties.size();
-    vector<int> aviable;
 
-    for (int i=0; i <numberOfPartyies; i++){aviable.push_back(i);}
+    for (int i=0; i <numberOfPartyies; i++)
+    {
+        vector <int> a;
+        aviable.push_back(i);
+        offers.push_back(a);
+    }
     for (unsigned int i=0; i<mAgents.size();i++)
     {
         auto iter = std::remove(aviable.begin(),aviable.end(),mAgents[i].getPartyId());
@@ -72,13 +77,28 @@ void Simulation::stepByAgents()
 
         if(partyToOffer != -1)
         {
-            if (parties.at(partyToOffer).getState() != 2)
+            if (parties.at(partyToOffer).getState()==0){offers.at(i).push_back(partyToOffer);}
+            
+            if (parties.at(partyToOffer).getState()!= 2)
             {
+                
                 parties.at(partyToOffer).choose(&mAgents[i],coalitions.at(mAgents[i].getColId()).getMandates(),iter);
                 mGraph.getParty(partyToOffer).setState(State(1));
                 parties.at(partyToOffer).setState(State(1));
                 coalitions.at(mAgents[i].getColId()).deleteFromCoalition(partyId);
                 copyMatrix[mAgents.at(i).getPartyId()][partyToOffer]=0;
+            }
+        }
+    }
+    for (unsigned int i=0; i < mAgents.size(); i++)
+    {
+        for (unsigned k = 0; k < offers.at(i).size(); k++)
+        {
+            cout << offers.at(i).at(k) << endl;
+            if (parties.at(offers.at(i).at(k)).getState()!=2 )
+            {
+
+                parties.at(offers.at(i).at(k)).updateMandates(&mAgents[i],coalitions.at(mAgents[i].getColId()).getMandates());
             }
         }
     }
@@ -164,4 +184,3 @@ void Simulation::addAgent(int mAgentId,int mPartyId,Agent agent,int  coal)
     }
     
 }
-

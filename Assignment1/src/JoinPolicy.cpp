@@ -20,6 +20,15 @@ void MandatesJoinPolicy::choose(Agent * agent,Party * party,int mandates)
         party->setBestCoal(agent->getColId());
     }
 }
+void MandatesJoinPolicy::update(Agent * agent,Party * party,int mandates)
+{
+    if (mandates > party->getbestOffer())
+    {
+        party->setbestOffer(mandates);
+        party->setbestAgent(agent->getPartyId());
+        party->setBestCoal(agent->getColId());
+    }
+}
 
 MandatesJoinPolicy* MandatesJoinPolicy::clone()
 {
@@ -28,11 +37,19 @@ MandatesJoinPolicy* MandatesJoinPolicy::clone()
 
 void LastOfferJoinPolicy::choose(Agent * agent,Party * party,int mandates)
 {
+    
     party->setbestOffer(mandates);
     party->setbestAgent(agent->getPartyId());
     party->setBestCoal(agent->getColId());
+    
+
 }
 LastOfferJoinPolicy* LastOfferJoinPolicy::clone()
 {
     return new LastOfferJoinPolicy();
+}
+
+void LastOfferJoinPolicy::update(Agent * agent,Party * party,int mandates)
+{
+    return;
 }

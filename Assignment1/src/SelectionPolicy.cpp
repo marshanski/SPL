@@ -22,7 +22,7 @@ std::pair<int,int> EdgeWeightSelectionPolicy::choose(vector<Party>parties,vector
         {
             max      = connections.at(aviable.at(i));
             maxIndex = aviable.at(i);
-            partyId   = i;
+            partyId  = i;
         }
     }
     return(std::make_pair(maxIndex,partyId));

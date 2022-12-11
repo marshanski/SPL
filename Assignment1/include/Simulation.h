@@ -47,4 +47,5 @@ private:
     int iter,joined,numberOfPartyies;
     bool hasCoalition;
     vector<vector<int>> colByNum;
+    vector<vector<int>> offers;
 };

@@ -148,4 +148,9 @@ void Party::choose(Agent * agent,int mandates,int iter)
     mJoinPolicy->choose(agent,this,mandates);
 }
 
+void Party::updateMandates(Agent * agent,int mandates)
+{
+    mJoinPolicy->update(agent,this,mandates);
+}
+
 
