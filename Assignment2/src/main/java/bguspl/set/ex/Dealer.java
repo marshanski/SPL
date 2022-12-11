@@ -74,20 +74,23 @@ public class Dealer implements Runnable {
      */
     private void timerLoop() 
     {
-        while (!terminate && System.currentTimeMillis() < reshuffleTime) 
+        int i=0;
+        while (!terminate && System.currentTimeMillis() < reshuffleTime && i==0) 
         {
             sleepUntilWokenOrTimeout();
             
             updateTimerDisplay(false);
             removeCardsFromTable();
             placeCardsOnTable();
+            i++;
         }
     }
 
     /**
      * Called when the game should be terminated due to an external event.
      */
-    public void terminate() {
+    public void terminate() 
+    {
         // TODO implement
     }
 
