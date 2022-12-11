@@ -65,16 +65,9 @@ public class Dealer implements Runnable {
         }
         while (!shouldFinish() && k==0)
         {
-<<<<<<< HEAD
-            placeCardsOnTable();
-            timerLoop();
-            updateTimerDisplay(false);
-            //removeCardToDeck(4);
-=======
             placeCardsOnTable(found);
             timerLoop(found);
             //updateTimerDisplay(false);
->>>>>>> 794c7bcf041da203d065efd5d0411bf03ae2c59c
             removeAllCardsFromTable();
             k++;
         }
