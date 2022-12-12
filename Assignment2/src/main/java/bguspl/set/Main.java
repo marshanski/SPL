@@ -37,6 +37,10 @@ public class Main {
         // start the dealer thread
         Thread dealerThread = new Thread(dealer, "dealer");
         dealerThread.start();
+        
+        Thread currentThread = Thread.currentThread();
+        // print the name of the thread to the console
+        System.out.println("The currently executing thread is: " + currentThread.getName());
 
         try { dealerThread.join(); } catch (InterruptedException ignored) {}
         System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
