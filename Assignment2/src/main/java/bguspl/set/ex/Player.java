@@ -34,6 +34,7 @@ public class Player implements Runnable {
      * The thread of the AI (computer) player (an additional thread used to generate key presses).
      */
     private Thread aiThread;
+    private Dealer dealer;
 
     /**
      * True iff the player is human (not a computer player).
@@ -61,10 +62,11 @@ public class Player implements Runnable {
      */
     public Player(Env env, Dealer dealer, Table table, int id, boolean human) 
     {
-        this.env   = env;
-        this.table = table;
-        this.id    = id;
-        this.human = human;
+        this.env    = env;
+        this.table  = table;
+        this.id     = id;
+        this.human  = human;
+        this.dealer = dealer;
        // int keyPresses[] = new int[3];
     }
 
@@ -79,6 +81,7 @@ public class Player implements Runnable {
         if (!human) createArtificialIntelligence();
         while (!terminate) 
         {
+            this.dealer.check();
             
         }
 
@@ -105,7 +108,8 @@ public class Player implements Runnable {
             while (!terminate) 
             {
                 // TODO implement player key press simulator
-                try {
+                try 
+                {
                     synchronized (this) { wait(); }
                 } 
                 catch (InterruptedException ignored) 

@@ -24,6 +24,8 @@ public class Dealer implements Runnable {
     private final Table table;
     private final Player[] players;
     private final Thread playerThreads[];
+    private static Object lock ;
+
 
     /**
      * The list of card ids that are left in the dealer's deck.
@@ -47,6 +49,8 @@ public class Dealer implements Runnable {
         this.players       = players;
         deck               = IntStream.range(0, env.config.deckSize).boxed().collect(Collectors.toList());
         this.playerThreads = new Thread[this.players.length];
+        this.lock          = new Object();
+        
     }
 
     /**
@@ -157,17 +161,23 @@ public class Dealer implements Runnable {
         long toSleep   = 1000;
         while (time < start+1000)
         {
-            try 
+            synchronized (this.lock) 
             {
-                Thread.sleep(toSleep);
-            } 
-            catch (InterruptedException e)
-            {
-                Thread.currentThread().interrupt();
-
+                try
+                {
+                    lock.wait(1000);
+                    if(System.currentTimeMillis()<start+1000){System.out.println("WIWI");}
+                    time    = System.currentTimeMillis();
+                    toSleep = 1000-(time-start); 
+                    
+                }
+                catch (InterruptedException ignored) 
+                {
+                    System.out.println("WIWI");
+                    
+                }
             }
-            time    = System.currentTimeMillis();
-            toSleep = 1000-(time-start); 
+
         }
       
     }
@@ -211,4 +221,16 @@ public class Dealer implements Runnable {
     {
         // TODO implement
     }
+
+    public void check()
+    {
+        synchronized (this.lock) 
+        {
+            //this.lock.notifyAll();
+        }
+
+    }
+    
+
+    
 }
