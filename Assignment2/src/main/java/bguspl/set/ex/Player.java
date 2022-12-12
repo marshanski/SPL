@@ -81,7 +81,16 @@ public class Player implements Runnable {
         {
             
         }
-        if (!human) try { aiThread.join(); } catch (InterruptedException ignored) {}
+
+        if (!human) 
+        {
+            try 
+            {
+                aiThread.interrupt();
+                aiThread.join(); 
+            } 
+            catch (InterruptedException ignored) {}
+        }
         System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
     }
 
@@ -93,11 +102,16 @@ public class Player implements Runnable {
         // note: this is a very very smart AI (!)
         aiThread = new Thread(() -> {
             System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
-            while (!terminate) {
+            while (!terminate) 
+            {
                 // TODO implement player key press simulator
                 try {
                     synchronized (this) { wait(); }
-                } catch (InterruptedException ignored) {}
+                } 
+                catch (InterruptedException ignored) 
+                {
+                    this.terminate();
+                }
             }
             System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
         }, "computer-" + id);
@@ -109,7 +123,7 @@ public class Player implements Runnable {
      */
     public void terminate() 
     {
-        // TODO implement
+        terminate = true;
     }
 
     /**

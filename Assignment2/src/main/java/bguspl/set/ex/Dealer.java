@@ -23,6 +23,7 @@ public class Dealer implements Runnable {
      */
     private final Table table;
     private final Player[] players;
+    private final Thread playerThreads[];
 
     /**
      * The list of card ids that are left in the dealer's deck.
@@ -39,13 +40,13 @@ public class Dealer implements Runnable {
      */
     private long reshuffleTime = Long.MAX_VALUE;
 
-    public Dealer(Env env, Table table, Player[] players) {
-        this.env     = env;
-        this.table   = table;
-        this.players = players;
-        deck         = IntStream.range(0, env.config.deckSize).boxed().collect(Collectors.toList());
-        
-        
+    public Dealer(Env env, Table table, Player[] players) 
+    {
+        this.env           = env;
+        this.table         = table;
+        this.players       = players;
+        deck               = IntStream.range(0, env.config.deckSize).boxed().collect(Collectors.toList());
+        this.playerThreads = new Thread[this.players.length];
     }
 
     /**
@@ -57,13 +58,14 @@ public class Dealer implements Runnable {
         System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
         int k =0 ;
         boolean found = false;
+        
 
         for(int i=0 ;i<this.players.length;i++)
         {
-            Thread playerThread = new Thread(this.players[i], "player"+ i);
-            playerThread.start();
+            this.playerThreads[i] = new Thread(this.players[i], "player"+ i);
+            this.playerThreads[i].start();
         }
-        while (!shouldFinish() && k==0)
+        while (!shouldFinish())
         {
             placeCardsOnTable(found);
             timerLoop(found);
@@ -88,8 +90,6 @@ public class Dealer implements Runnable {
         {
             sleepUntilWokenOrTimeout();
             updateTimerDisplay(found,end);
-            //removeCardsFromTable();
-            //placeCardsOnTable();
         }
     }
 
@@ -98,7 +98,14 @@ public class Dealer implements Runnable {
      */
     public void terminate() 
     {
-        // TODO implement
+        terminate = true;
+        for(int i=0 ;i<this.players.length;i++)
+        {
+            this.players[i].terminate();
+            try{this.playerThreads[i].join();}
+            catch(Exception ex){}
+                
+        }
     }
 
     /**
@@ -145,13 +152,20 @@ public class Dealer implements Runnable {
      */
     private void sleepUntilWokenOrTimeout() 
     {
-        long start    = System.currentTimeMillis();
-        long time     = start;
+        long start     = System.currentTimeMillis();
+        long time      = start;
         long toSleep   = 1000;
         while (time < start+1000)
         {
-            try{Thread.sleep(toSleep);}
-            catch(InterruptedException e){System.out.println(e);};
+            try 
+            {
+                Thread.sleep(toSleep);
+            } 
+            catch (InterruptedException e)
+            {
+                Thread.currentThread().interrupt();
+
+            }
             time    = System.currentTimeMillis();
             toSleep = 1000-(time-start); 
         }
@@ -190,7 +204,6 @@ public class Dealer implements Runnable {
         this.table.removeCard(slot);
     }
         
-   
     /**
      * Check who is/are the winner/s and displays them.
      */
