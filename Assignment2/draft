@@ -1,0 +1,24 @@
+    private void sleepUntilWokenOrTimeout() 
+    {
+        long start     = System.currentTimeMillis();
+        long time      = start;
+        long toSleep   = 1000;
+        while (time < start+1000)
+        {
+            try 
+            {
+                Thread.sleep(toSleep);
+            } 
+            catch (InterruptedException ignored)
+            {
+                Thread.currentThread().interrupt();
+                System.out.println("wiwi");
+
+            }
+
+            
+            time    = System.currentTimeMillis();
+            toSleep = 1000-(time-start); 
+        }
+      
+    }
