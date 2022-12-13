@@ -163,10 +163,14 @@ public class Player implements Runnable {
 
             if(slotIndex < 0) //the player preesed a new key
             {
+                this.env.ui.placeToken(id, slot);
                 keyPresses[currPresses] = slot;
                 currPresses++;
-                this.env.ui.placeToken(id, slot);
-                //notifyAll();
+                if(currPresses ==3)
+                {
+                    this.dealer.check(this.id);
+                    
+                }
             }
             else //the player pressed an existing key, meaning we need to delete.
             {
@@ -174,11 +178,7 @@ public class Player implements Runnable {
                 currPresses--;
                 this.env.ui.removeToken(id, slot);
             }
-            if(currPresses ==3)
-            {
-                this.dealer.check(this.id);
-                
-            }
+
         }
     }
 

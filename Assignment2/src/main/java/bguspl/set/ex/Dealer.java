@@ -271,8 +271,6 @@ public class Dealer implements Runnable {
             System.out.println("FOUND");
             this.q.pop();
             synchronized (this.playerThreads[i]) { this.playerThreads[i].notifyAll();}
-            
-
         }
         
 
