@@ -136,6 +136,7 @@ public class Dealer implements Runnable {
      */
     private void placeCardsOnTable() 
     {
+        
         if (!found)
         {
             int k;
@@ -155,6 +156,7 @@ public class Dealer implements Runnable {
                 deck.remove(k);
             }
         }
+        this.startPress();
     }
 
 
@@ -236,15 +238,19 @@ public class Dealer implements Runnable {
     {
 
         this.q.add(k);
-        try 
+        if(this.q.size()>0)
         {
-            synchronized (this.playerThreads[k]) { this.playerThreads[k].wait();}
-            //this.playerThreads[k].wait();
-            
-        } 
-        catch (InterruptedException ignored) 
-        {
-            this.terminate();
+            try 
+            {
+                synchronized (this.playerThreads[k]) { this.playerThreads[k].wait();}
+                //this.playerThreads[k].wait();
+                
+            } 
+            catch (InterruptedException ignored) 
+            {
+                this.terminate();
+            }
+
         }
         //while(q.peek()!=k){}
         
@@ -259,7 +265,8 @@ public class Dealer implements Runnable {
     {
         int i  = this.q.peek();
         int[] cards = new int[this.env.config.featureSize];
-        int[] press =this.players[i].getPress();
+        int[] press = this.players[i].getPress();
+
         for(int k=0;k<cards.length;k++)
         {
             cards[k] = this.table.getSlotToCard(press[k]);
@@ -267,12 +274,62 @@ public class Dealer implements Runnable {
         
         if(this.env.util.testSet(cards))
         {
+            this.stopPress();
             found = true;
             System.out.println("FOUND");
             this.q.pop();
             synchronized (this.playerThreads[i]) { this.playerThreads[i].notifyAll();}
         }
-        
+        else
+        {
+
+        }
+    }
+
+    public void stopPress()
+    {
+        for(int i=0;i<this.players.length;i++)
+        {
+            this.players[i].stopPress();
+        }
+    }
+    public void startPress()
+    {
+        for(int i=0;i<this.players.length;i++)
+        {
+            this.players[i].startPress();
+        }
+    }
+
+    public void removeChecks(int[]set)
+    {
+        Deque<Integer> c = new LinkedList<Integer>();
+        boolean match;
+        int[] press;
+        int i;
+        while(this.q.size()>0)
+        {
+            c.add(this.q.removeFirst());
+        }
+        while(c.size()>0)
+        {
+            i     = c.removeFirst();
+            press = this.players[i].getPress();
+            match = false;
+            for(int j=0;j<press.length;j++)
+            {
+                for(int k=0;k<set.length;k++)
+                {
+                    if(set[k]==press[j])match = true;
+                }
+            }
+            if(!match)this.q.add(i);
+            else
+            {
+                synchronized (this.playerThreads[i]) { this.playerThreads[i].notifyAll();}
+            }
+            
+        }
 
     }
 

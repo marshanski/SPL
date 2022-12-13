@@ -56,6 +56,7 @@ public class Player implements Runnable {
      * True iff game should be terminated due to an external event.
      */
     private volatile boolean terminate;
+    private volatile boolean found;
 
     /**
      * The current score of the player.
@@ -83,6 +84,7 @@ public class Player implements Runnable {
         {
             keyPresses[i]= noPress;
         }
+        found = true;
     }
 
     /**
@@ -143,6 +145,14 @@ public class Player implements Runnable {
     {
         terminate = true;
     }
+    public void stopPress() 
+    {
+        found = true;
+    }
+    public void startPress() 
+    {
+        found = false;
+    }
 
     /**
      * This method is called when a key is pressed.
@@ -152,7 +162,7 @@ public class Player implements Runnable {
     public void keyPressed(int slot) 
     {
         System.out.println(slot);
-        if(currPresses <= keyPresses.length-1)
+        if(currPresses <= keyPresses.length-1 && !found)
         {
             int slotIndex = -1;
             for(int i=0;i<= currPresses;i++)
