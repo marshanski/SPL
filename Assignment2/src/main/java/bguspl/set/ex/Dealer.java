@@ -32,13 +32,14 @@ public class Dealer implements Runnable {
      * The list of card ids that are left in the dealer's deck.
      */
     private final List<Integer> deck;
-    private Deque<int[]> q;
+    private Deque<Integer> q;
 
 
     /**
      * True iff game should be terminated due to an external event.
      */
     private volatile boolean terminate;
+    private volatile boolean found;
 
     /**
      * The time when the dealer needs to reshuffle the deck due to turn timeout.
@@ -53,7 +54,7 @@ public class Dealer implements Runnable {
         deck               = IntStream.range(0, env.config.deckSize).boxed().collect(Collectors.toList());
         this.playerThreads = new Thread[this.players.length];
         this.lock          = new Object();
-        this.q             = new LinkedList<int[]>();
+        this.q             = new LinkedList<Integer>();
        
         
     }
@@ -65,10 +66,6 @@ public class Dealer implements Runnable {
     public void run() 
     {
         System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
-        int k =0 ;
-        boolean found = false;
-        
-
         for(int i=0 ;i<this.players.length;i++)
         {
             this.playerThreads[i] = new Thread(this.players[i], "player"+ i);
@@ -76,11 +73,10 @@ public class Dealer implements Runnable {
         }
         while (!shouldFinish())
         {
-            placeCardsOnTable(found);
-            timerLoop(found);
+            placeCardsOnTable();
+            timerLoop();
             //updateTimerDisplay(false);
             removeAllCardsFromTable();
-            k++;
         }
         announceWinners();
         System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
@@ -89,7 +85,7 @@ public class Dealer implements Runnable {
     /**
      * The inner loop of the dealer thread that runs as long as the countdown did not time out.
      */
-    private void timerLoop(boolean found) 
+    private void timerLoop() 
     {
         int i=0;
         this.env.ui.setCountdown(60000, terminate);
@@ -138,13 +134,21 @@ public class Dealer implements Runnable {
     /**
      * Check if any cards can be removed from the deck and placed on the table.
      */
-    private void placeCardsOnTable(boolean found) 
+    private void placeCardsOnTable() 
     {
         if (!found)
         {
             int k;
             Random rand  = new Random();
-            for(int i=0 ; i<12; i++)
+            List<int[]> sets = this.env.util.findSets(deck,1);
+            int[] a = sets.get(0);
+            for(int i=0;i<3;i++)
+            {
+                this.table.placeCard(a[i],i);
+                deck.remove(a[i]);
+            }
+
+            for(int i=3 ; i<12; i++)
             {
                 k = rand.nextInt(deck.size());
                 this.table.placeCard(deck.get(k),i);
@@ -171,8 +175,7 @@ public class Dealer implements Runnable {
                 try
                 {
                     lock.wait(toSleep);
-                    //if(System.currentTimeMillis()<start+1000){System.out.println("WIWI");}
-                    //check
+                    if(this.q.size()>0)this.checkSet();
                     time    = System.currentTimeMillis();
                     toSleep = 1000-(time-start); 
                     
@@ -228,21 +231,52 @@ public class Dealer implements Runnable {
         // TODO implement
     }
 
-    public void check(int []k)
+
+    public void check(int k)
     {
 
         this.q.add(k);
-        while(q.peek()!=k)
+        try 
         {
-
+            synchronized (this.playerThreads[k]) { this.playerThreads[k].wait();}
+            //this.playerThreads[k].wait();
+            
+        } 
+        catch (InterruptedException ignored) 
+        {
+            this.terminate();
         }
+        //while(q.peek()!=k){}
+        
         synchronized (this.lock) 
         {
             this.lock.notifyAll();
         }
 
     }
-    
+
+    public void checkSet()
+    {
+        int i  = this.q.peek();
+        int[] cards = new int[this.env.config.featureSize];
+        int[] press =this.players[i].getPress();
+        for(int k=0;k<cards.length;k++)
+        {
+            cards[k] = this.table.getSlotToCard(press[k]);
+        }
+        
+        if(this.env.util.testSet(cards))
+        {
+            found = true;
+            System.out.println("FOUND");
+            this.q.pop();
+            synchronized (this.playerThreads[i]) { this.playerThreads[i].notifyAll();}
+            
+
+        }
+        
+
+    }
 
     
 }

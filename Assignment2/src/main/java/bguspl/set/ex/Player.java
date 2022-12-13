@@ -36,7 +36,7 @@ public class Player implements Runnable {
      */
     private Thread aiThread;
     private Dealer dealer;
-    private int[] keyPresses ;
+    private int[] keyPresses;
 
     /**
      * this erplaces 'null' in the keyPresses array.
@@ -96,7 +96,6 @@ public class Player implements Runnable {
         if (!human) createArtificialIntelligence();
         while (!terminate) 
         {
-            //this.dealer.check(keyPresses);
             
         }
 
@@ -175,7 +174,11 @@ public class Player implements Runnable {
                 currPresses--;
                 this.env.ui.removeToken(id, slot);
             }
-            //Arrays.sort(keyPresses);
+            if(currPresses ==3)
+            {
+                this.dealer.check(this.id);
+                
+            }
         }
     }
 
@@ -213,7 +216,12 @@ public class Player implements Runnable {
             }
         }
 
-    public int getScore() {
+    public int getScore() 
+    {
         return score;
+    }
+    public int[] getPress()
+    {
+        return this.keyPresses;
     }
 }
