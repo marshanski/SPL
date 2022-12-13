@@ -179,6 +179,13 @@ public class Player implements Runnable {
                 this.env.ui.removeToken(id, slot);
             }
 
+<<<<<<< Updated upstream
+=======
+            if(currPresses == 3)
+            {
+                this.dealer.check(this.id);
+            }
+>>>>>>> Stashed changes
         }
     }
 
@@ -199,14 +206,9 @@ public class Player implements Runnable {
      * Penalize a player and perform other related actions.
      */
   
-    public void penalty(boolean res) 
+    public void penalty(int penaltyTime) 
         {
             // TODO implement
-            int penaltyTime;
-            if(res) // the player made a correct set  
-                penaltyTime = 1000;
-            else
-                penaltyTime = 3000;
             try{
                 Thread.sleep(penaltyTime);
             }

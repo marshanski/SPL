@@ -29,6 +29,12 @@ public class Table {
      */
     protected final Integer[] cardToSlot; // slot per card (if any)
 
+
+    /**
+     * Mapping between a slot and the players that are placeing a token on that slot.
+     */
+    protected boolean[][] slotToPlayers; // slot per card (if any)
+
     /**
      * Constructor for testing.
      *
@@ -42,6 +48,14 @@ public class Table {
         this.env        = env;
         this.slotToCard = slotToCard;
         this.cardToSlot = cardToSlot;
+        this.slotToPlayers = new boolean[this.env.config.tableSize][this.env.config.players];
+        for(int i=0;i<slotToPlayers.length;i++)
+        {
+            for(int k=0;k<slotToPlayers[0].length;k++)
+            {
+                slotToPlayers[i][k] = false;
+            }
+        }
     }
 
     /**
