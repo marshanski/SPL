@@ -179,13 +179,6 @@ public class Player implements Runnable {
                 this.env.ui.removeToken(id, slot);
             }
 
-<<<<<<< Updated upstream
-=======
-            if(currPresses == 3)
-            {
-                this.dealer.check(this.id);
-            }
->>>>>>> Stashed changes
         }
     }
 
