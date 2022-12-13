@@ -165,7 +165,7 @@ public class Dealer implements Runnable {
             {
                 try
                 {
-                    lock.wait(1000);
+                    lock.wait(toSleep);
                     if(System.currentTimeMillis()<start+1000){System.out.println("WIWI");}
                     time    = System.currentTimeMillis();
                     toSleep = 1000-(time-start); 
@@ -173,7 +173,7 @@ public class Dealer implements Runnable {
                 }
                 catch (InterruptedException ignored) 
                 {
-                    System.out.println("WIWI");
+                    //System.out.println("WIWI");
                     
                 }
             }
@@ -226,7 +226,7 @@ public class Dealer implements Runnable {
     {
         synchronized (this.lock) 
         {
-            //this.lock.notifyAll();
+            this.lock.notifyAll();
         }
 
     }

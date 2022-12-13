@@ -1,7 +1,8 @@
-package bguspl.set.ex;
 
-import bguspl.set.Env;
+package bguspl.set.ex;
 import java.util.Arrays;
+import bguspl.set.Env;
+
 /**
  * This class manages the players' threads and data
  *
@@ -35,7 +36,17 @@ public class Player implements Runnable {
      */
     private Thread aiThread;
     private Dealer dealer;
+    private int[] keyPresses = {-1,-1,-1};
 
+    /**
+     * this erplaces 'null' in the keyPresses array.
+     */
+    private final int noPress = -1;
+
+    /**
+     * the number of preeses currenlty in keyPresses array.
+     */
+    private int currPresses = 0;
     /**
      * True iff the player is human (not a computer player).
      */
@@ -52,21 +63,6 @@ public class Player implements Runnable {
     private int score;
 
     /**
-     * The array that stores the player's key presses.
-     */
-    private int[] keyPresses = {-1,-1,-1};
-
-    /**
-     * this erplaces 'null' in the keyPresses array.
-     */
-    private final int noPress = -1;
-
-    /**
-     * the number of preeses currenlty in keyPresses array.
-     */
-    private int currPresses = 0;
-
-    /**
      * The class constructor.
      *
      * @param env    - the environment object.
@@ -77,11 +73,12 @@ public class Player implements Runnable {
      */
     public Player(Env env, Dealer dealer, Table table, int id, boolean human) 
     {
-        this.env   = env;
-        this.table = table;
-        this.id    = id;
-        this.human = human;
-
+        this.env    = env;
+        this.table  = table;
+        this.id     = id;
+        this.human  = human;
+        this.dealer = dealer;
+       // int keyPresses[] = new int[3];
     }
 
     /**
@@ -151,6 +148,7 @@ public class Player implements Runnable {
      */
     public void keyPressed(int slot) 
     {
+        System.out.println(slot);
         if(currPresses <= keyPresses.length-1)
         {
             int slotIndex = -1;
@@ -192,24 +190,24 @@ public class Player implements Runnable {
 
     /**
      * Penalize a player and perform other related actions.
-     * 
      */
+  
     public void penalty(boolean res) 
-    {
-        // TODO implement
-        int penaltyTime;
-        if(res) // the player made a correct set  
-            penaltyTime = 1000;
-        else
-            penaltyTime = 3000;
-        try{
-            Thread.sleep(penaltyTime);
+        {
+            // TODO implement
+            int penaltyTime;
+            if(res) // the player made a correct set  
+                penaltyTime = 1000;
+            else
+                penaltyTime = 3000;
+            try{
+                Thread.sleep(penaltyTime);
+            }
+            catch (InterruptedException e) {
+                // handle the InterruptedException
+                System.out.println("The thread was interrupted: " + e.getMessage());
+            }
         }
-        catch (InterruptedException e) {
-            // handle the InterruptedException
-            System.out.println("The thread was interrupted: " + e.getMessage());
-        }
-    }
 
     public int getScore() {
         return score;
