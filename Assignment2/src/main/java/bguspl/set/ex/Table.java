@@ -133,4 +133,9 @@ public class Table {
         // TODO implement
         return false;
     }
+
+    public int getSlotToCard(int slot)
+    {
+        return this.slotToCard[slot];
+    }
 }

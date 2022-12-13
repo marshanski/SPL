@@ -36,7 +36,7 @@ public class Player implements Runnable {
      */
     private Thread aiThread;
     private Dealer dealer;
-    private int[] keyPresses = {-1,-1,-1};
+    private int[] keyPresses;
 
     /**
      * this erplaces 'null' in the keyPresses array.
@@ -78,7 +78,11 @@ public class Player implements Runnable {
         this.id     = id;
         this.human  = human;
         this.dealer = dealer;
-       // int keyPresses[] = new int[3];
+        this.keyPresses = new int[this.env.config.featureSize];
+        for (int i=0;i<this.keyPresses.length;i++)
+        {
+            keyPresses[i]= noPress;
+        }
     }
 
     /**
@@ -92,7 +96,6 @@ public class Player implements Runnable {
         if (!human) createArtificialIntelligence();
         while (!terminate) 
         {
-            this.dealer.check();
             
         }
 
@@ -121,7 +124,7 @@ public class Player implements Runnable {
                 // TODO implement player key press simulator
                 try 
                 {
-                    synchronized (this) { wait(); }
+                    synchronized (this) { wait();}
                 } 
                 catch (InterruptedException ignored) 
                 {
@@ -160,10 +163,14 @@ public class Player implements Runnable {
 
             if(slotIndex < 0) //the player preesed a new key
             {
+                this.env.ui.placeToken(id, slot);
                 keyPresses[currPresses] = slot;
                 currPresses++;
-                this.env.ui.placeToken(id, slot);
-                //notifyAll();
+                if(currPresses ==3)
+                {
+                    this.dealer.check(this.id);
+                    
+                }
             }
             else //the player pressed an existing key, meaning we need to delete.
             {
@@ -171,7 +178,7 @@ public class Player implements Runnable {
                 currPresses--;
                 this.env.ui.removeToken(id, slot);
             }
-            //Arrays.sort(keyPresses);
+
         }
     }
 
@@ -209,7 +216,12 @@ public class Player implements Runnable {
             }
         }
 
-    public int getScore() {
+    public int getScore() 
+    {
         return score;
+    }
+    public int[] getPress()
+    {
+        return this.keyPresses;
     }
 }
