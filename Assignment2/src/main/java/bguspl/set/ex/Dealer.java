@@ -1,5 +1,5 @@
 package bguspl.set.ex;
-
+import java.util.*;
 import bguspl.set.Env;
 import java.util.Random;
 import java.math.*;
@@ -7,6 +7,7 @@ import java.sql.Time;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
 
 /**
  * This class manages the dealer's threads and data
@@ -31,6 +32,8 @@ public class Dealer implements Runnable {
      * The list of card ids that are left in the dealer's deck.
      */
     private final List<Integer> deck;
+    private Deque<int[]> q;
+
 
     /**
      * True iff game should be terminated due to an external event.
@@ -50,6 +53,8 @@ public class Dealer implements Runnable {
         deck               = IntStream.range(0, env.config.deckSize).boxed().collect(Collectors.toList());
         this.playerThreads = new Thread[this.players.length];
         this.lock          = new Object();
+        this.q             = new LinkedList<int[]>();
+       
         
     }
 
@@ -166,7 +171,8 @@ public class Dealer implements Runnable {
                 try
                 {
                     lock.wait(toSleep);
-                    if(System.currentTimeMillis()<start+1000){System.out.println("WIWI");}
+                    //if(System.currentTimeMillis()<start+1000){System.out.println("WIWI");}
+                    //check
                     time    = System.currentTimeMillis();
                     toSleep = 1000-(time-start); 
                     
@@ -222,8 +228,14 @@ public class Dealer implements Runnable {
         // TODO implement
     }
 
-    public void check()
+    public void check(int []k)
     {
+
+        this.q.add(k);
+        while(q.peek()!=k)
+        {
+
+        }
         synchronized (this.lock) 
         {
             this.lock.notifyAll();

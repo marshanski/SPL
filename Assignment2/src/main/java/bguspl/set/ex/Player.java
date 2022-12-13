@@ -36,7 +36,7 @@ public class Player implements Runnable {
      */
     private Thread aiThread;
     private Dealer dealer;
-    private int[] keyPresses = {-1,-1,-1};
+    private int[] keyPresses ;
 
     /**
      * this erplaces 'null' in the keyPresses array.
@@ -78,7 +78,11 @@ public class Player implements Runnable {
         this.id     = id;
         this.human  = human;
         this.dealer = dealer;
-       // int keyPresses[] = new int[3];
+        this.keyPresses = new int[this.env.config.featureSize];
+        for (int i=0;i<this.keyPresses.length;i++)
+        {
+            keyPresses[i]= noPress;
+        }
     }
 
     /**
@@ -92,7 +96,7 @@ public class Player implements Runnable {
         if (!human) createArtificialIntelligence();
         while (!terminate) 
         {
-            this.dealer.check();
+            //this.dealer.check(keyPresses);
             
         }
 
@@ -121,7 +125,7 @@ public class Player implements Runnable {
                 // TODO implement player key press simulator
                 try 
                 {
-                    synchronized (this) { wait(); }
+                    synchronized (this) { wait();}
                 } 
                 catch (InterruptedException ignored) 
                 {
