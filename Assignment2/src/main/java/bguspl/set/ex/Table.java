@@ -29,7 +29,6 @@ public class Table {
      */
     protected final Integer[] cardToSlot; // slot per card (if any)
 
-
     /**
      * Mapping between a slot and the players that are placeing a token on that slot.
      */

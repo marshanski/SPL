@@ -7,7 +7,9 @@ import java.sql.Time;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Semaphore;
+import java.util.concurrent.TimeUnit;
 
 
 /**
@@ -30,11 +32,13 @@ public class Dealer implements Runnable {
     private static Object lock ;
 
 
+
     /**
      * The list of card ids that are left in the dealer's deck.
      */
     private final List<Integer> deck;
     private Deque<Integer> q;
+    private ArrayBlockingQueue<Integer> queue;
     private Semaphore semaphore;
 
 
@@ -58,8 +62,9 @@ public class Dealer implements Runnable {
         this.playerThreads = new Thread[this.players.length];
         this.lock          = new Object();
         this.q             = new LinkedList<Integer>();
-        this.semaphore     = new Semaphore(1);
+        this.semaphore     = new Semaphore(4);
         this.set           = new int[this.env.config.featureSize];
+        this.queue         = new ArrayBlockingQueue<>(this.players.length);
        
         
     }
@@ -186,7 +191,7 @@ public class Dealer implements Runnable {
                 try
                 {
                     lock.wait(toSleep);
-                    if(this.q.size()>0)this.checkSet();
+                    if(this.queue.size()>0)this.checkSet();
                     time    = System.currentTimeMillis();
                     toSleep = 1000-(time-start); 
                     
@@ -270,13 +275,18 @@ public class Dealer implements Runnable {
 
     public void check(int k)
     {
-        this.addToQueue(k);
-
-        if(this.q.peek()!=k)
+        synchronized (this.queue)
+        {
+            this.queue.add(k);
+            synchronized (this.lock) {this.lock.notifyAll();}
             this.goWaitPlayer(k);
+            this.queue.poll();
+            this.queue.notifyAll();
+        }
+        
 
-        synchronized (this.lock) {this.lock.notifyAll();}
-        this.goWaitPlayer(k);
+
+
             
     }
 
@@ -295,14 +305,36 @@ public class Dealer implements Runnable {
     public void addToQueue(int k) 
     {
 
-        try {this.semaphore.acquire();this.q.add(k);} 
+        try 
+        {
+            this.semaphore.acquire();
+            this.q.add(k);
+        } 
         catch (InterruptedException e) {e.printStackTrace();}
         finally{this.semaphore.release();}
     }
 
+    public void addToQueue2(int k) 
+    {
+        synchronized (this.queue)
+        {
+            this.queue.add(k);
+            this.queue.notifyAll();
+        }
+    }
+    public void pollToQueue() 
+    {
+        synchronized (this.queue)
+        {
+            this.queue.poll();
+            this.queue.notifyAll();
+        }
+    }
+
+
     public void checkSet()
     {
-        int i  = this.q.peek();
+        int i  = this.queue.peek();
         int[] cards = new int[this.env.config.featureSize];
         int[] press = this.players[i].getPress();
         for(int k=0;k<cards.length;k++)
@@ -316,16 +348,16 @@ public class Dealer implements Runnable {
             this.set = press;
             found    = true;
             System.out.println("FOUND");//debug
-            this.players[i].point();
+            this.players[i].setAnswer(1);
 
         }
         else
         {
-            //this.player[k].penalty(3)
-
+            this.players[i].setAnswer(-1);
         }
-        this.q.pop();
+        
         synchronized (this.playerThreads[i]) { this.playerThreads[i].notifyAll();}
+
     }
 
     public void stopPress()
