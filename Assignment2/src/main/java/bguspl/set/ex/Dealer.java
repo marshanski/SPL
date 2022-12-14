@@ -82,7 +82,7 @@ public class Dealer implements Runnable {
             placeCardsOnTable();
             timerLoop();
             if(found)
-                this.removeSet();
+                this.updateAfterSet(this.set);
             else
                 removeAllCardsFromTable();
         }
@@ -218,10 +218,30 @@ public class Dealer implements Runnable {
         for(int i=0;i<12;i++)
             removeCardToDeck(i);
     }
-
-    private void removeSet()
+    /**
+     * @param set
+     * the set array represents the slots that needs to be replaced.
+     */
+    private void updateAfterSet(int[]set)//the set array represents the slots that needs to be removed.
     {
-        return;
+        this.table.removeSetFromTable(set);
+        for(int i=0;i<set.length; i++)
+        {
+            this.placeACardInSlot(set[i]);
+        }
+    }
+
+    /**
+     * removes a card from the table, and return it to the deck.
+     * @param slot
+     */
+    public void placeACardInSlot(int slot) // remove a card from the deck and place it in the slot
+    {
+        //make try and catch if there are no cards left in the deck!!!
+        Random rand = new Random();
+        int k = rand.nextInt(deck.size());
+        this.table.placeCard(deck.get(k),slot);
+        deck.remove(k);
     }
     
      /**

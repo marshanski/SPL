@@ -169,7 +169,7 @@ public class Table {
         return this.slotToCard[slot];
     }
 
-    private void removeSetFromTable(int[] set)
+    protected void removeSetFromTable(int[] set)
     {
         for(int i=0; i<slotToPlayers.length;i++)// remove all token from the cards that made the set
         {
