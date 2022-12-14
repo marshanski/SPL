@@ -176,7 +176,7 @@ public class Player implements Runnable {
 
             if(slotIndex < 0) //the player preesed a new key
             {
-                this.env.ui.placeToken(id, slot);
+                this.table.placeToken(this.id, slot);
                 keyPresses[currPresses] = slot;
                 currPresses++;
                 if(currPresses ==3)
@@ -190,7 +190,7 @@ public class Player implements Runnable {
             {
                 keyPresses[slotIndex] = noPress;
                 currPresses--;
-                this.env.ui.removeToken(id, slot);
+                this.table.removeToken(this.id, slot);
             }
 
         }

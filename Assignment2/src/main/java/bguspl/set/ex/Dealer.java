@@ -236,6 +236,7 @@ public class Dealer implements Runnable {
         // do a try catch if is trying to remove a card that isnt on the table!!
         deck.add(table.slotToCard[slot]);
         this.table.removeCard(slot);
+        this.env.ui.removeCard(slot);
     }
         
     /**
