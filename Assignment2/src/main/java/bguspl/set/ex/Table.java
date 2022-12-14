@@ -44,17 +44,10 @@ public class Table {
     public Table(Env env, Integer[] slotToCard, Integer[] cardToSlot) 
     {
 
-<<<<<<< HEAD
-        this.env           = env;
-        this.slotToCard    = slotToCard;
-        this.cardToSlot    = cardToSlot;
-        this.slotToPlayers = new boolean[this.env.config.tableSize][this.env.config.players];
-=======
         this.env        = env;
         this.slotToCard = slotToCard;
         this.cardToSlot = cardToSlot;
         this.slotToPlayers = new boolean[this.env.config.players][this.env.config.tableSize];
->>>>>>> 1cfee6d46a919db9c71f4dd74886dabc15d9cf3e
         for(int i=0;i<slotToPlayers.length;i++)
         {
             for(int k=0;k<slotToPlayers[0].length;k++)

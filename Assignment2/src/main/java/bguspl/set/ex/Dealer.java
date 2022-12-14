@@ -255,17 +255,18 @@ public class Dealer implements Runnable {
 
     public void check(int k)
     {
-        this.addToQueue2(k);
-
-        if(this.queue.peek()!=k)
+        synchronized (this.queue)
+        {
+            this.queue.add(k);
+            synchronized (this.lock) {this.lock.notifyAll();}
             this.goWaitPlayer(k);
+            this.queue.poll();
+            this.queue.notifyAll();
+        }
+        
 
 
-        synchronized (this.lock) {this.lock.notifyAll();}
-        this.goWaitPlayer(k);
-        this.pollToQueue();
-        if(this.queue.size()>0)
-            synchronized (this.playerThreads[this.queue.peek()]) { this.playerThreads[this.queue.peek()].notifyAll();}
+
             
     }
 
@@ -325,7 +326,7 @@ public class Dealer implements Runnable {
         {
             this.stopPress();
             this.set = press;
-            found    = true;
+            //found    = true;
             System.out.println("FOUND");//debug
             this.players[i].setAnswer(1);
 
