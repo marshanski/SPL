@@ -1,7 +1,7 @@
 package bguspl.set.ex;
 
 import bguspl.set.Env;
-
+import java.util.Random;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -44,10 +44,17 @@ public class Table {
     public Table(Env env, Integer[] slotToCard, Integer[] cardToSlot) 
     {
 
+<<<<<<< HEAD
         this.env           = env;
         this.slotToCard    = slotToCard;
         this.cardToSlot    = cardToSlot;
         this.slotToPlayers = new boolean[this.env.config.tableSize][this.env.config.players];
+=======
+        this.env        = env;
+        this.slotToCard = slotToCard;
+        this.cardToSlot = cardToSlot;
+        this.slotToPlayers = new boolean[this.env.config.players][this.env.config.tableSize];
+>>>>>>> 1cfee6d46a919db9c71f4dd74886dabc15d9cf3e
         for(int i=0;i<slotToPlayers.length;i++)
         {
             for(int k=0;k<slotToPlayers[0].length;k++)
@@ -65,6 +72,17 @@ public class Table {
     public Table(Env env) {
 
         this(env, new Integer[env.config.tableSize], new Integer[env.config.deckSize]);
+
+        /*
+        this.slotToPlayers = new boolean[this.env.config.tableSize][this.env.config.players];
+        for(int i=0;i<slotToPlayers.length;i++)
+        {
+            for(int k=0;k<slotToPlayers[0].length;k++)
+            {
+                slotToPlayers[i][k] = false;
+            }
+        }
+        */
     }
 
     /**
@@ -121,6 +139,7 @@ public class Table {
             Thread.sleep(env.config.tableDelayMillis);
         } catch (InterruptedException ignored) {}
 
+        this.slotToCard[slot] = null;
         this.env.ui.removeCard(slot);
          // TODO implement
     }
@@ -133,6 +152,8 @@ public class Table {
     public void placeToken(int player, int slot) 
     {
         // TODO implement
+        this.slotToPlayers[player][slot] = true;
+        this.env.ui.placeToken(player, slot);
     }
 
     /**
@@ -144,11 +165,29 @@ public class Table {
     public boolean removeToken(int player, int slot) 
     {
         // TODO implement
+        this.slotToPlayers[player][slot] = false;
+        this.env.ui.removeToken(player, slot);
         return false;
     }
 
     public int getSlotToCard(int slot)
     {
         return this.slotToCard[slot];
+    }
+
+    private void removeSetFromTable(int[] set)
+    {
+        for(int i=0; i<slotToPlayers.length;i++)// remove all token from the cards that made the set
+        {
+            for(int k=0;k<set.length;k++)
+            {
+                removeToken(i, set[k]);
+                this.env.ui.removeToken(i, set[k]);
+            }
+        }
+        for(int k=0;k<set.length;k++)//remove the cards that made the set
+        {
+            this.removeCard(k);
+        }
     }
 }
