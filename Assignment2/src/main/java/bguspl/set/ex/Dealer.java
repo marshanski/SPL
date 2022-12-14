@@ -7,6 +7,7 @@ import java.sql.Time;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.concurrent.Semaphore;
 
 
 /**
@@ -24,6 +25,7 @@ public class Dealer implements Runnable {
      */
     private final Table table;
     private final Player[] players;
+    private  int[] set;
     private final Thread playerThreads[];
     private static Object lock ;
 
@@ -33,6 +35,7 @@ public class Dealer implements Runnable {
      */
     private final List<Integer> deck;
     private Deque<Integer> q;
+    private Semaphore semaphore;
 
 
     /**
@@ -55,6 +58,8 @@ public class Dealer implements Runnable {
         this.playerThreads = new Thread[this.players.length];
         this.lock          = new Object();
         this.q             = new LinkedList<Integer>();
+        this.semaphore     = new Semaphore(1);
+        this.set           = new int[this.env.config.featureSize];
        
         
     }
@@ -66,6 +71,7 @@ public class Dealer implements Runnable {
     public void run() 
     {
         System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
+        this.stopPress();
         for(int i=0 ;i<this.players.length;i++)
         {
             this.playerThreads[i] = new Thread(this.players[i], "player"+ i);
@@ -75,8 +81,10 @@ public class Dealer implements Runnable {
         {
             placeCardsOnTable();
             timerLoop();
-            //updateTimerDisplay(false);
-            removeAllCardsFromTable();
+            if(found)
+                this.removeSet();
+            else
+                removeAllCardsFromTable();
         }
         announceWinners();
         System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
@@ -88,9 +96,10 @@ public class Dealer implements Runnable {
     private void timerLoop() 
     {
         int i=0;
-        this.env.ui.setCountdown(60000, terminate);
+        
+        this.env.ui.setCountdown(60999, terminate);
         long start    = System.currentTimeMillis();
-        long end      = start + 60000;
+        long end      = start + 60999;
         while (!terminate && !found && System.currentTimeMillis() < end) 
         {
             sleepUntilWokenOrTimeout();
@@ -170,7 +179,7 @@ public class Dealer implements Runnable {
         long start     = System.currentTimeMillis();
         long time      = start;
         long toSleep   = 1000;
-        while (time < start+1000)
+        while (time < start+1000 && !found)
         {
             synchronized (this.lock) 
             {
@@ -209,8 +218,12 @@ public class Dealer implements Runnable {
         for(int i=0;i<12;i++)
             removeCardToDeck(i);
     }
-    
 
+    private void removeSet()
+    {
+        return;
+    }
+    
      /**
      * removes a card from the table, and return it to the deck.
      * @param slot
@@ -236,29 +249,34 @@ public class Dealer implements Runnable {
 
     public void check(int k)
     {
+        this.addToQueue(k);
 
-        this.q.add(k);
-        if(this.q.size()>0)
+        if(this.q.peek()!=k)
+            this.goWaitPlayer(k);
+
+        synchronized (this.lock) {this.lock.notifyAll();}
+        this.goWaitPlayer(k);
+            
+    }
+
+    public void goWaitPlayer(int k)
+    {
+        try 
         {
-            try 
-            {
-                synchronized (this.playerThreads[k]) { this.playerThreads[k].wait();}
-                //this.playerThreads[k].wait();
-                
-            } 
-            catch (InterruptedException ignored) 
-            {
-                this.terminate();
-            }
-
-        }
-        //while(q.peek()!=k){}
-        
-        synchronized (this.lock) 
+            synchronized (this.playerThreads[k]) { this.playerThreads[k].wait();}
+        } 
+        catch (InterruptedException ignored) 
         {
-            this.lock.notifyAll();
+            //this.terminate();
         }
+    }
 
+    public void addToQueue(int k) 
+    {
+
+        try {this.semaphore.acquire();this.q.add(k);} 
+        catch (InterruptedException e) {e.printStackTrace();}
+        finally{this.semaphore.release();}
     }
 
     public void checkSet()
@@ -266,7 +284,6 @@ public class Dealer implements Runnable {
         int i  = this.q.peek();
         int[] cards = new int[this.env.config.featureSize];
         int[] press = this.players[i].getPress();
-
         for(int k=0;k<cards.length;k++)
         {
             cards[k] = this.table.getSlotToCard(press[k]);
@@ -275,15 +292,19 @@ public class Dealer implements Runnable {
         if(this.env.util.testSet(cards))
         {
             this.stopPress();
-            found = true;
-            System.out.println("FOUND");
-            this.q.pop();
-            synchronized (this.playerThreads[i]) { this.playerThreads[i].notifyAll();}
+            this.set = press;
+            found    = true;
+            System.out.println("FOUND");//debug
+            this.players[i].point();
+
         }
         else
         {
+            //this.player[k].penalty(3)
 
         }
+        this.q.pop();
+        synchronized (this.playerThreads[i]) { this.playerThreads[i].notifyAll();}
     }
 
     public void stopPress()
@@ -323,12 +344,10 @@ public class Dealer implements Runnable {
                     if(set[k]==press[j])match = true;
                 }
             }
-            if(!match)this.q.add(i);
+            if(!match)
+                this.q.add(i);
             else
-            {
                 synchronized (this.playerThreads[i]) { this.playerThreads[i].notifyAll();}
-            }
-            
         }
 
     }

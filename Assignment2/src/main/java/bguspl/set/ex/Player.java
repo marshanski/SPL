@@ -57,6 +57,7 @@ public class Player implements Runnable {
      */
     private volatile boolean terminate;
     private volatile boolean found;
+    private volatile boolean check;
 
     /**
      * The current score of the player.
@@ -80,11 +81,13 @@ public class Player implements Runnable {
         this.human  = human;
         this.dealer = dealer;
         this.keyPresses = new int[this.env.config.featureSize];
+        this.score  = 0;
         for (int i=0;i<this.keyPresses.length;i++)
         {
             keyPresses[i]= noPress;
         }
         found = true;
+        check = false;
     }
 
     /**
@@ -162,7 +165,7 @@ public class Player implements Runnable {
     public void keyPressed(int slot) 
     {
         System.out.println(slot);
-        if(currPresses <= keyPresses.length-1 && !found)
+        if(currPresses <= keyPresses.length-1 && !found && !check)
         {
             int slotIndex = -1;
             for(int i=0;i<= currPresses;i++)
@@ -178,6 +181,7 @@ public class Player implements Runnable {
                 currPresses++;
                 if(currPresses ==3)
                 {
+                    check = true;
                     this.dealer.check(this.id);
                     
                 }
@@ -198,11 +202,13 @@ public class Player implements Runnable {
      * @post - the player's score is increased by 1.
      * @post - the player's score is updated in the ui.
      */
-    public void point() {
+    public void point() 
+    {
         // TODO implement
 
-        int ignored = table.countCards(); // this part is just for demonstration in the unit tests
-        env.ui.setScore(id, ++score);
+        int ignored = table.countCards(); 
+        this.score ++;// this part is just for demonstration in the unit tests
+        env.ui.setScore(id, this.score);
     }
 
     /**
