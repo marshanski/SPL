@@ -58,6 +58,7 @@ public class Player implements Runnable {
     private volatile boolean terminate;
     private volatile boolean found;
     private volatile boolean check;
+    private int answer;
 
     /**
      * The current score of the player.
@@ -75,13 +76,14 @@ public class Player implements Runnable {
      */
     public Player(Env env, Dealer dealer, Table table, int id, boolean human) 
     {
-        this.env    = env;
-        this.table  = table;
-        this.id     = id;
-        this.human  = human;
-        this.dealer = dealer;
+        this.env        = env;
+        this.table      = table;
+        this.id         = id;
+        this.human      = human;
+        this.dealer     = dealer;
         this.keyPresses = new int[this.env.config.featureSize];
-        this.score  = 0;
+        this.score      = 0;
+        this.answer     = 0;
         for (int i=0;i<this.keyPresses.length;i++)
         {
             keyPresses[i]= noPress;
@@ -161,6 +163,7 @@ public class Player implements Runnable {
      * This method is called when a key is pressed.
      *
      * @param slot - the slot corresponding to the key pressed.
+     * @throws InterruptedException
      */
     public void keyPressed(int slot) 
     {
@@ -181,8 +184,20 @@ public class Player implements Runnable {
                 currPresses++;
                 if(currPresses ==3)
                 {
-                    check = true;
+                    
                     this.dealer.check(this.id);
+                    check = true;
+                    if(this.answer == -1)
+                    {
+                        this.executeFreeze(3999);
+                        check = false;
+                    }   
+                    if(this.answer==1)
+                    {
+                        this.point();
+                        this.executeFreeze(2999);
+                        check = false;
+                    }
                     
                 }
             }
@@ -235,4 +250,40 @@ public class Player implements Runnable {
     {
         return this.keyPresses;
     }
+
+    public void executeFreeze(int penaltyTime)
+    {
+        Thread f = new Thread(() ->{this.freeze(penaltyTime);});
+        f.start();
+
+    }
+    public void freeze(int penaltyTime)
+    {
+        this.env.ui.setCountdown(penaltyTime, terminate);
+        long start    = System.currentTimeMillis();
+        long end      = start + penaltyTime;
+        while (System.currentTimeMillis() < end) 
+        {
+            synchronized (this) 
+            {
+                try
+                {
+                    this.wait(1000);
+                    this.updateTimerDisplay(end);
+
+                }
+                catch (InterruptedException ignored) {}
+            }
+        }
+
+    }
+    private void updateTimerDisplay(long end) 
+    {
+        this.env.ui.setFreeze(this.id,end-System.currentTimeMillis());
+    }
+    public void setAnswer(int i)
+    {
+        this.answer = i;
+    }
+
 }

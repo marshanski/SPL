@@ -29,7 +29,6 @@ public class Table {
      */
     protected final Integer[] cardToSlot; // slot per card (if any)
 
-
     /**
      * Mapping between a slot and the players that are placeing a token on that slot.
      */
@@ -45,9 +44,9 @@ public class Table {
     public Table(Env env, Integer[] slotToCard, Integer[] cardToSlot) 
     {
 
-        this.env        = env;
-        this.slotToCard = slotToCard;
-        this.cardToSlot = cardToSlot;
+        this.env           = env;
+        this.slotToCard    = slotToCard;
+        this.cardToSlot    = cardToSlot;
         this.slotToPlayers = new boolean[this.env.config.tableSize][this.env.config.players];
         for(int i=0;i<slotToPlayers.length;i++)
         {
