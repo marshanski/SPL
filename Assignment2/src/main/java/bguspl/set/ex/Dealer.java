@@ -66,7 +66,6 @@ public class Dealer implements Runnable {
         this.set           = new int[this.env.config.featureSize];
         this.queue         = new ArrayBlockingQueue<>(this.players.length);
        
-        
     }
 
     /**
@@ -100,8 +99,6 @@ public class Dealer implements Runnable {
      */
     private void timerLoop() 
     {
-        int i=0;
-        
         this.env.ui.setCountdown(60999, terminate);
         long start    = System.currentTimeMillis();
         long end      = start + 60999;
@@ -111,7 +108,6 @@ public class Dealer implements Runnable {
             updateTimerDisplay(found,end);
         }
     }
-
     /**
      * Called when the game should be terminated due to an external event.
      */
@@ -153,21 +149,24 @@ public class Dealer implements Runnable {
         
         if (!found)
         {
-            int k;
-            Random rand  = new Random();
-            List<int[]> sets = this.env.util.findSets(deck,1);
-            int[] a = sets.get(0);
-            for(int i=0;i<3;i++)
+            if(deck.size()>12)
             {
-                this.table.placeCard(a[i],i);
-                deck.remove(a[i]);
-            }
+                int k;
+                Random rand  = new Random();
+                List<int[]> sets = this.env.util.findSets(deck,1);
+                int[] a = sets.get(0);
+                for(int i=0;i<3;i++)
+                {
+                    this.table.placeCard(a[i],i);
+                    deck.remove(a[i]);
+                }
 
-            for(int i=3 ; i<12; i++)
-            {
-                k = rand.nextInt(deck.size());
-                this.table.placeCard(deck.get(k),i);
-                deck.remove(k);
+                for(int i=3 ; i<12; i++)
+                {
+                    k = rand.nextInt(deck.size());
+                    this.table.placeCard(deck.get(k),i);
+                    deck.remove(k);
+                }
             }
         }
         this.startPress();
@@ -196,17 +195,10 @@ public class Dealer implements Runnable {
                     toSleep = 1000-(time-start); 
                     
                 }
-                catch (InterruptedException ignored) 
-                {
-                    //System.out.println("WIWI");
-                    
-                }
+                catch (InterruptedException ignored) {}
             }
-
         }
-      
     }
-
     /**
      * Reset and/or update the countdown and the countdown display.
      */
@@ -277,17 +269,12 @@ public class Dealer implements Runnable {
     {
         synchronized (this.queue)
         {
-            this.queue.add(k);
+            this.addToQueue(k);
             synchronized (this.lock) {this.lock.notifyAll();}
             this.goWaitPlayer(k);
-            this.queue.poll();
-            this.queue.notifyAll();
+            this.pollToQueue();
         }
         
-
-
-
-            
     }
 
     public void goWaitPlayer(int k)
@@ -296,25 +283,11 @@ public class Dealer implements Runnable {
         {
             synchronized (this.playerThreads[k]) { this.playerThreads[k].wait();}
         } 
-        catch (InterruptedException ignored) 
-        {
-            //this.terminate();
-        }
+        catch (InterruptedException ignored) {}
     }
+
 
     public void addToQueue(int k) 
-    {
-
-        try 
-        {
-            this.semaphore.acquire();
-            this.q.add(k);
-        } 
-        catch (InterruptedException e) {e.printStackTrace();}
-        finally{this.semaphore.release();}
-    }
-
-    public void addToQueue2(int k) 
     {
         synchronized (this.queue)
         {
@@ -349,7 +322,6 @@ public class Dealer implements Runnable {
             found    = true;
             System.out.println("FOUND");//debug
             this.players[i].setAnswer(1);
-
         }
         else
         {

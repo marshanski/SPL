@@ -386,3 +386,16 @@ public class Dealer implements Runnable {
 
     
 }
+
+
+public void addToQueue(int k) 
+{
+
+    try 
+    {
+        this.semaphore.acquire();
+        this.q.add(k);
+    } 
+    catch (InterruptedException e) {e.printStackTrace();}
+    finally{this.semaphore.release();}
+}
