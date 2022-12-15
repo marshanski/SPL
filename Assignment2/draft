@@ -445,3 +445,22 @@ public void keyPressed(int slot)
 
     }
 }
+
+if(this.id == 1)
+{
+    Integer[]a = this.table.getSlotToCard();
+    List<Integer> b = new ArrayList<>();
+    for(int i=0;i<a.length;i++)
+    {
+        b.add(a[i]);
+    }
+    List<int[]> sets = this.env.util.findSets(b,1);
+    int[] c          = sets.get(0);
+    for(int i=0;i<this.keyPresses.length;i++)
+    {
+        //this.keyPresses = this.table.getCardToslot(c[i]);
+    }
+    this.table.hints();
+    int r=0;
+
+}

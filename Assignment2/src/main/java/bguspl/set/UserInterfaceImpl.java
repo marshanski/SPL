@@ -267,6 +267,7 @@ public class UserInterfaceImpl extends JFrame implements UserInterface {
                     text = text.concat(config.playerNames[player] + " AND ");
                 text = text.substring(0, text.length() - 5);
                 winnerAnnouncement.setText("IT IS A DRAW: " + text + " WON!!!");
+                int r=0;
             }
         }
     }
@@ -324,5 +325,6 @@ public class UserInterfaceImpl extends JFrame implements UserInterface {
         playersPanel.setVisible(false);
         winnerPanel.announceWinner(players);
         winnerPanel.setVisible(true);
+        int r=0;
     }
 }

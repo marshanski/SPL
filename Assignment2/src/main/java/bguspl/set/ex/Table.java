@@ -122,6 +122,10 @@ public class Table {
 
         // TODO implement
     }
+    public Integer[] getSlotToCard()
+    {
+        return Arrays.copyOf(this.slotToCard,this.slotToCard.length);
+    }
 
     /**
      * Removes a card from a grid slot on the table.
@@ -166,6 +170,10 @@ public class Table {
     public int getSlotToCard(int slot)
     {
         return this.slotToCard[slot];
+    }
+    public int getCardToslot(int card)
+    {
+        return this.cardToSlot[card];
     }
 
     protected void removeSetFromTable(int[] set)

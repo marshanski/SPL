@@ -166,7 +166,7 @@ public class Config {
 
         // gameplay settings
         humanPlayers = Integer.parseInt(properties.getProperty("HumanPlayers", "2"));
-        computerPlayers = Integer.parseInt(properties.getProperty("ComputerPlayers", "0"));
+        computerPlayers = Integer.parseInt(properties.getProperty("ComputerPlayers", "4"));
         players = humanPlayers + computerPlayers;
 
         hints = Boolean.parseBoolean(properties.getProperty("Hints", "True"));

@@ -1,7 +1,7 @@
-
 package bguspl.set.ex;
 import java.util.Arrays;
 import bguspl.set.Env;
+import java.util.*;
 
 /**
  * This class manages the players' threads and data
@@ -103,7 +103,7 @@ public class Player implements Runnable {
         if (!human) createArtificialIntelligence();
         while (!terminate) 
         {
-            
+
         }
 
         if (!human) 
@@ -116,6 +116,10 @@ public class Player implements Runnable {
             catch (InterruptedException ignored) {}
         }
         System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
+    }
+    public boolean isHuman()
+    {
+        return this.human;
     }
 
     public void initKeyPress()
@@ -135,17 +139,18 @@ public class Player implements Runnable {
         // note: this is a very very smart AI (!)
         aiThread = new Thread(() -> {
             System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
+
             while (!terminate) 
             {
-                // TODO implement player key press simulator
-                try 
+                this.keyPressAi();
+                /*try 
                 {
                     synchronized (this) { wait();}
                 } 
                 catch (InterruptedException ignored) 
                 {
-                    this.terminate();
-                }
+                    
+                }*/
             }
             System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
         }, "computer-" + id);
@@ -177,7 +182,7 @@ public class Player implements Runnable {
     public void keyPressed(int slot) 
     {
         System.out.println(slot);
-        if(!found && !freeze )
+        if(!found && !freeze && isHuman() )
         {
             int slotIndex = -1;
             for(int i=0; i <= currPresses-1; i++)
@@ -233,9 +238,41 @@ public class Player implements Runnable {
                     
                 }
             
-            }   
+            } 
         }
 
+    }
+
+    public void keyPressAi()
+    {
+        if(!found&& !isHuman())
+        {
+            ArrayList<Integer> slots = new ArrayList<Integer>();
+             
+            for (int i=0;i<12;i++)slots.add(i);
+            Collections.shuffle(slots);
+            for(int i=0;i<this.keyPresses.length;i++)
+            {
+                this.keyPresses[i]=slots.get(i);
+                this.table.placeToken(this.id, slots.get(i));
+            }
+            this.currPresses=3;
+            this.dealer.check(this.id);
+            if(answer ==1)
+            {
+                this.point();
+                this.executeFreezeAI(1999);
+            }
+            else
+            {
+                this.executeFreezeAI(200);
+                for(int i=0;i<this.keyPresses.length;i++)
+                {
+                    this.table.removeToken(this.id, keyPresses[i]);
+
+                }
+            }
+        }
     }
     /**
      * Award a point to a player and perform other related actions.
@@ -281,11 +318,20 @@ public class Player implements Runnable {
     {
         Thread f = new Thread(() ->{this.freeze(penaltyTime);});
         f.start();
+    }
+
+    public void executeFreezeAI(int penaltyTime)
+    {
+        Thread f = new Thread(() ->{this.freeze(penaltyTime);});
+        f.start();
+        try{f.join();}
+        catch(Exception ex){}
+        //aiThread.notifyAll();
 
     }
     public void freeze(int penaltyTime)
     {
-        this.env.ui.setCountdown(penaltyTime, terminate);
+        //this.env.ui.setCountdown(penaltyTime, terminate);
         long start    = System.currentTimeMillis();
         long end      = start + penaltyTime;
         while (System.currentTimeMillis() < end) 
