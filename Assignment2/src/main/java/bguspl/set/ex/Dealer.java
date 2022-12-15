@@ -1,10 +1,9 @@
 package bguspl.set.ex;
 import java.util.*;
 import bguspl.set.Env;
-import java.util.Random;
+
 import java.math.*;
 import java.sql.Time;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -96,12 +95,15 @@ public class Dealer implements Runnable {
 
     public void updateRound()
     {
-        try{Thread.currentThread().sleep(1000);}
-        catch(Exception ex){}
+        //try{Thread.currentThread().sleep(1000);}
+        //catch(Exception ex){}
         if(found)
-        this.updateAfterSet(this.set);
+            this.updateAfterSet(this.set);
         else
         {
+            int [] slots = new int[12];
+            for(int i=0;i<slots.length;i++)slots[i]=i;
+            this.updateKeyPress(slots);
             removeAllCardsFromTable();
             placeCardsOnTable();
         }
@@ -113,9 +115,9 @@ public class Dealer implements Runnable {
      */
     private void timerLoop() 
     {
-        this.env.ui.setCountdown(60999, terminate);
+        this.env.ui.setCountdown(10999, terminate);
         long start    = System.currentTimeMillis();
-        long end      = start + 60999;
+        long end      = start + 10999;
         while (!terminate && !found && System.currentTimeMillis() < end) 
         {
             sleepUntilWokenOrTimeout();
@@ -128,6 +130,7 @@ public class Dealer implements Runnable {
     public void terminate() 
     {
         terminate = true;
+                terminate = true;
         for(int i=0 ;i<this.players.length;i++)
         {
             this.players[i].terminate();
@@ -135,6 +138,8 @@ public class Dealer implements Runnable {
             catch(Exception ex){}
                 
         }
+    
+
     }
 
     /**
@@ -165,12 +170,14 @@ public class Dealer implements Runnable {
         {
             int k;
             Random rand  = new Random();
-            List<int[]> sets = this.env.util.findSets(deck,1);
+
+            
+            /*List<int[]> sets = this.env.util.findSets(deck,1);
             int[] a = sets.get(0);
             for(int i=0;i<3;i++)
             {
                 this.table.placeCard(a[i],i);
-                deck.remove(a[i]);
+                deck.remove(a[i]-i);
             }
             
             sets = this.env.util.findSets(deck,1);
@@ -178,14 +185,14 @@ public class Dealer implements Runnable {
             for(int i=0;i<3;i++)
             {
                 this.table.placeCard(a[i],i+3);
-                deck.remove(a[i]);
-            }
+                deck.remove(a[i]-i);
+            }*/
 
-            for(int i=6 ; i<12; i++)
+            for(int i=0 ; i<12; i++)
             {
                 k = rand.nextInt(deck.size());
                 this.table.placeCard(deck.get(k),i);
-                deck.remove(k);
+                deck.remove(deck.get(k));
             }
         }
     }
@@ -240,11 +247,44 @@ public class Dealer implements Runnable {
     private void updateAfterSet(int[]set)//the set array represents the slots that needs to be removed.
     {
         this.table.removeSetFromTable(set);
+        this.updateKeyPress(set);
         for(int i=0;i<set.length; i++)
         {
             this.placeACardInSlot(set[i]);
         }
     }
+
+    private void updateKeyPress(int[]slots)
+    {
+        int [] keyPress;
+        int currentPress;
+        for(int i=0;i<this.players.length;i++)
+        {
+            keyPress     = this.players[i].getPress();
+            currentPress = this.players[i].getCurrentPress();
+            for(int k=0;k<slots.length;k++)
+            {
+                for(int j=0;j<keyPress.length;j++)
+                {
+                    if(keyPress[j]==slots[k])
+                    {
+                        currentPress--;
+                        keyPress[j] = 100;
+
+                    }
+                }
+            }
+            Arrays.sort(keyPress);
+            for (int r = 0;r<keyPress.length;r++)
+            {
+                if(keyPress[r]==100)keyPress[r]=-1;
+            }
+            this.players[i].setPress(keyPress);
+            this.players[i].setCurrentPress(currentPress);
+            this.players[i].setCheck();
+        }
+    }
+
 
     /**
      * removes a card from the table, and return it to the deck.
@@ -254,18 +294,18 @@ public class Dealer implements Runnable {
     {
         //make try and catch if there are no cards left in the deck!!!
 
-        List<int[]> sets = this.env.util.findSets(deck,1);
+        /*List<int[]> sets = this.env.util.findSets(deck,1);
         int[] a          = sets.get(0);
         for(int i=0;i<3;i++)
         {
-            this.table.placeCard(a[i],i);
-            deck.remove(a[i]);
-        }
+            this.table.placeCard(a[i],slot);
+            deck.remove(a[i]-i);
+        }*/
 
-        /*Random rand = new Random();
+        Random rand = new Random();
         int k = rand.nextInt(deck.size());
         this.table.placeCard(deck.get(k),slot);
-        deck.remove(k);*/
+        deck.remove(k);
     }
     
      /**
@@ -281,6 +321,11 @@ public class Dealer implements Runnable {
         deck.add(table.slotToCard[slot]);
         this.table.removeCard(slot);
         this.env.ui.removeCard(slot);
+        for(int i=0;i<this.players.length;i++)
+        {
+            this.table.removeToken(this.players[i].getId(), slot);
+            this.env.ui.removeToken(this.players[i].getId(),slot);
+        }
     }
         
     /**
@@ -288,7 +333,20 @@ public class Dealer implements Runnable {
      */
     private void announceWinners() 
     {
-        // TODO implement
+        int [] score = new int[this.players.length];
+        for (int i=0;i<this.players.length;i++)score[i]=this.players[i].getId();
+        this.env.ui.announceWinner(score);
+        //try{Thread.currentThread().sleep(3000);}
+        //catch(Exception ex){}
+        //this.terminate();
+        for(int i=0 ;i<this.players.length;i++)
+        {
+            this.players[i].terminate();
+            try{this.playerThreads[i].join();}
+            catch(Exception ex){}
+                
+        }
+
     }
 
 
@@ -341,9 +399,8 @@ public class Dealer implements Runnable {
         if(this.env.util.testSet(cards))
         {
             this.stopPress();
-            this.set = press;
+            this.set = Arrays.copyOf(press,press.length);
             found    = true;
-            System.out.println("FOUND");//debug
             this.players[i].setAnswer(1);
             this.removeChecks();
         }

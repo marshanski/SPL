@@ -169,7 +169,7 @@ public class Config {
         computerPlayers = Integer.parseInt(properties.getProperty("ComputerPlayers", "0"));
         players = humanPlayers + computerPlayers;
 
-        hints = Boolean.parseBoolean(properties.getProperty("Hints", "False"));
+        hints = Boolean.parseBoolean(properties.getProperty("Hints", "True"));
         turnTimeoutMillis = (long) (Double.parseDouble(properties.getProperty("TurnTimeoutSeconds", "60")) * 1000.0);
         turnTimeoutWarningMillis = (long) (Double.parseDouble(properties.getProperty("TurnTimeoutWarningSeconds", "60")) * 1000.0);
         pointFreezeMillis = (long) (Double.parseDouble(properties.getProperty("PointFreezeSeconds", "1")) * 1000.0);

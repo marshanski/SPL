@@ -58,6 +58,7 @@ public class Player implements Runnable {
     private volatile boolean terminate;
     private volatile boolean found;
     private volatile boolean check;
+    private volatile boolean freeze;
     private int answer;
 
     /**
@@ -84,12 +85,11 @@ public class Player implements Runnable {
         this.keyPresses = new int[this.env.config.featureSize];
         this.score      = 0;
         this.answer     = 0;
-        for (int i=0;i<this.keyPresses.length;i++)
-        {
-            keyPresses[i]= noPress;
-        }
+        this.initKeyPress();
+
         found = true;
         check = false;
+        freeze =false;
     }
 
     /**
@@ -116,6 +116,15 @@ public class Player implements Runnable {
             catch (InterruptedException ignored) {}
         }
         System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
+    }
+
+    public void initKeyPress()
+    {
+        for (int i=0;i<this.keyPresses.length;i++)
+        {
+            keyPresses[i]= noPress;
+        }
+
     }
 
     /**
@@ -168,49 +177,66 @@ public class Player implements Runnable {
     public void keyPressed(int slot) 
     {
         System.out.println(slot);
-        if(currPresses <= keyPresses.length-1 && !found && !check)
+        if(!found && !freeze )
         {
             int slotIndex = -1;
-            for(int i=0;i<= currPresses;i++)
+            for(int i=0; i <= currPresses-1; i++)
             {
                 if(keyPresses[i] == slot)
                     slotIndex =i;
             }
-
-            if(slotIndex < 0) //the player preesed a new key
+            if(check)//the player was already checked
             {
-                this.table.placeToken(this.id, slot);
-                keyPresses[currPresses] = slot;
-                currPresses++;
-                if(currPresses ==3)
+                if(slotIndex < 0)
                 {
-                    
-                    this.dealer.check(this.id);
-                    check = true;
-                    if(this.answer == -1)
-                    {
-                        this.executeFreeze(3999);
-                        check = false;
-                    }   
-                    if(this.answer==1)
-                    {
-                        this.point();
-                        this.executeFreeze(2999);
-                        check = false;
-                    }
-                    
+                    System.out.println("you cannot place another token until you take one out!");
+                }
+                else
+                {
+                    keyPresses[slotIndex] = noPress;
+                    currPresses--;
+                    this.table.removeToken(this.id, slot);
+                    check = false;
                 }
             }
-            else //the player pressed an existing key, meaning we need to delete.
+            else// the player wasnt checked
             {
-                keyPresses[slotIndex] = noPress;
-                currPresses--;
-                this.table.removeToken(this.id, slot);
+                if(slotIndex < 0)
+                {
+
+                    this.table.placeToken(this.id, slot);
+                    keyPresses[currPresses] = slot;
+                    currPresses++;
+                }
+                else
+                {
+                    keyPresses[slotIndex] = noPress;
+                    currPresses--;
+                    this.table.removeToken(this.id, slot);
+                }
             }
+            if(currPresses ==3 && !check)
+            {
+                this.dealer.check(this.id);
+                freeze = true;
+                if(this.answer == -1)
+                {
+                    this.executeFreeze(3999);
+                    check = true;
 
+                }   
+                if(this.answer==1)
+                {
+                    this.point();
+                    this.executeFreeze(2999);
+                    check = true;
+                    
+                }
+            
+            }   
         }
-    }
 
+    }
     /**
      * Award a point to a player and perform other related actions.
      *
@@ -275,6 +301,7 @@ public class Player implements Runnable {
                 catch (InterruptedException ignored) {}
             }
         }
+        freeze =false;
 
     }
     private void updateTimerDisplay(long end) 
@@ -284,6 +311,26 @@ public class Player implements Runnable {
     public void setAnswer(int i)
     {
         this.answer = i;
+    }
+    public int getId()
+    {
+        return this.id;
+    }
+    public void setPress(int[]c)
+    {
+        this.keyPresses = c;
+    }
+    public void setCurrentPress(int l)
+    {
+        this.currPresses = l;
+    }
+    public int getCurrentPress()
+    {
+        return this.currPresses;
+    }
+    public void setCheck()
+    {
+        check = false;
     }
 
 }

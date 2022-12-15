@@ -169,7 +169,7 @@ public class Table {
     }
 
     protected void removeSetFromTable(int[] set)
-    {
+    {  
         for(int i=0; i<slotToPlayers.length;i++)// remove all token from the cards that made the set
         {
             for(int k=0;k<set.length;k++)
@@ -180,7 +180,8 @@ public class Table {
         }
         for(int k=0;k<set.length;k++)//remove the cards that made the set
         {
-            this.removeCard(k);
+            this.removeCard(set[k]);
         }
+        
     }
 }
