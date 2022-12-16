@@ -30,9 +30,9 @@ public class Main {
         //Player[] players = new Player[4];
         Table table      = new Table(env);
         Dealer dealer    = new Dealer(env, table, players);
-        players[0] = new Player(env, dealer, table, 0, true);
-        players[1] = new Player(env, dealer, table, 1, true);
-        for (int i =2 ; i < players.length; i++)
+        //players[0] = new Player(env, dealer, table, 0, true);
+        //players[1] = new Player(env, dealer, table, 1, true);
+        for (int i =0 ; i < players.length; i++)
             players[i] = new Player(env, dealer, table, i, i < env.config.humanPlayers);
         
             

@@ -207,7 +207,6 @@ public class Player implements Runnable {
                 }
                 this.currentPresslock.notifyAll();
             }
-               
             
         }
 
@@ -278,6 +277,9 @@ public class Player implements Runnable {
         this.keyPresses[this.currPresses] = slot;
         this.currPresses++;
         this.table.placeToken(this.id, slot);
+        /*try {
+            Thread.sleep(50);
+        } catch (InterruptedException ignored) {}*/
         //this.descandingSort();
         //this.currentPresslock.notifyAll();
     }
@@ -351,7 +353,6 @@ public class Player implements Runnable {
             }
         }
         freeze =false;
-
     }
 
     private void updateTimerDisplay(long end) 

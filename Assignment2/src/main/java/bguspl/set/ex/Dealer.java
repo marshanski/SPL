@@ -69,7 +69,6 @@ public class Dealer implements Runnable {
     {
         System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
         this.stopPress();
-       
         this.runPlayers();
         placeCardsOnTable();
         while (!shouldFinish())
@@ -112,10 +111,10 @@ public class Dealer implements Runnable {
      */
     private void timerLoop() 
     {
-        this.env.ui.setCountdown(60999, terminate);
+        this.env.ui.setCountdown(30999, terminate);
         
         long start    = System.currentTimeMillis();
-        long end      = start +60999;
+        long end      = start +30999;
         while (!terminate && !this.found && System.currentTimeMillis() < end) 
         {
             sleepUntilWokenOrTimeout();
@@ -252,10 +251,15 @@ public class Dealer implements Runnable {
                 if(changes>0)
                 {
                     currentPress -=changes;
-                    Arrays.sort(keyPress);
                     for (int r = 0;r<keyPress.length;r++)
                     {
                         if(keyPress[r]==100)keyPress[r]=-1;
+                    }
+                    Arrays.sort(keyPress);
+                    if(changes ==1 )
+                    {
+                        keyPress[0] = keyPress[keyPress.length-1];
+                        keyPress[keyPress.length-1] = -1;
                     }
                 }
                 this.players[i].setCheck();
@@ -314,7 +318,7 @@ public class Dealer implements Runnable {
     {
         int max =this.players[0].getScore(),mone=0,k=0;
         int [] score;
-        for (int i=0;i<this.players.length;i++)
+        for (int i=1;i<this.players.length;i++)
         {
             if(this.players[i].getScore()>max)
                 max = this.players[i].getScore();
@@ -329,8 +333,10 @@ public class Dealer implements Runnable {
         for (int i=0;i<this.players.length;i++)
         {
             if(this.players[i].getScore()==max)
+            {
                 score[k]=this.players[i].getId();
                 k++;
+            }
         }
         return score;
     }
