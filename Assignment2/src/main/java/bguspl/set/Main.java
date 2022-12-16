@@ -1,3 +1,4 @@
+
 package bguspl.set;
 
 import bguspl.set.ex.Dealer;

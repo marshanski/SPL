@@ -48,13 +48,8 @@ public class Table {
         this.slotToCard = slotToCard;
         this.cardToSlot = cardToSlot;
         this.slotToPlayers = new boolean[this.env.config.players][this.env.config.tableSize];
-        for(int i=0;i<slotToPlayers.length;i++)
-        {
-            for(int k=0;k<slotToPlayers[0].length;k++)
-            {
-                slotToPlayers[i][k] = false;
-            }
-        }
+        this.initslotToPlayers();
+
     }
 
     /**
@@ -76,6 +71,17 @@ public class Table {
             }
         }
         */
+    }
+    public void initslotToPlayers()
+    {
+        for(int i=0;i<this.slotToPlayers.length;i++)
+        {
+            for(int k=0;k<this.slotToPlayers[0].length;k++)
+            {
+                this.slotToPlayers[i][k] = false;
+            }
+        }
+
     }
 
     /**

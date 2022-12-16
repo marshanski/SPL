@@ -60,6 +60,7 @@ public class Player implements Runnable {
     private volatile boolean check;
     private volatile boolean freeze;
     private int answer;
+    private static Object currentPresslock ;
 
     /**
      * The current score of the player.
@@ -83,6 +84,7 @@ public class Player implements Runnable {
         this.human      = human;
         this.dealer     = dealer;
         this.keyPresses = new int[this.env.config.featureSize];
+        this.currentPresslock = new Object();
         this.score      = 0;
         this.answer     = 0;
         this.initKeyPress();
@@ -105,18 +107,9 @@ public class Player implements Runnable {
         {
 
         }
-
-        if (!human) 
-        {
-            try 
-            {
-                aiThread.interrupt();
-                aiThread.join(); 
-            } 
-            catch (InterruptedException ignored) {}
-        }
         System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
     }
+
     public boolean isHuman()
     {
         return this.human;
@@ -126,7 +119,7 @@ public class Player implements Runnable {
     {
         for (int i=0;i<this.keyPresses.length;i++)
         {
-            keyPresses[i]= noPress;
+            this.keyPresses[i]= noPress;
         }
 
     }
@@ -143,35 +136,12 @@ public class Player implements Runnable {
             while (!terminate) 
             {
                 this.keyPressAi();
-                /*try 
-                {
-                    synchronized (this) { wait();}
-                } 
-                catch (InterruptedException ignored) 
-                {
-                    
-                }*/
             }
             System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
         }, "computer-" + id);
         aiThread.start();
     }
 
-    /**
-     * Called when the game should be terminated due to an external event.
-     */
-    public void terminate() 
-    {
-        terminate = true;
-    }
-    public void stopPress() 
-    {
-        found = true;
-    }
-    public void startPress() 
-    {
-        found = false;
-    }
 
     /**
      * This method is called when a key is pressed.
@@ -184,68 +154,68 @@ public class Player implements Runnable {
         System.out.println(slot);
         if(!found && !freeze && isHuman() )
         {
-            int slotIndex = -1;
-            for(int i=0; i <= currPresses-1; i++)
+            synchronized(this.currentPresslock)
             {
-                if(keyPresses[i] == slot)
-                    slotIndex =i;
-            }
-            if(check)//the player was already checked
-            {
-                if(slotIndex < 0)
-                {
-                    System.out.println("you cannot place another token until you take one out!");
-                }
-                else
-                {
-                    keyPresses[slotIndex] = noPress;
-                    currPresses--;
-                    this.table.removeToken(this.id, slot);
-                    check = false;
-                }
-            }
-            else// the player wasnt checked
-            {
-                if(slotIndex < 0)
-                {
 
-                    this.table.placeToken(this.id, slot);
-                    keyPresses[currPresses] = slot;
-                    currPresses++;
-                }
-                else
+                int slotIndex = -1;
+                for(int i=0; i < this.currPresses; i++)
                 {
-                    keyPresses[slotIndex] = noPress;
-                    currPresses--;
-                    this.table.removeToken(this.id, slot);
+                    if(this.keyPresses[i] == slot)
+                        slotIndex =i;
                 }
-            }
-            if(currPresses ==3 && !check)
-            {
-                this.dealer.check(this.id);
-                freeze = true;
-                if(this.answer == -1)
+                if(check)//the player was already checked
                 {
-                    this.executeFreeze(3999);
-                    check = true;
+                    if(slotIndex < 0)
+                    {
+                        System.out.println("you cannot place another token until you take one out!");
+                    }
+                    else
+                    {
+                        this.removePress(slotIndex,slot);
+                        check = false;
+                    }
+                }
+                else// the player wasnt checked
+                {
+                    if(slotIndex < 0)
+                    {
+                        this.addPress(slot);
+                    }
+                    else
+                    {
+                        this.removePress(slotIndex,slot);
 
-                }   
-                if(this.answer==1)
-                {
-                    this.point();
-                    this.executeFreeze(2999);
-                    check = true;
-                    
+                    }
                 }
+                if(currPresses ==3 && !check)
+                {
+                    this.dealer.check(this.id);
+                    freeze = true;
+                    if(this.answer == -1)
+                    {
+                        this.executeFreeze(3999);
+                        check = true;
+
+                    }   
+                    if(this.answer==1)
+                    {
+                        this.point();
+                        this.executeFreeze(2999);
+                        check = true;
+                    }
+                
+                }
+                this.currentPresslock.notifyAll();
+            }
+               
             
-            } 
         }
 
     }
 
     public void keyPressAi()
     {
-        if(!found&& !isHuman())
+        if(!found && !isHuman())
         {
             ArrayList<Integer> slots = new ArrayList<Integer>();
              
@@ -274,6 +244,20 @@ public class Player implements Runnable {
             }
         }
     }
+    public void descandingSort()
+    {
+        for(int i=0;i<this.keyPresses.length;i++)
+        {
+            if(this.keyPresses[i] == noPress)
+                this.keyPresses[i] = 100;
+        }
+        Arrays.sort(this.keyPresses);
+        for (int r = 0;r<this.keyPresses.length;r++)
+        {
+            if(this.keyPresses[r]==100)this.keyPresses[r]=-1;
+        }
+
+    }
     /**
      * Award a point to a player and perform other related actions.
      *
@@ -287,6 +271,25 @@ public class Player implements Runnable {
         int ignored = table.countCards(); 
         this.score ++;// this part is just for demonstration in the unit tests
         env.ui.setScore(id, this.score);
+    }
+    public void addPress(int slot)
+    {
+
+        this.keyPresses[this.currPresses] = slot;
+        this.currPresses++;
+        this.table.placeToken(this.id, slot);
+        //this.descandingSort();
+        //this.currentPresslock.notifyAll();
+    }
+
+    public void removePress(int slotIndex,int slot)
+    {
+
+        this.keyPresses[slotIndex] = noPress;
+        this.currPresses--;
+        this.table.removeToken(this.id, slot);
+        this.descandingSort();
+        //this.currentPresslock.notifyAll();
     }
 
     /**
@@ -326,12 +329,12 @@ public class Player implements Runnable {
         f.start();
         try{f.join();}
         catch(Exception ex){}
-        //aiThread.notifyAll();
 
     }
+
+
     public void freeze(int penaltyTime)
     {
-        //this.env.ui.setCountdown(penaltyTime, terminate);
         long start    = System.currentTimeMillis();
         long end      = start + penaltyTime;
         while (System.currentTimeMillis() < end) 
@@ -350,18 +353,22 @@ public class Player implements Runnable {
         freeze =false;
 
     }
+
     private void updateTimerDisplay(long end) 
     {
         this.env.ui.setFreeze(this.id,end-System.currentTimeMillis());
     }
+
     public void setAnswer(int i)
     {
         this.answer = i;
     }
+    
     public int getId()
     {
         return this.id;
     }
+
     public void setPress(int[]c)
     {
         this.keyPresses = c;
@@ -377,6 +384,18 @@ public class Player implements Runnable {
     public void setCheck()
     {
         check = false;
+    }
+    public void terminate() 
+    {
+        terminate = true;
+    }
+    public void stopPress() 
+    {
+        found = true;
+    }
+    public void startPress() 
+    {
+        found = false;
     }
 
 }
