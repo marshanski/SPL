@@ -100,7 +100,7 @@ public class Dealer implements Runnable {
 
     public int[] createSlots()
     {
-        int [] slots = new int[12];
+        int [] slots = new int[this.env.config.tableSize];
         for(int i=0;i<slots.length;i++)slots[i]=i;
         return slots;
 
@@ -111,10 +111,10 @@ public class Dealer implements Runnable {
      */
     private void timerLoop() 
     {
-        this.env.ui.setCountdown(30999, terminate);
+        this.env.ui.setCountdown(this.env.config.turnTimeoutMillis, terminate);
         
         long start    = System.currentTimeMillis();
-        long end      = start +30999;
+        long end      = start +this.env.config.turnTimeoutMillis;
         while (!terminate && !this.found && System.currentTimeMillis() < end) 
         {
             sleepUntilWokenOrTimeout();
@@ -128,8 +128,7 @@ public class Dealer implements Runnable {
      */
     public void terminate() 
     {
-        terminate = true;
-        //this.shutDownPlayers();    
+        terminate = true;  
     }
 
     /**
@@ -140,6 +139,8 @@ public class Dealer implements Runnable {
     private boolean shouldFinish() 
     {
         return terminate || env.util.findSets(deck, 1).size() == 0;
+    
+        
     }
 
     /**
@@ -150,6 +151,7 @@ public class Dealer implements Runnable {
         // TODO implement
     }
 
+
     /**
      * Check if any cards can be removed from the deck and placed on the table.
      */
@@ -157,8 +159,8 @@ public class Dealer implements Runnable {
     {
         int k,size;
         Random rand  = new Random();
-        if(deck.size()>12)
-            size =12;
+        if(deck.size()>this.env.config.tableSize)
+            size =this.env.config.tableSize;
         else
             size = deck.size();
 
@@ -205,12 +207,25 @@ public class Dealer implements Runnable {
         this.env.ui.setCountdown(end-System.currentTimeMillis(), reset);
     }
 
+    public void debug()
+    {
+        int k;
+        Random rand  = new Random();
+ 
+        for(int i=0 ; i<60; i++)
+        {
+            k = rand.nextInt(deck.size());
+            deck.remove(k);
+        }
+
+    }
+
     /**
      * Returns all the cards from the table to the deck.
      */
     private void removeAllCardsFromTable() 
     {
-        for(int i=0;i<12;i++)
+        for(int i=0;i<this.env.config.tableSize;i++)
             removeCardToDeck(i);
     }
     /**
@@ -256,11 +271,9 @@ public class Dealer implements Runnable {
                         if(keyPress[r]==100)keyPress[r]=-1;
                     }
                     Arrays.sort(keyPress);
-                    if(changes ==1 )
-                    {
-                        keyPress[0] = keyPress[keyPress.length-1];
-                        keyPress[keyPress.length-1] = -1;
-                    }
+                    for(int r=0;r<keyPress.length;r++)keyPress[r]=keyPress[r]*-1;
+                    Arrays.sort(keyPress);
+                    for(int r=0;r<keyPress.length;r++)keyPress[r]=keyPress[r]*-1;
                 }
                 this.players[i].setCheck();
                 this.players[i].setPress(keyPress);
@@ -309,9 +322,15 @@ public class Dealer implements Runnable {
      */
     private void announceWinners() 
     {
+
         if(!terminate)
+        {
+            this.removeAllCardsFromTable();
             this.env.ui.announceWinner(this.findWinners());
             this.shutDownPlayers();
+
+        }
+
     }
 
     public int[] findWinners()
@@ -393,7 +412,6 @@ public class Dealer implements Runnable {
             
             if(this.env.util.testSet(cards))
             {
-                
                 this.stopPress();
                 this.found    = true;
                 this.set = Arrays.copyOf(press,press.length);

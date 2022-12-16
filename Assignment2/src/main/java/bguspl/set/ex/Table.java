@@ -102,7 +102,8 @@ public class Table {
      *
      * @return - the number of cards on the table.
      */
-    public int countCards() {
+    public int countCards() 
+    {
         int cards = 0;
         for (Integer card : slotToCard)
             if (card != null)
@@ -126,7 +127,6 @@ public class Table {
         slotToCard[slot] = card;
         this.env.ui.placeCard(card,slot);
 
-        // TODO implement
     }
     public Integer[] getSlotToCard()
     {
@@ -144,7 +144,6 @@ public class Table {
 
         this.slotToCard[slot] = null;
         this.env.ui.removeCard(slot);
-         // TODO implement
     }
 
     /**
@@ -154,7 +153,7 @@ public class Table {
      */
     public void placeToken(int player, int slot) 
     {
-        // TODO implement
+    
         this.slotToPlayers[player][slot] = true;
         this.env.ui.placeToken(player, slot);
     }

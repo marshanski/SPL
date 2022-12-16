@@ -187,20 +187,21 @@ public class Player implements Runnable {
 
                     }
                 }
-                if(currPresses ==3 && !check)
+                if(currPresses ==this.env.config.featureSize && !check)
                 {
                     this.dealer.check(this.id);
                     freeze = true;
                     if(this.answer == -1)
                     {
-                        this.executeFreeze(3999);
+                        
+                        this.executeFreeze(this.env.config.penaltyFreezeMillis);
                         check = true;
 
                     }   
                     if(this.answer==1)
                     {
                         this.point();
-                        this.executeFreeze(2999);
+                        this.executeFreeze(this.env.config.pointFreezeMillis);
                         check = true;
                     }
                 
@@ -220,21 +221,22 @@ public class Player implements Runnable {
              
             for (int i=0;i<12;i++)slots.add(i);
             Collections.shuffle(slots);
+
             for(int i=0;i<this.keyPresses.length;i++)
             {
                 this.keyPresses[i]=slots.get(i);
                 this.table.placeToken(this.id, slots.get(i));
             }
-            this.currPresses=3;
+            this.currPresses=this.env.config.featureSize;
             this.dealer.check(this.id);
             if(answer ==1)
             {
                 this.point();
-                this.executeFreezeAI(1999);
+                this.executeFreezeAI(this.env.config.pointFreezeMillis);
             }
             else
             {
-                this.executeFreezeAI(200);
+                this.executeFreezeAI(this.env.config.penaltyFreezeMillis);
                 for(int i=0;i<this.keyPresses.length;i++)
                 {
                     this.table.removeToken(this.id, keyPresses[i]);
@@ -265,23 +267,18 @@ public class Player implements Runnable {
      */
     public void point() 
     {
-        // TODO implement
-
         int ignored = table.countCards(); 
         this.score ++;// this part is just for demonstration in the unit tests
         env.ui.setScore(id, this.score);
     }
+
     public void addPress(int slot)
     {
 
         this.keyPresses[this.currPresses] = slot;
         this.currPresses++;
         this.table.placeToken(this.id, slot);
-        /*try {
-            Thread.sleep(50);
-        } catch (InterruptedException ignored) {}*/
-        //this.descandingSort();
-        //this.currentPresslock.notifyAll();
+
     }
 
     public void removePress(int slotIndex,int slot)
@@ -291,24 +288,8 @@ public class Player implements Runnable {
         this.currPresses--;
         this.table.removeToken(this.id, slot);
         this.descandingSort();
-        //this.currentPresslock.notifyAll();
     }
 
-    /**
-     * Penalize a player and perform other related actions.
-     */
-  
-    public void penalty(int penaltyTime) 
-        {
-            // TODO implement
-            try{
-                Thread.sleep(penaltyTime);
-            }
-            catch (InterruptedException e) {
-                // handle the InterruptedException
-                System.out.println("The thread was interrupted: " + e.getMessage());
-            }
-        }
 
     public int getScore() 
     {
@@ -319,13 +300,14 @@ public class Player implements Runnable {
         return this.keyPresses;
     }
 
-    public void executeFreeze(int penaltyTime)
+    public void executeFreeze(long penaltyTime)
     {
         Thread f = new Thread(() ->{this.freeze(penaltyTime);});
         f.start();
+
     }
 
-    public void executeFreezeAI(int penaltyTime)
+    public void executeFreezeAI(long penaltyTime)
     {
         Thread f = new Thread(() ->{this.freeze(penaltyTime);});
         f.start();
@@ -335,7 +317,7 @@ public class Player implements Runnable {
     }
 
 
-    public void freeze(int penaltyTime)
+    public void freeze(long penaltyTime)
     {
         long start    = System.currentTimeMillis();
         long end      = start + penaltyTime;

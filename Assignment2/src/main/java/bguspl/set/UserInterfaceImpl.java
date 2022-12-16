@@ -325,6 +325,5 @@ public class UserInterfaceImpl extends JFrame implements UserInterface {
         playersPanel.setVisible(false);
         winnerPanel.announceWinner(players);
         winnerPanel.setVisible(true);
-        int r=0;
     }
 }
