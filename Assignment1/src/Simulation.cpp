@@ -59,6 +59,7 @@ Simulation::Simulation(Graph graph, vector<Agent> agents):mGraph(graph),mAgents(
 
 void Simulation::step()
 {
+    cout << iter << endl;
     this->stepByParties();
     this->stepByAgents();
     iter++;
@@ -77,7 +78,7 @@ void Simulation::stepByAgents()
 
         if(partyToOffer != -1)
         {
-            if (parties.at(partyToOffer).getState()==0){offers.at(i).push_back(partyToOffer);}
+            if (parties.at(partyToOffer).getState()!=2){offers.at(i).push_back(partyToOffer);}
             
             if (parties.at(partyToOffer).getState()!= 2)
             {
@@ -94,10 +95,8 @@ void Simulation::stepByAgents()
     {
         for (unsigned k = 0; k < offers.at(i).size(); k++)
         {
-            cout << offers.at(i).at(k) << endl;
             if (parties.at(offers.at(i).at(k)).getState()!=2 )
             {
-
                 parties.at(offers.at(i).at(k)).updateMandates(&mAgents[i],coalitions.at(mAgents[i].getColId()).getMandates());
             }
         }
