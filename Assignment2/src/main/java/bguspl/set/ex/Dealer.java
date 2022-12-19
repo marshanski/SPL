@@ -1,14 +1,11 @@
 package bguspl.set.ex;
 import java.util.*;
 import bguspl.set.Env;
-
-import java.math.*;
-import java.sql.Time;
+import java.util.stream.IntStream;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
+
 
 
 /**
@@ -20,6 +17,8 @@ public class Dealer implements Runnable {
      * The game environment object.
      */
     private final Env env;
+    private final int MARGIN = 999;
+    private final int SECOND = 1000;
 
     /**
      * Game entities.
@@ -41,6 +40,8 @@ public class Dealer implements Runnable {
      */
     private volatile boolean terminate;
     private volatile boolean found;
+    private volatile boolean thereIsNoSet;
+    private volatile boolean stop;
 
     /**
      * The time when the dealer needs to reshuffle the deck due to turn timeout.
@@ -56,6 +57,7 @@ public class Dealer implements Runnable {
         this.playerThreads = new Thread[this.players.length];
         this.lock          = new Object();
         this.found         = false;
+        this.thereIsNoSet  = false;
         this.set           = new int[this.env.config.featureSize];
         this.queue         = new ArrayBlockingQueue<>(this.players.length);
        
@@ -67,9 +69,10 @@ public class Dealer implements Runnable {
     @Override
     public void run() 
     {
-        System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
-        this.stopPress();
+        env.logger.info("Thread " + Thread.currentThread().getName() + " starting.");
         this.runPlayers();
+        this.stopPress(); 
+        this.debug();
         placeCardsOnTable();
         while (!shouldFinish())
         {
@@ -80,7 +83,7 @@ public class Dealer implements Runnable {
             this.updateRound();
         }
         announceWinners();
-        System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
+        env.logger.info("Thread " + Thread.currentThread().getName() + " terminated.");
     }
 
 
@@ -90,11 +93,11 @@ public class Dealer implements Runnable {
         if(this.found)this.updateAfterSet(this.set);
         else
         {
-
             this.updateKeyPress(this.createSlots());
             removeAllCardsFromTable();
             placeCardsOnTable();
         }
+
 
     }
 
@@ -112,14 +115,12 @@ public class Dealer implements Runnable {
     private void timerLoop() 
     {
         this.env.ui.setCountdown(this.env.config.turnTimeoutMillis, terminate);
-        
         long start    = System.currentTimeMillis();
-        long end      = start +this.env.config.turnTimeoutMillis;
+        long end      = start +this.env.config.turnTimeoutMillis+MARGIN;
         while (!terminate && !this.found && System.currentTimeMillis() < end) 
         {
             sleepUntilWokenOrTimeout();
             updateTimerDisplay(this.found,end);
-            
         }
         
     }
@@ -129,7 +130,23 @@ public class Dealer implements Runnable {
     public void terminate() 
     {
         terminate = true;  
+        this.stopPress();
+        this.shutDownPlayers();
     }
+
+
+    public void checkPossibleSet()
+    {
+        ArrayList<Integer> table = new ArrayList<Integer>();
+        Integer [] slot =this.table.getSlotToCard();
+        for(int i=0;i<slot.length;i++)
+        {
+            if(slot[i] != null)
+                table.add(slot[i]);
+        }
+        this.thereIsNoSet = (env.util.findSets(deck, 1).size() == 0 && env.util.findSets(table, 1).size() == 0) ;
+    }
+
 
     /**
      * Check if the game should be terminated or the game end conditions are met.
@@ -138,9 +155,8 @@ public class Dealer implements Runnable {
      */
     private boolean shouldFinish() 
     {
-        return terminate || env.util.findSets(deck, 1).size() == 0;
+        return terminate || this.thereIsNoSet;
     
-        
     }
 
     /**
@@ -159,6 +175,7 @@ public class Dealer implements Runnable {
     {
         int k,size;
         Random rand  = new Random();
+        this.checkPossibleSet();
         if(deck.size()>this.env.config.tableSize)
             size =this.env.config.tableSize;
         else
@@ -168,7 +185,7 @@ public class Dealer implements Runnable {
         {
             k = rand.nextInt(deck.size());
             this.table.placeCard(deck.get(k),i);
-            deck.remove(deck.get(k));
+            deck.remove(k);
         }
     }
 
@@ -182,8 +199,8 @@ public class Dealer implements Runnable {
     {
         long start     = System.currentTimeMillis();
         long time      = start;
-        long toSleep   = 1000;
-        while (time < start+1000 && !found)
+        long toSleep   = 10;
+        while (time < start+SECOND && !found)
         {
             synchronized (this.lock) 
             {
@@ -192,7 +209,8 @@ public class Dealer implements Runnable {
                     lock.wait(toSleep);
                     if(this.queue.size()>0)this.checkSet();
                     time    = System.currentTimeMillis();
-                    toSleep = 1000-(time-start); 
+                    toSleep = SECOND-(time-start); 
+                    
                     
                 }
                 catch (InterruptedException ignored) {}
@@ -235,8 +253,10 @@ public class Dealer implements Runnable {
 
     private void updateAfterSet(int[]set)//the set array represents the slots that needs to be removed.
     {
+        this.stopPress();
         this.table.removeSetFromTable(set);
         this.updateKeyPress(set);
+        this.checkPossibleSet();
         for(int i=0;i<set.length; i++)this.placeACardInSlot(set[i]);
     }
 
@@ -292,9 +312,12 @@ public class Dealer implements Runnable {
     {
         //make try and catch if there are no cards left in the deck!!!
         Random rand = new Random();
-        int k = rand.nextInt(deck.size());
-        this.table.placeCard(deck.get(k),slot);
-        deck.remove(k);
+        if(deck.size()>0)
+        {
+            int k = rand.nextInt(deck.size());
+            this.table.placeCard(deck.get(k),slot);
+            deck.remove(k);
+        }
     }
     
      /**
@@ -303,17 +326,14 @@ public class Dealer implements Runnable {
      */
     public void removeCardToDeck(int slot)
     {
-        /*try {
-            Thread.sleep(env.config.tableDelayMillis);
-        } catch (InterruptedException ignored) {}*/
-        // do a try catch if is trying to remove a card that isnt on the table!!
+
         deck.add(table.slotToCard[slot]);
         this.table.removeCard(slot);
-        this.env.ui.removeCard(slot);
+        //this.env.ui.removeCard(slot);
         for(int i=0;i<this.players.length;i++)
         {
             this.table.removeToken(this.players[i].getId(), slot);
-            this.env.ui.removeToken(this.players[i].getId(),slot);
+            //this.env.ui.removeToken(this.players[i].getId(),slot);
         }
     }
         
@@ -325,11 +345,13 @@ public class Dealer implements Runnable {
 
         if(!terminate)
         {
+            //terminate = true;
+            
             this.removeAllCardsFromTable();
             this.env.ui.announceWinner(this.findWinners());
-            this.shutDownPlayers();
-
         }
+        this.shutDownPlayers();
+
 
     }
 
@@ -365,7 +387,7 @@ public class Dealer implements Runnable {
         synchronized (this.queue)
         {
             this.addToQueue(k);
-            while(this.queue.size()>0 && this.queue.peek() !=k)
+            //while(this.queue.size()>0 && this.queue.peek() !=k)
                 
             synchronized (this.lock) {this.lock.notifyAll();}
             this.goWaitPlayer(k);
@@ -400,7 +422,7 @@ public class Dealer implements Runnable {
 
     public void checkSet()
     {
-        if(!this.found)
+        if(!found)
         {
             int i  = this.queue.peek();
             int[] cards = new int[this.env.config.featureSize];
@@ -412,11 +434,10 @@ public class Dealer implements Runnable {
             
             if(this.env.util.testSet(cards))
             {
-                this.stopPress();
-                this.found    = true;
                 this.set = Arrays.copyOf(press,press.length);
                 this.players[i].setAnswer(1);
                 this.removeChecks();
+                this.found    = true;
             }
             else
             {
@@ -434,6 +455,7 @@ public class Dealer implements Runnable {
         {
             this.players[i].stopPress();
         }
+
     }
 
     public void startPress()
@@ -455,7 +477,7 @@ public class Dealer implements Runnable {
 
     public void shutDownPlayers()
     {
-        for(int i=0 ;i<this.players.length;i++)
+        for(int i=this.players.length-1 ;i>=0;i--)
         {
             this.players[i].terminate();
             try{this.playerThreads[i].join();}

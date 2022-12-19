@@ -1,0 +1,73 @@
+[00:30:24.277] [INFO   ] thread main starting.
+[00:30:24.282] [SEVERE ] cannot read configuration file config.properties trying from resources.
+[00:30:24.284] [SEVERE ] configuration file was loaded from resources directory.
+[00:30:24.715] [INFO   ] thread dealer starting.
+[00:30:24.715] [INFO   ] Thread dealer starting.
+[00:30:24.716] [INFO   ] Thread player0 starting.
+[00:30:24.716] [INFO   ] Thread player1 starting.
+[00:30:24.825] [SEVERE ] placing card 56 in slot 0
+[00:30:24.936] [SEVERE ] placing card 61 in slot 1
+[00:30:25.047] [SEVERE ] placing card 72 in slot 2
+[00:30:25.159] [SEVERE ] placing card 76 in slot 3
+[00:30:25.271] [SEVERE ] placing card 54 in slot 4
+[00:30:25.380] [SEVERE ] placing card 24 in slot 5
+[00:30:25.491] [SEVERE ] placing card 45 in slot 6
+[00:30:25.601] [SEVERE ] placing card 79 in slot 7
+[00:30:25.710] [SEVERE ] placing card 14 in slot 8
+[00:30:25.820] [SEVERE ] placing card 75 in slot 9
+[00:30:25.932] [SEVERE ] placing card 67 in slot 10
+[00:30:26.044] [SEVERE ] placing card 0 in slot 11
+[00:30:26.049] [SEVERE ] updating countdown to 60000
+[00:30:27.050] [SEVERE ] updating countdown to 59999
+[00:30:28.063] [SEVERE ] updating countdown to 58986
+[00:30:29.064] [SEVERE ] updating countdown to 57985
+[00:30:30.064] [SEVERE ] updating countdown to 56985
+[00:30:31.066] [SEVERE ] updating countdown to 55983
+[00:30:32.066] [SEVERE ] updating countdown to 54983
+[00:30:33.066] [SEVERE ] updating countdown to 53983
+[00:30:34.066] [SEVERE ] updating countdown to 52983
+[00:30:34.286] [SEVERE ] key 73 was pressed by player 2
+[00:30:34.287] [SEVERE ] player 2 placing token on slot 1
+[00:30:35.068] [SEVERE ] updating countdown to 51981
+[00:30:36.069] [SEVERE ] updating countdown to 50980
+[00:30:37.070] [SEVERE ] updating countdown to 49979
+[00:30:38.071] [SEVERE ] updating countdown to 48978
+[00:30:38.142] [SEVERE ] key 81 was pressed by player 1
+[00:30:38.142] [SEVERE ] player 1 placing token on slot 0
+[00:30:39.071] [SEVERE ] updating countdown to 47978
+[00:30:39.549] [SEVERE ] key 81 was pressed by player 1
+[00:30:39.549] [SEVERE ] removing player 1 token from slot 0
+[00:30:40.072] [SEVERE ] updating countdown to 46977
+[00:30:40.398] [SEVERE ] key 87 was pressed by player 1
+[00:30:40.398] [SEVERE ] player 1 placing token on slot 1
+[00:30:40.886] [SEVERE ] key 87 was pressed by player 1
+[00:30:40.886] [SEVERE ] removing player 1 token from slot 1
+[00:30:41.072] [SEVERE ] updating countdown to 45977
+[00:30:41.950] [SEVERE ] key 87 was pressed by player 1
+[00:30:41.950] [SEVERE ] player 1 placing token on slot 1
+[00:30:42.073] [SEVERE ] updating countdown to 44976
+[00:30:42.325] [SEVERE ] key 87 was pressed by player 1
+[00:30:42.326] [SEVERE ] removing player 1 token from slot 1
+[00:30:43.074] [SEVERE ] updating countdown to 43975
+[00:30:43.502] [SEVERE ] key 73 was pressed by player 2
+[00:30:43.502] [SEVERE ] removing player 2 token from slot 1
+[00:30:44.074] [SEVERE ] updating countdown to 42975
+[00:30:45.075] [SEVERE ] updating countdown to 41974
+[00:30:46.076] [SEVERE ] updating countdown to 40973
+[00:30:46.830] [SEVERE ] key 73 was pressed by player 2
+[00:30:46.830] [SEVERE ] player 2 placing token on slot 1
+[00:30:47.077] [SEVERE ] updating countdown to 39972
+[00:30:48.078] [SEVERE ] updating countdown to 38971
+[00:30:49.078] [SEVERE ] updating countdown to 37971
+[00:30:49.958] [SEVERE ] key 75 was pressed by player 2
+[00:30:49.958] [SEVERE ] player 2 placing token on slot 5
+[00:30:50.079] [SEVERE ] updating countdown to 36970
+[00:30:51.081] [SEVERE ] updating countdown to 35968
+[00:30:51.157] [SEVERE ] key 75 was pressed by player 2
+[00:30:51.158] [SEVERE ] removing player 2 token from slot 5
+[00:30:51.270] [SEVERE ] key 76 was pressed by player 2
+[00:30:51.270] [SEVERE ] player 2 placing token on slot 6
+[00:30:52.082] [SEVERE ] updating countdown to 34967
+[00:30:53.083] [SEVERE ] updating countdown to 33966
+[00:30:54.098] [SEVERE ] updating countdown to 32951
+[00:30:55.099] [SEVERE ] updating countdown to 31950

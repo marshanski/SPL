@@ -1,5 +1,5 @@
 package bguspl.set.ex;
-
+import java.util.*;
 import bguspl.set.Env;
 import java.util.Random;
 import java.util.Arrays;
@@ -57,21 +57,11 @@ public class Table {
      *
      * @param env - the game environment objects.
      */
-    public Table(Env env) {
-
+    public Table(Env env) 
+    {
         this(env, new Integer[env.config.tableSize], new Integer[env.config.deckSize]);
-
-        /*
-        this.slotToPlayers = new boolean[this.env.config.tableSize][this.env.config.players];
-        for(int i=0;i<slotToPlayers.length;i++)
-        {
-            for(int k=0;k<slotToPlayers[0].length;k++)
-            {
-                slotToPlayers[i][k] = false;
-            }
-        }
-        */
     }
+
     public void initslotToPlayers()
     {
         for(int i=0;i<this.slotToPlayers.length;i++)
@@ -110,6 +100,7 @@ public class Table {
                 ++cards;
         return cards;
     }
+
 
     /**
      * Places a card on the table in a grid slot.
@@ -174,6 +165,8 @@ public class Table {
 
     public int getSlotToCard(int slot)
     {
+        if(this.slotToCard[slot] ==null)
+            return -1;
         return this.slotToCard[slot];
     }
     public int getCardToslot(int card)
@@ -187,8 +180,8 @@ public class Table {
         {
             for(int k=0;k<set.length;k++)
             {
-                removeToken(i, set[k]);
-                this.env.ui.removeToken(i, set[k]);
+                this.removeToken(i, set[k]);
+                //this.env.ui.removeToken(i, set[k]);
             }
         }
         for(int k=0;k<set.length;k++)//remove the cards that made the set
@@ -196,5 +189,16 @@ public class Table {
             this.removeCard(set[k]);
         }
         
+    }
+
+    public ArrayList<Integer> getSlotsOnTable()
+    {
+        ArrayList<Integer> slots = new ArrayList<Integer>();
+        for(int i=0;i<this.env.config.tableSize;i++)
+        {
+            if(this.getSlotToCard(i)!=-1)
+                slots.add(i);
+        }
+        return slots;
     }
 }

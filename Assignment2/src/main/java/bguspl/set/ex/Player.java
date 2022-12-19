@@ -42,6 +42,7 @@ public class Player implements Runnable {
      * this erplaces 'null' in the keyPresses array.
      */
     private final int noPress = -1;
+    private final int MARGIN  = 999;
 
     /**
      * the number of preeses currenlty in keyPresses array.
@@ -101,14 +102,16 @@ public class Player implements Runnable {
     public void run() 
     {
         playerThread = Thread.currentThread();
-        System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
+        env.logger.info("Thread " + Thread.currentThread().getName() + " starting.");
         if (!human) createArtificialIntelligence();
         while (!terminate) 
         {
 
         }
-        System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
+        if (!human) try {aiThread.interrupt(); aiThread.join(); } catch (InterruptedException ignored) {}
+        env.logger.info("Thread " + Thread.currentThread().getName() + " terminated.");
     }
+    
 
     public boolean isHuman()
     {
@@ -131,13 +134,16 @@ public class Player implements Runnable {
     private void createArtificialIntelligence() {
         // note: this is a very very smart AI (!)
         aiThread = new Thread(() -> {
-            System.out.printf("Info: Thread %s starting.%n", Thread.currentThread().getName());
+            env.logger.info("Thread " + Thread.currentThread().getName() + " starting.");
 
             while (!terminate) 
             {
                 this.keyPressAi();
+                try {
+                    synchronized (this) { wait(10); }
+                } catch (InterruptedException ignored) {this.terminate();}
             }
-            System.out.printf("Info: Thread %s terminated.%n", Thread.currentThread().getName());
+            env.logger.info("Thread " + Thread.currentThread().getName() + " terminated.");
         }, "computer-" + id);
         aiThread.start();
     }
@@ -152,12 +158,13 @@ public class Player implements Runnable {
     public void keyPressed(int slot) 
     {
         System.out.println(slot);
-        if(!found && !freeze && isHuman() )
+        while(found){}
+        if( !found && !freeze && isHuman() && this.table.getSlotToCard(slot)!=-1)
         {
             synchronized(this.currentPresslock)
             {
 
-                int slotIndex = -1;
+                int slotIndex = noPress;
                 for(int i=0; i < this.currPresses; i++)
                 {
                     if(this.keyPresses[i] == slot)
@@ -217,26 +224,28 @@ public class Player implements Runnable {
     {
         if(!found && !isHuman())
         {
-            ArrayList<Integer> slots = new ArrayList<Integer>();
-             
-            for (int i=0;i<12;i++)slots.add(i);
+            ArrayList<Integer> slots = this.table.getSlotsOnTable();
             Collections.shuffle(slots);
-
+            
             for(int i=0;i<this.keyPresses.length;i++)
             {
                 this.keyPresses[i]=slots.get(i);
-                this.table.placeToken(this.id, slots.get(i));
+                this.table.placeToken(this.id, slots.get(i)); 
+
             }
+
             this.currPresses=this.env.config.featureSize;
             this.dealer.check(this.id);
             if(answer ==1)
             {
                 this.point();
                 this.executeFreezeAI(this.env.config.pointFreezeMillis);
+                //this.executeFreezeAI(1999);
             }
             else
             {
                 this.executeFreezeAI(this.env.config.penaltyFreezeMillis);
+                //this.executeFreezeAI(3999);
                 for(int i=0;i<this.keyPresses.length;i++)
                 {
                     this.table.removeToken(this.id, keyPresses[i]);
@@ -304,30 +313,26 @@ public class Player implements Runnable {
     {
         Thread f = new Thread(() ->{this.freeze(penaltyTime);});
         f.start();
-
     }
 
     public void executeFreezeAI(long penaltyTime)
     {
-        Thread f = new Thread(() ->{this.freeze(penaltyTime);});
-        f.start();
-        try{f.join();}
-        catch(Exception ex){}
-
+        this.freeze(penaltyTime);
     }
 
 
     public void freeze(long penaltyTime)
     {
         long start    = System.currentTimeMillis();
-        long end      = start + penaltyTime;
+        long end      = start + penaltyTime+MARGIN;
+        this.updateTimerDisplay(end);
         while (System.currentTimeMillis() < end) 
         {
             synchronized (this) 
             {
                 try
                 {
-                    this.wait(1000);
+                    this.wait(10);
                     this.updateTimerDisplay(end);
 
                 }
@@ -339,6 +344,7 @@ public class Player implements Runnable {
 
     private void updateTimerDisplay(long end) 
     {
+
         this.env.ui.setFreeze(this.id,end-System.currentTimeMillis());
     }
 
@@ -375,10 +381,20 @@ public class Player implements Runnable {
     public void stopPress() 
     {
         found = true;
+
+    }
+    public boolean getFound()
+    {
+        return found;
+
     }
     public void startPress() 
     {
         found = false;
+    }
+    public int score()
+    {
+        return score;
     }
 
 }
