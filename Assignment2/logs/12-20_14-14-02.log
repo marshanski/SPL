@@ -1,0 +1,82 @@
+[14:14:02.331] [INFO   ] thread main starting.
+[14:14:02.338] [SEVERE ] cannot read configuration file config.properties trying from resources.
+[14:14:02.339] [SEVERE ] configuration file was loaded from resources directory.
+[14:14:02.793] [INFO   ] thread dealer starting.
+[14:14:02.796] [INFO   ] Thread dealer starting.
+[14:14:02.797] [INFO   ] Thread player0 starting.
+[14:14:02.797] [INFO   ] Thread player1 starting.
+[14:14:02.910] [SEVERE ] placing card 38 in slot 0
+[14:14:03.018] [SEVERE ] placing card 9 in slot 1
+[14:14:03.119] [SEVERE ] placing card 49 in slot 2
+[14:14:03.219] [SEVERE ] placing card 18 in slot 3
+[14:14:03.320] [SEVERE ] placing card 3 in slot 4
+[14:14:03.420] [SEVERE ] placing card 56 in slot 5
+[14:14:03.522] [SEVERE ] placing card 33 in slot 6
+[14:14:03.623] [SEVERE ] placing card 65 in slot 7
+[14:14:03.724] [SEVERE ] placing card 7 in slot 8
+[14:14:03.824] [SEVERE ] placing card 66 in slot 9
+[14:14:03.925] [SEVERE ] placing card 44 in slot 10
+[14:14:04.025] [SEVERE ] placing card 34 in slot 11
+[14:14:04.031] [SEVERE ] updating countdown to 60000
+[14:14:05.032] [SEVERE ] updating countdown to 59998
+[14:14:06.032] [SEVERE ] updating countdown to 58998
+[14:14:07.034] [SEVERE ] updating countdown to 57997
+[14:14:08.034] [SEVERE ] updating countdown to 56996
+[14:14:09.036] [SEVERE ] updating countdown to 55995
+[14:14:10.036] [SEVERE ] updating countdown to 54994
+[14:14:10.753] [SEVERE ] exit button pressed
+[14:14:10.753] [INFO   ] Thread player1 terminated.
+[14:14:10.754] [INFO   ] Thread player0 terminated.
+[14:14:11.037] [SEVERE ] updating countdown to 53993
+[14:14:11.139] [SEVERE ] removing card from slot 0
+[14:14:11.139] [SEVERE ] removing player 1 token from slot 0
+[14:14:11.140] [SEVERE ] removing player 2 token from slot 0
+[14:14:11.241] [SEVERE ] removing card from slot 1
+[14:14:11.242] [SEVERE ] removing player 1 token from slot 1
+[14:14:11.243] [SEVERE ] removing player 2 token from slot 1
+[14:14:11.344] [SEVERE ] removing card from slot 2
+[14:14:11.344] [SEVERE ] removing player 1 token from slot 2
+[14:14:11.345] [SEVERE ] removing player 2 token from slot 2
+[14:14:11.446] [SEVERE ] removing card from slot 3
+[14:14:11.447] [SEVERE ] removing player 1 token from slot 3
+[14:14:11.448] [SEVERE ] removing player 2 token from slot 3
+[14:14:11.549] [SEVERE ] removing card from slot 4
+[14:14:11.549] [SEVERE ] removing player 1 token from slot 4
+[14:14:11.550] [SEVERE ] removing player 2 token from slot 4
+[14:14:11.651] [SEVERE ] removing card from slot 5
+[14:14:11.652] [SEVERE ] removing player 1 token from slot 5
+[14:14:11.653] [SEVERE ] removing player 2 token from slot 5
+[14:14:11.753] [SEVERE ] removing card from slot 6
+[14:14:11.754] [SEVERE ] removing player 1 token from slot 6
+[14:14:11.755] [SEVERE ] removing player 2 token from slot 6
+[14:14:11.855] [SEVERE ] removing card from slot 7
+[14:14:11.856] [SEVERE ] removing player 1 token from slot 7
+[14:14:11.857] [SEVERE ] removing player 2 token from slot 7
+[14:14:11.958] [SEVERE ] removing card from slot 8
+[14:14:11.959] [SEVERE ] removing player 1 token from slot 8
+[14:14:11.959] [SEVERE ] removing player 2 token from slot 8
+[14:14:12.060] [SEVERE ] removing card from slot 9
+[14:14:12.060] [SEVERE ] removing player 1 token from slot 9
+[14:14:12.061] [SEVERE ] removing player 2 token from slot 9
+[14:14:12.162] [SEVERE ] removing card from slot 10
+[14:14:12.162] [SEVERE ] removing player 1 token from slot 10
+[14:14:12.163] [SEVERE ] removing player 2 token from slot 10
+[14:14:12.264] [SEVERE ] removing card from slot 11
+[14:14:12.265] [SEVERE ] removing player 1 token from slot 11
+[14:14:12.266] [SEVERE ] removing player 2 token from slot 11
+[14:14:12.370] [SEVERE ] placing card 33 in slot 0
+[14:14:12.471] [SEVERE ] placing card 3 in slot 1
+[14:14:12.571] [SEVERE ] placing card 38 in slot 2
+[14:14:12.672] [SEVERE ] placing card 7 in slot 3
+[14:14:12.773] [SEVERE ] placing card 25 in slot 4
+[14:14:12.874] [SEVERE ] placing card 66 in slot 5
+[14:14:12.974] [SEVERE ] placing card 69 in slot 6
+[14:14:13.075] [SEVERE ] placing card 9 in slot 7
+[14:14:13.176] [SEVERE ] placing card 4 in slot 8
+[14:14:13.277] [SEVERE ] placing card 34 in slot 9
+[14:14:13.378] [SEVERE ] placing card 56 in slot 10
+[14:14:13.479] [SEVERE ] placing card 65 in slot 11
+[14:14:13.479] [INFO   ] Thread dealer terminated.
+[14:14:13.480] [INFO   ] thread dealer terminated.
+[14:14:13.480] [SEVERE ] thanks for playing... it was fun!
+[14:14:13.481] [INFO   ] thread main terminated.

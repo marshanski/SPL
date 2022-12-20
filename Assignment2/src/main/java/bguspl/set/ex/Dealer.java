@@ -153,7 +153,7 @@ public class Dealer implements Runnable {
      *
      * @return true iff the game should be finished.
      */
-    private boolean shouldFinish() 
+    boolean shouldFinish() 
     {
         return terminate || this.thereIsNoSet;
     
@@ -230,7 +230,7 @@ public class Dealer implements Runnable {
         int k;
         Random rand  = new Random();
  
-        for(int i=0 ; i<60; i++)
+        for(int i=0 ; i<65; i++)
         {
             k = rand.nextInt(deck.size());
             deck.remove(k);
@@ -410,6 +410,7 @@ public class Dealer implements Runnable {
             this.queue.notifyAll();
         }
     }
+
     public void pollToQueue(int k) 
     {
         synchronized (this.queue)

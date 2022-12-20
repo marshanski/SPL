@@ -13,6 +13,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.logging.Logger;
 
+import javax.management.loading.PrivateMLet;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.eq;
@@ -23,12 +25,38 @@ import static org.mockito.Mockito.when;
 public class DealerTest 
 {
 
-    /*Env env;
-    @Mock
-    Table table;
-    @Mock
-    Player[] players;
-    @Mock*/
+    Dealer dealer;
 
-    
+    @Mock
+    Util util;
+
+    @Mock 
+    private UserInterface ui;
+
+    @Mock
+    private Table table;
+
+    @Mock
+    private Logger logger;
+
+
+    @BeforeEach
+    void setUp() 
+    {
+        // purposely do not find the configuration files (use defaults here).
+        Env env = new Env(logger, new Config(logger, (String) null), ui, util);
+        Player[] players = new Player[env.config.players];
+        dealer = new Dealer(env, table, players);
+        
+    }
+
+    @Test
+    void shouldFinish()
+    {
+        boolean expectedTerminate    = false;
+        boolean expectedThereIsNoSet = false; 
+        boolean expectedResult = expectedTerminate || expectedThereIsNoSet;
+        assertEquals(dealer.shouldFinish(), expectedResult);
+    }
+
 }

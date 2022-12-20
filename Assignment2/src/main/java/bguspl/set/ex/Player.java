@@ -311,8 +311,11 @@ public class Player implements Runnable {
 
     public void executeFreeze(long penaltyTime)
     {
-        Thread f = new Thread(() ->{this.freeze(penaltyTime);});
-        f.start();
+        if(!terminate)
+        {
+            Thread f = new Thread(() ->{this.freeze(penaltyTime);});
+            f.start();
+        }
     }
 
     public void executeFreezeAI(long penaltyTime)
@@ -326,7 +329,7 @@ public class Player implements Runnable {
         long start    = System.currentTimeMillis();
         long end      = start + penaltyTime+MARGIN;
         this.updateTimerDisplay(end);
-        while (System.currentTimeMillis() < end) 
+        while (System.currentTimeMillis() < end && !terminate) 
         {
             synchronized (this) 
             {
