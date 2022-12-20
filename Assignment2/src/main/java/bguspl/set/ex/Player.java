@@ -327,7 +327,7 @@ public class Player implements Runnable {
     public void freeze(long penaltyTime)
     {
         long start    = System.currentTimeMillis();
-        long end      = start + penaltyTime+MARGIN;
+        long end      = start + penaltyTime;
         this.updateTimerDisplay(end);
         while (System.currentTimeMillis() < end && !terminate) 
         {
@@ -335,7 +335,7 @@ public class Player implements Runnable {
             {
                 try
                 {
-                    this.wait(10);
+                    this.wait(950);
                     this.updateTimerDisplay(end);
 
                 }

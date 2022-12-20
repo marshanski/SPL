@@ -1,4 +1,5 @@
 package bguspl.set.ex;
+import java.sql.Time;
 import java.util.*;
 import bguspl.set.Env;
 import java.util.stream.IntStream;
@@ -18,7 +19,7 @@ public class Dealer implements Runnable {
      */
     private final Env env;
     private final int MARGIN = 999;
-    private final int SECOND = 1000;
+    private final int SECOND = 950;
 
     /**
      * Game entities.
@@ -89,13 +90,16 @@ public class Dealer implements Runnable {
 
     public void updateRound()
     {
-
-        if(this.found)this.updateAfterSet(this.set);
-        else
+        if(!terminate)
         {
-            this.updateKeyPress(this.createSlots());
-            removeAllCardsFromTable();
-            placeCardsOnTable();
+
+            if(this.found)this.updateAfterSet(this.set);
+            else
+            {
+                this.updateKeyPress(this.createSlots());
+                removeAllCardsFromTable();
+                placeCardsOnTable();
+            }
         }
 
 
@@ -199,7 +203,7 @@ public class Dealer implements Runnable {
     {
         long start     = System.currentTimeMillis();
         long time      = start;
-        long toSleep   = 10;
+        long toSleep   = SECOND;
         while (time < start+SECOND && !found)
         {
             synchronized (this.lock) 
@@ -230,7 +234,7 @@ public class Dealer implements Runnable {
         int k;
         Random rand  = new Random();
  
-        for(int i=0 ; i<65; i++)
+        for(int i=0 ; i<72; i++)
         {
             k = rand.nextInt(deck.size());
             deck.remove(k);
@@ -345,13 +349,12 @@ public class Dealer implements Runnable {
 
         if(!terminate)
         {
-            //terminate = true;
-            
+            terminate = true;
             this.removeAllCardsFromTable();
             this.env.ui.announceWinner(this.findWinners());
+            
         }
         this.shutDownPlayers();
-
 
     }
 
@@ -386,12 +389,14 @@ public class Dealer implements Runnable {
     {
         synchronized (this.queue)
         {
-            this.addToQueue(k);
-            //while(this.queue.size()>0 && this.queue.peek() !=k)
-                
-            synchronized (this.lock) {this.lock.notifyAll();}
-            this.goWaitPlayer(k);
-            this.pollToQueue(k);
+            if(!terminate)
+            {
+                this.addToQueue(k);                
+                synchronized (this.lock) {this.lock.notifyAll();}
+                this.goWaitPlayer(k);
+                this.pollToQueue(k);
+            }
+
         }
         
     }
