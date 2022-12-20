@@ -33,7 +33,7 @@ public class Dealer implements Runnable {
      * The list of card ids that are left in the dealer's deck.
      */
     private final List<Integer> deck;
-    private ArrayBlockingQueue<Integer> queue;
+    ArrayBlockingQueue<Integer> queue;
 
     /**
      * True iff game should be terminated due to an external event.
@@ -514,6 +514,10 @@ public class Dealer implements Runnable {
                 synchronized (this.playerThreads[i]) { this.playerThreads[i].notifyAll();}
         }
 
+    }
+    public int getQueueSize()
+    {
+        return queue.size();
     }
 
     

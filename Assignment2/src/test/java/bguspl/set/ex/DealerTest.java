@@ -1,5 +1,7 @@
 package bguspl.set.ex;
 
+import java.util.Queue;
+import java.util.concurrent.ArrayBlockingQueue;
 import bguspl.set.Config;
 import bguspl.set.Env;
 import bguspl.set.UserInterface;
@@ -57,6 +59,18 @@ public class DealerTest
         boolean expectedThereIsNoSet = false; 
         boolean expectedResult = expectedTerminate || expectedThereIsNoSet;
         assertEquals(dealer.shouldFinish(), expectedResult);
+    }
+
+    @Test
+    void getQueueSize()
+    {
+        int SizeBeforeAddition = dealer.getQueueSize();
+        int expectedSizeAfterAddition = SizeBeforeAddition + 1;
+        dealer.addToQueue(0);
+        int sizeAfterAdd = dealer.getQueueSize();
+
+        assertEquals(expectedSizeAfterAddition,sizeAfterAdd);
+
     }
 
 }
