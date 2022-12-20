@@ -1,0 +1,817 @@
+[22:27:53.778] [INFO   ] thread main starting.
+[22:27:53.784] [SEVERE ] cannot read configuration file config.properties trying from resources.
+[22:27:53.786] [SEVERE ] configuration file was loaded from resources directory.
+[22:27:54.249] [INFO   ] thread dealer starting.
+[22:27:54.250] [INFO   ] Thread dealer starting.
+[22:27:54.250] [INFO   ] Thread player0 starting.
+[22:27:54.250] [INFO   ] Thread player1 starting.
+[22:27:54.252] [INFO   ] Thread computer-0 starting.
+[22:27:54.252] [INFO   ] Thread computer-1 starting.
+[22:27:54.351] [SEVERE ] placing card 22 in slot 0
+[22:27:54.452] [SEVERE ] placing card 35 in slot 1
+[22:27:54.564] [SEVERE ] placing card 69 in slot 2
+[22:27:54.673] [SEVERE ] placing card 75 in slot 3
+[22:27:54.784] [SEVERE ] placing card 25 in slot 4
+[22:27:54.891] [SEVERE ] placing card 55 in slot 5
+[22:27:54.999] [SEVERE ] placing card 64 in slot 6
+[22:27:55.108] [SEVERE ] placing card 52 in slot 7
+[22:27:55.216] [SEVERE ] placing card 66 in slot 8
+[22:27:55.223] [SEVERE ] updating countdown to 60000
+[22:27:55.232] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.232] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.233] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.233] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.233] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.233] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.233] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.233] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.233] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.233] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.233] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.234] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.234] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.234] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.244] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.244] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.244] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.244] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.244] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.244] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.245] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.245] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.245] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.245] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.245] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.246] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.246] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.246] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.257] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.257] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.257] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.257] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.257] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.257] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.258] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.258] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.259] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.259] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.259] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.259] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.259] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.259] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.269] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.269] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.270] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.270] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.270] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.270] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.270] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.270] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.270] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.270] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.270] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.270] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.271] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.271] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.282] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.282] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.282] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.282] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.282] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.282] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.282] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.283] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.283] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.283] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.283] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.283] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.283] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.283] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.294] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.294] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.294] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.295] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.295] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.295] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.295] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.296] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.296] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.297] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.297] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.297] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.297] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.297] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.308] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.308] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.308] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.309] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.309] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.309] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.309] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.309] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.310] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.310] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.310] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.310] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.310] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.311] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.321] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.321] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.321] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.321] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.321] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.321] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.321] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.322] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.322] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.322] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.322] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.322] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.322] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.322] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.333] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.333] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.333] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.333] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.333] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.333] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.334] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.334] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.334] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.334] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.334] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.334] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.334] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.334] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.356] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.356] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.356] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.356] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.356] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.356] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.356] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.357] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.357] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.357] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.357] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.357] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.357] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.358] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.368] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.368] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.368] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.368] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.368] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.368] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.368] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.368] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.369] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.369] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.369] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.369] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.369] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.369] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.380] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.380] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.380] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.380] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.380] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.380] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.380] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.380] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.380] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.381] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.381] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.381] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.381] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.381] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.391] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.391] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.391] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.391] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.391] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.392] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.392] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.392] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.392] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.392] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.392] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.392] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.393] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.393] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.403] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.403] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.403] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.403] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.403] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.403] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.403] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.403] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.403] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.404] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.404] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.404] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.404] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.404] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.415] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.415] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.415] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.415] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.415] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.415] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.415] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.415] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.416] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.416] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.416] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.416] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.416] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.416] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.427] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.427] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.427] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.427] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.427] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.427] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.427] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.427] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.427] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.428] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.428] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.428] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.428] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.428] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.438] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.438] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.438] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.438] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.439] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.439] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.439] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.439] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.439] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.439] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.439] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.439] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.439] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.439] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.449] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.449] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.449] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.449] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.449] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.449] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.449] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.449] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.449] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.450] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.450] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.450] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.450] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.450] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.461] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.461] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.461] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.461] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.461] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.461] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.461] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.461] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.461] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.461] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.462] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.462] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.462] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.462] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.472] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.472] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.472] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.472] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.472] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.472] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.472] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.472] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.472] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.472] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.473] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.473] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.473] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.473] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.483] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.483] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.483] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.483] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.483] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.483] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.483] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.483] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.483] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.483] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.483] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.484] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.484] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.484] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.494] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.494] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.494] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.494] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.494] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.494] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.495] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.495] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.495] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.495] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.495] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.495] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.496] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.496] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.506] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.506] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.506] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.507] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.507] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.507] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.507] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.507] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.507] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.507] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.507] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.507] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.507] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.507] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.518] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.518] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.518] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.518] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.518] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.518] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.518] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.519] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.519] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.519] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.520] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.520] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.520] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.520] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.530] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.530] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.530] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.530] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.530] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.530] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.530] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.530] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.530] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.531] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.531] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.531] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.531] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.531] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.541] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.541] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.541] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.541] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.541] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.542] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.542] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.542] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.542] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.542] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.542] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.542] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.542] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.543] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.553] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.553] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.553] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.553] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.553] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.553] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.553] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.554] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.554] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.554] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.554] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.554] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.554] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.554] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.564] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.564] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.564] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.564] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.564] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.564] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.564] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.572] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.572] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.572] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.573] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.573] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.573] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.573] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.583] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.583] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.583] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.584] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.584] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.584] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.584] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.588] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.588] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.588] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.588] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.588] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.588] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.588] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.598] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.598] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.599] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.599] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.599] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.599] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.599] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.603] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.604] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.604] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.604] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.604] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.604] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.605] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.609] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.610] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.610] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.610] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.610] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.610] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.610] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.619] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.620] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.621] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.621] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.621] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.621] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.621] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.622] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.622] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.622] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.622] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.622] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.622] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.622] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.632] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.633] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.633] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.634] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.634] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.634] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.634] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.636] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.638] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.638] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.639] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.639] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.640] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.640] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.651] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.651] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.651] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.651] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.651] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.651] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.651] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.651] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.651] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.652] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.652] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.652] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.652] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.652] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.663] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.663] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.663] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.663] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.663] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.663] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.663] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.663] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.663] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.663] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.663] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.663] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.664] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.664] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.675] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.675] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.675] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.675] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.675] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.675] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.675] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.675] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.676] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.676] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.676] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.676] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.676] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.676] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.687] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.687] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.687] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.687] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.687] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.687] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.687] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.687] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.688] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.688] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.688] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.688] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.688] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.688] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.699] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.699] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.699] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.699] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.699] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.699] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.699] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.699] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.699] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.699] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.699] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.699] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.699] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.699] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.710] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.710] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.710] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.710] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.710] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.710] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.710] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.710] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.710] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.710] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.710] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.710] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.710] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.711] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.722] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.722] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.722] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.722] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.722] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.722] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.722] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.722] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.722] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.722] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.722] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.722] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.723] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.723] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.732] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.732] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.732] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.732] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.733] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.733] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.733] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.735] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.736] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.737] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.737] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.737] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.737] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.737] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.743] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.743] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.743] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.743] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.743] [SEVERE ] removing player 2 token from slot 1
+[22:27:55.743] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.743] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.748] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.748] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.748] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.748] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.748] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.748] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.748] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.754] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.754] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.754] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.754] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.754] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.754] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.754] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.758] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.759] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.759] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.759] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.759] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.759] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.759] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.770] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.770] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.770] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.770] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.770] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.770] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.770] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.774] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.774] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.774] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.774] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.774] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.774] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.774] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.780] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.780] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.780] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.780] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.780] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.780] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.780] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.789] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.789] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.789] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.789] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.789] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.790] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.790] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.791] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.791] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.791] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.791] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.791] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.791] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.791] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.800] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.800] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.800] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.801] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.801] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.801] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.801] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.802] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.802] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.802] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.802] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.802] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.802] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.802] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.811] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.811] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.811] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.811] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.811] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.811] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.811] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.812] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.812] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.812] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.812] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.812] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.812] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.812] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.822] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.822] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.822] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.822] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.822] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.822] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.822] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.823] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.823] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.823] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.823] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.823] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.823] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.823] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.833] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.833] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.833] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.834] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.834] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.834] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.834] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.834] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.834] [SEVERE ] player 1 placing token on slot 7
+[22:27:55.834] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.834] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.834] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.834] [SEVERE ] removing player 1 token from slot 7
+[22:27:55.834] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.851] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.851] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.851] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.851] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.851] [SEVERE ] player 1 placing token on slot 8
+[22:27:55.851] [SEVERE ] player 1 placing token on slot 2
+[22:27:55.851] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.851] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.851] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.851] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.851] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.851] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.852] [SEVERE ] removing player 1 token from slot 8
+[22:27:55.852] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.862] [SEVERE ] player 2 placing token on slot 5
+[22:27:55.862] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.862] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.863] [SEVERE ] setting player 2 freeze to -1
+[22:27:55.863] [SEVERE ] removing player 2 token from slot 5
+[22:27:55.863] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.863] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.863] [SEVERE ] player 1 placing token on slot 4
+[22:27:55.863] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.863] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.863] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.863] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.863] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.863] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.873] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.873] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.873] [SEVERE ] player 2 placing token on slot 3
+[22:27:55.873] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.873] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.873] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.873] [SEVERE ] removing player 2 token from slot 3
+[22:27:55.874] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.874] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.874] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.874] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.874] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.874] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.874] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.884] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.884] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.884] [SEVERE ] player 2 placing token on slot 6
+[22:27:55.884] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.884] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.885] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.885] [SEVERE ] removing player 2 token from slot 6
+[22:27:55.898] [SEVERE ] player 1 placing token on slot 1
+[22:27:55.898] [SEVERE ] player 2 placing token on slot 0
+[22:27:55.898] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.898] [SEVERE ] player 2 placing token on slot 8
+[22:27:55.898] [SEVERE ] player 1 placing token on slot 6
+[22:27:55.898] [SEVERE ] player 2 placing token on slot 7
+[22:27:55.898] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.898] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.898] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.898] [SEVERE ] removing player 1 token from slot 6
+[22:27:55.898] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.898] [SEVERE ] removing player 2 token from slot 0
+[22:27:55.898] [SEVERE ] removing player 2 token from slot 8
+[22:27:55.898] [SEVERE ] removing player 2 token from slot 7
+[22:27:55.908] [SEVERE ] player 1 placing token on slot 5
+[22:27:55.908] [SEVERE ] player 1 placing token on slot 0
+[22:27:55.908] [SEVERE ] player 1 placing token on slot 3
+[22:27:55.908] [SEVERE ] setting player 1 freeze to 0
+[22:27:55.908] [SEVERE ] removing player 1 token from slot 5
+[22:27:55.908] [SEVERE ] removing player 1 token from slot 0
+[22:27:55.908] [SEVERE ] removing player 1 token from slot 3
+[22:27:55.909] [SEVERE ] player 2 placing token on slot 4
+[22:27:55.909] [SEVERE ] player 2 placing token on slot 2
+[22:27:55.909] [SEVERE ] player 2 placing token on slot 1
+[22:27:55.909] [SEVERE ] setting player 2 score to 1
+[22:27:55.909] [SEVERE ] setting player 2 freeze to 0
+[22:27:55.910] [SEVERE ] removing player 1 token from slot 4
+[22:27:55.911] [SEVERE ] removing player 1 token from slot 2
+[22:27:55.911] [SEVERE ] removing player 1 token from slot 1
+[22:27:55.911] [SEVERE ] removing player 2 token from slot 4
+[22:27:55.911] [SEVERE ] removing player 2 token from slot 2
+[22:27:55.911] [SEVERE ] removing player 2 token from slot 1
+[22:27:56.022] [SEVERE ] removing card from slot 4
+[22:27:56.131] [SEVERE ] removing card from slot 2
+[22:27:56.243] [SEVERE ] removing card from slot 1
+[22:27:56.352] [SEVERE ] removing card from slot 0
+[22:27:56.352] [SEVERE ] removing player 1 token from slot 0
+[22:27:56.353] [SEVERE ] removing player 2 token from slot 0
+[22:27:56.460] [SEVERE ] removing card from slot 3
+[22:27:56.460] [SEVERE ] removing player 1 token from slot 3
+[22:27:56.460] [SEVERE ] removing player 2 token from slot 3
+[22:27:56.570] [SEVERE ] removing card from slot 5
+[22:27:56.570] [SEVERE ] removing player 1 token from slot 5
+[22:27:56.570] [SEVERE ] removing player 2 token from slot 5
+[22:27:56.678] [SEVERE ] removing card from slot 6
+[22:27:56.678] [SEVERE ] removing player 1 token from slot 6
+[22:27:56.678] [SEVERE ] removing player 2 token from slot 6
+[22:27:56.788] [SEVERE ] removing card from slot 7
+[22:27:56.788] [SEVERE ] removing player 1 token from slot 7
+[22:27:56.788] [SEVERE ] removing player 2 token from slot 7
+[22:27:56.898] [SEVERE ] removing card from slot 8
+[22:27:56.898] [SEVERE ] removing player 1 token from slot 8
+[22:27:56.898] [SEVERE ] removing player 2 token from slot 8
+[22:27:56.899] [SEVERE ] announcing winner(s): player 2
+[22:27:56.899] [INFO   ] Thread computer-1 terminated.
+[22:27:56.899] [INFO   ] Thread player1 terminated.
+[22:27:56.900] [INFO   ] Thread computer-0 terminated.
+[22:27:56.900] [INFO   ] Thread player0 terminated.
+[22:27:56.900] [INFO   ] Thread dealer terminated.
+[22:27:56.900] [INFO   ] thread dealer terminated.
+[22:28:01.910] [SEVERE ] thanks for playing... it was fun!
+[22:28:01.912] [INFO   ] thread main terminated.
+[22:28:01.913] [SEVERE ] disposing of user interface elements

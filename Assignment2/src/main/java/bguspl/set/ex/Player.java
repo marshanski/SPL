@@ -158,7 +158,7 @@ public class Player implements Runnable {
     public void keyPressed(int slot) 
     {
         System.out.println(slot);
-        while(found){}
+        while(found && !terminate){}
         if( !found && !freeze && isHuman() && this.table.getSlotToCard(slot)!=-1)
         {
             synchronized(this.currentPresslock)

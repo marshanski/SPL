@@ -73,7 +73,6 @@ public class Dealer implements Runnable {
         env.logger.info("Thread " + Thread.currentThread().getName() + " starting.");
         this.runPlayers();
         this.stopPress(); 
-        this.debug();
         placeCardsOnTable();
         while (!shouldFinish())
         {
@@ -92,7 +91,6 @@ public class Dealer implements Runnable {
     {
         if(!terminate)
         {
-
             if(this.found)this.updateAfterSet(this.set);
             else
             {
@@ -121,6 +119,7 @@ public class Dealer implements Runnable {
         this.env.ui.setCountdown(this.env.config.turnTimeoutMillis, terminate);
         long start    = System.currentTimeMillis();
         long end      = start +this.env.config.turnTimeoutMillis+MARGIN;
+        //long end      = start +10000;
         while (!terminate && !this.found && System.currentTimeMillis() < end) 
         {
             sleepUntilWokenOrTimeout();
@@ -148,7 +147,10 @@ public class Dealer implements Runnable {
             if(slot[i] != null)
                 table.add(slot[i]);
         }
-        this.thereIsNoSet = (env.util.findSets(deck, 1).size() == 0 && env.util.findSets(table, 1).size() == 0) ;
+        if(deck.size()==0)
+            this.thereIsNoSet =  env.util.findSets(table, 1).size() == 0 ;
+        else
+            this.thereIsNoSet = (env.util.findSets(deck, 1).size() == 0 && env.util.findSets(table, 1).size() == 0) ;
     }
 
 
@@ -179,7 +181,8 @@ public class Dealer implements Runnable {
     {
         int k,size;
         Random rand  = new Random();
-        this.checkPossibleSet();
+        
+        
         if(deck.size()>this.env.config.tableSize)
             size =this.env.config.tableSize;
         else
@@ -191,6 +194,7 @@ public class Dealer implements Runnable {
             this.table.placeCard(deck.get(k),i);
             deck.remove(k);
         }
+        this.checkPossibleSet();
     }
 
 
@@ -248,7 +252,11 @@ public class Dealer implements Runnable {
     private void removeAllCardsFromTable() 
     {
         for(int i=0;i<this.env.config.tableSize;i++)
-            removeCardToDeck(i);
+        {
+            if(this.table.getSlotToCard(i)!=-1)removeCardToDeck(i);
+        }
+            
+        
     }
     /**
      * @param set

@@ -1,0 +1,55 @@
+[22:28:06.588] [INFO   ] thread main starting.
+[22:28:06.593] [SEVERE ] cannot read configuration file config.properties trying from resources.
+[22:28:06.596] [SEVERE ] configuration file was loaded from resources directory.
+[22:28:07.037] [INFO   ] thread dealer starting.
+[22:28:07.038] [INFO   ] Thread dealer starting.
+[22:28:07.040] [INFO   ] Thread player1 starting.
+[22:28:07.040] [INFO   ] Thread player0 starting.
+[22:28:07.041] [INFO   ] Thread computer-1 starting.
+[22:28:07.041] [INFO   ] Thread computer-0 starting.
+[22:28:07.141] [SEVERE ] placing card 72 in slot 0
+[22:28:07.251] [SEVERE ] placing card 71 in slot 1
+[22:28:07.361] [SEVERE ] placing card 24 in slot 2
+[22:28:07.470] [SEVERE ] placing card 17 in slot 3
+[22:28:07.579] [SEVERE ] placing card 42 in slot 4
+[22:28:07.686] [SEVERE ] placing card 46 in slot 5
+[22:28:07.794] [SEVERE ] placing card 67 in slot 6
+[22:28:07.903] [SEVERE ] placing card 73 in slot 7
+[22:28:08.013] [SEVERE ] placing card 76 in slot 8
+[22:28:08.123] [SEVERE ] removing card from slot 0
+[22:28:08.123] [SEVERE ] removing player 1 token from slot 0
+[22:28:08.123] [SEVERE ] removing player 2 token from slot 0
+[22:28:08.235] [SEVERE ] removing card from slot 1
+[22:28:08.235] [SEVERE ] removing player 1 token from slot 1
+[22:28:08.235] [SEVERE ] removing player 2 token from slot 1
+[22:28:08.343] [SEVERE ] removing card from slot 2
+[22:28:08.343] [SEVERE ] removing player 1 token from slot 2
+[22:28:08.343] [SEVERE ] removing player 2 token from slot 2
+[22:28:08.452] [SEVERE ] removing card from slot 3
+[22:28:08.452] [SEVERE ] removing player 1 token from slot 3
+[22:28:08.452] [SEVERE ] removing player 2 token from slot 3
+[22:28:08.560] [SEVERE ] removing card from slot 4
+[22:28:08.561] [SEVERE ] removing player 1 token from slot 4
+[22:28:08.561] [SEVERE ] removing player 2 token from slot 4
+[22:28:08.672] [SEVERE ] removing card from slot 5
+[22:28:08.672] [SEVERE ] removing player 1 token from slot 5
+[22:28:08.672] [SEVERE ] removing player 2 token from slot 5
+[22:28:08.780] [SEVERE ] removing card from slot 6
+[22:28:08.780] [SEVERE ] removing player 1 token from slot 6
+[22:28:08.780] [SEVERE ] removing player 2 token from slot 6
+[22:28:08.892] [SEVERE ] removing card from slot 7
+[22:28:08.892] [SEVERE ] removing player 1 token from slot 7
+[22:28:08.892] [SEVERE ] removing player 2 token from slot 7
+[22:28:09.002] [SEVERE ] removing card from slot 8
+[22:28:09.002] [SEVERE ] removing player 1 token from slot 8
+[22:28:09.002] [SEVERE ] removing player 2 token from slot 8
+[22:28:09.003] [SEVERE ] announcing winner(s): player 1, player 2
+[22:28:09.004] [INFO   ] Thread computer-1 terminated.
+[22:28:09.005] [INFO   ] Thread player1 terminated.
+[22:28:09.005] [INFO   ] Thread computer-0 terminated.
+[22:28:09.005] [INFO   ] Thread player0 terminated.
+[22:28:09.005] [INFO   ] Thread dealer terminated.
+[22:28:09.005] [INFO   ] thread dealer terminated.
+[22:28:14.013] [SEVERE ] thanks for playing... it was fun!
+[22:28:14.016] [INFO   ] thread main terminated.
+[22:28:14.017] [SEVERE ] disposing of user interface elements
