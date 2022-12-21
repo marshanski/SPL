@@ -1,0 +1,81 @@
+[15:55:27.474] [INFO   ] thread main starting.
+[15:55:27.482] [SEVERE ] cannot read configuration file config.properties trying from resources.
+[15:55:27.485] [SEVERE ] configuration file was loaded from resources directory.
+[15:55:28.060] [INFO   ] thread dealer starting.
+[15:55:28.061] [INFO   ] Thread dealer starting.
+[15:55:28.064] [INFO   ] Thread player0 starting.
+[15:55:28.065] [INFO   ] Thread player1 starting.
+[15:55:28.165] [SEVERE ] placing card 54 in slot 0
+[15:55:28.275] [SEVERE ] placing card 8 in slot 1
+[15:55:28.375] [SEVERE ] placing card 65 in slot 2
+[15:55:28.476] [SEVERE ] placing card 60 in slot 3
+[15:55:28.576] [SEVERE ] placing card 44 in slot 4
+[15:55:28.677] [SEVERE ] placing card 13 in slot 5
+[15:55:28.778] [SEVERE ] placing card 36 in slot 6
+[15:55:28.879] [SEVERE ] placing card 56 in slot 7
+[15:55:28.979] [SEVERE ] placing card 9 in slot 8
+[15:55:29.080] [SEVERE ] placing card 42 in slot 9
+[15:55:29.180] [SEVERE ] placing card 22 in slot 10
+[15:55:29.281] [SEVERE ] placing card 77 in slot 11
+[15:55:29.294] [SEVERE ] updating countdown to 60000
+[15:55:29.631] [SEVERE ] updating countdown to 59859
+[15:55:29.773] [SEVERE ] updating countdown to 59717
+[15:55:29.914] [SEVERE ] updating countdown to 59576
+[15:55:30.056] [SEVERE ] updating countdown to 59434
+[15:55:30.198] [SEVERE ] updating countdown to 59292
+[15:55:30.339] [SEVERE ] updating countdown to 59151
+[15:55:30.481] [SEVERE ] updating countdown to 59009
+[15:55:30.622] [SEVERE ] updating countdown to 58868
+[15:55:30.764] [SEVERE ] updating countdown to 58726
+[15:55:30.905] [SEVERE ] updating countdown to 58585
+[15:55:31.047] [SEVERE ] updating countdown to 58443
+[15:55:31.188] [SEVERE ] updating countdown to 58302
+[15:55:31.330] [SEVERE ] updating countdown to 58160
+[15:55:31.472] [SEVERE ] updating countdown to 58019
+[15:55:31.613] [SEVERE ] updating countdown to 57877
+[15:55:31.755] [SEVERE ] updating countdown to 57735
+[15:55:31.896] [SEVERE ] updating countdown to 57594
+[15:55:32.038] [SEVERE ] updating countdown to 57452
+[15:55:32.179] [SEVERE ] updating countdown to 57311
+[15:55:32.321] [SEVERE ] updating countdown to 57169
+[15:55:32.463] [SEVERE ] updating countdown to 57027
+[15:55:32.604] [SEVERE ] updating countdown to 56886
+[15:55:32.688] [SEVERE ] key 81 was pressed by player 1
+[15:55:32.688] [SEVERE ] player 1 placing token on slot 0
+[15:55:32.746] [SEVERE ] updating countdown to 56744
+[15:55:32.888] [SEVERE ] updating countdown to 56602
+[15:55:33.029] [SEVERE ] updating countdown to 56461
+[15:55:33.070] [SEVERE ] key 87 was pressed by player 1
+[15:55:33.070] [SEVERE ] player 1 placing token on slot 1
+[15:55:33.176] [SEVERE ] updating countdown to 56314
+[15:55:33.318] [SEVERE ] updating countdown to 56172
+[15:55:33.459] [SEVERE ] updating countdown to 56031
+[15:55:33.470] [SEVERE ] key 69 was pressed by player 1
+[15:55:33.471] [SEVERE ] player 1 placing token on slot 2
+[15:55:33.474] [SEVERE ] setting player 1 freeze to 3000
+[15:55:33.603] [SEVERE ] updating countdown to 55887
+[15:55:33.744] [SEVERE ] updating countdown to 55746
+[15:55:33.886] [SEVERE ] updating countdown to 55604
+[15:55:34.027] [SEVERE ] updating countdown to 55463
+[15:55:34.169] [SEVERE ] updating countdown to 55321
+[15:55:34.310] [SEVERE ] updating countdown to 55180
+[15:55:34.424] [SEVERE ] setting player 1 freeze to 2050
+[15:55:34.452] [SEVERE ] updating countdown to 55038
+[15:55:34.593] [SEVERE ] updating countdown to 54897
+[15:55:34.735] [SEVERE ] updating countdown to 54755
+[15:55:34.876] [SEVERE ] updating countdown to 54614
+[15:55:35.018] [SEVERE ] updating countdown to 54472
+[15:55:35.159] [SEVERE ] updating countdown to 54331
+[15:55:35.301] [SEVERE ] updating countdown to 54189
+[15:55:35.374] [SEVERE ] setting player 1 freeze to 1100
+[15:55:35.442] [SEVERE ] updating countdown to 54048
+[15:55:35.584] [SEVERE ] updating countdown to 53906
+[15:55:35.725] [SEVERE ] updating countdown to 53765
+[15:55:35.809] [SEVERE ] exit button pressed
+[15:55:35.810] [INFO   ] Thread player1 terminated.
+[15:55:35.810] [INFO   ] Thread player0 terminated.
+[15:55:35.868] [SEVERE ] updating countdown to 53622
+[15:55:35.868] [INFO   ] Thread dealer terminated.
+[15:55:35.869] [INFO   ] thread dealer terminated.
+[15:55:35.869] [SEVERE ] thanks for playing... it was fun!
+[15:55:35.870] [INFO   ] thread main terminated.

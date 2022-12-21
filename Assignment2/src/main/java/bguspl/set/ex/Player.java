@@ -321,6 +321,7 @@ public class Player implements Runnable {
             Thread f = new Thread(() ->{this.freeze(penaltyTime);});
             f.start();
         }
+   
     }
 
     public void executeFreezeAI(long penaltyTime)

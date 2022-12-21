@@ -231,7 +231,7 @@ public class Dealer implements Runnable {
             {
                 try
                 {
-                    lock.wait(toSleep);
+                    lock.wait(10);
                     if(this.queue.size()>0)this.checkSet();
                     toSleep = toSleep-(System.currentTimeMillis()-start); 
                 }
