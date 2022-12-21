@@ -18,8 +18,8 @@ public class Dealer implements Runnable {
      * The game environment object.
      */
     private final Env env;
-    private final int MARGIN = 999;
     private final int SECOND = 950;
+    private final int ONEMILLISECOND=1;
 
     /**
      * Game entities.
@@ -42,7 +42,7 @@ public class Dealer implements Runnable {
     private volatile boolean terminate;
     private volatile boolean found;
     private volatile boolean thereIsNoSet;
-    private volatile boolean stop;
+
 
     /**
      * The time when the dealer needs to reshuffle the deck due to turn timeout.
@@ -72,11 +72,14 @@ public class Dealer implements Runnable {
     {
         env.logger.info("Thread " + Thread.currentThread().getName() + " starting.");
         this.runPlayers();
+        this.debug();
         this.stopPress(); 
         placeCardsOnTable();
         while (!shouldFinish())
         {
+            
             this.startPress();
+            this.setSet();
             this.found = false;
             this.table.hints();
             timerLoop();
@@ -102,6 +105,19 @@ public class Dealer implements Runnable {
 
 
     }
+    public void setSet()
+    {
+        for(int i=0;i<this.set.length;i++)this.set[i]=-1;
+    }
+    public boolean inSet(int slot)
+    {
+        for(int i=0;i<this.set.length;i++)
+        {
+            if(this.set[i]==slot)return true;
+
+        }
+        return false;
+    }
 
     public int[] createSlots()
     {
@@ -118,11 +134,10 @@ public class Dealer implements Runnable {
     {
         this.env.ui.setCountdown(this.env.config.turnTimeoutMillis, terminate);
         long start    = System.currentTimeMillis();
-        long end      = start +this.env.config.turnTimeoutMillis+MARGIN;
-        //long end      = start +10000;
+        long end      = start +this.env.config.turnTimeoutMillis;
         while (!terminate && !this.found && System.currentTimeMillis() < end) 
         {
-            sleepUntilWokenOrTimeout();
+            sleepUntilWokenOrTimeout(end);
             updateTimerDisplay(this.found,end);
         }
         
@@ -203,12 +218,15 @@ public class Dealer implements Runnable {
      * Sleep for a fixed amount of time or until the thread is awakened for some purpose.
      * @throws InterruptedException
      */
-    private void sleepUntilWokenOrTimeout() 
+    private void sleepUntilWokenOrTimeout(long end) 
     {
-        long start     = System.currentTimeMillis();
-        long time      = start;
-        long toSleep   = SECOND;
-        while (time < start+SECOND && !found)
+        long start     = System.currentTimeMillis(),toSleep,endInner;
+        if(end -start<this.env.config.turnTimeoutWarningMillis)
+            toSleep   =ONEMILLISECOND;
+        else
+            toSleep   = SECOND;
+        endInner = start+ toSleep;
+        while (System.currentTimeMillis()< endInner && !found && toSleep>=0)
         {
             synchronized (this.lock) 
             {
@@ -216,10 +234,7 @@ public class Dealer implements Runnable {
                 {
                     lock.wait(toSleep);
                     if(this.queue.size()>0)this.checkSet();
-                    time    = System.currentTimeMillis();
-                    toSleep = SECOND-(time-start); 
-                    
-                    
+                    toSleep = toSleep-(System.currentTimeMillis()-start); 
                 }
                 catch (InterruptedException ignored) {}
             }
@@ -230,7 +245,12 @@ public class Dealer implements Runnable {
      */
     private void updateTimerDisplay(boolean reset,long end) 
     {
-        this.env.ui.setCountdown(end-System.currentTimeMillis(), reset);
+        long time = end-System.currentTimeMillis();
+
+        if(time<=this.env.config.turnTimeoutWarningMillis && time>=0)
+            this.env.ui.setCountdown(time, true);
+        else
+            this.env.ui.setCountdown(time, false);
     }
 
     public void debug()

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="0" failures="0" name="bguspl.set.ex.DealerTest" time="0" errors="0" skipped="0">
+<testsuite tests="0" failures="0" name="bguspl.set.ex.DealerTest" time="0.003" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/local/Java/jdk1.8.0_181/jre/lib/amd64"/>
     <property name="java.vm.version" value="25.181-b13"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
-    <property name="maven.multiModuleProjectDirectory" value="/home/users/bsc/2023/razmar/Desktop/SPL/Assignment2"/>
+    <property name="maven.multiModuleProjectDirectory" value="/home/users/bsc/2023/idoisr/Desktop/SPL/Assignment2"/>
     <property name="java.vendor.url" value="http://java.oracle.com/"/>
     <property name="path.separator" value=":"/>
     <property name="guice.disable.misplaced.annotation.check" value="true"/>
@@ -15,9 +15,10 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/users/bsc/2023/razmar/Desktop/SPL/Assignment2"/>
+    <property name="user.dir" value="/home/users/bsc/2023/idoisr/Desktop/SPL/Assignment2"/>
     <property name="java.runtime.version" value="1.8.0_181-b13"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
+    <property name="basedir" value="/home/users/bsc/2023/idoisr/Desktop/SPL/Assignment2"/>
     <property name="java.endorsed.dirs" value="/usr/local/Java/jdk1.8.0_181/jre/lib/endorsed"/>
     <property name="os.arch" value="amd64"/>
     <property name="java.io.tmpdir" value="/tmp"/>
@@ -28,18 +29,19 @@
     <property name="classworlds.conf" value="/usr/share/maven/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/usr/lib:/usr/X11R6/lib:/usr/share/lib:/usr/openwin/lib:/usr/local/lib/X11:/usr/dt/lib/:/usr/local/lib:/usr/ucb/lib:/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib"/>
+    <property name="surefire.test.class.path" value="/home/users/bsc/2023/idoisr/Desktop/SPL/Assignment2/target/test-classes:/home/users/bsc/2023/idoisr/Desktop/SPL/Assignment2/target/classes:/home/users/bsc/2023/idoisr/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.9.1/junit-jupiter-engine-5.9.1.jar:/home/users/bsc/2023/idoisr/.m2/repository/org/junit/platform/junit-platform-engine/1.9.1/junit-platform-engine-1.9.1.jar:/home/users/bsc/2023/idoisr/.m2/repository/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar:/home/users/bsc/2023/idoisr/.m2/repository/org/junit/platform/junit-platform-commons/1.9.1/junit-platform-commons-1.9.1.jar:/home/users/bsc/2023/idoisr/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.9.1/junit-jupiter-api-5.9.1.jar:/home/users/bsc/2023/idoisr/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/users/bsc/2023/idoisr/.m2/repository/org/mockito/mockito-core/4.9.0/mockito-core-4.9.0.jar:/home/users/bsc/2023/idoisr/.m2/repository/net/bytebuddy/byte-buddy/1.12.16/byte-buddy-1.12.16.jar:/home/users/bsc/2023/idoisr/.m2/repository/net/bytebuddy/byte-buddy-agent/1.12.16/byte-buddy-agent-1.12.16.jar:/home/users/bsc/2023/idoisr/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/users/bsc/2023/idoisr/.m2/repository/org/mockito/mockito-junit-jupiter/4.9.0/mockito-junit-jupiter-4.9.0.jar:"/>
     <property name="maven.conf" value="/usr/share/maven/conf"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
-    <property name="os.version" value="4.15.0-197-generic"/>
+    <property name="os.version" value="4.15.0-200-generic"/>
     <property name="library.jansi.path" value="/usr/share/maven/lib/jansi-native"/>
-    <property name="user.home" value="/home/users/bsc/2023/razmar"/>
+    <property name="user.home" value="/home/users/bsc/2023/idoisr"/>
     <property name="user.timezone" value="Asia/Jerusalem"/>
     <property name="java.awt.printerjob" value="sun.print.PSPrinterJob"/>
     <property name="java.specification.version" value="1.8"/>
     <property name="file.encoding" value="UTF-8"/>
-    <property name="user.name" value="razmar@wincs.cs.bgu.ac.il"/>
+    <property name="user.name" value="idoisr@wincs.cs.bgu.ac.il"/>
     <property name="java.class.path" value="/usr/share/maven/boot/plexus-classworlds-2.x.jar"/>
     <property name="java.vm.specification.version" value="1.8"/>
     <property name="sun.arch.data.model" value="64"/>
@@ -55,6 +57,7 @@
     <property name="sun.boot.class.path" value="/usr/local/Java/jdk1.8.0_181/jre/lib/resources.jar:/usr/local/Java/jdk1.8.0_181/jre/lib/rt.jar:/usr/local/Java/jdk1.8.0_181/jre/lib/sunrsasign.jar:/usr/local/Java/jdk1.8.0_181/jre/lib/jsse.jar:/usr/local/Java/jdk1.8.0_181/jre/lib/jce.jar:/usr/local/Java/jdk1.8.0_181/jre/lib/charsets.jar:/usr/local/Java/jdk1.8.0_181/jre/lib/jfr.jar:/usr/local/Java/jdk1.8.0_181/jre/classes"/>
     <property name="java.vendor" value="Oracle Corporation"/>
     <property name="maven.home" value="/usr/share/maven"/>
+    <property name="localRepository" value="/home/users/bsc/2023/idoisr/.m2/repository"/>
     <property name="file.separator" value="/"/>
     <property name="java.vendor.url.bug" value="http://bugreport.sun.com/bugreport/"/>
     <property name="sun.cpu.endian" value="little"/>
