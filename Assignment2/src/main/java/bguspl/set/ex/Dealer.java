@@ -72,7 +72,6 @@ public class Dealer implements Runnable {
     {
         env.logger.info("Thread " + Thread.currentThread().getName() + " starting.");
         this.runPlayers();
-        this.debug();
         this.stopPress(); 
         placeCardsOnTable();
         while (!shouldFinish())
@@ -253,18 +252,6 @@ public class Dealer implements Runnable {
             this.env.ui.setCountdown(time, false);
     }
 
-    public void debug()
-    {
-        int k;
-        Random rand  = new Random();
- 
-        for(int i=0 ; i<72; i++)
-        {
-            k = rand.nextInt(deck.size());
-            deck.remove(k);
-        }
-
-    }
 
     /**
      * Returns all the cards from the table to the deck.

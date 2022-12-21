@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
-Test set: bguspl.set.ex.DealerTest
+Test set: bguspl.set.ex.TableTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.407 s - in bguspl.set.ex.DealerTest
+Tests run: 7, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 s - in bguspl.set.ex.TableTest
