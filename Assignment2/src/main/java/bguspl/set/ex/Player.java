@@ -41,8 +41,9 @@ public class Player implements Runnable {
     /**
      * this erplaces 'null' in the keyPresses array.
      */
-    private final int noPress = -1;
-    private final int MARGIN  = 999;
+    private final int noPress   = -1;
+    private final int AIWAIT    = 10;
+    private final int ONESECOND = 950;
 
     /**
      * the number of preeses currenlty in keyPresses array.
@@ -140,7 +141,7 @@ public class Player implements Runnable {
             {
                 this.keyPressAi();
                 try {
-                    synchronized (this) { wait(10); }
+                    synchronized (this) { wait(AIWAIT); }
                 } catch (InterruptedException ignored) {this.terminate();}
             }
             env.logger.info("Thread " + Thread.currentThread().getName() + " terminated.");
@@ -158,8 +159,12 @@ public class Player implements Runnable {
     public void keyPressed(int slot) 
     {
         System.out.println(slot);
-        while(found && !terminate){}
-        if( !found && !freeze && isHuman() && this.table.getSlotToCard(slot)!=-1)
+        boolean betweenSet = false;
+        while(found && !terminate)
+        {
+            if(this.dealer.inSet(slot))betweenSet = true;
+        }
+        if( !found && !freeze && isHuman() && this.table.getSlotToCard(slot)!=-1 && !betweenSet)
         {
             synchronized(this.currentPresslock)
             {
@@ -316,6 +321,7 @@ public class Player implements Runnable {
             Thread f = new Thread(() ->{this.freeze(penaltyTime);});
             f.start();
         }
+   
     }
 
     public void executeFreezeAI(long penaltyTime)
@@ -335,7 +341,7 @@ public class Player implements Runnable {
             {
                 try
                 {
-                    this.wait(950);
+                    this.wait(ONESECOND);
                     this.updateTimerDisplay(end);
 
                 }
