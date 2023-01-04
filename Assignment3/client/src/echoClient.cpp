@@ -9,14 +9,17 @@ int main (int argc, char *argv[]) {
         std::cerr << "Usage: " << argv[0] << " host port" << std::endl << std::endl;
         return -1;
     }
+    //definding the host and the port
     std::string host = argv[1];
     short port = atoi(argv[2]);
     
+    //create the connection, means create a socket to connect with
     ConnectionHandler connectionHandler(host, port);
     if (!connectionHandler.connect()) {
         std::cerr << "Cannot connect to " << host << ":" << port << std::endl;
         return 1;
     }
+    
 	
 	//From here we will see the rest of the ehco client implementation:
     while (1) {

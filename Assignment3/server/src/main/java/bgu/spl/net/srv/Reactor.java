@@ -36,8 +36,9 @@ public class Reactor<T> implements Server<T> {
     }
 
     @Override
-    public void serve() {
-	selectorThread = Thread.currentThread();
+    public void serve() 
+    {
+	    selectorThread = Thread.currentThread();
         try (Selector selector = Selector.open();
                 ServerSocketChannel serverSock = ServerSocketChannel.open()) {
 
@@ -53,7 +54,8 @@ public class Reactor<T> implements Server<T> {
                 selector.select();
                 runSelectionThreadTasks();
 
-                for (SelectionKey key : selector.selectedKeys()) {
+                for (SelectionKey key : selector.selectedKeys()) 
+                {
 
                     if (!key.isValid()) {
                         continue;
