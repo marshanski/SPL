@@ -14,7 +14,8 @@ public class RCIClient implements Closeable {
     private final BufferedInputStream in;
     private final BufferedOutputStream out;
 
-    public RCIClient(String host, int port) throws IOException {
+    public RCIClient(String host, int port) throws IOException 
+    {
         sock = new Socket(host, port);
         encdec = new ObjectEncoderDecoder();
         in = new BufferedInputStream(sock.getInputStream());

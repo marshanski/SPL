@@ -8,16 +8,21 @@ public class NewsFeed {
 
     private ConcurrentHashMap<String, ConcurrentLinkedQueue<String>> channels = new ConcurrentHashMap<>();
 
-    public ArrayList<String> fetch(String channel) {
+    public ArrayList<String> fetch(String channel) 
+    {
         ConcurrentLinkedQueue<String> queue = channels.get(channel);
-        if (queue == null) {
+        if (queue == null)
+        {
             return new ArrayList<>(0); //empty
-        } else {
+        } 
+        else 
+        {
             return new ArrayList<>(queue); //copy of the queue, arraylist is serializable
         }
     }
 
-    public void publish(String channel, String news) {
+    public void publish(String channel, String news) 
+    {
         ConcurrentLinkedQueue<String> queue = channels.computeIfAbsent(channel, k -> new ConcurrentLinkedQueue<>());
         queue.add(news);
     }

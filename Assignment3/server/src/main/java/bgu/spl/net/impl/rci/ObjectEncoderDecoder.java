@@ -10,7 +10,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
 
-public class ObjectEncoderDecoder implements MessageEncoderDecoder<Serializable> {
+public class ObjectEncoderDecoder implements MessageEncoderDecoder<Serializable> 
+{
 
     private final ByteBuffer lengthBuffer = ByteBuffer.allocate(4);
     private byte[] objectBytes = null;
@@ -43,7 +44,8 @@ public class ObjectEncoderDecoder implements MessageEncoderDecoder<Serializable>
         return serializeObject(message);
     }
 
-    private Serializable deserializeObject() {
+    private Serializable deserializeObject() 
+    {
         try {
             ObjectInput in = new ObjectInputStream(new ByteArrayInputStream(objectBytes));
             return (Serializable) in.readObject();
