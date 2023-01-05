@@ -1,4 +1,5 @@
 #include "../include/ConnectionHandler.h"
+#include "Connect.h"
 
 using boost::asio::ip::tcp;
 
@@ -7,6 +8,7 @@ using std::cout;
 using std::cerr;
 using std::endl;
 using std::string;
+
 
 ConnectionHandler::ConnectionHandler(string host, short port) : host_(host), port_(port), io_service_(),
                                                                 socket_(io_service_) {}
@@ -68,7 +70,10 @@ bool ConnectionHandler::getLine(std::string &line) {
 	return getFrameAscii(line, '\n');
 }
 
-bool ConnectionHandler::sendLine(std::string &line) {
+bool ConnectionHandler::sendLine(std::string &line)
+{
+	Connect c = Connect(line);
+	cout << c.toString() << endl;
 	return sendFrameAscii(line, '\n');
 }
 

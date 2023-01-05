@@ -3,10 +3,10 @@ LDFLAGS:=-lboost_system -lpthread
 
 all: EchoClient
 
-EchoClient: bin/ConnectionHandler.o bin/echoClient.o
-	g++ -o bin/EchoClient bin/ConnectionHandler.o bin/echoClient.o $(LDFLAGS)
+EchoClient: bin/ConnectionHandler.o bin/echoClient.o bin/Connect.o
+	g++ -o bin/EchoClient bin/ConnectionHandler.o bin/echoClient.o bin/Connect.o $(LDFLAGS)
 
-StompWCIClient: bin/ConnectionHandler.o bin/StompClient.obin/event.o
+StompWCIClient: bin/ConnectionHandler.o bin/StompClient.o bin/event.o
 	g++ -o bin/StompWCIClient bin/ConnectionHandler.o bin/StompClient.o $(LDFLAGS)
 
 bin/ConnectionHandler.o: src/ConnectionHandler.cpp
@@ -17,6 +17,9 @@ bin/echoClient.o: src/echoClient.cpp
 
 bin/event.o: src/event.cpp
 	g++ $(CFLAGS) -o bin/event.o src/event.cpp
+
+bin/Connect.o: src/Connect.cpp
+	g++ $(CFLAGS) -o bin/Connect.o src/Connect.cpp
 
 bin/StompClient.o: src/StompClient.cpp
 	g++ $(CFLAGS) -o bin/StompClient.o src/StompClient.cpp
