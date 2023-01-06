@@ -7,12 +7,14 @@ public class RemoteCommandInvocationProtocol<T> implements MessagingProtocol<Ser
 
     private T arg;
 
-    public RemoteCommandInvocationProtocol(T arg) {
+    public RemoteCommandInvocationProtocol(T arg) 
+    {
         this.arg = arg;
     }
 
     @Override
-    public Serializable process(Serializable msg) {
+    public Serializable process(Serializable msg) 
+    {
         return ((Command) msg).execute(arg);
     }
 
