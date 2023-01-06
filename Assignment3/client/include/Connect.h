@@ -21,4 +21,6 @@ public:
     virtual ~Frame();
     string toString(std::string order);
     string ConnectToString(std::string order);
+    string SubscribeToString(std::string msg);
+    string unSubscribeToString(std::string msg);
 };

@@ -6,6 +6,10 @@
 #include <sstream>
 #include <vector>
 
+using std::cin;
+using std::cout;
+using std::cerr;
+using std::endl;
 using std::string;
 using std::vector;
 
@@ -38,6 +42,11 @@ string Frame:: toString(std::string msg)
     vector<string> parametrs    = split(msg,' ');
     if(parametrs[0] == "login")
         return ConnectToString(msg);
+    if(parametrs[0] =="join")
+        return SubscribeToString(msg);
+    if(parametrs[0] =="exit")
+        return unSubscribeToString(msg);
+    return "bye";
 
 }
 
@@ -52,7 +61,27 @@ string Frame:: ConnectToString(std::string msg)
     str +="Port: "     + hostAndPort[1] + "\n";
     str +="Username: " + parametrs [2]  + "\n";
     str +="Password: " + parametrs [3]  + "\n";
-    str += "\n" +end;
+    return str;
+}
+
+string Frame:: SubscribeToString(std::string msg)
+{
+    vector<string> parametrs    = split(msg,' ');
+    string str = "",command = "Subscribe", end = "\0",id = "17",recipt="73";
+    str +="Command: "     + command      + "\n";
+    str +="destination:/ " + parametrs[1] + "\n";
+    str +="id:"           + id           + "\n";
+    str +="recipt: "      + recipt       + "\n";
+    return str;
+
+}
+string Frame:: unSubscribeToString(std::string msg)
+{
+    vector<string> parametrs    = split(msg,' ');
+    string str = "",command = "UNSUBSCRIBE", end = "\0",id = "17",recipt="73";
+    str +="Command: "     + command      + "\n";
+    str +="id:"           + id           + "\n";
+    str +="recipt: "      + recipt       + "\n";
     return str;
 
 }

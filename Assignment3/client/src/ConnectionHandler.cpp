@@ -74,7 +74,7 @@ bool ConnectionHandler::sendLine(std::string &line)
 {
 	Frame c = Frame();
 	cout << c.toString(line) << endl;
-	return sendFrameAscii(c.toString(line), '\n');
+	return sendFrameAscii(c.toString(line), '\0');
 }
 
 
