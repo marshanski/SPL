@@ -23,30 +23,36 @@ std::vector<std::string> split(const std::string& s, char delimiter)
 }
 
 
-Connect::Connect(std::string msg)
+Frame::Frame()
+{
+    
+}
+
+
+Frame::~Frame()
+{
+}
+
+string Frame:: toString(std::string msg)
+{
+    vector<string> parametrs    = split(msg,' ');
+    if(parametrs[0] == "login")
+        return ConnectToString(msg);
+
+}
+
+string Frame:: ConnectToString(std::string msg)
 {
     vector<string> parametrs    = split(msg,' ');
     vector<string>hostAndPort   = split(parametrs [1],':');
-    command = "Connect";
-    host    = hostAndPort[0];
-    port    = hostAndPort[1];
-    username = parametrs [2];
-    password = parametrs [3];
-}
-
-
-Connect::~Connect()
-{
-}
-
-string Connect:: toString()
-{
     string str = "";
+    string command = "Connect", end = "\0" ;
     str +="Command: "  + command  + "\n";
-    str +="Host: "     + host     + "\n";
-    str +="Port: "     + port     + "\n";
-    str +="Username: " + username + "\n";
-    str +="Password: " + password + "\n";
+    str +="Host: "     + hostAndPort[0] + "\n";
+    str +="Port: "     + hostAndPort[1] + "\n";
+    str +="Username: " + parametrs [2]  + "\n";
+    str +="Password: " + parametrs [3]  + "\n";
+    str += "\n" +end;
     return str;
 
 }

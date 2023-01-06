@@ -4,20 +4,21 @@
 #include <iostream>
 #include <map>
 #include <vector>
+#include <iostream>
+#include <unordered_map>
+#include <functional>
 using std::string;
 using std::vector;
 
-class Connect
+class Frame
 {
 private:
-    string command;
-    string host;
-    string  port;
-    string username;
-    string password;
+
+   
 
 public:
-    Connect(std::string order);
-    virtual ~Connect();
-    string toString();
+    Frame();
+    virtual ~Frame();
+    string toString(std::string order);
+    string ConnectToString(std::string order);
 };

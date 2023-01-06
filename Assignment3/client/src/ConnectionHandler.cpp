@@ -72,9 +72,9 @@ bool ConnectionHandler::getLine(std::string &line) {
 
 bool ConnectionHandler::sendLine(std::string &line)
 {
-	Connect c = Connect(line);
-	cout << c.toString() << endl;
-	return sendFrameAscii(line, '\n');
+	Frame c = Frame();
+	cout << c.toString(line) << endl;
+	return sendFrameAscii(c.toString(line), '\n');
 }
 
 
