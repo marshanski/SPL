@@ -23,4 +23,6 @@ public:
     string ConnectToString(std::string order);
     string SubscribeToString(std::string msg);
     string unSubscribeToString(std::string msg);
+    string logOutToString(std::string msg);
+    string reportToString(std::string msg);
 };
