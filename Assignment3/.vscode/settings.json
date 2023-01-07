@@ -60,7 +60,21 @@
         "typeinfo": "cpp",
         "utility": "cpp",
         "valarray": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "csetjmp": "cpp",
+        "cfenv": "cpp",
+        "cinttypes": "cpp",
+        "cuchar": "cpp",
+        "unordered_set": "cpp",
+        "algorithm": "cpp",
+        "filesystem": "cpp",
+        "iterator": "cpp",
+        "memory_resource": "cpp",
+        "random": "cpp",
+        "regex": "cpp",
+        "scoped_allocator": "cpp",
+        "shared_mutex": "cpp",
+        "*.ipp": "cpp"
     },
     "makefile.makefilePath": "client/"
 }
