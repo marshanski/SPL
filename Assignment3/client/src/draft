@@ -1,0 +1,5 @@
+        if(event.get_name() == "halftime")
+            HALFTIME = "false";
+
+        if(HALFTIME == "true")
+            str+="    before halftime: " + HALFTIME + "\n";

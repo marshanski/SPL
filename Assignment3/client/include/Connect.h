@@ -19,10 +19,10 @@ private:
 public:
     Frame();
     virtual ~Frame();
-    string toString(std::string order);
-    string ConnectToString(std::string order);
-    string SubscribeToString(std::string msg);
-    string unSubscribeToString(std::string msg);
-    string logOutToString(std::string msg);
-    string reportToString(std::string msg);
+    vector<string>  toString(std::string order);
+    vector<string>  ConnectToString(std::string order);
+    vector<string>  SubscribeToString(std::string msg);
+    vector<string>  unSubscribeToString(std::string msg);
+    vector<string>  logOutToString(std::string msg);
+    vector<string>  reportToString(std::string msg);
 };

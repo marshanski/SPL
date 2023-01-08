@@ -38,9 +38,10 @@ Frame::~Frame()
 {
 }
 
-string Frame:: toString(std::string msg)
+vector<string>  Frame:: toString(std::string msg)
 {
     vector<string> parametrs    = split(msg,' ');
+    std::vector<string> messages;
     if(parametrs[0] == "login")
         return ConnectToString(msg);
     if(parametrs[0] =="join")
@@ -51,12 +52,14 @@ string Frame:: toString(std::string msg)
         return logOutToString(msg);
     if(parametrs[0] =="report")
         return reportToString(msg);
-    return "bye";
 
+    messages.push_back("bye");
+    return messages;
 }
 
-string Frame:: ConnectToString(std::string msg)
+vector<string>  Frame:: ConnectToString(std::string msg)
 {
+    std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
     //vector<string>hostAndPort   = split(parametrs [1],':');
     string str = "";
@@ -66,60 +69,71 @@ string Frame:: ConnectToString(std::string msg)
     str +="accept-version: "+ version        + "\n";
     str +="login: "         + parametrs [2]  + "\n";
     str +="passcode: "      + parametrs [3]  + "\n";
-    return str;
+    messages.push_back(str);
+    return messages;
 }
 
-string Frame:: SubscribeToString(std::string msg)
+vector<string>  Frame:: SubscribeToString(std::string msg)
 {
+    std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
     string str = "",command = "SUBSCRIBE", end = "\0",id = "17",recipt="73";
     str +="command: "     + command      + "\n";
     str +="destination:/ " + parametrs[1] + "\n";
     str +="id:"           + id           + "\n";
     str +="recipt: "      + recipt       + "\n";
-    return str;
+    messages.push_back(str);
+    return messages;
 
 }
-string Frame:: unSubscribeToString(std::string msg)
+vector<string>  Frame:: unSubscribeToString(std::string msg)
 {
+    std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
     string str = "",command = "UNSUBSCRIBE", end = "\0",id = "17",recipt="73";
     str +="command: "     + command      + "\n";
     str +="id:"           + id           + "\n";
     str +="recipt: "      + recipt       + "\n";
-    return str;
+    messages.push_back(str);
+    return messages;
 }
 
-string Frame:: logOutToString(std::string msg)
+vector<string>  Frame:: logOutToString(std::string msg)
 {
+    std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
     string str = "",command = "DISCONNECT", end = "\0",recipt="73";
     str +="command: "     + command      + "\n";
     str +="recipt: "      + recipt       + "\n";
-    return str;
+    messages.push_back(str);
+    
+    return messages;
 }
 
-string Frame:: reportToString(std::string msg)
+vector<string>  Frame:: reportToString(std::string msg)
 {
     vector<string> parametrs    = split(msg,' ');
-    std::string team_a_name ,team_b_name,end = "\0",username = "meni";
+    std::string team_a_name ,team_b_name,end = "\0",username = "meni",HALFTIME = "true";
     std::vector<Event> events;
     std::vector<string> messages;
-    names_and_events NAE = parseEventsFile("events1_partial.json");
+    names_and_events NAE = parseEventsFile("events1.json");
     events = NAE.events;
     std::sort(events.begin(), events.end(), [](const Event& a, const Event& b) {return a.get_time() < b.get_time();});
     for(const Event& event: events)
     {
         string str ="";
         str+= "command: send \n";
-        str+= "destination:/"  + NAE.team_a_name + "_" + NAE.team_b_name + "\n"+"\n"; 
+        str+= "destination: "  + NAE.team_a_name + "_" + NAE.team_b_name + "\n"+"\n"; 
         str+= "user: "         + username +"\n";
-        str+= "event time: "    + event.get_name() + "\n";
+        str+= "event name: "    + event.get_name() + "\n";
+
         str+="time: "          + std::to_string(event.get_time()) + "\n";
         str+="general game updates: \n";
+
         for (const auto& update :event.get_game_updates())
         {
             str+="    "+ update.first +": " + update.second + "\n";
+            
         }
         str+="team a updates:  \n" ;
         for (const auto& update :event.get_team_a_updates())
@@ -134,13 +148,12 @@ string Frame:: reportToString(std::string msg)
         }
         str+="description:  \n";
         str+=event.get_discription()+"\n";
-        str+=end;
         cout << str << endl;
         messages.push_back(str);
 
     }
     
-    return "RAZ";
+    return messages;
 
 }
 
