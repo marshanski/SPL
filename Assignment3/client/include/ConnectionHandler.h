@@ -3,6 +3,7 @@
 #include <string>
 #include <iostream>
 #include <boost/asio.hpp>
+#include "../include/user.h"
 
 using boost::asio::ip::tcp;
 
@@ -12,6 +13,7 @@ private:
 	const short port_;
 	boost::asio::io_service io_service_;   // Provides core I/O functionality
 	tcp::socket socket_;
+	User user;
 
 public:
 	ConnectionHandler(std::string host, short port);

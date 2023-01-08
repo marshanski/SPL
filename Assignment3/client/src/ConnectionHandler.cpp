@@ -1,5 +1,6 @@
 #include "../include/ConnectionHandler.h"
 #include "Connect.h"
+#include "../include/user.h"
 
 using boost::asio::ip::tcp;
 
@@ -10,8 +11,9 @@ using std::endl;
 using std::string;
 
 
+
 ConnectionHandler::ConnectionHandler(string host, short port) : host_(host), port_(port), io_service_(),
-                                                                socket_(io_service_) {}
+                                                                socket_(io_service_),user(User()){}
 
 ConnectionHandler::~ConnectionHandler() {
 	close();
@@ -73,7 +75,8 @@ bool ConnectionHandler::getLine(std::string &line) {
 bool ConnectionHandler::sendLine(std::string &line)
 {
 	Frame c = Frame();
-	cout << c.toString(line) << endl;
+	//cout << c.toString(line) << endl;
+	cout << user.getPassCode() << endl;
 	return sendFrameAscii(c.toString(line), '\0');
 }
 

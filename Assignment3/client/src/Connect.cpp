@@ -106,7 +106,7 @@ string Frame:: reportToString(std::string msg)
     std::string team_a_name ,team_b_name,str="",end = "\0";
     std::vector<Event> events;
     std::vector<string> messages;
-    names_and_events NAE = parseEventsFile(parametrs[1]);
+    names_and_events NAE = parseEventsFile("data/events1.json");
     events = NAE.events;
     std::sort(events.begin(), events.end(), [](const Event& a, const Event& b) {return a.get_time() < b.get_time();});
     for(const Event& event: events)
