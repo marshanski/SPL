@@ -76,7 +76,6 @@ bool ConnectionHandler::sendLine(std::string &line)
 {
 	Frame c = Frame();
 	//cout << c.toString(line) << endl;
-	cout << user.getPassCode() << endl;
 	return sendFrameAscii(c.toString(line), '\0');
 }
 

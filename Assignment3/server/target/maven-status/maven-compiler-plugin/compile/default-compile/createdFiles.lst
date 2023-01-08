@@ -1,8 +1,13 @@
 bgu/spl/net/srv/Server$1.class
 bgu/spl/net/impl/newsfeed/NewsFeedServerMain.class
 bgu/spl/net/impl/rci/Command.class
+bgu/spl/net/impl/stomp/StompServerTPC.class
+bgu/spl/net/impl/echo/EchoClientRci.class
 bgu/spl/net/api/MessagingProtocol.class
+bgu/spl/net/impl/stomp/StompMessageEncoderDecoder.class
 bgu/spl/net/impl/rci/RCIClient.class
+bgu/spl/net/impl/stomp/StompServerReactor.class
+bgu/spl/net/impl/stomp/StompProtocol.class
 bgu/spl/net/srv/BlockingConnectionHandler.class
 bgu/spl/net/impl/echo/LineMessageEncoderDecoder.class
 bgu/spl/net/srv/ConnectionHandler.class

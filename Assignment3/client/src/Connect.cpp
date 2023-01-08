@@ -102,37 +102,45 @@ string Frame:: logOutToString(std::string msg)
 string Frame:: reportToString(std::string msg)
 {
     vector<string> parametrs    = split(msg,' ');
-    cout << parametrs[1] ;
-    std::string team_a_name ,team_b_name,str="",end = "\0";
+    std::string team_a_name ,team_b_name,end = "\0",username = "meni";
     std::vector<Event> events;
     std::vector<string> messages;
-    names_and_events NAE = parseEventsFile("data/events1.json");
+    names_and_events NAE = parseEventsFile("events1_partial.json");
     events = NAE.events;
     std::sort(events.begin(), events.end(), [](const Event& a, const Event& b) {return a.get_time() < b.get_time();});
     for(const Event& event: events)
     {
-        str ="";
-        str+= "command: send " + '\n';
+        string str ="";
+        str+= "command: send \n";
         str+= "destination:/"  + NAE.team_a_name + "_" + NAE.team_b_name + "\n"+"\n"; 
-        str+= "user: "         + 'meni' +'\n';
-        str+="event time: "    + event.get_name() + "\n";
+        str+= "user: "         + username +"\n";
+        str+= "event time: "    + event.get_name() + "\n";
         str+="time: "          + std::to_string(event.get_time()) + "\n";
-        str+="team a updates:  " +'\n';
+        str+="general game updates: \n";
+        for (const auto& update :event.get_game_updates())
+        {
+            str+="    "+ update.first +": " + update.second + "\n";
+        }
+        str+="team a updates:  \n" ;
         for (const auto& update :event.get_team_a_updates())
         {
             str+="    "+ update.first +": " + update.second + "\n";
         }
-        str+="team b updates:  " +'\n';
+        
+        str+="team b updates:  \n";
         for (const auto& update :event.get_team_b_updates())
         {
             str+="    "+ update.first +": " + update.second + "\n";
         }
-        str+="description:  " +'\n';
+        str+="description:  \n";
         str+=event.get_discription()+"\n";
         str+=end;
+        cout << str << endl;
         messages.push_back(str);
 
     }
+    
+    return "RAZ";
 
 }
 
