@@ -26,7 +26,12 @@ public class EchoClient {
                 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(sock.getOutputStream()))) {
 
             System.out.println("sending message to server");
-            out.write(args[1]);
+            String str = "Command: SUBSCRICBE" + "\n";
+            str += "destination: /germany_spain" + "\n";
+            str+= "id: 17" + "\n";
+            str+="receipt: 73"+"\n";
+            str+= "\0";
+            out.write(str);
             out.newLine();
             out.flush();
 

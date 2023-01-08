@@ -14,7 +14,7 @@ public class StompMessageEncoderDecoder implements MessageEncoderDecoder<String>
     {
         //notice that the top 128 ascii characters have the same representation as their utf-8 counterparts
         //this allow us to do the following comparison
-        if (nextByte == '\n') {
+        if (nextByte == '\0') { // might need to switch back to /n
             return popString();
         }
 
@@ -24,7 +24,7 @@ public class StompMessageEncoderDecoder implements MessageEncoderDecoder<String>
 
     @Override
     public byte[] encode(String message) {
-        return (message + "\n").getBytes(); //uses utf8 by default
+        return (message + "\0").getBytes(); //uses utf8 by default , might need to switch back to /n
     }
 
     private void pushByte(byte nextByte) {
