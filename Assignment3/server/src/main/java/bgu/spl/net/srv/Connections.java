@@ -2,7 +2,7 @@ package bgu.spl.net.srv;
 
 import java.io.IOException;
 
-public interface Connections<T> 
+public interface Connections<String> //i changed to String, maybe need to change back to type T.
 {
 /*
  * 
@@ -10,9 +10,9 @@ public interface Connections<T>
  להוסיף מחלקה של קונקשיין אימפל
  */
 
-    boolean send(int connectionId, T msg);
+    boolean send(int connectionId, String msg);
 
-    void send(String channel, T msg);
+    void send(String channel, String msg);
 
     void disconnect(int connectionId);
 }
