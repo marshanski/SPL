@@ -70,6 +70,7 @@ vector<string>  Frame:: ConnectToString(std::string msg)
     str +="login: "         + parametrs [2]  + "\n";
     str +="passcode: "      + parametrs [3]  + "\n";
     str += "\n";
+    cout << str << endl;
     messages.push_back(str);
     return messages;
 }
