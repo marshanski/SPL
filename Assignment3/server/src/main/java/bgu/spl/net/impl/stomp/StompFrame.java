@@ -30,7 +30,7 @@ public class StompFrame {
 
         // Headers
         Map<String, String> headers = new HashMap<>();
-        while (!lines[pos].isEmpty()) {
+        while (pos<lines.length && !lines[pos].isEmpty()) {
             String[] keyValue = lines[pos].split(":");
             headers.put(keyValue[0], keyValue[1]);
             pos++;

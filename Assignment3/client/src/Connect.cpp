@@ -78,7 +78,7 @@ vector<string>  Frame:: SubscribeToString(std::string msg)
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
     string str = "",command = "SUBSCRIBE", end = "\0",id = "17",recipt="73";
-    str +="command: "     + command      + "\n";
+    str +=command      + "\n";
     str +="destination:/ " + parametrs[1] + "\n";
     str +="id:"           + id           + "\n";
     str +="recipt: "      + recipt       + "\n";
@@ -91,7 +91,7 @@ vector<string>  Frame:: unSubscribeToString(std::string msg)
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
     string str = "",command = "UNSUBSCRIBE", end = "\0",id = "17",recipt="73";
-    str +="command: "     + command      + "\n";
+    str +=command      + "\n";
     str +="id:"           + id           + "\n";
     str +="recipt: "      + recipt       + "\n";
     messages.push_back(str);
@@ -103,7 +103,7 @@ vector<string>  Frame:: logOutToString(std::string msg)
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
     string str = "",command = "DISCONNECT", end = "\0",recipt="73";
-    str +="command: "     + command      + "\n";
+    str +=command      + "\n";
     str +="recipt: "      + recipt       + "\n";
     messages.push_back(str);
     
