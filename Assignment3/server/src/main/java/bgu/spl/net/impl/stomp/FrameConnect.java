@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class FrameConnect 
 {
+    private StompCommand command = null;
     private String login = null;
     private String password= null;
     private String host= null;
@@ -13,6 +14,7 @@ public class FrameConnect
 
     public FrameConnect(StompFrame frame)
     {
+        this.command = frame.getCommand();
         headers = frame.getHeaders();
         this.login = headers.get("login");
         this.password = headers.get("password");
