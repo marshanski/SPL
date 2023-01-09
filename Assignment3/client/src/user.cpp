@@ -37,3 +37,11 @@ string User:: getPassCode()
 {
     return passcode;
 }
+bool User:: getIsConnected()
+{
+    return isConnetd;
+}
+int User:: getCount()
+{
+    return count;
+}

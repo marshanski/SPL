@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../include/user.h"
 #include <string>
 #include <iostream>
 #include <map>
@@ -19,10 +20,12 @@ private:
 public:
     Frame();
     virtual ~Frame();
-    vector<string>  toString(std::string order);
-    vector<string>  ConnectToString(std::string order);
-    vector<string>  SubscribeToString(std::string msg);
-    vector<string>  unSubscribeToString(std::string msg);
-    vector<string>  logOutToString(std::string msg);
-    vector<string>  reportToString(std::string msg);
+    vector<string>  toString(std::string order,User& user);
+    vector<string>  ConnectToString(std::string order,User& user);
+    vector<string>  SubscribeToString(std::string msg,User& user);
+    vector<string>  unSubscribeToString(std::string msg,User& user);
+    vector<string>  logOutToString(std::string msg,User& user);
+    vector<string>  reportToString(std::string msg,User& user);
+    void toUser(std::string msg,User& user,User& user);
+    void toUserConnect(std::string msg, User& user);
 };

@@ -27,5 +27,7 @@ public:
     void setUsername(string name);
     void setPassCode(string code);
     string getPassCode();
+    bool getIsConnected();
+    int getCount();
 
 };

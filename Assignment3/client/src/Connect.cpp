@@ -1,5 +1,6 @@
 #include "../include/Connect.h"
 #include "../include/event.h"
+#include "../include/user.h"
 #include "../include/json.hpp"
 #include <string>
 #include <bits/stdc++.h>
@@ -38,28 +39,35 @@ Frame::~Frame()
 {
 }
 
-vector<string>  Frame:: toString(std::string msg)
+vector<string>  Frame:: toString(std::string msg, User& user)
 {
     vector<string> parametrs    = split(msg,' ');
     std::vector<string> messages;
     if(parametrs[0] == "login")
-        return ConnectToString(msg);
+        return ConnectToString(msg,User& user);
     if(parametrs[0] =="join")
-        return SubscribeToString(msg);
+        return SubscribeToString(msg,User& user);
     if(parametrs[0] =="exit")
-        return unSubscribeToString(msg);
+        return unSubscribeToString(msg,User& user);
     if(parametrs[0] =="logout")
-        return logOutToString(msg);
+        return logOutToString(msg,User& user);
     if(parametrs[0] =="report")
-        return reportToString(msg);
+        return reportToString(msg,User& user);
 
     messages.push_back("bye");
     return messages;
 }
 
-vector<string>  Frame:: ConnectToString(std::string msg)
+vector<string>  Frame:: ConnectToString(std::string msg,User& user)
 {
     std::vector<string> messages;
+    if(user.getIsConnected())
+    {
+        cout <<"The user is already log in";
+        messages.push_back("NO MESSAGE");
+        return messages;
+
+    }
     vector<string> parametrs    = split(msg,' ');
     //vector<string>hostAndPort   = split(parametrs [1],':');
     string str = "";
@@ -70,13 +78,19 @@ vector<string>  Frame:: ConnectToString(std::string msg)
     str +="login: "         + parametrs [2]  + "\n";
     str +="passcode: "      + parametrs [3]  + "\n";
     str += "\n";
-    cout << str << endl;
     messages.push_back(str);
     return messages;
 }
 
-vector<string>  Frame:: SubscribeToString(std::string msg)
+vector<string>  Frame:: SubscribeToString(std::string msg,User& user)
 {
+    if(!user.getIsConnected())
+    {
+        cout <<"The user is already log in";
+        messages.push_back("NO MESSAGE");
+        return messages;
+
+    }
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
     string str = "",command = "SUBSCRIBE", end = "\0",id = "17",recipt="73";
@@ -88,7 +102,7 @@ vector<string>  Frame:: SubscribeToString(std::string msg)
     return messages;
 
 }
-vector<string>  Frame:: unSubscribeToString(std::string msg)
+vector<string>  Frame:: unSubscribeToString(std::string msg,User& user)
 {
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
@@ -100,7 +114,7 @@ vector<string>  Frame:: unSubscribeToString(std::string msg)
     return messages;
 }
 
-vector<string>  Frame:: logOutToString(std::string msg)
+vector<string>  Frame:: logOutToString(std::string msg,User& user)
 {
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
@@ -112,7 +126,7 @@ vector<string>  Frame:: logOutToString(std::string msg)
     return messages;
 }
 
-vector<string>  Frame:: reportToString(std::string msg)
+vector<string>  Frame:: reportToString(std::string msg,User& user)
 {
     vector<string> parametrs    = split(msg,' ');
     std::string team_a_name ,team_b_name,end = "\0",username = "meni",HALFTIME = "true";
@@ -157,6 +171,35 @@ vector<string>  Frame:: reportToString(std::string msg)
     
     return messages;
 
+}
+
+void Frame:: toUser(std::string msg, User& user)
+{
+    vector<string> parametrs    = split(msg,' ');
+    std::vector<string> messages;
+    cout <<"wiwi" << endl; 
+    if(parametrs[0] == "login")
+        toUserConnect(msg,user);
+    /*if(parametrs[0] =="join")
+        return SubscribeToString(msg);
+    if(parametrs[0] =="exit")
+        return unSubscribeToString(msg);
+    if(parametrs[0] =="logout")
+        return logOutToString(msg);
+    if(parametrs[0] =="report")
+        return reportToString(msg);
+
+    messages.push_back("bye");
+    return messages;*/
+}
+
+
+void Frame:: toUserConnect(std::string msg, User& user)
+{
+    vector<string> parametrs    = split(msg,' ');
+    user.setUsername(parametrs [2]);
+    user.setPassCode(parametrs [3]);
+   
 }
 
 

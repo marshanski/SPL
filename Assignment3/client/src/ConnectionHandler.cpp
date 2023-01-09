@@ -75,12 +75,15 @@ bool ConnectionHandler::getLine(std::string &line) {
 bool ConnectionHandler::sendLine(std::string &line)
 {
 	Frame c = Frame();
-	std::vector<string> messagesToSend = c.toString(line);
+	std::vector<string> messagesToSend = c.toString(line,user);
+	c.toUser(line ,user);
 	for(const string message: messagesToSend)
 	{
-		cout << message << endl;
-		if(!sendFrameAscii(message, '\0'))
-			return false;
+		if(message != "NO MESSAGE")
+		{
+			if(!sendFrameAscii(message, '\0'))
+				return false;
+		}
 	}
 	return true;
 }
