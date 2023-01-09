@@ -63,12 +63,13 @@ vector<string>  Frame:: ConnectToString(std::string msg)
     vector<string> parametrs    = split(msg,' ');
     //vector<string>hostAndPort   = split(parametrs [1],':');
     string str = "";
-    string command = "Connect", host = "stomp.cs.bgu.ac.il",version="1.2",end = "\0" ;
-    str +="command: "       + command        + "\n";
+    string command = "CONNECT", host = "stomp.cs.bgu.ac.il",version="1.2",end = "\0" ;
+    str +=command        + "\n";
     str +="host: "          + host           + "\n";
     str +="accept-version: "+ version        + "\n";
     str +="login: "         + parametrs [2]  + "\n";
     str +="passcode: "      + parametrs [3]  + "\n";
+    str += "\n";
     messages.push_back(str);
     return messages;
 }

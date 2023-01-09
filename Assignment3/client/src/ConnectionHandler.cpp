@@ -78,6 +78,7 @@ bool ConnectionHandler::sendLine(std::string &line)
 	std::vector<string> messagesToSend = c.toString(line);
 	for(const string message: messagesToSend)
 	{
+		cout << message << endl;
 		if(!sendFrameAscii(message, '\0'))
 			return false;
 	}
