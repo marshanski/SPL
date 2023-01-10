@@ -37,6 +37,8 @@ public class StompProtocol implements MessagingProtocol<String> {
             FrameUsubscribe unsubscribeFrame = new FrameUsubscribe(stompFrame);
             // activate connecy frame action method.
         
+
+
        }
        
 
@@ -57,11 +59,15 @@ public class StompProtocol implements MessagingProtocol<String> {
     }
     public void contentActions(FrameConnect frame)
     {
+        
 
 
     }
 
-}/*
+}
+/*
+ * עשות מחלקה לכל פריים בנפרד בתיקייה סטומפ.
 לכתוב פה את הפעולות שמבצעות את כל הדברים בכל פריימ
 בפעולה פרוסס יהיה סוויצ׳ קייס על הערך של הקומנד והוא יקרא לכל אחת מהפעולות האלה בהתאם לקומנד שהתקבל.
-*/
+ * sholud have a strat function
+ */
