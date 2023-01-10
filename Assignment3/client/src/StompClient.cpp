@@ -8,7 +8,7 @@
 
 void ReceiveThread(ConnectionHandler& connectionHandler)
 {
-	while (1) 
+	while (connectionHandler.isAlive()) 
     {
 		int len;
 
@@ -34,7 +34,7 @@ void ReceiveThread(ConnectionHandler& connectionHandler)
 
 void SendThread(ConnectionHandler& connectionHandler)
 {
-    while (1) 
+    while (connectionHandler.isAlive()) 
     {
         const short bufsize = 1024;
         char buf[bufsize];

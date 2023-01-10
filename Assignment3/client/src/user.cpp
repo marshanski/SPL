@@ -15,7 +15,7 @@ using std::endl;
 using std::string;
 using std::vector;
 
-User::User():username(""),passcode("RAZ"),isConnetd(true) ,topicToindex(),eventsInTopic(),count(0)
+User::User():username(""),passcode("RAZ"),isConnetd(true) ,topicToindex(),eventsByTopic(),count(0)
 {
     
 }
@@ -33,9 +33,18 @@ void User:: setPassCode(string code)
 {
     passcode = code;
 }
+void User:: activateUser()
+{
+    isConnetd = true;
+}
+
 string User:: getPassCode()
 {
     return passcode;
+}
+string User:: getUsername()
+{
+    return username;
 }
 bool User:: getIsConnected()
 {
@@ -65,4 +74,9 @@ bool User:: haveTopic(string topic)
 void User:: deleteTopic(string topic)
 {
     topicToindex.erase(topic); 
+}
+
+void User:: addEvent(string topic,string user, Event& event)
+{
+    eventsByTopic[topic][user].push_back(event);
 }

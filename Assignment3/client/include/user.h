@@ -17,7 +17,7 @@ private:
     string passcode;
     bool isConnetd;
     std::map<std::string, int> topicToindex;
-    std::map<std::string, std::vector<Event>> eventsInTopic;
+    std::map<std::string, std::map<std::string, std::vector<Event>>> eventsByTopic;
     int count;
 
     
@@ -33,5 +33,8 @@ public:
     std::map<std::string, int> getTopicToindex();
     bool haveTopic(string topic);
     void deleteTopic(string topic);
+    void activateUser();
+    string getUsername();
+    void addEvent(string topic,string user, Event& event);
 
 };

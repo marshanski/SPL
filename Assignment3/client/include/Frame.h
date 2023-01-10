@@ -30,5 +30,5 @@ public:
     void toUser(std::string msg,User& user);
     void toUserConnect(User& user,std::string username, std::string passcode);
     void toUserSubscribe(User& user,std::string topic);
-    void translateFrame(string msg);
+    bool translateFrame(std::string msg,User& user);
 };

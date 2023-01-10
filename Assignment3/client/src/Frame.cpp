@@ -161,50 +161,51 @@ vector<string>  Frame:: reportToString(std::string msg,User& user)
 {
     vector<string> parametrs    = split(msg,' ');
     std::vector<string> messages;
-    std::string team_a_name ,team_b_name,end = "\0",username = "meni",HALFTIME = "true";
+    std::string topic,team_a_name ,team_b_name,end = "\0",username = "meni",HALFTIME = "true";
     std::vector<Event> events;
 
-    if(!user.haveTopic(parametrs[1]))
+    names_and_events NAE = parseEventsFile("events1_partial.json");
+    events = NAE.events;
+    topic = NAE.team_a_name + "_" + NAE.team_b_name;
+    if(!user.haveTopic(topic))
     {
         cout <<"The user didn't subscribe to that topic"<<endl;
         messages.push_back("NO MESSAGE");
         return messages;
     }
-
-    
-    names_and_events NAE = parseEventsFile("events1.json");
-    events = NAE.events;
     std::sort(events.begin(), events.end(), [](const Event& a, const Event& b) {return a.get_time() < b.get_time();});
     for(const Event& event: events)
     {
         string str ="";
-        str+= "SEND \n";
-        str+= "destination: "   + NAE.team_a_name + "_" + NAE.team_b_name + "\n"+"\n"; 
-        str+= "user: "          + username +"\n";
-        str+= "event name: "    + event.get_name() + "\n";
+        str+= "SEND\n";
+        str+= "destination:/"   + topic            + "\n"+"\n"; 
+        str+= "user:"          + username         +"\n";
+        str+= "team a:"         + NAE.team_a_name  +"\n";
+        str+= "team b:"         + NAE.team_b_name  +"\n";
+        str+= "event name:"    + event.get_name() + "\n";
 
-        str+= "time: "          + std::to_string(event.get_time()) + "\n";
-        str+= "general game updates: \n";
+        str+= "time:"          + std::to_string(event.get_time()) + "\n";
+        str+= "general game updates:\n";
 
         for (const auto& update :event.get_game_updates())
         {
-            str+="    "+ update.first +": " + update.second + "\n";
+            str+="    "+ update.first +":" + update.second + "\n";
             
         }
-        str+="team a updates:  \n" ;
+        str+="team a updates:\n" ;
         for (const auto& update :event.get_team_a_updates())
         {
-            str+="    "+ update.first +": " + update.second + "\n";
+            str+="    "+ update.first +":" + update.second + "\n";
         }
         
-        str+="team b updates:  \n";
+        str+="team b updates:\n";
         for (const auto& update :event.get_team_b_updates())
         {
-            str+="    "+ update.first +": " + update.second + "\n";
+            str+="    "+ update.first +":" + update.second + "\n";
         }
-        str+="description:  \n";
+        str+="description:\n";
         str+=event.get_discription()+"\n";
-        cout << str << endl;
+        //cout << str << endl;
         messages.push_back(str);
 
     }
@@ -227,19 +228,69 @@ void Frame:: toUserSubscribe(User& user,std::string topic)
    
 }
 
-void Frame:: translateFrame(string msg)
+bool Frame:: translateFrame(string msg,User& user)
 {
-    string str ="",command = "CONNECT",version="1.2",end = "\0" ;
+    /*string str ="",command = "CONNECT",version="1.2",end = "\0" ;
     str +=command        + "\n";
     str +="accept-version: "+ version        + "\n";
     str += "\n";
-    str += "\0";
-    vector<string> parametrs    = split(str,'\n');
-    for(const string message: parametrs)
-	{
-        cout << message<< endl;
+    str += "\0";*/
+    
+    vector<string> parametrs    = split(msg,'\n');
+    cout << msg<< endl;
+    if (parametrs[0]=="CONNECT")
+    {
+        cout << user.getUsername() + " is Connected" << endl;
+        user.activateUser();
+    }
+    if(parametrs[0]=="SEND")
+    {
+        string teamA,teamB,topic,username,eventName,description;
+        int time;
+        topic     = split(parametrs[1],'/')[1] ;
+        username  = split(parametrs[3],':')[1] ;
+        teamA     = split(parametrs[4],':')[1] ;
+        teamB     = split(parametrs[5],':')[1] ;
+        eventName = split(parametrs[6],':')[1] ;
+        
+        time      = std::stoi(split(parametrs[7],':')[1]);
+        std::map<std::string, std::string> game_updates,a_updates,b_updates;
+        int i= 9;
+        while (parametrs[i]!="team a updates:")
+        {
+            vector<string> update = split(split(parametrs[i],' ')[4],':');
+            game_updates.insert(std::pair<string, string>(update[0],update[1]));
+            
+            i++;
+        }
+        i++;
+        cout << "A" << endl;
+        while (parametrs[i]!="team b updates:")
+        {
+            vector<string> update = split(split(parametrs[i],' ')[4],':');
+            a_updates.insert(std::pair<string, string>(update[0],update[1]));
+            
+            i++;
+        }
+        i++;
+        cout << "B" << endl;
+        while (parametrs[i]!="description:")
+        {
+            vector<string> update = split(split(parametrs[i],' ')[4],':');
+            b_updates.insert(std::pair<string, string>(update[0],update[1]));
+            
+            i++;
+        }
+        i++;
+        description = parametrs[i];
+        Event event = Event(teamA,teamB,eventName,time,game_updates,a_updates,b_updates,description);
+        user.addEvent(topic,username,event);
 
-	}
+    }
+
+
+    return true;
+
 
 }
 
