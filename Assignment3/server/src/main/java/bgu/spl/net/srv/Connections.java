@@ -2,7 +2,7 @@ package bgu.spl.net.srv;
 
 import java.io.IOException;
 
-public interface Connections<String> //i changed to String, maybe need to change back to type T.
+public interface Connections<T> //i changed to String, maybe need to change back to type T.
 {
 /*
  * 
