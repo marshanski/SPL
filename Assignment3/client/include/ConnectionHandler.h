@@ -4,6 +4,7 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include "../include/user.h"
+#include "../include/Frame.h"
 
 using boost::asio::ip::tcp;
 
@@ -14,6 +15,7 @@ private:
 	boost::asio::io_service io_service_;   // Provides core I/O functionality
 	tcp::socket socket_;
 	User user;
+	Frame frame;
 
 public:
 	ConnectionHandler(std::string host, short port);

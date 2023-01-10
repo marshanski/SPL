@@ -1,4 +1,4 @@
-#include "../include/Connect.h"
+#include "../include/Frame.h"
 #include "../include/event.h"
 #include "../include/user.h"
 #include "../include/json.hpp"
@@ -29,8 +29,11 @@ std::vector<std::string> split(const std::string& s, char delimiter)
    return tokens;
 }
 
+
+
 Frame::Frame()
 {
+  
     
 }
 
@@ -39,20 +42,30 @@ Frame::~Frame()
 {
 }
 
+
 vector<string>  Frame:: toString(std::string msg, User& user)
 {
     vector<string> parametrs    = split(msg,' ');
     std::vector<string> messages;
     if(parametrs[0] == "login")
-        return ConnectToString(msg,User& user);
+        return ConnectToString(msg,user);
+
+    if(!user.getIsConnected())
+    {
+        cout <<"The user isn't log in";
+        messages.push_back("NO MESSAGE");
+        return messages;
+    }
     if(parametrs[0] =="join")
-        return SubscribeToString(msg,User& user);
+        return SubscribeToString(msg,user);
+
     if(parametrs[0] =="exit")
-        return unSubscribeToString(msg,User& user);
+        return unSubscribeToString(msg,user);
+        
     if(parametrs[0] =="logout")
-        return logOutToString(msg,User& user);
+        return logOutToString(msg,user);
     if(parametrs[0] =="report")
-        return reportToString(msg,User& user);
+        return reportToString(msg,user);
 
     messages.push_back("bye");
     return messages;
@@ -61,15 +74,19 @@ vector<string>  Frame:: toString(std::string msg, User& user)
 vector<string>  Frame:: ConnectToString(std::string msg,User& user)
 {
     std::vector<string> messages;
+    vector<string> parametrs    = split(msg,' ');
+    //cheking the user isn't login
     if(user.getIsConnected())
     {
-        cout <<"The user is already log in";
+        cout <<"The user is already log in"<<endl;
         messages.push_back("NO MESSAGE");
         return messages;
-
     }
-    vector<string> parametrs    = split(msg,' ');
-    //vector<string>hostAndPort   = split(parametrs [1],':');
+
+    //update the user according to the user name and the passcode, but still don't activate him
+    toUserConnect(user,parametrs [2],parametrs [3]);
+
+    //create the frame string
     string str = "";
     string command = "CONNECT", host = "stomp.cs.bgu.ac.il",version="1.2",end = "\0" ;
     str +=command        + "\n";
@@ -84,33 +101,47 @@ vector<string>  Frame:: ConnectToString(std::string msg,User& user)
 
 vector<string>  Frame:: SubscribeToString(std::string msg,User& user)
 {
-    if(!user.getIsConnected())
-    {
-        cout <<"The user is already log in";
-        messages.push_back("NO MESSAGE");
-        return messages;
-
-    }
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
-    string str = "",command = "SUBSCRIBE", end = "\0",id = "17",recipt="73";
-    str +="command: "     + command      + "\n";
-    str +="destination:/ " + parametrs[1] + "\n";
-    str +="id:"           + id           + "\n";
-    str +="recipt: "      + recipt       + "\n";
+
+    if(user.haveTopic(parametrs[1]))
+    {
+        cout <<"The user is already sunscribe to that topic"<<endl;
+        messages.push_back("NO MESSAGE");
+        return messages;
+    }
+
+    //create the frame string
+    string str = "SUBSCRIBE \n", end = "\0",id = "17",recipt="73";
+    str +="destination:/ " + parametrs[1]                      + "\n";
+    str +="id:"            + std::to_string(user.getCount())   + "\n";
+    str +="recipt: "       + recipt                            + "\n";
     messages.push_back(str);
+
+    //update the user 
+    toUserSubscribe(user,parametrs[1]);
+
     return messages;
+    //
 
 }
 vector<string>  Frame:: unSubscribeToString(std::string msg,User& user)
 {
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
+    if(!user.haveTopic(parametrs[1]))
+    {
+        cout <<"The user didn't subscribe to that topic"<<endl;
+        messages.push_back("NO MESSAGE");
+        return messages;
+    }
+
     string str = "",command = "UNSUBSCRIBE", end = "\0",id = "17",recipt="73";
     str +="command: "     + command      + "\n";
     str +="id:"           + id           + "\n";
     str +="recipt: "      + recipt       + "\n";
     messages.push_back(str);
+    user.deleteTopic(parametrs[1]);
     return messages;
 }
 
@@ -129,22 +160,31 @@ vector<string>  Frame:: logOutToString(std::string msg,User& user)
 vector<string>  Frame:: reportToString(std::string msg,User& user)
 {
     vector<string> parametrs    = split(msg,' ');
+    std::vector<string> messages;
     std::string team_a_name ,team_b_name,end = "\0",username = "meni",HALFTIME = "true";
     std::vector<Event> events;
-    std::vector<string> messages;
+
+    if(!user.haveTopic(parametrs[1]))
+    {
+        cout <<"The user didn't subscribe to that topic"<<endl;
+        messages.push_back("NO MESSAGE");
+        return messages;
+    }
+
+    
     names_and_events NAE = parseEventsFile("events1.json");
     events = NAE.events;
     std::sort(events.begin(), events.end(), [](const Event& a, const Event& b) {return a.get_time() < b.get_time();});
     for(const Event& event: events)
     {
         string str ="";
-        str+= "command: send \n";
-        str+= "destination: "  + NAE.team_a_name + "_" + NAE.team_b_name + "\n"+"\n"; 
-        str+= "user: "         + username +"\n";
+        str+= "SEND \n";
+        str+= "destination: "   + NAE.team_a_name + "_" + NAE.team_b_name + "\n"+"\n"; 
+        str+= "user: "          + username +"\n";
         str+= "event name: "    + event.get_name() + "\n";
 
-        str+="time: "          + std::to_string(event.get_time()) + "\n";
-        str+="general game updates: \n";
+        str+= "time: "          + std::to_string(event.get_time()) + "\n";
+        str+= "general game updates: \n";
 
         for (const auto& update :event.get_game_updates())
         {
@@ -173,33 +213,23 @@ vector<string>  Frame:: reportToString(std::string msg,User& user)
 
 }
 
-void Frame:: toUser(std::string msg, User& user)
-{
-    vector<string> parametrs    = split(msg,' ');
-    std::vector<string> messages;
-    cout <<"wiwi" << endl; 
-    if(parametrs[0] == "login")
-        toUserConnect(msg,user);
-    /*if(parametrs[0] =="join")
-        return SubscribeToString(msg);
-    if(parametrs[0] =="exit")
-        return unSubscribeToString(msg);
-    if(parametrs[0] =="logout")
-        return logOutToString(msg);
-    if(parametrs[0] =="report")
-        return reportToString(msg);
 
-    messages.push_back("bye");
-    return messages;*/
+
+void Frame:: toUserConnect(User& user,std::string username, std::string passcode)
+{
+    user.setUsername(username);
+    user.setPassCode(passcode);
+   
+}
+void Frame:: toUserSubscribe(User& user,std::string topic)
+{
+    user.addTopic(topic);
+   
 }
 
-
-void Frame:: toUserConnect(std::string msg, User& user)
+void Frame:: translateFrame(string msg)
 {
-    vector<string> parametrs    = split(msg,' ');
-    user.setUsername(parametrs [2]);
-    user.setPassCode(parametrs [3]);
-   
+    
 }
 
 

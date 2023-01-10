@@ -29,5 +29,9 @@ public:
     string getPassCode();
     bool getIsConnected();
     int getCount();
+    void addTopic(string gamename);
+    std::map<std::string, int> getTopicToindex();
+    bool haveTopic(string topic);
+    void deleteTopic(string topic);
 
 };

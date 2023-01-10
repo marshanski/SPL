@@ -21,7 +21,7 @@ void ReceiveThread(ConnectionHandler& connectionHandler)
         
 		len=answer.length();
         answer.resize(len-1);
-        std::cout << "Reply: " << answer << " " << len << " bytes " << std::endl << std::endl;
+        //std::cout << "Reply: " << answer << " " << len << " bytes " << std::endl << std::endl;
         if (answer == "bye") 
 		{
             std::cout << "Exiting...\n" << std::endl;
@@ -47,7 +47,7 @@ void SendThread(ConnectionHandler& connectionHandler)
             break;
         }
 		// connectionHandler.sendLine(line) appends '\n' to the message. Therefor we send len+1 bytes.
-        std::cout << "Sent " << len+1 << " bytes to server" << std::endl;
+        //std::cout << "Sent " << len+1 << " bytes to server" << std::endl;
 	}
 
 	

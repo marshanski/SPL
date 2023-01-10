@@ -3,11 +3,11 @@ LDFLAGS:=-lboost_system -lpthread
 
 all: StompClient
 
-EchoClient: bin/ConnectionHandler.o bin/echoClient.o bin/Connect.o
-	g++ -o bin/EchoClient bin/ConnectionHandler.o bin/echoClient.o bin/Connect.o $(LDFLAGS)
+EchoClient: bin/ConnectionHandler.o bin/echoClient.o bin/Frame.o
+	g++ -o bin/EchoClient bin/ConnectionHandler.o bin/echoClient.o bin/Frame.o $(LDFLAGS)
 
-StompClient: bin/ConnectionHandler.o bin/StompClient.o bin/event.o bin/Connect.o bin/user.o
-	g++ -o bin/StompClient bin/ConnectionHandler.o bin/StompClient.o bin/event.o  bin/Connect.o bin/user.o $(LDFLAGS)
+StompClient: bin/ConnectionHandler.o bin/StompClient.o bin/event.o bin/Frame.o bin/user.o
+	g++ -o bin/StompClient bin/ConnectionHandler.o bin/StompClient.o bin/event.o  bin/Frame.o bin/user.o $(LDFLAGS)
 
 bin/ConnectionHandler.o: src/ConnectionHandler.cpp
 	g++ $(CFLAGS) -o bin/ConnectionHandler.o src/ConnectionHandler.cpp
@@ -21,8 +21,8 @@ bin/event.o: src/event.cpp
 bin/user.o: src/user.cpp
 	g++ $(CFLAGS) -o bin/user.o src/user.cpp
 
-bin/Connect.o: src/Connect.cpp
-	g++ $(CFLAGS) -o bin/Connect.o src/Connect.cpp
+bin/Frame.o: src/Frame.cpp
+	g++ $(CFLAGS) -o bin/Frame.o src/Frame.cpp
 
 bin/StompClient.o: src/StompClient.cpp
 	g++ $(CFLAGS) -o bin/StompClient.o src/StompClient.cpp
