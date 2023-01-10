@@ -14,7 +14,7 @@ void ReceiveThread(ConnectionHandler& connectionHandler)
 
         std::string answer;
 
-        if (!connectionHandler.getLine(answer)) {
+        if (connectionHandler.isAlive() && !connectionHandler.getLine(answer)) {
             std::cout << "Disconnected. Exiting...\n" << std::endl;
             break;
         }
@@ -41,7 +41,7 @@ void SendThread(ConnectionHandler& connectionHandler)
         std::cin.getline(buf, bufsize);
 		std::string line(buf);
 		int len=line.length();
-        if (!connectionHandler.sendLine(line))
+        if (connectionHandler.isAlive() && !connectionHandler.sendLine(line))
 		{
             std::cout << "Disconnected. Exiting...\n" << std::endl;
             break;
@@ -72,8 +72,10 @@ int main (int argc, char *argv[])
 	std::thread send_thread(SendThread, std::ref(connectionHandler));
   	std::thread receive_thread(ReceiveThread, std::ref(connectionHandler));
 
-	send_thread.join();
+	
   	receive_thread.join();
+    //send_thread.detach();
+    send_thread.join();
 
     return 0;
 }

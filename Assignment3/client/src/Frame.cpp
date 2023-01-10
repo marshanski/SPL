@@ -64,10 +64,12 @@ vector<string>  Frame:: toString(std::string msg, User& user)
         
     if(parametrs[0] =="logout")
         return logOutToString(msg,user);
+
     if(parametrs[0] =="report")
         return reportToString(msg,user);
 
-    messages.push_back("bye");
+    //messages.push_back("NO MESSAGE");
+    messages.push_back("EROR");
     return messages;
 }
 
@@ -264,7 +266,6 @@ bool Frame:: translateFrame(string msg,User& user)
             i++;
         }
         i++;
-        cout << "A" << endl;
         while (parametrs[i]!="team b updates:")
         {
             vector<string> update = split(split(parametrs[i],' ')[4],':');
@@ -273,7 +274,6 @@ bool Frame:: translateFrame(string msg,User& user)
             i++;
         }
         i++;
-        cout << "B" << endl;
         while (parametrs[i]!="description:")
         {
             vector<string> update = split(split(parametrs[i],' ')[4],':');
@@ -285,7 +285,11 @@ bool Frame:: translateFrame(string msg,User& user)
         description = parametrs[i];
         Event event = Event(teamA,teamB,eventName,time,game_updates,a_updates,b_updates,description);
         user.addEvent(topic,username,event);
-
+    }
+    if (parametrs[0]=="EROR"|| msg == "EROR")
+    {
+        cout << "Eror was occued the client will be disconnected" << endl;
+        return false;
     }
 
 
