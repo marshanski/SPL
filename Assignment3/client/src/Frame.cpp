@@ -229,7 +229,18 @@ void Frame:: toUserSubscribe(User& user,std::string topic)
 
 void Frame:: translateFrame(string msg)
 {
-    
+    string str ="",command = "CONNECT",version="1.2",end = "\0" ;
+    str +=command        + "\n";
+    str +="accept-version: "+ version        + "\n";
+    str += "\n";
+    str += "\0";
+    vector<string> parametrs    = split(str,'\n');
+    for(const string message: parametrs)
+	{
+        cout << message<< endl;
+
+	}
+
 }
 
 

@@ -72,7 +72,7 @@ bool ConnectionHandler::getLine(std::string &line)
 {
 	
 	bool answer = getFrameAscii(line, '\0');
-	//if (answer!= "")
+	frame.translateFrame(line);
 
 	return answer;
 }
