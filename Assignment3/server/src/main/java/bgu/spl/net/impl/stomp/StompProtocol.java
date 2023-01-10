@@ -37,8 +37,6 @@ public class StompProtocol implements MessagingProtocol<String> {
             FrameUsubscribe unsubscribeFrame = new FrameUsubscribe(stompFrame);
             // activate connecy frame action method.
         
-
-
        }
        
 
