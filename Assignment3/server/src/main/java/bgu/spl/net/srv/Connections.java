@@ -17,4 +17,7 @@ public interface Connections<T> //i changed to String, maybe need to change back
     void disconnect(int connectionId);
 
     boolean connect(int connectionId, String username, String passcode);
+
+    int addClient(ConnectionHandler<T> handler);// generates connId, adds the <connId, handler> to map, return connId
+
 }

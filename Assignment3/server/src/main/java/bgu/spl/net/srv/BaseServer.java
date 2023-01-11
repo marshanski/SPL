@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.function.Supplier;
+import bgu.spl.net.srv.ConnectionsImpl;
 
 public abstract class BaseServer<T> implements Server<T> {
 
@@ -13,6 +14,7 @@ public abstract class BaseServer<T> implements Server<T> {
     private final Supplier<MessagingProtocol<T>> protocolFactory;
     private final Supplier<MessageEncoderDecoder<T>> encdecFactory;
     private ServerSocket sock;
+    private ConnectionsImpl<T> connections;
 
     public BaseServer(
             int port,
@@ -41,7 +43,8 @@ public abstract class BaseServer<T> implements Server<T> {
                 BlockingConnectionHandler<T> handler = new BlockingConnectionHandler<>(
                         clientSock,
                         encdecFactory.get(),
-                        protocolFactory.get());
+                        protocolFactory.get(),
+                        connections);
 
                 execute(handler);
             }
