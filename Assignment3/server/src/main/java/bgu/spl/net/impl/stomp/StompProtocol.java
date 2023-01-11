@@ -1,20 +1,31 @@
 package bgu.spl.net.impl.stomp;
 
-import bgu.spl.net.api.MessagingProtocol;
+import bgu.spl.net.srv.Connections;
+import bgu.spl.net.api.StompMessagingProtocol;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StompProtocol implements MessagingProtocol<String> {
+public class StompProtocol implements StompMessagingProtocol<String> {
 
+    private int connectionId;
+    private Connections<String> connections;
     private boolean shouldTerminate = false;
     private StompFrame stompFrame;
     private StompCommand stompCommand;
     private StompHeader stompHeader;
     //private Map<StompCommand, StompClass> commandToActions = new HashMap<>();
 
+
     @Override
-    public String process(String msg) 
+    public void start(int connectionId, Connections<String> connections)
+    {
+        this.connectionId = connectionId;
+        this.connections  = connections;
+    }
+
+    @Override
+    public void process(String msg) 
     {
        stompFrame = StompFrame.fromString(msg);
        stompCommand = stompFrame.getCommand();
@@ -47,9 +58,7 @@ public class StompProtocol implements MessagingProtocol<String> {
 
 
 
-        shouldTerminate = "bye".equals(msg);
-        System.out.println("[" + LocalDateTime.now() + "]: " + msg);
-        return "hi";
+    
     }
 
     @Override
@@ -57,10 +66,10 @@ public class StompProtocol implements MessagingProtocol<String> {
     {
         return shouldTerminate;
     }
-    public void contentActions(FrameConnect frame)
+    public void executeConnect(FrameConnect frame)
     {
         
-
+        
 
     }
 

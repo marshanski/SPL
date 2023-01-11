@@ -16,7 +16,7 @@ public class ConnectionsImpl<T> implements Connections<T>
     //mapping between channels and users that connected to that channel using a map that maps connectionId to SubscribeId 
     //<channelName , <ConnectionId , SubscribeId>>:
     private ConcurrentHashMap<String,ConcurrentHashMap<Integer,Integer>> channelsToUsers;
-    private int numOfConnections;
+    private static int numOfConnections;
 
     public ConnectionsImpl()
     {
@@ -39,7 +39,11 @@ public class ConnectionsImpl<T> implements Connections<T>
             entry.getValue().remove(connectionId); // deleteing the user from all topics
         }
         clients.remove(connectionId); // removing the client's connection handler from the map clients.
-        
+    }
+
+    public boolean connect(int connectionId, String username, String passcode)
+    {   
+
 
     }
 
