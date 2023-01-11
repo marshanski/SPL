@@ -5,13 +5,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ConnectionsImpl<T> implements Connections<T> 
 {
     //mapping between <ConnectionId , ConnectionHandler>:
-    private ConcurrentHashMap<Integer,ConnectionHandler<T>> clients;
+    public ConcurrentHashMap<Integer,ConnectionHandler<T>> clients;
     
     //maping all the users that ever connected to the server <username,passcode>:
-    private ConcurrentHashMap<String,String> users;
+    public ConcurrentHashMap<String,String> users;
 
     //mapping all the users that are currently logged in the server <username,connectionId>:
-    private ConcurrentHashMap<String,Integer> activeUsers;
+    public ConcurrentHashMap<String,Integer> activeUsers;
 
     //mapping between channels and users that connected to that channel using a map that maps connectionId to SubscribeId 
     //<channelName , <ConnectionId , SubscribeId>>:
@@ -42,9 +42,31 @@ public class ConnectionsImpl<T> implements Connections<T>
     }
 
     public boolean connect(int connectionId, String username, String passcode)
-    {   
+    {     
+        if(users.contains(username))// the username existes in the database
+        {
+            if(users.get(username)!= passcode)// check if passcode is matching
+                return false;
+            else
+                activeUsers.put(username, connectionId);
+                return true;
+        }
+        else
+        {
+            return true;
+        }
+        
 
-
+        
+        
+        
+    }
+    public int addClient(ConnectionHandler<T> handler)
+    {
+        int id = numOfConnections;
+        numOfConnections++;
+        clients.put(id, handler);
+        return id;
     }
 
 
