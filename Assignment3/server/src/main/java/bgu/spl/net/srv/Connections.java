@@ -15,4 +15,6 @@ public interface Connections<T> //i changed to String, maybe need to change back
     void send(String channel, String msg);
 
     void disconnect(int connectionId);
+
+    boolean connect(int connectionId, String username, String passcode);
 }

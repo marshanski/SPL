@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import javax.sound.midi.Receiver;
-
 public class FrameConnect 
 {
     private StompCommand command = null;
