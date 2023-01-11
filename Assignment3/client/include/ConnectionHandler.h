@@ -1,10 +1,11 @@
 #pragma once
 
+#include "../include/user.h"
+#include "../include/Frame.h"
 #include <string>
 #include <iostream>
 #include <boost/asio.hpp>
-#include "../include/user.h"
-#include "../include/Frame.h"
+
 
 using boost::asio::ip::tcp;
 

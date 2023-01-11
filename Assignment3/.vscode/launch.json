@@ -45,10 +45,10 @@
             "name": "(gdb) Launch stomp client",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/client/bin/StompWCIClient",
+            "program": "${workspaceFolder}/client/bin/StompClient",
             "args": ["127.0.0.1","7777"],
             "stopAtEntry": false,
-            "cwd": "${fileDirname}",
+            "cwd": "${workspaceFolder}/client/bin/",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",
@@ -64,7 +64,7 @@
                     "ignoreFailures": true
                 }
             ],
-            "preLaunchTask": "make StompWCIClient"
+            "preLaunchTask": "make StompClient"
         },
         {
             "name": "(gdb) Launch echo client",
@@ -76,7 +76,7 @@
                 "7777"
             ],
             "stopAtEntry": false,
-            "cwd": "${fileDirname}",
+            "cwd": "${workspaceFolder}/client/bin",
             "environment": [],
             "externalConsole": false,
             "MIMode": "gdb",

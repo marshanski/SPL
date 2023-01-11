@@ -74,6 +74,7 @@ int main (int argc, char *argv[])
 
 	
   	receive_thread.join();
+
     //send_thread.detach();
     send_thread.join();
 
