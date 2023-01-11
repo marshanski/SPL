@@ -8,6 +8,8 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <iostream>
+#include <fstream>
 
 using std::cin;
 using std::cout;
@@ -68,8 +70,13 @@ vector<string>  Frame:: toString(std::string msg, User& user)
     if(parametrs[0] =="report")
         return reportToString(msg,user);
 
-    //messages.push_back("NO MESSAGE");
-    messages.push_back("EROR");
+    if(parametrs[0] =="summery")
+    {
+        summeryTostring(msg,user);
+    }
+
+    messages.push_back("NO MESSAGE");
+    //messages.push_back("EROR");
     return messages;
 }
 
@@ -140,7 +147,7 @@ vector<string>  Frame:: unSubscribeToString(std::string msg,User& user)
 
     string str = "",command = "UNSUBSCRIBE", end = "\0",id = "17",recipt="73";
     str +="command: "     + command      + "\n";
-    str +="id:"           + id           + "\n";
+    str +="id:"           + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
     str +="recipt: "      + recipt       + "\n";
     messages.push_back(str);
     user.deleteTopic(parametrs[1]);
@@ -166,7 +173,7 @@ vector<string>  Frame:: reportToString(std::string msg,User& user)
     std::string topic,team_a_name ,team_b_name,end = "\0",username = "meni",HALFTIME = "true";
     std::vector<Event> events;
 
-    names_and_events NAE = parseEventsFile("events1_partial.json");
+    names_and_events NAE = parseEventsFile("events1.json");
     events = NAE.events;
     topic = NAE.team_a_name + "_" + NAE.team_b_name;
     if(!user.haveTopic(topic))
@@ -207,12 +214,58 @@ vector<string>  Frame:: reportToString(std::string msg,User& user)
         }
         str+="description:\n";
         str+=event.get_discription()+"\n";
-        //cout << str << endl;
+        cout << str << endl;
         messages.push_back(str);
 
     }
     
     return messages;
+
+}
+
+void Frame:: summeryTostring(std::string msg,User& user)
+{
+    vector<string> parametrs    = split(msg,' ');
+    string topic =parametrs[1] ,username=parametrs[2],file=parametrs[3],summery ="";
+    std::vector<Event> events = user.getEventsByUser(topic,username);
+    std::sort(events.begin(), events.end(), [](const Event& a, const Event& b) {return a.get_time() < b.get_time();});
+
+    summery += events[0].get_team_a_name() + " vs " + events[0].get_team_b_name() +"\n";
+    summery += "Game stats:\n";
+    summery += "Genral stats:\n";
+    for (auto & event : events) 
+    {    
+        for (const auto& update :event.get_game_updates())
+        {
+            summery += "    "+ update.first +":" + update.second + "\n";
+        }
+    }
+    summery += "team " + events[0].get_team_a_name()+ " updates:\n" ;
+    for (auto & event : events) 
+    {    
+        for (const auto& update :event.get_team_a_updates())
+        {
+            summery += "    "+ update.first +":" + update.second + "\n";
+        }
+    }
+    summery += "team " + events[0].get_team_b_name()+ " updates:\n" ;
+    for (auto & event : events) 
+    {    
+        for (const auto& update :event.get_team_b_updates())
+        {
+            summery += "    "+ update.first +":" + update.second + "\n";
+        }
+    }
+    summery += "Game event reports:\n" ;
+    for (auto & event : events) 
+    {
+        summery += std::to_string(event.get_time()) +" - "+event.get_name() +"\n\n";
+        summery += event.get_discription() +"\n\n";
+        
+    }
+    std:: ofstream MyFile("filename.txt");
+    MyFile << summery;
+    MyFile.close();
 
 }
 

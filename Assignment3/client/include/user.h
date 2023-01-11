@@ -36,5 +36,7 @@ public:
     void activateUser();
     string getUsername();
     void addEvent(string topic,string user, Event& event);
+    int  getReciptId(string topic);
+    std::vector<Event> getEventsByUser(string topic,string username);
 
 };

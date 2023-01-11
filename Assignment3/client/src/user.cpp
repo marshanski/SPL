@@ -80,3 +80,14 @@ void User:: addEvent(string topic,string user, Event& event)
 {
     eventsByTopic[topic][user].push_back(event);
 }
+
+int User:: getReciptId(string topic)
+{
+    return topicToindex[topic];
+}
+
+std::vector<Event> User:: getEventsByUser(string topic,string username)
+{
+    return eventsByTopic[topic][username];
+
+}

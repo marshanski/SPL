@@ -31,4 +31,5 @@ public:
     void toUserConnect(User& user,std::string username, std::string passcode);
     void toUserSubscribe(User& user,std::string topic);
     bool translateFrame(std::string msg,User& user);
+    void summeryTostring(std::string msg,User& user);
 };
