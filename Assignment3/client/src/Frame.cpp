@@ -150,6 +150,7 @@ vector<string>  Frame:: unSubscribeToString(std::string msg,User& user)
     str +="id:"           + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
     str +="recipt: "      + recipt       + "\n";
     messages.push_back(str);
+    
     user.deleteTopic(parametrs[1]);
     return messages;
 }
@@ -264,7 +265,7 @@ void Frame:: summeryTostring(std::string msg,User& user)
         summery += event.get_discription() +"\n\n";
         
     }
-    std:: ofstream MyFile("filename.txt");
+    std:: ofstream MyFile(file);
     MyFile << summery;
     MyFile.close();
 
