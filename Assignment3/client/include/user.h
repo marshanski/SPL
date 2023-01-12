@@ -32,7 +32,7 @@ public:
     string getPassCode();
     bool getIsConnected();
     int getCount();
-    void addTopic(string gamename,int index);
+    void addTopic(int index);
     std::map<std::string, int> getTopicToindex();
     bool haveTopic(string topic);
     void deleteTopic(string topic);
@@ -41,7 +41,10 @@ public:
     void addEvent(string topic,string user, Event& event);
     int  getReciptId(string topic);
     std::vector<Event> getEventsByUser(string topic,string username);
-    void addTopicToWaitingList(string gamename);
+    void addToSubWaiting(string gamename);
+    void addToUnSubWaiting(string gamename);
     int getIndexByTopic(string gamename);
+    bool User:: inWaitSubList(string topic);
+    bool User:: inWaitUnSubList(string topic);
 
 };

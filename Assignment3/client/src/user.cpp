@@ -55,17 +55,18 @@ int User:: getCount()
     return count;
 }
 
-void User:: addTopic(string gamename,int index)
+void User:: addTopic(int index)
 {
-    topicToindex.insert(std::pair<string, int>(gamename,index));
-    indexToTopic.insert(std::pair<int, string>(index,gamename));
+    
+    topicToindex.insert(std::pair<string, int>(SubscribeWaitingList[index],index));
+    indexToTopic.insert(std::pair<int, string>(index,SubscribeWaitingList[index]));
 }
-void User:: addTopicToWaitingList(string gamename)
+void User:: addToSubWaiting(string gamename)
 {
     SubscribeWaitingList.insert(std::pair<int,string>(count,gamename));
     count++;
 }
-void User:: addTopicToWaitingList(string gamename)
+void User:: addToUnSubWaiting(string gamename)
 {
     
     UnSubscribeWaitingList.insert(std::pair<int,string>(topicToIndex[gamename],gamename));
@@ -105,4 +106,23 @@ std::vector<Event> User:: getEventsByUser(string topic,string username)
 {
     return eventsByTopic[topic][username];
 
+}
+
+bool User:: inWaitSubList(string topic)
+{
+    for (const auto &[k, v] : SubscribeWaitingList) 
+    {
+        if (v == topic) 
+            return true;
+    }
+    return false;
+}
+bool User:: inWaitUnSubList(string topic)
+{
+    for (const auto &[k, v] : UnSubscribeWaitingList) 
+    {
+        if (v == topic) 
+            return true;
+    }
+    return false;
 }

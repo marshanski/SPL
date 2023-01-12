@@ -119,17 +119,22 @@ vector<string>  Frame:: SubscribeToString(std::string msg,User& user)
         messages.push_back("NO MESSAGE");
         return messages;
     }
+    if(user.inWaitSubList(parametrs[1]))
+    {
+        cout <<"The user is already send a message to join that topic wait for the answer"<<endl;
+        messages.push_back("NO MESSAGE");
+        return messages;
+    }
 
     //create the frame string
-    string str = "SUBSCRIBE \n", end = "\0",id = "17",recipt="73";
+    string str = "SUBSCRIBE\n", end = "\0",id = "17",recipt="73";
     str +="destination:/ " + parametrs[1]                      + "\n";
     str +="id:"            + std::to_string(user.getCount())   + "\n";
     str +="recipt: "       + recipt                            + "\n";
     messages.push_back(str);
 
     //update the user 
-    toUserSubscribe(user,parametrs[1]);
-
+    user.addToSubWaiting(parametrs[1]);
     return messages;
     //
 
@@ -144,14 +149,18 @@ vector<string>  Frame:: unSubscribeToString(std::string msg,User& user)
         messages.push_back("NO MESSAGE");
         return messages;
     }
+    if(user.inWaitUnSubList(parametrs[1]))
+    {
+        cout <<"The user is already send a message to exit that topic wait for the answer"<<endl;
+        messages.push_back("NO MESSAGE");
+        return messages;
+    }
 
-    string str = "",command = "UNSUBSCRIBE", end = "\0",id = "17",recipt="73";
-    str +="command: "     + command      + "\n";
+    string str = "UNSUBSCRIBE\n";
     str +="id:"           + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
-    str +="recipt: "      + recipt       + "\n";
+    str +="recipt: "      + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
     messages.push_back(str);
-    
-    user.deleteTopic(parametrs[1]);
+    user.addTopicToWaitingList(parametrs[1]);
     return messages;
 }
 
@@ -159,8 +168,7 @@ vector<string>  Frame:: logOutToString(std::string msg,User& user)
 {
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
-    string str = "",command = "DISCONNECT", end = "\0",recipt="73";
-    str +="command: "     + command      + "\n";
+    string str = "DISCONNECT\n",recipt="73";
     str +="recipt: "      + recipt       + "\n";
     messages.push_back(str);
     
@@ -279,9 +287,9 @@ void Frame:: toUserConnect(User& user,std::string username, std::string passcode
     user.setPassCode(passcode);
    
 }
-void Frame:: toUserSubscribe(User& user,std::string topic)
+void Frame:: toUserSubscribe(User& user,int index)
 {
-    user.addTopic(topic);
+    user.addTopic(index);
    
 }
 
