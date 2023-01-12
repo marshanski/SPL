@@ -18,6 +18,9 @@ private:
     bool isConnetd;
     std::map<std::string, int> topicToindex;
     std::map<std::string, std::map<std::string, std::vector<Event>>> eventsByTopic;
+    std::map<int,string> SubscribeWaitingList;
+    std::map<int,string> UnSubscribeWaitingList;
+    std::map<int,string> indexToTopic;
     int count;
 
     
@@ -29,7 +32,7 @@ public:
     string getPassCode();
     bool getIsConnected();
     int getCount();
-    void addTopic(string gamename);
+    void addTopic(string gamename,int index);
     std::map<std::string, int> getTopicToindex();
     bool haveTopic(string topic);
     void deleteTopic(string topic);
@@ -38,5 +41,7 @@ public:
     void addEvent(string topic,string user, Event& event);
     int  getReciptId(string topic);
     std::vector<Event> getEventsByUser(string topic,string username);
+    void addTopicToWaitingList(string gamename);
+    int getIndexByTopic(string gamename);
 
 };
