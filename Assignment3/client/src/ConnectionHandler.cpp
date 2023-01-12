@@ -1,5 +1,5 @@
 #include "../include/ConnectionHandler.h"
-#include "Connect.h"
+#include "Frame.h"
 #include "../include/user.h"
 
 using boost::asio::ip::tcp;
@@ -13,7 +13,7 @@ using std::string;
 
 
 ConnectionHandler::ConnectionHandler(string host, short port) : host_(host), port_(port), io_service_(),
-                                                                socket_(io_service_),user(User()){}
+                                                                socket_(io_service_),user(User()),frame(Frame()),alive(true){}
 
 ConnectionHandler::~ConnectionHandler() {
 	close();
@@ -68,24 +68,41 @@ bool ConnectionHandler::sendBytes(const char bytes[], int bytesToWrite) {
 	return true;
 }
 
-bool ConnectionHandler::getLine(std::string &line) {
-	return getFrameAscii(line, '\n');
+bool ConnectionHandler::getLine(std::string &line) 
+{
+	
+	bool answer = getFrameAscii(line, '\0');
+	if(line != "")
+		alive = frame.translateFrame(line,user);
+
+	return answer;
 }
 
 bool ConnectionHandler::sendLine(std::string &line)
 {
-	Frame c = Frame();
-	std::vector<string> messagesToSend = c.toString(line);
-	for(const string message: messagesToSend)
+
+	std::vector<string> messagesToSend = frame.toString(line,user);
+	for(int i=0; i<messagesToSend.size();i++)
 	{
-		if(!sendFrameAscii(message, '\0'))
-			return false;
+		//cout << message<< endl;
+		if(messagesToSend[i] != "NO MESSAGE")
+		{
+			if(!sendFrameAscii(messagesToSend[i], '\0'))
+				return false;
+		}
 	}
+
 	return true;
 }
 
+bool ConnectionHandler:: isAlive()
+{
+	return alive;
+}
 
-bool ConnectionHandler::getFrameAscii(std::string &frame, char delimiter) {
+
+bool ConnectionHandler::getFrameAscii(std::string &frame, char delimiter) 
+{
 	char ch;
 	// Stop when we encounter the null character.
 	// Notice that the null character is not appended to the frame string.

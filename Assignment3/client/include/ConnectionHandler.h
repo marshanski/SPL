@@ -1,9 +1,11 @@
 #pragma once
 
+#include "../include/user.h"
+#include "../include/Frame.h"
 #include <string>
 #include <iostream>
 #include <boost/asio.hpp>
-#include "../include/user.h"
+
 
 using boost::asio::ip::tcp;
 
@@ -14,6 +16,8 @@ private:
 	boost::asio::io_service io_service_;   // Provides core I/O functionality
 	tcp::socket socket_;
 	User user;
+	Frame frame;
+	bool alive;
 
 public:
 	ConnectionHandler(std::string host, short port);
@@ -46,6 +50,8 @@ public:
 	// Send a message to the remote host.
 	// Returns false in case connection is closed before all the data is sent.
 	bool sendFrameAscii(const std::string &frame, char delimiter);
+
+	bool isAlive();
 
 	// Close down the connection properly.
 	void close();

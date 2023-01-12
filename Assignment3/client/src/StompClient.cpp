@@ -8,20 +8,20 @@
 
 void ReceiveThread(ConnectionHandler& connectionHandler)
 {
-	while (1) 
+	while (connectionHandler.isAlive()) 
     {
 		int len;
 
         std::string answer;
 
-        if (!connectionHandler.getLine(answer)) {
+        if (connectionHandler.isAlive() && !connectionHandler.getLine(answer)) {
             std::cout << "Disconnected. Exiting...\n" << std::endl;
             break;
         }
         
 		len=answer.length();
         answer.resize(len-1);
-        std::cout << "Reply: " << answer << " " << len << " bytes " << std::endl << std::endl;
+        //std::cout << "Reply: " << answer << " " << len << " bytes " << std::endl << std::endl;
         if (answer == "bye") 
 		{
             std::cout << "Exiting...\n" << std::endl;
@@ -34,20 +34,20 @@ void ReceiveThread(ConnectionHandler& connectionHandler)
 
 void SendThread(ConnectionHandler& connectionHandler)
 {
-    while (1) 
+    while (connectionHandler.isAlive()) 
     {
         const short bufsize = 1024;
         char buf[bufsize];
         std::cin.getline(buf, bufsize);
 		std::string line(buf);
 		int len=line.length();
-        if (!connectionHandler.sendLine(line))
+        if (connectionHandler.isAlive() && !connectionHandler.sendLine(line))
 		{
             std::cout << "Disconnected. Exiting...\n" << std::endl;
             break;
         }
 		// connectionHandler.sendLine(line) appends '\n' to the message. Therefor we send len+1 bytes.
-        std::cout << "Sent " << len+1 << " bytes to server" << std::endl;
+        //std::cout << "Sent " << len+1 << " bytes to server" << std::endl;
 	}
 
 	
@@ -72,8 +72,11 @@ int main (int argc, char *argv[])
 	std::thread send_thread(SendThread, std::ref(connectionHandler));
   	std::thread receive_thread(ReceiveThread, std::ref(connectionHandler));
 
-	send_thread.join();
+	
   	receive_thread.join();
+
+    //send_thread.detach();
+    send_thread.join();
 
     return 0;
 }
