@@ -34,33 +34,29 @@ public class StompProtocol<T> implements StompMessagingProtocol<String> {
        {
         case CONNECT:
             FrameConnect connectFrame = new FrameConnect(stompFrame);
-            // activate connecy frame action method.
-
+            executeConnect(stompFrame);
+            break;
         case DISCONNECT:
             FrameDisconnect disconnectFrame = new FrameDisconnect(stompFrame);
-            // activate connecy frame action method.
+            executeDisconnect(stompFrame);
+            break;
         case SEND:
             FrameSend sendFrame = new FrameSend(stompFrame);
-            // activate connecy frame action method.
+            executeSend(stompFrame,msg);
+            break;
         case SUBSCRIBE:
             FrameSubscribe subscribeFrame = new FrameSubscribe(stompFrame);
-            // activate connecy frame action method.
+            executeSubscrice(stompFrame);
+            break;
         case UNSUBSCRIBE:
             FrameUsubscribe unsubscribeFrame = new FrameUsubscribe(stompFrame);
-            // activate connecy frame action method.
-
-        
-    
+            executeUnsubscribe(stompFrame);
+            break;
+        default:
+            break;
 
        }
        
-
-
-
-
-
-
-    
     }
 
     @Override
@@ -68,10 +64,26 @@ public class StompProtocol<T> implements StompMessagingProtocol<String> {
     {
         return shouldTerminate;
     }
+
+    public boolean containsReceipt(StompFrame frame)
+    {
+        if(frame.getHeaders().containsKey("receipt"))
+            return true;
+        return false;
+    }
     
     public void executeConnect(StompFrame frame)
     {
-        if(frame.getHeaders().containsKey("RECEIPT"));
+        if(connections.connect(connectionId, frame.getHeaders().get("login"), frame.getHeaders().get("passcode")));
+        {
+            connections.send(connectionId, "CONNECTED");
+           // if(containsReceipt(frame))
+
+        }
+
+
+
+       /*  if(frame.getHeaders().containsKey("RECEIPT"));
         {
             int receipteId=0;
             try{
@@ -82,8 +94,47 @@ public class StompProtocol<T> implements StompMessagingProtocol<String> {
                 ex.printStackTrace();
             }
             FrameReceipt receiptFrame = new FrameReceipt(receipteId);
-            //connections.send(connectionId, (T)receiptFrame);
+            //connections.send(connectionId, (T)receiptFrame); 
         }
+        */
+    }
+
+    public void executeSubscrice(StompFrame frame)
+    {
+        if(connections.sub(connectionId, frame.getHeaders().get("destination"), stringToInt(frame.getHeaders().get("id"))))
+            connections.send(connectionId, "SUBSCRIBED" + "\n" +"receipt-id:"+frame.getHeaders().get("receipt"));
+
+    }
+
+    public void executeUnsubscribe(StompFrame frame)
+    {
+        if(connections.unsub(connectionId, stringToInt(frame.getHeaders().get("id")))) 
+            connections.send(connectionId, "UNSUBSCRIBED" + "\n" +"receipt-id:"+ frame.getHeaders().get("receipt")); 
+
+
+    }
+    
+    public void executeDisconnect(StompFrame frame)
+    {
+        connections.send(connectionId, "YOU ARE NOW SIGNED OUT, FUCK YOU, SHALOM. \n"+frame.getHeaders().get("receipt")); 
+        connections.disconnect(connectionId);
+    }
+    public void executeSend(StompFrame frame,String msg)
+    {
+        connections.send(frame.getHeaders().get("destination"), msg);
+    }
+
+
+    public int stringToInt(String str)
+    {
+        int num;
+        try {
+            num = Integer.parseInt(str);
+        } catch (NumberFormatException e) {
+            System.out.println("Invalid input: " + str);
+            num = 0;
+        }
+        return num;
     }
 }
 /*

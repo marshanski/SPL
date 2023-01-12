@@ -14,10 +14,15 @@ public interface Connections<T> //i changed to String, maybe need to change back
 
     void send(String channel, String msg);
 
-    void disconnect(int connectionId);
-
     boolean connect(int connectionId, String username, String passcode);
 
     int addClient(ConnectionHandler<T> handler);// generates connId, adds the <connId, handler> to map, return connId
+
+    boolean sub(int connectionId, String channelName, int SubscribeId);
+
+    boolean unsub(int connectionId, int SubscribeId);
+
+    boolean disconnect(int connectionId);
+    
 
 }

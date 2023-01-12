@@ -33,13 +33,14 @@ public class ConnectionsImpl<T> implements Connections<T>
         clients.get(connectionId).send(msg);
     }
 
-    public void disconnect(int connectionId)
+    public boolean disconnect(int connectionId)
     {
         for (Map.Entry<String,ConcurrentHashMap<Integer,Integer>> entry : channelsToUsers.entrySet())
         {
             entry.getValue().remove(connectionId); // deleteing the user from all topics
         }
         clients.remove(connectionId); // removing the client's connection handler from the map clients.
+        return true;
     }
 
     public boolean connect(int connectionId, String username, String passcode)
@@ -54,6 +55,8 @@ public class ConnectionsImpl<T> implements Connections<T>
         }
         else
         {
+            users.put(username, passcode);
+            activeUsers.put(username, connectionId);
             return true;
         }
         
@@ -70,14 +73,50 @@ public class ConnectionsImpl<T> implements Connections<T>
         return id;
     }
     
-    public void send(String a, String b )
+    public boolean sub(int connectionId, String channelName, int subscribeId)
     {
-        
+        if(!channelsToUsers.isEmpty())
+        {
+            if(channelsToUsers.contains(channelName))
+            {
+                if(channelsToUsers.get(channelName).contains(connectionId))
+                    return false;
+                channelsToUsers.get(channelName).put(connectionId, subscribeId);
+                return true;
+            }
+        }
+        ConcurrentHashMap<Integer,Integer> hash =  new ConcurrentHashMap<Integer,Integer>();
+        channelsToUsers.put(channelName,hash);
+        channelsToUsers.get(channelName).put(connectionId, subscribeId);
+        return true;
     }
 
+    public boolean unsub(int connectionId, int subscribeId)
+    {
+        if(!channelsToUsers.isEmpty())
+        {
+            for (Map.Entry<String,ConcurrentHashMap<Integer,Integer>> entry : channelsToUsers.entrySet())
+            {
+                if(entry.getValue().get(connectionId) == subscribeId)
+                {
+                    entry.getValue().remove(connectionId,subscribeId);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
+    public void send(String channel, String msg)
+    {
+        ConcurrentHashMap<Integer,Integer> hash =  channelsToUsers.get(channel);
+        for (Map.Entry<Integer,Integer> entry : hash.entrySet())
+        {
+            send(entry.getKey(), msg);
+        }
 
-    
+    }
+
 }
 
 

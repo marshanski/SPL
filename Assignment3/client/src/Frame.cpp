@@ -121,10 +121,10 @@ vector<string>  Frame:: SubscribeToString(std::string msg,User& user)
     }
 
     //create the frame string
-    string str = "SUBSCRIBE \n", end = "\0",id = "17",recipt="73";
-    str +="destination:/ " + parametrs[1]                      + "\n";
+    string str = "SUBSCRIBE\n", end = "\0",id = "17",receipt="73";
+    str +="destination:/" + parametrs[1]                      + "\n";
     str +="id:"            + std::to_string(user.getCount())   + "\n";
-    str +="recipt: "       + recipt                            + "\n";
+    str +="receipt:"        + receipt                            + "\n";
     messages.push_back(str);
 
     //update the user 
@@ -145,10 +145,10 @@ vector<string>  Frame:: unSubscribeToString(std::string msg,User& user)
         return messages;
     }
 
-    string str = "",command = "UNSUBSCRIBE", end = "\0",id = "17",recipt="73";
-    str +="command: "     + command      + "\n";
-    str +="id:"           + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
-    str +="recipt: "      + recipt       + "\n";
+    string str = "",command = "UNSUBSCRIBE", end = "\0",id = "17",receipt="73";
+    str +=command         + "\n";
+    str +="id:"           + std::to_string(user.getReceiptId(parametrs[1]))+ "\n";
+    str +="receipt:"      + receipt       + "\n";
     messages.push_back(str);
     user.deleteTopic(parametrs[1]);
     return messages;
@@ -158,9 +158,9 @@ vector<string>  Frame:: logOutToString(std::string msg,User& user)
 {
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
-    string str = "",command = "DISCONNECT", end = "\0",recipt="73";
-    str +="command: "     + command      + "\n";
-    str +="recipt: "      + recipt       + "\n";
+    string str = "",command = "DISCONNECT", end = "\0",receipt="73";
+    str +=command      + "\n";
+    str +="receipt: "      + receipt       + "\n";
     messages.push_back(str);
     
     return messages;
@@ -198,23 +198,22 @@ vector<string>  Frame:: reportToString(std::string msg,User& user)
 
         for (const auto& update :event.get_game_updates())
         {
-            str+="    "+ update.first +":" + update.second + "\n";
+            str+= update.first +":" + update.second + "\n";
             
         }
         str+="team a updates:\n" ;
         for (const auto& update :event.get_team_a_updates())
         {
-            str+="    "+ update.first +":" + update.second + "\n";
+            str+= update.first +":" + update.second + "\n";
         }
         
         str+="team b updates:\n";
         for (const auto& update :event.get_team_b_updates())
         {
-            str+="    "+ update.first +":" + update.second + "\n";
+            str+= update.first +":" + update.second + "\n";
         }
         str+="description:\n";
         str+=event.get_discription()+"\n";
-        cout << str << endl;
         messages.push_back(str);
 
     }
@@ -293,7 +292,7 @@ bool Frame:: translateFrame(string msg,User& user)
     
     vector<string> parametrs    = split(msg,'\n');
     cout << msg<< endl;
-    if (parametrs[0]=="CONNECT")
+    if (parametrs[0]=="CONNECTED")
     {
         cout << user.getUsername() + " is Connected" << endl;
         user.activateUser();

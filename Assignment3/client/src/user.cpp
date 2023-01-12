@@ -15,7 +15,7 @@ using std::endl;
 using std::string;
 using std::vector;
 
-User::User():username(""),passcode("RAZ"),isConnetd(true) ,topicToindex(),eventsByTopic(),count(0)
+User::User():username(""),passcode("RAZ"),isConnetd(false) ,topicToindex(),eventsByTopic(),count(0)
 {
     
 }
@@ -81,7 +81,7 @@ void User:: addEvent(string topic,string user, Event& event)
     eventsByTopic[topic][user].push_back(event);
 }
 
-int User:: getReciptId(string topic)
+int User:: getReceiptId(string topic)
 {
     return topicToindex[topic];
 }

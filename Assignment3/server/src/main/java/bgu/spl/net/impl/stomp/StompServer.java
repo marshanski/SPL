@@ -11,12 +11,13 @@ public class StompServer
     {
 
         // you can use any server... 
-        /*Server.threadPerClient(
+        Server.threadPerClient(
                 7777, //port
                 () -> new StompProtocol<>(), //protocol factory
-                () -> new StompMessageEncoderDecoder<String>() /:new //message encoder decoder factory
-        ).serve();*/
+                () -> new StompMessageEncoderDecoder<String>() //message encoder decoder factory
+        ).serve();
 
+        /* 
         Server.reactor
         (
                  Runtime.getRuntime().availableProcessors(),
@@ -24,6 +25,6 @@ public class StompServer
                  () -> new StompProtocol<String>(), 
                  () -> new StompMessageEncoderDecoder<String>()//protocol factory 'when we started it was () -> new StompProtocol<>()' StompMessageEncoderDecoder::new 
                  //message encoder decoder factory
-         ).serve();
+         ).serve();  */
     }
 }
