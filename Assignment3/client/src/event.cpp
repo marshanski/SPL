@@ -68,6 +68,7 @@ Event::Event(const std::string &frame_body) : team_a_name(""), team_b_name(""), 
 names_and_events parseEventsFile(std::string json_path)
 {
     std::ifstream f(json_path);
+    
     json data = json::parse(f);
 
     std::string team_a_name = data["team a"];
