@@ -7,6 +7,7 @@
 #include <sstream>
 #include <vector>
 #include <algorithm>
+#include <map>
 
 using std::cin;
 using std::cout;
@@ -15,9 +16,9 @@ using std::endl;
 using std::string;
 using std::vector;
 
-User::User():username(""),passcode(""),isConnetd(true) ,topicToindex(),eventsByTopic(),SubscribeWaitingList(),UnSubscribeWaitingList(),indexToTopic(),coint(0)
+User::User():username(""),passcode(""),isConnetd(true) ,topicToindex(),eventsByTopic(),SubWaitList(),myMap(),UnSubscribeWaitingList(),indexToTopic(),count(0)
 {
-    
+
 }
 
 
@@ -57,24 +58,45 @@ int User:: getCount()
 
 void User:: addTopic(int index)
 {
-    
-    topicToindex.insert(std::pair<string, int>(SubscribeWaitingList[index],index));
-    indexToTopic.insert(std::pair<int, string>(index,SubscribeWaitingList[index]));
+    string topic = myMap[index];
+    topicToindex.insert(std::pair<std::string, int>(topic,index));
+    indexToTopic.insert(std::pair<int, std::string>(index,topic));
+    std::map<int,string>::iterator it;
+    it = myMap.find(index);
+    myMap.erase(it);
+    int r=0;
+    //it  = topicToindex.find(index);
 }
+void User:: removeTopic(int index)
+{
+    std::map<string,int>::iterator it;
+    std::map<int,string>::iterator it2;
+    it  = topicToindex.find(indexToTopic[index]);
+    it2 = indexToTopic.find(index);
+    topicToindex.erase(it);  
+    indexToTopic.erase(it2); 
+
+    int r=0;
+    //topicToindex.erase(myMap[index]);
+    //indexToTopic.erase(index);
+}
+
 void User:: addToSubWaiting(string gamename)
 {
-    SubscribeWaitingList.insert(std::pair<int,string>(count,gamename));
+    //SubWaitList.insert(std::make_pair(count, gamename));
+
+    myMap.insert(std::make_pair(count, gamename));
     count++;
 }
 void User:: addToUnSubWaiting(string gamename)
 {
     
-    UnSubscribeWaitingList.insert(std::pair<int,string>(topicToIndex[gamename],gamename));
+    UnSubscribeWaitingList.insert(std::pair<int,std::string>(topicToindex[gamename],gamename));
 
 }
 int User:: getIndexByTopic(string gamename)
 {
-    return topicToIndex[gamename];
+    return topicToindex[gamename];
 }
 
 std::map<std::string, int> User:: getTopicToindex()
@@ -110,7 +132,7 @@ std::vector<Event> User:: getEventsByUser(string topic,string username)
 
 bool User:: inWaitSubList(string topic)
 {
-    for (const auto &[k, v] : SubscribeWaitingList) 
+    for (const auto &[k, v] : myMap) 
     {
         if (v == topic) 
             return true;

@@ -31,8 +31,6 @@ std::vector<std::string> split(const std::string& s, char delimiter)
    return tokens;
 }
 
-
-
 Frame::Frame()
 {
   
@@ -54,7 +52,7 @@ vector<string>  Frame:: toString(std::string msg, User& user)
 
     if(!user.getIsConnected())
     {
-        cout <<"The user isn't log in";
+        cout <<"--The user isn't log in--";
         messages.push_back("NO MESSAGE");
         return messages;
     }
@@ -75,8 +73,8 @@ vector<string>  Frame:: toString(std::string msg, User& user)
         summeryTostring(msg,user);
     }
 
+    cout << "Unrecognized order, try again" << endl;
     messages.push_back("NO MESSAGE");
-    //messages.push_back("EROR");
     return messages;
 }
 
@@ -98,11 +96,11 @@ vector<string>  Frame:: ConnectToString(std::string msg,User& user)
     //create the frame string
     string str = "";
     string command = "CONNECT", host = "stomp.cs.bgu.ac.il",version="1.2",end = "\0" ;
-    str +=command        + "\n";
-    str +="host: "          + host           + "\n";
-    str +="accept-version: "+ version        + "\n";
-    str +="login: "         + parametrs [2]  + "\n";
-    str +="passcode: "      + parametrs [3]  + "\n";
+    str +=command          + "\n";
+    str +="host:"          + host           + "\n";
+    str +="accept-version:"+ version        + "\n";
+    str +="login:"         + parametrs [2]  + "\n";
+    str +="passcode:"      + parametrs [3]  + "\n";
     str += "\n";
     messages.push_back(str);
     return messages;
@@ -130,7 +128,7 @@ vector<string>  Frame:: SubscribeToString(std::string msg,User& user)
     string str = "SUBSCRIBE\n", end = "\0",id = "17",recipt="73";
     str +="destination:/ " + parametrs[1]                      + "\n";
     str +="id:"            + std::to_string(user.getCount())   + "\n";
-    str +="recipt: "       + recipt                            + "\n";
+    str +="recipt:"       + recipt                            + "\n";
     messages.push_back(str);
 
     //update the user 
@@ -158,9 +156,9 @@ vector<string>  Frame:: unSubscribeToString(std::string msg,User& user)
 
     string str = "UNSUBSCRIBE\n";
     str +="id:"           + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
-    str +="recipt: "      + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
+    str +="recipt:"      + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
     messages.push_back(str);
-    user.addTopicToWaitingList(parametrs[1]);
+    user.addToUnSubWaiting(parametrs[1]);
     return messages;
 }
 
@@ -169,7 +167,7 @@ vector<string>  Frame:: logOutToString(std::string msg,User& user)
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
     string str = "DISCONNECT\n",recipt="73";
-    str +="recipt: "      + recipt       + "\n";
+    str +="recipt:"      + recipt       + "\n";
     messages.push_back(str);
     
     return messages;
@@ -182,7 +180,15 @@ vector<string>  Frame:: reportToString(std::string msg,User& user)
     std::string topic,team_a_name ,team_b_name,end = "\0",username = "meni",HALFTIME = "true";
     std::vector<Event> events;
 
-    names_and_events NAE = parseEventsFile("events1.json");
+    std::ifstream file(parametrs[1]);
+    if (!file.good())
+    {
+        cout <<"That file doesn't exsist try another one"<<endl;
+        messages.push_back("NO MESSAGE");
+        return messages;
+    }
+
+    names_and_events NAE = parseEventsFile(parametrs[1]);
     events = NAE.events;
     topic = NAE.team_a_name + "_" + NAE.team_b_name;
     if(!user.haveTopic(topic))
@@ -302,12 +308,28 @@ bool Frame:: translateFrame(string msg,User& user)
     str += "\0";*/
     
     vector<string> parametrs    = split(msg,'\n');
-    cout << msg<< endl;
     if (parametrs[0]=="CONNECT")
     {
         cout << user.getUsername() + " is Connected" << endl;
         user.activateUser();
     }
+    if (parametrs[0]=="SUBSCRIBE")
+    {
+        cout << user.getUsername() + " is subscribed" << endl;
+        user.addTopic(0);
+    }
+    if (parametrs[0]=="UNSUBSCRIBE")
+    {
+        cout << user.getUsername() + " is Unsubscribed" << endl;
+        user.removeTopic(0);
+    }
+    if (parametrs[0]=="DISCONNECT")
+    {
+        cout << "User Discconted from the system. Thank you and have a good day" << endl;
+        return false;
+    }
+
+
     if(parametrs[0]=="SEND")
     {
         string teamA,teamB,topic,username,eventName,description;
@@ -354,10 +376,7 @@ bool Frame:: translateFrame(string msg,User& user)
         return false;
     }
 
-
     return true;
-
-
 }
 
 

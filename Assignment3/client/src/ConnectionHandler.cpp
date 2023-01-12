@@ -29,8 +29,10 @@ bool ConnectionHandler::connect() {
 		if (error)
 			throw boost::system::system_error(error);
 	}
-	catch (std::exception &e) {
+	catch (std::exception &e) 
+	{
 		std::cerr << "Connection failed (Error: " << e.what() << ')' << std::endl;
+		alive = false;
 		return false;
 	}
 	return true;
@@ -45,8 +47,10 @@ bool ConnectionHandler::getBytes(char bytes[], unsigned int bytesToRead) {
 		}
 		if (error)
 			throw boost::system::system_error(error);
-	} catch (std::exception &e) {
+	} catch (std::exception &e) 
+	{
 		std::cerr << "recv failed (Error: " << e.what() << ')' << std::endl;
+		alive = false;
 		return false;
 	}
 	return true;
@@ -63,6 +67,7 @@ bool ConnectionHandler::sendBytes(const char bytes[], int bytesToWrite) {
 			throw boost::system::system_error(error);
 	} catch (std::exception &e) {
 		std::cerr << "recv failed (Error: " << e.what() << ')' << std::endl;
+		alive = false;
 		return false;
 	}
 	return true;
@@ -84,7 +89,7 @@ bool ConnectionHandler::sendLine(std::string &line)
 	{
 
 		std::vector<string> messagesToSend = frame.toString(line,user);
-		for(int i=0; i<messagesToSend.size();i++)
+		for(unsigned int i=0; i<messagesToSend.size();i++)
 		{
 			//cout << message<< endl;
 			if(messagesToSend[i] != "NO MESSAGE")
@@ -119,6 +124,7 @@ bool ConnectionHandler::getFrameAscii(std::string &frame, char delimiter)
 		} while (delimiter != ch);
 	} catch (std::exception &e) {
 		std::cerr << "recv failed2 (Error: " << e.what() << ')' << std::endl;
+		alive = false;
 		return false;
 	}
 	return true;
