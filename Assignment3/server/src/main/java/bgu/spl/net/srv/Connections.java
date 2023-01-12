@@ -10,7 +10,7 @@ public interface Connections<T> //i changed to String, maybe need to change back
  להוסיף מחלקה של קונקשיין אימפל
  */
 
-    void send(int connectionId, T msg);
+    void send(int connectionId, String msg);
 
     void send(String channel, String msg);
 

@@ -2,17 +2,18 @@ package bgu.spl.net.srv;
 
 import bgu.spl.net.api.MessageEncoderDecoder;
 import bgu.spl.net.api.StompMessagingProtocol;
-import bgu.spl.net.srv.Connections;
+import bgu.spl.net.srv.ConnectionsImpl;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import bgu.spl.net.impl.stomp.*;
 
 public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler<T> 
 {
 
     private final StompMessagingProtocol<T> protocol;
-    private final MessageEncoderDecoder<T> encdec;
+    private final StompMessageEncoderDecoder<T> encdec;
     private final Socket sock;
     private BufferedInputStream in;
     private BufferedOutputStream out;
@@ -20,13 +21,13 @@ public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler
     ConnectionsImpl<T> connections;
     private int connectionId;
 
-    public BlockingConnectionHandler(Socket sock, MessageEncoderDecoder<T> reader, StompMessagingProtocol<T> protocol, ConnectionsImpl<T> connections)
+    public BlockingConnectionHandler(Socket sock, StompMessageEncoderDecoder<T> reader, StompMessagingProtocol<T> protocol, ConnectionsImpl<T> connections)
      {
-        this.sock = sock;
-        this.encdec = reader;
-        this.protocol = protocol;
-        this.connections = connections;
-        connectionId = connections.addClient(this);
+        this.sock         = sock;
+        this.encdec       = reader;
+        this.protocol     = protocol;
+        this.connections  = connections;
+        this.connectionId = connections.addClient(this);
         protocol.start(connectionId,connections);
     }
     @Override
@@ -39,7 +40,7 @@ public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler
             out = new BufferedOutputStream(sock.getOutputStream());
 
             while (!protocol.shouldTerminate() && connected && (read = in.read()) >= 0) {
-                T nextMessage = encdec.decodeNextByte((byte) read);
+                String nextMessage = encdec.decodeNextByte((byte) read);
                 if (nextMessage != null) {
                     protocol.process(nextMessage);
                     /*if (response != null) {
@@ -61,7 +62,7 @@ public class BlockingConnectionHandler<T> implements Runnable, ConnectionHandler
     }
 
     @Override
-    public void send(T msg) 
+    public void send(String msg) 
     {
         //IMPLEMENT IF NEEDED
         try {

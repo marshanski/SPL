@@ -2,6 +2,7 @@ package bgu.spl.net.srv;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
 public class ConnectionsImpl<T> implements Connections<T> 
 {
     //mapping between <ConnectionId , ConnectionHandler>:
@@ -27,7 +28,7 @@ public class ConnectionsImpl<T> implements Connections<T>
         this.numOfConnections = 0;
     }
 
-    public void send(int connectionId, T msg)
+    public void send(int connectionId, String msg)
     {
         clients.get(connectionId).send(msg);
     }
@@ -68,9 +69,18 @@ public class ConnectionsImpl<T> implements Connections<T>
         clients.put(id, handler);
         return id;
     }
+    
+    public void send(String a, String b )
+    {
+        
+    }
 
 
 
     
 }
+
+
+
+
 

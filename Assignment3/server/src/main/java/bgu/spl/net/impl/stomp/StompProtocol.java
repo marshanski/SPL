@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StompProtocol implements StompMessagingProtocol<String> {
+public class StompProtocol<T> implements StompMessagingProtocol<String> {
 
     private int connectionId;
     private ConnectionsImpl<String> connections;
@@ -48,8 +48,9 @@ public class StompProtocol implements StompMessagingProtocol<String> {
         case UNSUBSCRIBE:
             FrameUsubscribe unsubscribeFrame = new FrameUsubscribe(stompFrame);
             // activate connecy frame action method.
-        
 
+        
+    
 
        }
        
