@@ -80,15 +80,18 @@ bool ConnectionHandler::getLine(std::string &line)
 
 bool ConnectionHandler::sendLine(std::string &line)
 {
-
-	std::vector<string> messagesToSend = frame.toString(line,user);
-	for(int i=0; i<messagesToSend.size();i++)
+	if(line != "")
 	{
-		//cout << message<< endl;
-		if(messagesToSend[i] != "NO MESSAGE")
+
+		std::vector<string> messagesToSend = frame.toString(line,user);
+		for(int i=0; i<messagesToSend.size();i++)
 		{
-			if(!sendFrameAscii(messagesToSend[i], '\0'))
-				return false;
+			//cout << message<< endl;
+			if(messagesToSend[i] != "NO MESSAGE")
+			{
+				if(!sendFrameAscii(messagesToSend[i], '\0'))
+					return false;
+			}
 		}
 	}
 

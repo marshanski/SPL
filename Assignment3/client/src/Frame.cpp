@@ -198,20 +198,21 @@ vector<string>  Frame:: reportToString(std::string msg,User& user)
 
         for (const auto& update :event.get_game_updates())
         {
-            str+="    "+ update.first +":" + update.second + "\n";
+            str+=update.first +":" + update.second + "\n";
             
         }
         str+="team a updates:\n" ;
         for (const auto& update :event.get_team_a_updates())
         {
-            str+="    "+ update.first +":" + update.second + "\n";
+            str+=update.first +":" + update.second + "\n";
         }
         
         str+="team b updates:\n";
         for (const auto& update :event.get_team_b_updates())
         {
-            str+="    "+ update.first +":" + update.second + "\n";
+            str+=update.first +":" + update.second + "\n";
         }
+
         str+="description:\n";
         str+=event.get_discription()+"\n";
         cout << str << endl;
@@ -313,7 +314,7 @@ bool Frame:: translateFrame(string msg,User& user)
         int i= 9;
         while (parametrs[i]!="team a updates:")
         {
-            vector<string> update = split(split(parametrs[i],' ')[4],':');
+            vector<string> update = split(parametrs[i],':');
             game_updates.insert(std::pair<string, string>(update[0],update[1]));
             
             i++;
@@ -321,7 +322,7 @@ bool Frame:: translateFrame(string msg,User& user)
         i++;
         while (parametrs[i]!="team b updates:")
         {
-            vector<string> update = split(split(parametrs[i],' ')[4],':');
+            vector<string> update = split(parametrs[i],':');
             a_updates.insert(std::pair<string, string>(update[0],update[1]));
             
             i++;
@@ -329,9 +330,8 @@ bool Frame:: translateFrame(string msg,User& user)
         i++;
         while (parametrs[i]!="description:")
         {
-            vector<string> update = split(split(parametrs[i],' ')[4],':');
+            vector<string> update = split(parametrs[i],':');
             b_updates.insert(std::pair<string, string>(update[0],update[1]));
-            
             i++;
         }
         i++;
