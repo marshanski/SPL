@@ -70,7 +70,7 @@ vector<string>  Frame:: toString(std::string msg, User& user)
     if(parametrs[0] =="report")
         return reportToString(msg,user);
 
-    if(parametrs[0] =="summery")
+    if(parametrs[0] =="summary")
     {
         summeryTostring(msg,user);
     }
