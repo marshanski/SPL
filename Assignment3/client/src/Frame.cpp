@@ -331,31 +331,30 @@ vector<string> Frame:: returnNoMessage(vector<string>messages)
 bool Frame:: translateFrame(string msg,User& user)
 {
 
-
     vector<string> parametrs    = split(msg,'\n');
-    if (parametrs[0]=="CONNECT")
+    if (parametrs[0]=="CONNECTED")
     {
         cout << "---" + user.getUsername() + " is Connected To The System" +"---" << endl;
         user.activateUser();
     }
 
-    if (parametrs[0]=="SUBSCRIBE")
+    if (parametrs[0]=="SUBSCRIBED")
     {
-        //int index      = std::stoi(split(parametrs[1],':')[1]);
-        int index      = std::stoi(split(parametrs[2],':')[1]);
+        int index      = std::stoi(split(parametrs[1],':')[1]);
+        //int index      = std::stoi(split(parametrs[2],':')[1]);
         string topic   = user.addTopic(index);
         cout <<"---"+ user.getUsername() + " is Subscribed: " + topic+"---" << endl;  
     }
 
-    if (parametrs[0]=="UNSUBSCRIBE")
+    if (parametrs[0]=="UNSUBSCRIBED")
     {
-        //int index      = std::stoi(split(parametrs[1],':')[1]);
-        int index      = std::stoi(split(parametrs[2],':')[1]);
+        int index      = std::stoi(split(parametrs[1],':')[1]);
+        //int index      = std::stoi(split(parametrs[2],':')[1]);
         string topic   = user.removeTopic(index);
         cout << "---" +user.getUsername() + " is Unsubscribed: " + topic + "---" << endl;
     }
 
-    if (parametrs[0]=="DISCONNECT")
+    if (parametrs[0]=="DISCONNECTED")
     {
         cout << "---" + user.getUsername()+ " Disconected from the system. Thank you and have a good day" + "---"<< endl;
         return false;
