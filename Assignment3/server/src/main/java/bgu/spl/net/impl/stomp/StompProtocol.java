@@ -74,29 +74,7 @@ public class StompProtocol<T> implements StompMessagingProtocol<String> {
     
     public void executeConnect(StompFrame frame)
     {
-        if(connections.connect(connectionId, frame.getHeaders().get("login"), frame.getHeaders().get("passcode")));
-        {
-            connections.send(connectionId, "CONNECTED");
-           // if(containsReceipt(frame))
-
-        }
-
-
-
-       /*  if(frame.getHeaders().containsKey("RECEIPT"));
-        {
-            int receipteId=0;
-            try{
-                 receipteId = Integer.parseInt(frame.getHeaders().get("RECEIPT"));
-                System.out.println(receipteId); // output = 25
-            }
-            catch (NumberFormatException ex){
-                ex.printStackTrace();
-            }
-            FrameReceipt receiptFrame = new FrameReceipt(receipteId);
-            //connections.send(connectionId, (T)receiptFrame); 
-        }
-        */
+        connections.send(connectionId, connections.connect(connectionId, frame.getHeaders().get("login"), frame.getHeaders().get("passcode")));
     }
 
     public void executeSubscrice(StompFrame frame)
@@ -136,6 +114,8 @@ public class StompProtocol<T> implements StompMessagingProtocol<String> {
         }
         return num;
     }
+
+    
 }
 /*
 try{

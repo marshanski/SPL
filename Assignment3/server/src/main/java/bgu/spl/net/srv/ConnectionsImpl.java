@@ -43,28 +43,22 @@ public class ConnectionsImpl<T> implements Connections<T>
         return true;
     }
 
-    public boolean connect(int connectionId, String username, String passcode)
+    public String connect(int connectionId, String username, String passcode)
     {     
-        if(users.containsKey(username))// the username existes in the database
+        if(!isAvailable(username))// the username existes in the database
         {
-            if(users.get(username)!= passcode)// check if passcode is matching
-                return false;
-            else
-                activeUsers.put(username, connectionId);
-                return true;
+            if(!isPasscodeRight(username, passcode))// check if passcode is matching
+                return "ERROR\nPASSCODE\n";
+            return "ERROR\nUSERNAME\n";
         }
         else
         {
             users.put(username, passcode);
             activeUsers.put(username, connectionId);
-            return true;
+            return "CONNECTED\n"+username+"\n"+passcode;
         }
-        
-
-        
-        
-        
     }
+
     public int addClient(ConnectionHandler<T> handler)
     {
         int id = numOfConnections;
@@ -115,6 +109,20 @@ public class ConnectionsImpl<T> implements Connections<T>
             send(entry.getKey(), msg);
         }
 
+    }
+
+    public boolean isAvailable(String username)
+    {
+        if(users.containsKey(username))
+            return false;
+        return true;
+    }
+
+    public boolean isPasscodeRight(String user, String pass)
+    {
+        if(users.containsKey(user)&& users.get(user) != pass)
+            return false;
+        return true;
     }
 
 }
