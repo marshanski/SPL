@@ -125,10 +125,10 @@ vector<string>  Frame:: SubscribeToString(std::string msg,User& user)
     }
 
     //create the frame string
-    string str = "SUBSCRIBE\n", end = "\0",id = "17",recipt="73";
+    string str = "SUBSCRIBE\n";
     str +="destination:/ " + parametrs[1]                      + "\n";
     str +="id:"            + std::to_string(user.getCount())   + "\n";
-    str +="recipt:"       + recipt                            + "\n";
+    str +="receipt:"       + std::to_string(user.getCount())   + "\n";
     messages.push_back(str);
 
     //update the user 
@@ -155,8 +155,8 @@ vector<string>  Frame:: unSubscribeToString(std::string msg,User& user)
     }
 
     string str = "UNSUBSCRIBE\n";
-    str +="id:"           + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
-    str +="recipt:"      + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
+    str +="id:"           + std::to_string(user.getReceiptId(parametrs[1]))+ "\n";
+    str +="receipt:"      + std::to_string(user.getReceiptId(parametrs[1]))+ "\n";
     messages.push_back(str);
     user.addToUnSubWaiting(parametrs[1]);
     return messages;
@@ -166,8 +166,8 @@ vector<string>  Frame:: logOutToString(std::string msg,User& user)
 {
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
-    string str = "DISCONNECT\n",recipt="73";
-    str +="recipt:"      + recipt       + "\n";
+    string str = "DISCONNECT\n",receipt="73";
+    str +="receipt:"      + receipt       + "\n";
     messages.push_back(str);
     
     return messages;
