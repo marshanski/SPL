@@ -13,11 +13,11 @@ public class EchoServer {
                 LineMessageEncoderDecoder::new //message encoder decoder factory
         ).serve();*/
 
-        Server.reactor(
+        /*Server.reactor(
                  Runtime.getRuntime().availableProcessors(),
                  7777, //port
                  () -> new EchoProtocol(), //protocol factory
                  LineMessageEncoderDecoder::new //message encoder decoder factory
-         ).serve();
+         ).serve();*/
     }
 }
