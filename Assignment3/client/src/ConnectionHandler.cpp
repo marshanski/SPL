@@ -77,7 +77,7 @@ bool ConnectionHandler::getLine(std::string &line)
 {
 	
 	bool answer = getFrameAscii(line, '\0');
-	cout << line << endl;
+	//cout << line << endl;
 	if(line != "")
 		alive = frame.translateFrame(line,user);
 

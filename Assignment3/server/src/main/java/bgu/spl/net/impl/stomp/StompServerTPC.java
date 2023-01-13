@@ -11,12 +11,14 @@ public class StompServerTPC {
 
     public static void main(String[] args) 
     {
+        /*
         NewsFeed feed = new NewsFeed(); 
         Server.threadPerClient(
                 7777, //port
                 () -> new StompProtocol<String>(), //protocol factory
                 () -> new StompMessageEncoderDecoder<String>()  //message encoder decoder factory
         ).serve();
+        */
 
 
     }

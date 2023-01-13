@@ -200,7 +200,7 @@ vector<string>  Frame:: reportToString(std::string msg,User& user)
 
     names_and_events NAE = parseEventsFile(parametrs[1]);
 
-    if(NAE.team_a_name == "EROR IN FILE")
+    if(NAE.team_a_name == "ERROR IN FILE")
         return returnNoMessage(messages);
 
     events = NAE.events;
@@ -407,7 +407,7 @@ bool Frame:: translateFrame(string msg,User& user)
         Event event = Event(teamA,teamB,eventName,time,game_updates,a_updates,b_updates,description);
         user.addEvent(topic,username,event);
     }
-    if (parametrs[0]=="EROR")
+    if (parametrs[0]=="ERROR")
     {
         if(parametrs[1] == "USERNAME")
             cout << parametrs[2] + " is already taken" << endl;
@@ -415,7 +415,7 @@ bool Frame:: translateFrame(string msg,User& user)
             cout << "UnMatch Passowrd" << endl;
         else
         {
-            cout << "Eror was occued the client will be disconnected" << endl;
+            cout << "Error was occued the client will be disconnected" << endl;
             return false;
         }
     }

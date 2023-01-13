@@ -1,7 +1,9 @@
 package bgu.spl.net.srv;
 
 
-
+import bgu.spl.net.api.MessageEncoderDecoder;
+import bgu.spl.net.api.StompMessagingProtocol;
+import bgu.spl.net.srv.ConnectionsImpl;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectionKey;
@@ -15,21 +17,24 @@ public class NonBlockingConnectionHandler<T> implements ConnectionHandler<T> {
     private static final int BUFFER_ALLOCATION_SIZE = 1 << 13; //8k
     private static final ConcurrentLinkedQueue<ByteBuffer> BUFFER_POOL = new ConcurrentLinkedQueue<>();
 
-    private final StompProtocol<T>protocol;
+    private final StompMessagingProtocol<T> protocol;
     private final StompMessageEncoderDecoder<T> encdec;
     private final Queue<ByteBuffer> writeQueue = new ConcurrentLinkedQueue<>();
     private final SocketChannel chan;
     private final Reactor reactor;
+    private ConnectionsImpl<T> connections;
+    private int connectionId;
 
-    public NonBlockingConnectionHandler(
-            StompMessageEncoderDecoder<T> reader,
-            StompProtocol<T> protocol,
-            SocketChannel chan,
-            Reactor reactor) {
+    public NonBlockingConnectionHandler(StompMessageEncoderDecoder<T> reader, StompMessagingProtocol<T> protocol, SocketChannel chan, Reactor reactor, ConnectionsImpl<T> connections) 
+    {
         this.chan = chan;
         this.encdec = reader;
         this.protocol = protocol;
         this.reactor = reactor;
+        this.connections  = connections;
+        this.connectionId = connections.addClient(this);
+        protocol.start(this.connectionId,this.connections);
+        
     }
 
     public Runnable continueRead() {
