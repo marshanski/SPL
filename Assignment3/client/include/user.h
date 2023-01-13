@@ -33,7 +33,7 @@ public:
     string getPassCode();
     bool getIsConnected();
     int getCount();
-    void addTopic(int index);
+    std::string  addTopic(int index);
     std::map<std::string, int> getTopicToindex();
     bool haveTopic(string topic);
     void deleteTopic(string topic);
@@ -47,6 +47,7 @@ public:
     int getIndexByTopic(string gamename);
     bool inWaitSubList(string topic);
     bool inWaitUnSubList(string topic);
-    void removeTopic(int index);
+    std::string removeTopic(int index);
+    bool isUserReported(string topic,string username);
 
 };

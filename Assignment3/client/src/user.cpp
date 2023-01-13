@@ -56,7 +56,7 @@ int User:: getCount()
     return count;
 }
 
-void User:: addTopic(int index)
+string User:: addTopic(int index)
 {
     string topic = myMap[index];
     topicToindex.insert(std::pair<std::string, int>(topic,index));
@@ -64,21 +64,22 @@ void User:: addTopic(int index)
     std::map<int,string>::iterator it;
     it = myMap.find(index);
     myMap.erase(it);
-    int r=0;
-    //it  = topicToindex.find(index);
+    return topic;
+
 }
-void User:: removeTopic(int index)
+string User:: removeTopic(int index)
 {
+    string topic = indexToTopic[index];
     std::map<string,int>::iterator it;
     std::map<int,string>::iterator it2;
     it  = topicToindex.find(indexToTopic[index]);
     it2 = indexToTopic.find(index);
     topicToindex.erase(it);  
     indexToTopic.erase(it2); 
-
-    int r=0;
-    //topicToindex.erase(myMap[index]);
-    //indexToTopic.erase(index);
+    std::map<int,string>::iterator it3;
+    it3 = UnSubscribeWaitingList.find(index);
+    UnSubscribeWaitingList.erase(it3);
+    return topic;
 }
 
 void User:: addToSubWaiting(string gamename)
@@ -127,23 +128,29 @@ int User:: getReceiptId(string topic)
 std::vector<Event> User:: getEventsByUser(string topic,string username)
 {
     return eventsByTopic[topic][username];
-
+}
+bool User:: isUserReported(string topic,string username)
+{
+    return eventsByTopic[topic].count(username);
 }
 
 bool User:: inWaitSubList(string topic)
 {
-    for (const auto &[k, v] : myMap) 
+    std::map<int,std::string>::iterator it;
+    for (std::map<int,std::string>::iterator it = myMap.begin();it != myMap.end();++it) 
     {
-        if (v == topic) 
+        if (it->second  == topic) 
             return true;
     }
     return false;
 }
+
 bool User:: inWaitUnSubList(string topic)
 {
-    for (const auto &[k, v] : UnSubscribeWaitingList) 
+    std::map<int,std::string>::iterator it;
+    for (std::map<int,std::string>::iterator it = UnSubscribeWaitingList.begin();it != UnSubscribeWaitingList.end();++it) 
     {
-        if (v == topic) 
+        if (it->second  == topic) 
             return true;
     }
     return false;
