@@ -87,14 +87,13 @@ bool ConnectionHandler::sendLine(std::string &line)
 {
 	if(line != "")
 	{
-
 		std::vector<string> messagesToSend = frame.toString(line,user);
-		for(unsigned int i=0; i<messagesToSend.size();i++)
+		for(string message: messagesToSend)
 		{
 			//cout << message<< endl;
-			if(messagesToSend[i] != "NO MESSAGE")
+			if(message != "NO MESSAGE")
 			{
-				if(!sendFrameAscii(messagesToSend[i], '\0'))
+				if(!sendFrameAscii(message, '\0'))
 					return false;
 			}
 		}
