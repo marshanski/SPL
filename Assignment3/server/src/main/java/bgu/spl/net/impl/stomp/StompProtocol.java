@@ -116,7 +116,7 @@ public class StompProtocol<T> implements StompMessagingProtocol<String> {
     
     public void executeDisconnect(StompFrame frame)
     {
-        connections.send(connectionId, "YOU ARE NOW SIGNED OUT, FUCK YOU, SHALOM. \n"+frame.getHeaders().get("receipt")); 
+        connections.send(connectionId, "DISCONNECTED\n"+"receipt-id:"+frame.getHeaders().get("receipt")); 
         connections.disconnect(connectionId);
     }
     public void executeSend(StompFrame frame,String msg)

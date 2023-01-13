@@ -126,7 +126,7 @@ vector<string>  Frame:: SubscribeToString(std::string msg,User& user)
 
     //create the frame string
     string str = "SUBSCRIBE\n";
-    str +="destination:/ " + parametrs[1]                      + "\n";
+    str +="destination:/"  + parametrs[1]                      + "\n";
     str +="id:"            + std::to_string(user.getCount())   + "\n";
     str +="receipt:"       + std::to_string(user.getCount())   + "\n";
     messages.push_back(str);
@@ -307,22 +307,22 @@ bool Frame:: translateFrame(string msg,User& user)
     str += "\0";*/
     
     vector<string> parametrs    = split(msg,'\n');
-    if (parametrs[0]=="CONNECT")
+    if (parametrs[0]=="CONNECTED")
     {
         cout << user.getUsername() + " is Connected" << endl;
         user.activateUser();
     }
-    if (parametrs[0]=="SUBSCRIBE")
+    if (parametrs[0]=="SUBSCRIBED")
     {
         cout << user.getUsername() + " is subscribed" << endl;
         user.addTopic(0);
     }
-    if (parametrs[0]=="UNSUBSCRIBE")
+    if (parametrs[0]=="UNSUBSCRIBED")
     {
         cout << user.getUsername() + " is Unsubscribed" << endl;
         user.removeTopic(0);
     }
-    if (parametrs[0]=="DISCONNECT")
+    if (parametrs[0]=="DISCONNECTED")
     {
         cout << "User Discconted from the system. Thank you and have a good day" << endl;
         return false;
