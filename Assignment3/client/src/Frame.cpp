@@ -139,10 +139,10 @@ vector<string>  Frame:: SubscribeToString(std::string msg,User& user)
     }
 
     //create the frame string
-    string str = "SUBSCRIBE\n";
-    str +="destination:/"  + parametrs[1]                     + "\n";
-    str +="id:"            + std::to_string(user.getCount())  + "\n";
-    str +="recipt:"        + std::to_string(user.getCount())  + "\n";
+    string str = "SUBSCRIBE\n", end = "\0",id = "17",recipt="73";
+    str +="destination:/ " + parametrs[1]                      + "\n";
+    str +="id:"            + std::to_string(user.getCount())   + "\n";
+    str +="recipt:"       + recipt                            + "\n";
     messages.push_back(str);
 
     //update the user 
@@ -167,8 +167,8 @@ vector<string>  Frame:: unSubscribeToString(std::string msg,User& user)
     }
 
     string str = "UNSUBSCRIBE\n";
-    str +="id:"           + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
-    str +="recipt:"      + std::to_string(user.getReciptId(parametrs[1]))+ "\n";
+    str +="id:"           + std::to_string(user.getReceiptId(parametrs[1]))+ "\n";
+    str +="receipt:"      + std::to_string(user.getReceiptId(parametrs[1]))+ "\n";
     messages.push_back(str);
     user.addToUnSubWaiting(parametrs[1]);
     return messages;
@@ -176,10 +176,10 @@ vector<string>  Frame:: unSubscribeToString(std::string msg,User& user)
 
 vector<string>  Frame:: logOutToString(std::string msg,User& user)
 {
-    std::vector<string> messages,parametrs=split(msg,' ');
+    std::vector<string> messages;
+    vector<string> parametrs    = split(msg,' ');
     string str = "DISCONNECT\n",recipt="73";
-
-    str       +="recipt:"      + recipt+ "\n";
+    str +="recipt:"      + recipt       + "\n";
     messages.push_back(str);
     return messages;
 }
@@ -337,24 +337,21 @@ bool Frame:: translateFrame(string msg,User& user)
         cout << "---" + user.getUsername() + " is Connected To The System" +"---" << endl;
         user.activateUser();
     }
-
-    if (parametrs[0]=="SUBSCRIBED")
+    if (parametrs[0]=="SUBSCRIBE")
     {
         int index      = std::stoi(split(parametrs[1],':')[1]);
         //int index      = std::stoi(split(parametrs[2],':')[1]);
         string topic   = user.addTopic(index);
         cout <<"---"+ user.getUsername() + " is Subscribed: " + topic+"---" << endl;  
     }
-
-    if (parametrs[0]=="UNSUBSCRIBED")
+    if (parametrs[0]=="UNSUBSCRIBE")
     {
         int index      = std::stoi(split(parametrs[1],':')[1]);
         //int index      = std::stoi(split(parametrs[2],':')[1]);
         string topic   = user.removeTopic(index);
         cout << "---" +user.getUsername() + " is Unsubscribed: " + topic + "---" << endl;
     }
-
-    if (parametrs[0]=="DISCONNECTED")
+    if (parametrs[0]=="DISCONNECT")
     {
         cout << "---" + user.getUsername()+ " Disconected from the system. Thank you and have a good day" + "---"<< endl;
         return false;

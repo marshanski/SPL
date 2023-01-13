@@ -120,7 +120,7 @@ void User:: addEvent(string topic,string user, Event& event)
     eventsByTopic[topic][user].push_back(event);
 }
 
-int User:: getReciptId(string topic)
+int User:: getReceiptId(string topic)
 {
     return topicToindex[topic];
 }

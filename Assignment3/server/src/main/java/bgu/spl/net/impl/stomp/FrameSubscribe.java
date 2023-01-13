@@ -6,15 +6,15 @@ import java.util.Map;
 
 public class FrameSubscribe 
 {
-    private String destenation = null;
-    private String id = null;    
+    private String destination = null;
+    private String subid = null;    
     private Map<String, String> headers = new HashMap<>();
 
     public FrameSubscribe(StompFrame frame)
     {
         headers = frame.getHeaders();
-        this.destenation = headers.get("destenation");
-        this.id = headers.get("id");
+        this.destination = headers.get("destination");
+        this.subid = headers.get("id");
     }
 
     //validate!!!

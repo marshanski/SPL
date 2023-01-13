@@ -12,12 +12,10 @@ public class StompServerTPC {
     public static void main(String[] args) 
     {
         NewsFeed feed = new NewsFeed(); 
-
-        Server.threadPerClient
-        (
+        Server.threadPerClient(
                 7777, //port
-                () -> new RemoteCommandInvocationProtocol<>(feed), //protocol factory
-                ObjectEncoderDecoder::new //message encoder decoder factory
+                () -> new StompProtocol<String>(), //protocol factory
+                () -> new StompMessageEncoderDecoder<String>()  //message encoder decoder factory
         ).serve();
 
 
