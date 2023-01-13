@@ -37,7 +37,7 @@ public:
     std::map<std::string, int> getTopicToindex();
     bool haveTopic(string topic);
     void deleteTopic(string topic);
-    void activateUser();
+    void activateUser(string user,string code);
     string getUsername();
     void addEvent(string topic,string user, Event& event);
     int  getReceiptId(string topic);
