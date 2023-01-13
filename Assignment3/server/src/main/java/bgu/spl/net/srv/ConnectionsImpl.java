@@ -45,7 +45,7 @@ public class ConnectionsImpl<T> implements Connections<T>
 
     public boolean connect(int connectionId, String username, String passcode)
     {     
-        if(users.contains(username))// the username existes in the database
+        if(users.containsKey(username))// the username existes in the database
         {
             if(users.get(username)!= passcode)// check if passcode is matching
                 return false;
@@ -77,9 +77,9 @@ public class ConnectionsImpl<T> implements Connections<T>
     {
         if(!channelsToUsers.isEmpty())
         {
-            if(channelsToUsers.contains(channelName))
+            if(channelsToUsers.containsKey(channelName))
             {
-                if(channelsToUsers.get(channelName).contains(connectionId))
+                if(channelsToUsers.get(channelName).containsKey(connectionId))
                     return false;
                 channelsToUsers.get(channelName).put(connectionId, subscribeId);
                 return true;
