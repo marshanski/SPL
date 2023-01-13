@@ -139,10 +139,10 @@ vector<string>  Frame:: SubscribeToString(std::string msg,User& user)
     }
 
     //create the frame string
-    string str = "SUBSCRIBE\n", end = "\0",id = "17",recipt="73";
-    str +="destination:/ " + parametrs[1]                      + "\n";
-    str +="id:"            + std::to_string(user.getCount())   + "\n";
-    str +="recipt:"       + recipt                            + "\n";
+    string str = "SUBSCRIBE\n";
+    str +="destination:/"   + parametrs[1]                      + "\n";
+    str +="id:"             + std::to_string(user.getCount())   + "\n";
+    str +="receipt:"        + std::to_string(user.getCount())   + "\n";
     messages.push_back(str);
 
     //update the user 
@@ -179,7 +179,7 @@ vector<string>  Frame:: logOutToString(std::string msg,User& user)
     std::vector<string> messages;
     vector<string> parametrs    = split(msg,' ');
     string str = "DISCONNECT\n",recipt="73";
-    str +="recipt:"      + recipt       + "\n";
+    str +="receipt:"      + recipt       + "\n";
     messages.push_back(str);
     return messages;
 }
@@ -309,7 +309,6 @@ void Frame:: summeryTostring(std::string msg,User& user)
 }
 
 
-
 void Frame:: toUserConnect(User& user,std::string username, std::string passcode)
 {
     user.setUsername(username);
@@ -334,24 +333,31 @@ bool Frame:: translateFrame(string msg,User& user)
     vector<string> parametrs    = split(msg,'\n');
     if (parametrs[0]=="CONNECTED")
     {
-        cout << "---" + user.getUsername() + " is Connected To The System" +"---" << endl;
-        user.activateUser();
+        if(!user.getIsConnected())
+        {
+            cout << "---" + user.getUsername() + " is Connected To The System" +"---" << endl;
+            user.activateUser(parametrs[1],parametrs[2]);
+        }
+        else
+        {
+            cout << user.getUsername() + " is already Connected To The System" << endl;
+        }
     }
-    if (parametrs[0]=="SUBSCRIBE")
+    if (parametrs[0]=="SUBSCRIBED")
     {
         int index      = std::stoi(split(parametrs[1],':')[1]);
         //int index      = std::stoi(split(parametrs[2],':')[1]);
         string topic   = user.addTopic(index);
         cout <<"---"+ user.getUsername() + " is Subscribed: " + topic+"---" << endl;  
     }
-    if (parametrs[0]=="UNSUBSCRIBE")
+    if (parametrs[0]=="UNSUBSCRIBED")
     {
         int index      = std::stoi(split(parametrs[1],':')[1]);
         //int index      = std::stoi(split(parametrs[2],':')[1]);
         string topic   = user.removeTopic(index);
         cout << "---" +user.getUsername() + " is Unsubscribed: " + topic + "---" << endl;
     }
-    if (parametrs[0]=="DISCONNECT")
+    if (parametrs[0]=="DISCONNECTED")
     {
         cout << "---" + user.getUsername()+ " Disconected from the system. Thank you and have a good day" + "---"<< endl;
         return false;
@@ -401,10 +407,17 @@ bool Frame:: translateFrame(string msg,User& user)
         Event event = Event(teamA,teamB,eventName,time,game_updates,a_updates,b_updates,description);
         user.addEvent(topic,username,event);
     }
-    if (parametrs[0]=="EROR"|| msg == "EROR")
+    if (parametrs[0]=="EROR")
     {
-        cout << "Eror was occued the client will be disconnected" << endl;
-        return false;
+        if(parametrs[1] == "USERNAME")
+            cout << parametrs[2] + " is already taken" << endl;
+        if(parametrs[1] == "PASSCODE")
+            cout << "UnMatch Passowrd" << endl;
+        else
+        {
+            cout << "Eror was occued the client will be disconnected" << endl;
+            return false;
+        }
     }
 
     return true;

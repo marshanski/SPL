@@ -34,9 +34,11 @@ void User:: setPassCode(string code)
 {
     passcode = code;
 }
-void User:: activateUser()
+void User:: activateUser(string user,string code)
 {
     isConnetd = true;
+    username  = user;
+    passcode  = code;
 }
 
 string User:: getPassCode()
