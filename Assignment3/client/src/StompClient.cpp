@@ -1,4 +1,3 @@
-
 #include <stdlib.h>
 #include "../include/ConnectionHandler.h"
 #include <thread>
@@ -14,7 +13,8 @@ void ReceiveThread(ConnectionHandler& connectionHandler)
 
         std::string answer;
 
-        if (connectionHandler.isAlive() && !connectionHandler.getLine(answer)) {
+        if (connectionHandler.isAlive() && !connectionHandler.getLine(answer)) 
+        {
             std::cout << "Disconnected. Exiting...\n" << std::endl;
             break;
         }
@@ -40,14 +40,13 @@ void SendThread(ConnectionHandler& connectionHandler)
         char buf[bufsize];
         std::cin.getline(buf, bufsize);
 		std::string line(buf);
-		int len=line.length();
+		//int len=line.length();
         if (connectionHandler.isAlive() && !connectionHandler.sendLine(line))
 		{
             std::cout << "Disconnected. Exiting...\n" << std::endl;
             break;
         }
-		// connectionHandler.sendLine(line) appends '\n' to the message. Therefor we send len+1 bytes.
-        //std::cout << "Sent " << len+1 << " bytes to server" << std::endl;
+
 	}
 
 	
@@ -74,9 +73,8 @@ int main (int argc, char *argv[])
 
 	
   	receive_thread.join();
-
-    //send_thread.detach();
     send_thread.join();
+    connectionHandler.close();
 
     return 0;
 }

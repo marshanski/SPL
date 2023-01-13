@@ -27,9 +27,10 @@ public:
     vector<string>  unSubscribeToString(std::string msg,User& user);
     vector<string>  logOutToString(std::string msg,User& user);
     vector<string>  reportToString(std::string msg,User& user);
+    vector<string>  returnNoMessage(vector<string>messages);
     void toUser(std::string msg,User& user);
     void toUserConnect(User& user,std::string username, std::string passcode);
-    void toUserSubscribe(User& user,std::string topic);
+    void toUserSubscribe(User& user,int index);
     bool translateFrame(std::string msg,User& user);
     void summeryTostring(std::string msg,User& user);
 };

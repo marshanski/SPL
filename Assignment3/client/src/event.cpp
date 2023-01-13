@@ -6,6 +6,10 @@
 #include <map>
 #include <vector>
 #include <sstream>
+
+using std::cout;
+using std::cerr;
+using std::endl;
 using json = nlohmann::json;
 
 Event::Event(std::string team_a_name, std::string team_b_name, std::string name, int time,
@@ -67,49 +71,64 @@ Event::Event(const std::string &frame_body) : team_a_name(""), team_b_name(""), 
 
 names_and_events parseEventsFile(std::string json_path)
 {
-    std::ifstream f(json_path);
-    json data = json::parse(f);
 
-    std::string team_a_name = data["team a"];
-    std::string team_b_name = data["team b"];
-
-    // run over all the events and convert them to Event objects
-    std::vector<Event> events;
-    for (auto &event : data["events"])
+    try
     {
-        std::string name = event["event name"];
-        int time = event["time"];
-        std::string description = event["description"];
-        std::map<std::string, std::string> game_updates;
-        std::map<std::string, std::string> team_a_updates;
-        std::map<std::string, std::string> team_b_updates;
-        for (auto &update : event["general game updates"].items())
-        {
-            if (update.value().is_string())
-                game_updates[update.key()] = update.value();
-            else
-                game_updates[update.key()] = update.value().dump();
-        }
+        std::ifstream f(json_path);
+        json data = json::parse(f);
 
-        for (auto &update : event["team a updates"].items())
-        {
-            if (update.value().is_string())
-                team_a_updates[update.key()] = update.value();
-            else
-                team_a_updates[update.key()] = update.value().dump();
-        }
+        std::string team_a_name = data["team a"];
+        std::string team_b_name = data["team b"];
 
-        for (auto &update : event["team b updates"].items())
+        // run over all the events and convert them to Event objects
+        std::vector<Event> events;
+        for (auto &event : data["events"])
         {
-            if (update.value().is_string())
-                team_b_updates[update.key()] = update.value();
-            else
-                team_b_updates[update.key()] = update.value().dump();
+            std::string name = event["event name"];
+            int time = event["time"];
+            std::string description = event["description"];
+            std::map<std::string, std::string> game_updates;
+            std::map<std::string, std::string> team_a_updates;
+            std::map<std::string, std::string> team_b_updates;
+            for (auto &update : event["general game updates"].items())
+            {
+                if (update.value().is_string())
+                    game_updates[update.key()] = update.value();
+                else
+                    game_updates[update.key()] = update.value().dump();
+            }
+
+            for (auto &update : event["team a updates"].items())
+            {
+                if (update.value().is_string())
+                    team_a_updates[update.key()] = update.value();
+                else
+                    team_a_updates[update.key()] = update.value().dump();
+            }
+
+            for (auto &update : event["team b updates"].items())
+            {
+                if (update.value().is_string())
+                    team_b_updates[update.key()] = update.value();
+                else
+                    team_b_updates[update.key()] = update.value().dump();
+            }
+            
+            events.push_back(Event(team_a_name, team_b_name, name, time, game_updates, team_a_updates, team_b_updates, description));
         }
-        
-        events.push_back(Event(team_a_name, team_b_name, name, time, game_updates, team_a_updates, team_b_updates, description));
+        names_and_events events_and_names{team_a_name, team_b_name, events};
+
+        return events_and_names;
     }
-    names_and_events events_and_names{team_a_name, team_b_name, events};
 
-    return events_and_names;
+    catch (const std::exception& e)
+    {
+        cout <<json_path +" Isn't matching the protocol of report" << endl;
+        std::string team_a_name = "EROR IN FILE";
+        std::string team_b_name = "EROR IN FILE";
+        std::vector<Event> events;
+        names_and_events events_and_names{team_a_name, team_b_name, events};
+        return events_and_names;
+
+    }
 }
