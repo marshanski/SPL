@@ -1,0 +1,37 @@
+stmt                = '''
+                        SELECT employees.name, employees.salary, 0 as total_sales_income, branches.location
+                        FROM employees
+                        JOIN branches ON employees.branche = branches.id
+                        UNION 
+                        SELECT employees.name, employees.salary, SUM(activities.quantity * products.price*-1) as total_sales_income, branches.location
+                        FROM activities
+                        JOIN products ON activities.product_id = products.id
+                        JOIN employees ON employees.id = activities.activator_id 
+                        JOIN branches ON employees.branche = branches.id
+                        GROUP BY employees.name, branches.location
+                    '''
+
+
+
+                    stmt= '''
+                    SELECT employees.name, employees.salary,COALESCE(activities.quantity,0) as total_income, branches.location
+                    FROM employees 
+                    JOIN branches ON employees.branche = branches.id
+                    LEFT JOIN activities ON activities.activator_id  = employees.id
+                    ORDER BY employees.name
+                    '''
+        
+
+
+                    SELECT raz.name, raz.salary,raz.location,SUM(raz.total_income*COALESCE(products.price,0) *-1)as pp
+                    FROM
+                        (SELECT employees.name, employees.salary,COALESCE(activities.quantity,0) as total_income, branches.location, COALESCE(activities.product_id, 0) as pid
+                        FROM employees
+                        JOIN branches ON employees.branche = branches.id
+                        LEFT JOIN activities ON activities.activator_id  = employees.id) as raz
+        
+                        LEFT JOIN products ON products.id = raz.pid
+                        
+                    GROUP BY raz.name, raz.salary, raz.location
+                    ORDER BY raz.name
+                    '''

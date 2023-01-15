@@ -41,11 +41,15 @@ class Dao(object):
             .format(self._table_name, column_names, qmarks)
 
         self._conn.execute(stmt, params)
+        
 
     def find_all(self):
         c = self._conn.cursor()
         c.execute('SELECT * FROM {}'.format(self._table_name))
         return orm(c, self._dto_type)
+
+
+
     
     def find(self, **keyvals):
         column_names = keyvals.keys()
