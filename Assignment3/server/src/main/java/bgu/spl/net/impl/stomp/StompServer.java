@@ -11,7 +11,7 @@ public class StompServer
     {
 
         // you can use any server... 
-        if(args[0] == "TPC")
+        if(args[1] == "tpc")
         {
             Server.threadPerClient
             (
