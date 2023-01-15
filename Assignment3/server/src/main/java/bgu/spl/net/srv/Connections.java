@@ -24,5 +24,9 @@ public interface Connections<T> //i changed to String, maybe need to change back
 
     boolean disconnect(int connectionId);
     
+    boolean userIsActive(int connectionId);
+    
+
+    
 
 }

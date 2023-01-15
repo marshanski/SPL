@@ -32,6 +32,10 @@ public class ConnectionsImpl<T> implements Connections<T>
     {
         clients.get(connectionId).send(msg);
     }
+    public boolean userIsActive(int connectionId)
+    {
+        return activeUsers.values().contains(connectionId);
+    }
 
     public boolean disconnect(int connectionId)
     {

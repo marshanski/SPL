@@ -302,6 +302,7 @@ void Frame:: summeryTostring(std::string msg,User& user)
         summery += event.get_discription() +"\n\n";
         
     }
+    cout << "--summary was added in "+ file +"--" << endl;
     std:: ofstream MyFile(file);
     MyFile << summery;
     MyFile.close();
