@@ -39,13 +39,14 @@ public class ConnectionsImpl<T> implements Connections<T>
         {
             entry.getValue().remove(connectionId); // deleteing the user from all topics
         }
-        clients.remove(connectionId); // removing the client's connection handler from the map clients.
+        clients.remove(connectionId);
+        activeUsers.entrySet().removeIf(entry -> entry.getValue() == connectionId); // removing the client's connection handler from the map clients.
         return true;
     }
 
     public String connect(int connectionId, String username, String passcode)
     {     
-        if(!isAvailable(username))// the username existes in the database
+         if(!isAvailable(username))// the username existes in the database
         {
             if(!isPasscodeRight(username, passcode))// check if passcode is matching
                 return "ERROR\nPASSCODE\n";
@@ -53,13 +54,12 @@ public class ConnectionsImpl<T> implements Connections<T>
             {
                 if(!activeUsers.containsKey(username))
                 {
-                    users.put(username, passcode);
                     activeUsers.put(username, connectionId);
                     return "CONNECTED\n"+username+"\n"+passcode;
                 }
                 else
                 {
-                    return "ERROR\nUSERNAME\n";
+                    return "ERROR\nUSERNAME\n"+username+"\n";
                 }
             }
         }
@@ -132,7 +132,8 @@ public class ConnectionsImpl<T> implements Connections<T>
 
     public boolean isPasscodeRight(String user, String pass)
     {
-        if(users.containsKey(user)&& users.get(user) != pass)
+        System.out.print(users.get(user));
+        if(users.containsKey(user)&& !users.get(user).equals(pass))
             return false;
         return true;
     }

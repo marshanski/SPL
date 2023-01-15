@@ -188,7 +188,7 @@ vector<string>  Frame:: reportToString(std::string msg,User& user)
 {
     vector<string> parametrs    = split(msg,' ');
     std::vector<string> messages;
-    std::string topic,team_a_name ,team_b_name,end = "\0",username = "meni",HALFTIME = "true";
+    std::string topic,team_a_name ,team_b_name,end = "\0";
     std::vector<Event> events;
 
     std::ifstream file(parametrs[1]);
@@ -214,8 +214,8 @@ vector<string>  Frame:: reportToString(std::string msg,User& user)
     for(const Event& event: events)
     {
         string str ="SEND\n";
-        str+= "destination:/"   + topic            + "\n"+"\n"; 
-        str+= "user:"          + username          +"\n";
+        str+= "destination:/"   + topic                + "\n"+"\n"; 
+        str+= "user:"           + user.getUsername()   +"\n";
         str+= "team a:"         + NAE.team_a_name  +"\n";
         str+= "team b:"         + NAE.team_b_name  +"\n";
         str+= "event name:"    + event.get_name()  +"\n";
@@ -410,7 +410,11 @@ bool Frame:: translateFrame(string msg,User& user)
     if (parametrs[0]=="ERROR")
     {
         if(parametrs[1] == "USERNAME")
+        {
             cout << parametrs[2] + " is already connected" << endl;
+            return true;
+        }
+            
         if(parametrs[1] == "PASSCODE")
             cout << "UnMatch Passowrd" << endl;
         else
