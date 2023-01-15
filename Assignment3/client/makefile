@@ -1,13 +1,13 @@
 CFLAGS:=-c -Wall -Weffc++ -g -std=c++11 -Iinclude
 LDFLAGS:=-lboost_system -lpthread
 
-all: StompClient
+all: StompWCIClient
 
 EchoClient: bin/ConnectionHandler.o bin/echoClient.o bin/Frame.o
 	g++ -o bin/EchoClient bin/ConnectionHandler.o bin/echoClient.o bin/Frame.o $(LDFLAGS)
 
-StompClient: bin/ConnectionHandler.o bin/StompClient.o bin/event.o  bin/user.o bin/Frame.o 
-	g++ -o bin/StompClient bin/ConnectionHandler.o bin/StompClient.o bin/event.o bin/user.o bin/Frame.o  $(LDFLAGS)
+StompWCIClient: bin/ConnectionHandler.o bin/StompWCIClient.o bin/event.o  bin/user.o bin/Frame.o 
+	g++ -o bin/StompWCIClient bin/ConnectionHandler.o bin/StompWCIClient.o bin/event.o bin/user.o bin/Frame.o  $(LDFLAGS)
 
 bin/ConnectionHandler.o: src/ConnectionHandler.cpp
 	g++ $(CFLAGS) -o bin/ConnectionHandler.o src/ConnectionHandler.cpp
@@ -24,8 +24,8 @@ bin/user.o: src/user.cpp
 bin/Frame.o: src/Frame.cpp
 	g++ $(CFLAGS) -o bin/Frame.o src/Frame.cpp
 
-bin/StompClient.o: src/StompClient.cpp
-	g++ $(CFLAGS) -o bin/StompClient.o src/StompClient.cpp
+bin/StompWCIClient.o: src/StompWCIClient.cpp
+	g++ $(CFLAGS) -o bin/StompWCIClient.o src/StompWCIClient.cpp
 
 .PHONY: clean
 clean:
