@@ -49,7 +49,19 @@ public class ConnectionsImpl<T> implements Connections<T>
         {
             if(!isPasscodeRight(username, passcode))// check if passcode is matching
                 return "ERROR\nPASSCODE\n";
-            return "ERROR\nUSERNAME\n";
+            else
+            {
+                if(!activeUsers.containsKey(username))
+                {
+                    users.put(username, passcode);
+                    activeUsers.put(username, connectionId);
+                    return "CONNECTED\n"+username+"\n"+passcode;
+                }
+                else
+                {
+                    return "ERROR\nUSERNAME\n";
+                }
+            }
         }
         else
         {

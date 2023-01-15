@@ -410,7 +410,7 @@ bool Frame:: translateFrame(string msg,User& user)
     if (parametrs[0]=="ERROR")
     {
         if(parametrs[1] == "USERNAME")
-            cout << parametrs[2] + " is already taken" << endl;
+            cout << parametrs[2] + " is already connected" << endl;
         if(parametrs[1] == "PASSCODE")
             cout << "UnMatch Passowrd" << endl;
         else
