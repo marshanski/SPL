@@ -124,8 +124,8 @@ names_and_events parseEventsFile(std::string json_path)
     catch (const std::exception& e)
     {
         cout <<json_path +" Isn't matching the protocol of report" << endl;
-        std::string team_a_name = "EROR IN FILE";
-        std::string team_b_name = "EROR IN FILE";
+        std::string team_a_name = "ERROR IN FILE";
+        std::string team_b_name = "ERROR IN FILE";
         std::vector<Event> events;
         names_and_events events_and_names{team_a_name, team_b_name, events};
         return events_and_names;
